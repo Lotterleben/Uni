@@ -1,0 +1,100 @@
+\section{Protocols}
+\label{sec:protocols}
+%==============================================================================
+In the preceding section, the building blocks of an \gls{IoT} routing protocol, both essential and additional, have been discussed.
+This chapter provides an overview over routing protocols that are comprised of these building blocks. Each characteristic presented in section \ref{subsec:appr_protocol_characteristics} is represented by at least one protocol.\\
+Each protocol fulfills the criteria listed in section \ref{subsec:criteria} and employs at least one of the approaches described in section \ref{sec:approaches}. The protocols are roughly ordered in accordance with the order from section \ref{sec:approaches}.
+Not all of the protocols presented have been designed with the IoT in mind; most stem from adjacent fields of research such as \glspl{DTN} or \glspl{MANET}. %TODO. woher kommt icn zeug?
+Despite this, they exhibit characteristics which may make them suitable for the \gls{IoT}.
+
+\subsection{Criteria}
+\label{subsec:criteria}
+%==============================================================================
+During the past 15 years, an overwhelming amount of routing protocols and protocol modifications for \glspl{LLN} and \glspl{MANET} have been published. To sieve through these contributions, a set of criteria has been created and applied to all candidate protocols.
+\begin{description}
+\item{\emph{Suitability for the IoT:}} A routing protocol has to apply to at least one topology and traffic flow scenario common in the \gls{IoT}. It should be scalable to a certain extent, and be able to cope with unidirectional routes.
+\item{\emph{Standardization:}} Protocols which are the result or part of a standardization process are greatly preferred. This ensures the availability of a detailed protocol specification, review by a diverse cast of specialists familiar with the subject and increases the likelihood of adoption in real-world scenarios.
+\item{\emph{Available implementations:}} Existing, ideally accessible implementations are an indicator for the maturity and seriousness of a protocol. They allow the evaluation of the protocol through simulation and testbed experiments.
+
+\end{description}
+
+\subsection{Overview}
+\label{subsec:overview}
+%==============================================================================
+Fig. \ref{fig:overview} provides a feature visualization of the protocols that have been chosen to be presented in the following.
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[width=\textwidth]{graphics/overview.pdf}
+  \caption{Overview over possible routing protocols for the IoT.}
+  \label{fig:overview}
+\end{figure}
+% TODO: should I include the traffic patterns a protocol serves best (point to point, point to multipoint, multipoint to point) in the graphic as well? Schon, oder?
+
+\subsection{RPL}
+\label{subsec:rpl}
+%...............................................................................
+\gls{RPL} \cite{RFC-6550} was designed to be \emph{the} routing protocol for \gls{LLN} and the \gls{IoT}. %(TODO: back up this claim). http://blogs.cisco.com/news/rpl-routing-standard-completed/ zählt nicht, wa? :D
+RPL primarily supports \emph{multipoint-to-point} traffic, with reasonable support for \emph{point-to-multipoint} traffic and basic features for \emph{point-to-point} traffic. %(TODO: primaerquelle! \cite{chp-ceirp-11} reicht sicherlich nicht aus -- wobei.. steht doch im rfc?).
+It operates under the assumption that the network contains a \gls{sink node} with greater computing ability and energy resources than the rest of the nodes in the network. It constructs a \gls{DODAG} whose root is the sink node, directing all traffic towards the sink node. Each node in the DODAG emits \gls{DIO} messages containing information about its identity and rank in the DODAG. Because the \glspl{DIO} are sent proactively and the network topology is explored in advance, RPL can be classified as a proactive protocol.
+However, the frequency of \gls{DIO} decreases over time, reducing unnecessary control overhead once the DODAG has stabilized.\\
+When the optional \gls{DAO} messages are used, RPL is able to perform both bidirectionality checks and multipath routing from the sink node to individual routers. The trade-off for this is an increase in control traffic and memory usage. RPL is the only one of the protocols presented which may also employ source routing. This occurs when it is operating in non-storing mode.\\
+\cite{chp-ceirp-11} provides a critical evaluation of the RPL protocol. Among others it lists its inflexibility in terms of data traffic flow, especially point-to-point traffic, possible control packet fragmentation and the assumption of bidirectional links as problematic points of the specification.
+An extension improving the protocol's support for point-to-point communication is presented and evaluated by \cite{baccelli_p2p_prl}.
+
+%TODO: mention source routing in non storing mode
+
+
+\subsection{OLSR and OLSRv2}
+\label{subsec:olsr}
+%...............................................................................
+The \gls{OLSR} protocol \cite{RFC-3626} and its successor OLSRv2 \cite{RFC-7181} are proactive link-state hop by hop routing protocols, both specified by the IETF. They are among the most popular routing protocols for \glspl{MANET} and thus cannot go unmentioned.
+OLSRv2 introduces support for alternate metrics as one of its biggest upgrades from OLSR, enabling the use of energy-aware metrics. An extension for OLSRv2 has been proposed by \cite{olsrv2_multipath} to enable multipath routing, which was studied for OLSR in the past \cite{olsr_multipath}.
+Both OLSR and OLSRv2 are, however, most likely to be unsuitable for the IoT for the following reasons:
+Being proactive routing protocols, they periodically broadcast neighbor discovery and topology control packets. They maintain a detailed list about both direct neighbors and routes through the entire network. This generates both protocol overhead on the air, draining batteries through unnecessary transmissions, as well as storage overhead, since information which may never be used is stored in the so-called Information Base.
+
+\subsection{AODV, LOADng and AODVv2}
+\label{subsec:aodv}
+%...............................................................................
+\gls{AODV} is a reactive hop by hop routing protocol specified by the IETF in 2003 \cite{rfc3561}.
+It makes use of a \gls{RREQ}- \gls{RREP}-cycle, which is triggered every time a packet to an unknown destination has to be sent. During this cycle, a route is discovered and stored Hop-by-Hop: each node only knows which direct neighbor is the next hop towards a certain destination. Whenever a link breaks, this is communicated downstream in the same manner.\\
+Because routes are only stored when necessary, AODV can be described as memory-efficient. In its most minimal configuration, the protocol is %relatively easy to implement and is
+likely to be small in terms of code image size because of its simplicity.
+Multipath extensions to AODV have been proposed by the original author \cite{aodv_multipath_ebr} and others \cite{aodv_multipath_other}.\\
+Two successors of AODV have been developed since its specification:
+\gls{LOADng} \cite{LOADng} and AODVv2 \cite{AODVv2}, with the latter having been adopted by the \gls{MANET} working group of the \gls{IETF}. While AODV only accepts Hop Count as a metric, both of its successors allow alternate metrics, opening up the possibility for deployment of an energy-aware metric as described in section \ref{subsec:appr_mechanisms_metrics}.
+
+\subsection{CCNx/ CCNLite}
+\label{subsec:ndn}
+%...............................................................................
+CCNx is an implementation of the ICN idea described in section \ref{subsec:appr_char_infocentric}, created by XEROX PARC.%(TODO QUELLE!).
+Its lightweight adaption is CCNlite, which has been adopted for the \gls{IoT} by \cite{gerla_tactical_iot} and \cite{mehlis_ccn_iot}. CCN operates on a hop by hop basis.
+Whenever a node is looking for data, it distributes an \emph{Interest} message. This Interest is forwarded through the network until it can be answered by one of the participating nodes. Each node that received the Interest records it in its \gls{PIT}. When an Interest is answered with data, all nodes forwarding the data cache it, effectively distributing the data over the network. By doing so, CCN ensures that the data is able to survive even network partitioning. Additionally, subsequent requests for the data may be answered by intermediate nodes, distributing network load among neighbors. CCN is most suitable for multipoint-to-point or point-to-point traffic.
+
+%TODO: what sets ccnx/lite apart from other ICN protocols?
+%( CCB traffic optimizatrion for IoT hat ne schöne zusammenfassung)
+% TODO: is CCN multipath? Anscheinend ja.. % http://perso.telecom-paristech.fr/~drossi/paper/rossi13comcom.pdf
+
+
+\subsection{PRoPHET}
+\label{subsec:prophet}
+%...............................................................................
+% TODO: proactive or reactive? ich mach mir ja proaktiv ein bild von der topologie, aber werden auch proaktiv routen gesucht? nee... ich sende ja randomly drauf los.
+
+The \gls{PRoPHET} was published in 2012 as an experimental hop by hop routing protocol for \glspl{DTN} by the \gls{IRTF} \cite{rfc6693}. It has been described fist in 2003 by \cite{prophetpaper}.\\
+PRoPHET measures a network's movements, both physical and in terms of network traffic. Based on this data, the \emph{delivery predictability} metric stating the probability of a successful data transfer is calculated per neighbor, characterizing PRoPHET as a probabilistic protocol.
+All data towards a certain route is buffered until a route can be established. This way, PRoPHET is able to handle networks that are never fully connected.
+Whenever two nodes meet, either through physical movement or a node switching on, they exchange the predictability information they calculated and update their internal data accordingly. Based on this information, each node decides if and which data it may want to forward though the neighbor it just met.
+A node may send their data through more than one neighbor, making PRoPHET a multipath routing protocol as well.
+
+\section{Comparability between protocols}
+\label{subsec:comparability}
+%==============================================================================
+Because there are no widely agreed upon benchmarks for \gls{IoT} or \gls{WSN} protocols, the protocols described above can only be evaluated based on their features.
+%  No comparative simulations or test bed experiments have been performed yet.
+% TOO: Bullshit, oder?! -> http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6069710
+% (TODO referenz zu loadng- und rpl interops als pointer?) http://hal.inria.fr/hal-00661629
+\cite{RFC2501} discusses routing protocol evaluation considerations which may be used as a basis to construct possible benchmark scenarios.
+% TODO: hat die ROLL gruppe da evtl was rausgebracht?
+Additionally, the protocols presented have been implemented for different platforms such as Contiki, TinyOS, RIOT, or Linux, most without support for the NS-2 or NS-3 network simulator, complicating evaluation through comparison.
+% TODO: genau auflisten was für welche plattform?

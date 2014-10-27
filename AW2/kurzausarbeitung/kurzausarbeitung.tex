@@ -1,0 +1,68 @@
+\documentclass[a4paper,10pt, twocolumn]{scrartcl}
+
+% Deutsche Umlaute (Mac)
+\usepackage[applemac]{inputenc}
+
+% Deutsche Umlaute (Windows)
+%\usepackage[ansinew]{inputenc}
+
+% Einbinden von Bildern
+\usepackage{graphicx}
+
+% Seitenfläche etwas mehr ausnutzen
+\usepackage{geometry}
+\geometry{a4paper,left=30mm,right=30mm, top=1cm, bottom=3cm}
+
+% Kein Einrücken bei zweispaltigen Bildunterschriften
+\usepackage[normal]{caption}
+
+% Lotte: Glossary benutzen
+\usepackage{glossaries}
+\loadglsentries[main]{glossary}
+\makeglossaries
+
+\begin{document}
+
+% Titel
+\title{Hybrid routing for the IoT}
+\subtitle{challenges and opportunities}
+\author{Lotte Steenbrink}
+\date{Wintersemester 2014/15}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Introduction}
+% motivation: Why do we need hybrid routing protocols?
+% -> concrete use cases
+
+%Kapitelübersicht bei Ausarbeitung nicht vergessen!
+Routing in
+
+\section{Challenges}
+
+\section{Existing approaches}
+% ZRP
+Existing approaches can be categorized as either area-centered or route-centered.\\
+\emph{Area-centered} routing protocols, such as the \gls{ZRP}\cite{ZRP-Draft} or (TODO: more protocols+ sources),
+distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively.\\
+\emph{Route-centered} protocols like the P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550} instead focus on the importance of a route: a connection to a \gls{sink node} may be crucial to the operation of a network and should be maintained proactively, while connections between arbitrary nodes
+may be short-lived and should only be established on-demand (i.e. reactively) in order to save resources and bandwidth.
+\section{Conclusion}
+
+% Alternativ kann auch BibTex verwendet werden
+%\begin{thebibliography}{}
+%\bibitem[Jenke, 2014]{jenke14} P. Jenke und S. Sarstedt: {\em AW2 ist ein wichtiger Baustein auf dem Weg zum Master}, Journal of NichtVeršffentlicht, 2014
+%\bibitem[Wolf]{wolf} Thomas Wolf: {\em www.foto-tw.de}.
+%\end{thebibliography}
+
+{\small
+\bibliographystyle{ieeetr}
+\bibliography{kurzausarbeitung}
+}
+
+
+\end{document}

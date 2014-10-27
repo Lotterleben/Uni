@@ -1,0 +1,71 @@
+\section{Approaches}
+\label{sec:approaches}
+%==============================================================================
+In order to meet the constraints of the \gls{IoT} as described in section \ref{subsec:intro_requirements}, a routing protocol may employ different strategies. This section lists promising mechanisms and approaches which may form the building blocks if a successful routing protocol for the IoT.
+
+\subsection{Protocol characteristics}
+\label{subsec:appr_protocol_characteristics}
+%==============================================================================
+Each routing protocol exhibits core characteristics which form the very base of its workings.
+In the following, characteristics which may be most beneficial in an \gls{IoT} environment will be discussed.
+
+\subsubsection{Proactive vs. Reactive}
+\label{subsec:appr_char_reactive}
+%...............................................................................
+With the exception of hybrid approaches, routing protocols either fall in the category of proactive or reactive.
+\begin{description}
+\item{\emph{A proactive protocol}} gathers routing information proactively, attempting to have an overview of the entire network's topology at all times. Typically, the periodic distribution of \glspl{beacon} provides nodes with insight about the existence and quality of connection to their neighbors.
+This provides for great performance in terms of latency, but can wreak havoc on the battery lifetime: In networks which experience sparse traffic, most of the topology information exchanged can be considered protocol overhead which will drain a device's batteries unnecessarily.
+\item{\emph{Reactive protocols}} search for routes on-demand: only when a transmission towards another node is started, the route discovery process (towards this specific node) is triggered. In consequence, topology information is only exchanged when needed, saving energy. The downside to reactive protocols is their latency: because routes are discovered on-demand, transmissions over unknown or expired routes face delays, for which either the application or the routing protocol has to account by buffering or dropping data.
+\end{description}
+
+\subsubsection{Hop-by-Hop vs. Source Routing}
+\label{subsec:appr_hbh_source}
+%...............................................................................
+Packet forwarding may be either carried out hop by hop or through source routing. With the former, each router stores a small part of each route it is participating in: the destination of the route, and over which of its neighbors packets towards this destination should be forwarded. With the latter, the entire path of a route is embedded in its packet header. While this has the benefit of memory-efficiency, it increases header sizes and traffic volumes dramatically. Routes may become stale before the packet carrying them in their header has reached its destination. With the relatively small MTU of IEEE 802.15.4 and the moderate mobility in the \gls{IoT}, this makes for an unfortunate combination.
+
+\subsubsection{Information Centric}
+\label{subsec:appr_char_infocentric}
+%...............................................................................
+\glspl{ICN} are not merely a routing protocol, but an entirely new networking paradigm. Oftentimes, it does not matter to the recipient who sends them the data they requested, they are merely interested in receiving the data at all. ICN picks this up: instead of asking single addresses for data, a node will ask the network \cite{ahlgren_ccn_survey}.
+%This is especially useful if data is location-dependent, i.e. if it is likely that a node will want to receive information stemming from its surroundings.
+Since some \gls{IoT} use cases, like the evaluation of environmental data, are more focused on the information than its origin as well, ICN may be a suitable solution for some IoT deployments.\\
+%TODO: explanation: what is the task of a routing protocol?
+Because \gls{ICN} was designed with large-scale, cabled networks in mind, it exhibits some characteristics problematic for the deployment in the \gls{IoT}:
+%The header overhead it produces may exceed
+Connections are assumed to be bidirectional, with no mechanisms to ensure that this assumption holds.\\
+With some ICN protocols, all routers cache the data they forward. Considering that memory is very limited on IoT nodes, this may prove to be problematic. Additionally, data which provides an update for a previous information often doesn't update its predecessor, but is stored as a copy, consuming even more storage space \cite{mehlis_ccn_iot}.
+
+\subsection{Mechanisms}
+\label{subsec:appr_mechanisms}
+%==============================================================================
+Routing protocols may be equipped with a myriad of mechanisms influencing the way they make routing decisions. In the following, some mechanisms that may be beneficial to IoT protocols will be highlighted.
+
+\subsubsection{Energy-aware metrics}
+\label{subsec:appr_mechanisms_metrics}
+%...............................................................................
+Metrics are used to quantify the quality of a link or route under certain aspects.
+The most commonly deployed metric is Hop Count, with which the route using the fewest hops is chosen. However, this is often less than ideal: not all links are created equal in quality, and long-distance links are especially prone to be lossy.
+% TODO: link state vs distance vector -> additive vs ??? metriken beleuchten?
+%Problem: energielevel bleibt nicht gleich; metrikinfos muessen evtl oefter ausgetauscht werden? passiert vllt bei OLSR, bei AODV aber definitiv nicht.. was ist mit LOADng?
+Energy-awareness may be introduced to existing routing protocols with the help of suitable metrics. A metric which takes energy levels on either the node or network level may influence the routing decisions of a protocol in a way which preserves energy resources.\\
+\cite{rfc6551} specify several routing metrics for the \gls{RPL} protocol, some of which may be interesting for other deployments as well. Notable are:\\
+\emph{Node Energy:} The energy level of a node may be taken into account in different ways: most intuitively, it may be beneficiary to choose a route over nodes with great residual energy in order to elongate its lifetime and relieve nodes with fewer resources. In doing so, the value of residual energy has to be put into context by the transceiver costs of the individual node as well as its expected lifetime: It may be beneficial to use a node with less battery which is likely to be recharged in the near future (e.g. a mobile device on the nightstand) than one with high residual energy that has to last for a while (e.g. a node in the wall)\footnote{Example as published in \cite{rfc6551}, p. 13}. \\
+\emph{Throughput:} When the data sent over a router exceeds the amount of throughput it is able to handle, the resulting packet loss will cause retransmissions, wasting energy on redundant communication. Therefor, a router may specify the throughput it is able to handle.\\
+\emph{Latency:} Different types of information may have different latency constraints, for instance because the data may become stale quickly, is important in case of emergency or may trigger timeouts. By taking these requirements into account, a protocol is able to distribute the network load in a way that supports different traffic requirements.\\
+These approaches can be combined: \cite{fuzzymetrics} proposes the use fuzzy logic %(TODO: cite fuzzy logic for systems engineering?)
+to merge several relevant characteristics of a route or link into one statement about its quality, in this case \emph{number of hops}, \emph{residual energy} and \emph{Received Signal Strength Indicator}.%  (Problem: Paper ist leider sehr vage und versucht, 3 Dinge auf einmal zu zeigen, aber ich mag die Idee...)
+
+
+\subsubsection{Multipath routing}
+\label{subsec:appr_mechanisms_multipath}
+%...............................................................................
+A protocol employing multipath routing seeks to find and use alternate paths towards every destination. This distributes the cost of forwarding packets among more nodes, saving the energy of individual, highly-frequented nodes. % TODO evtl auch nützlich bei unidiretional nodes? gibts da bestrebungen?
+\cite{wsn_survey}
+
+\subsubsection{Probabilistic routing}
+\label{subsec:appr_char_probabilistic}
+%...............................................................................
+With probabilistic routing, routing decisions are calculated based on probabilistic values.\\
+The most primitive way to do this is gossiping: Data is flooded through the network like a rumor, but every packet is only forwarded with a probability \emph{p}. This way, traffic overhead is reduced.\\
+A more elaborate approach is to predict the chance of delivery towards a certain destination through mobility patterns or previous experience and base forwarding decisions on this prediction.

@@ -1,0 +1,178 @@
+% This file was created with JabRef 2.9.2.
+% Encoding: UTF8
+
+@ARTICLE{icn_survey,
+  author = {Ahlgren, Bengt and Dannewitz, Christian and Imbrenda, Claudio and
+	Kutscher, Dirk and Ohlman, Börje},
+  title = {A survey of information-centric networking.},
+  journal = {IEEE Communications Magazine},
+  year = {2012},
+  volume = {50},
+  pages = {26-36},
+  number = {7}
+}
+
+@ARTICLE{metric_energy_delay,
+  author = {Boughanmi, Najet and Song, Yeqiong},
+  title = {A New Routing Metric for Satisfying Both Energy and Delay Constraints
+	in Wireless Sensor Networks},
+  journal = {J. Signal Process. Syst.},
+  year = {2008},
+  volume = {51},
+  pages = {137--143},
+  number = {2},
+  month = may,
+  acmid = {1355839},
+  address = {Hingham, MA, USA},
+  doi = {10.1007/s11265-007-0102-5},
+  issn = {1939-8018},
+  issue_date = {May 2008},
+  keywords = {delay, delivery rate, energy, lifetime, real-time, routing, wireless
+	sensor network},
+  numpages = {7},
+  publisher = {Kluwer Academic Publishers},
+  url = {http://dx.doi.org/10.1007/s11265-007-0102-5}
+}
+
+@MISC{RFC5826,
+  author = {A. Brandt and J. Buron and G. Porcu},
+  title = {{Home Automation Routing Requirements in Low-Power and Lossy Networks}},
+  howpublished = {Online},
+  month = {April},
+  year = {2010},
+  note = {RFC 5826 (Informational). \url{http://tools.ietf.org/html/rfc5826}}
+}
+
+@MISC{RFC6550,
+  author = {A. Brandt and J. Hui and R. Kelsey and P. Levis and K. Pister and
+	R. Struik and JP. Vasseur and R. Alexander},
+  title = {{RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks}},
+  howpublished = {Online},
+  month = {April},
+  year = {2010},
+  note = {RFC 6550 (Standard). \url{http://tools.ietf.org/html/rfc6550}}
+}
+
+@INPROCEEDINGS{LOADng,
+  author = {Clausen, T. and Jiazi Yi and de Verdiere, A.C.},
+  title = {LOADng: Towards AODV Version 2},
+  booktitle = {Vehicular Technology Conference (VTC Fall), 2012 IEEE},
+  year = {2012},
+  pages = {1-5},
+  month = {Sept},
+  doi = {10.1109/VTCFall.2012.6399334},
+  issn = {1090-3038},
+  keywords = {mobile ad hoc networks;routing protocols;vectors;AODV;LLN;LOADng specification;MANET;ad
+	hoc on-demand distance-vector;low-power lossy networks;mobile ad
+	hoc networks;routing protocol;Ad hoc networks;Delay;Internet;Mobile
+	computing;Routing;Routing protocols}
+}
+
+@TECHREPORT{RPL_eval_critical,
+  author = {Clausen, Thomas Heide and Herberg, Ulrich and Philipp, Matthias},
+  title = {{A Critical Evaluation of the ''IPv6 Routing Protocol for Low Power
+	and Lossy Networks'' (RPL)}},
+  institution = {INRIA},
+  year = {2011},
+  type = {Research Report},
+  number = {RR-7633},
+  month = May,
+  affiliation = {HIPERCOM - INRIA Saclay - Ile de France , Laboratoire d'informatique
+	de l'{\'e}cole polytechnique - LIX},
+  hal_id = {inria-00597036},
+  language = {English},
+  url = {http://hal.inria.fr/inria-00597036}
+}
+
+@MISC{RFC5548,
+  author = {Dohler, M. and Watteyne, T. and Winter, T. and Barthel, D.},
+  title = {{Routing Requirements for Urban Low-Power and Lossy Networks}},
+  howpublished = {Online},
+  month = {May},
+  year = {2009},
+  note = {RFC 5548 (Informational). \url{www.ietf.org/rfc/rfc5548.txt}},
+  owner = {lotte},
+  timestamp = {2014.02.24}
+}
+
+@BOOK{KULeuven-314567,
+  title = {{Vision and Challenges for Realising the Internet of Things}},
+  publisher = {European Commission},
+  year = {2010},
+  editor = {Friess, Peter and Guillemin, Partick and Sundmaeker, Harald and Woelffl\'e,
+	Sylvie},
+  author = {Gusmeroli, Sergio and Haller, Stephan and Harrison, Mark and Kalaboukas,
+	Kostas and Tomasella, Maurizio and Vermesan, Ovidiu and Vogt, Harald
+	and Wouters, Karel},
+  url = {https://lirias.kuleuven.be/handle/123456789/314567}
+}
+
+@MISC{RFC5867,
+  author = {P. De Mil and N. Riou and W. Vermeylen},
+  title = {{Building Automation Routing Requirements in Low-Power and Lossy
+	Networks}},
+  howpublished = {Online},
+  month = {June},
+  year = {2010},
+  note = {RFC 5867 (Informational). \url{http://www.ietf.org/rfc/rfc3561.txt}},
+  owner = {lotte},
+  timestamp = {2014.01.07}
+}
+
+@MISC{AODVv2,
+  author = {C. Perkins and S. Ratliff and J. Dowdell},
+  title = {{D}ynamic {MANET} {O}n-demand ({AODV}v2) {R}outing},
+  howpublished = {Online},
+  year = {2014},
+  note = {\url{http://tools.ietf.org/html/draft-ietf-manet-aodvv2}},
+  owner = {lotte},
+  timestamp = {2014.01.07}
+}
+
+@ARTICLE{multipath_survey,
+  author = {Radi, Marjan and Dezfouli, Behnam and Bakar, Kamalrulnizam Abu and
+	Lee, Malrey},
+  title = {Multipath Routing in Wireless Sensor Networks: Survey and Research
+	Challenges},
+  journal = {Sensors},
+  year = {2012},
+  volume = {12},
+  pages = {650--685},
+  number = {1},
+  doi = {10.3390/s120100650},
+  issn = {1424-8220},
+  pubmedid = {22368490},
+  url = {http://www.mdpi.com/1424-8220/12/1/650}
+}
+
+@INPROCEEDINGS{Singh_power_aware_metric,
+  author = {Singh, Suresh and Woo, Mike and Raghavendra, C. S.},
+  title = {Power-aware Routing in Mobile Ad Hoc Networks},
+  booktitle = {Proceedings of the 4th Annual ACM/IEEE International Conference on
+	Mobile Computing and Networking},
+  year = {1998},
+  series = {MobiCom '98},
+  pages = {181--190},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  acmid = {288286},
+  doi = {10.1145/288235.288286},
+  isbn = {1-58113-035-X},
+  location = {Dallas, Texas, USA},
+  numpages = {10},
+  url = {http://doi.acm.org/10.1145/288235.288286}
+}
+
+@INPROCEEDINGS{loadng_p2mp,
+  author = {Jiazi Yi and Clausen, T. and de Verdiere, A.C.},
+  title = {Efficient Data Acquisition in Sensor Networks: Introducing (the)
+	LOADng Collection Tree Protocol},
+  booktitle = {Wireless Communications, Networking and Mobile Computing (WiCOM),
+	2012 8th International Conference on},
+  year = {2012},
+  pages = {1-4},
+  month = {Sept},
+  doi = {10.1109/WiCOM.2012.6478508},
+  issn = {2161-9646}
+}
+

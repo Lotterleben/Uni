@@ -1,0 +1,191 @@
+\documentclass[draft=false
+              ,paper=a4
+              ,twoside=false
+              ,fontsize=11pt
+              ,headsepline
+              ,BCOR10mm
+              ,DIV11
+              ]{scrbook}
+\usepackage[ngerman,english]{babel}
+%% see http://www.tex.ac.uk/cgi-bin/texfaq2html?label=uselmfonts
+\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage[latin1]{inputenc}
+\usepackage{libertine}
+\usepackage{pifont}
+\usepackage{microtype}
+\usepackage{textcomp}
+\usepackage[german,refpage]{nomencl}
+\usepackage{setspace}
+\usepackage{makeidx}
+\usepackage{listings}
+%\usepackage{natbib}
+\usepackage[ngerman,colorlinks=true]{hyperref}
+\usepackage{soul}
+\usepackage{hawstyle}
+\usepackage{lipsum} %% for sample text
+\usepackage{chngcntr}
+
+%% define some colors
+\colorlet{BackgroundColor}{gray!20}
+\colorlet{KeywordColor}{blue}
+\colorlet{CommentColor}{black!60}
+%% for tables
+\colorlet{HeadColor}{gray!60}
+\colorlet{Color1}{blue!10}
+\colorlet{Color2}{white}
+
+%% configure colors
+\HAWifprinter{
+  \colorlet{BackgroundColor}{gray!20}
+  \colorlet{KeywordColor}{black}
+  \colorlet{CommentColor}{gray}
+  % for tables
+  \colorlet{HeadColor}{gray!60}
+  \colorlet{Color1}{gray!40}
+  \colorlet{Color2}{white}
+}{}
+\lstset{%
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=5pt,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{KeywordColor}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{CommentColor},
+  backgroundcolor=\color{BackgroundColor},
+  captionpos=b,
+  fontadjust=true
+}
+\lstset{escapeinside={(*@}{@*)}, % used to enter latex code inside listings
+        morekeywords={uint32_t, int32_t}
+}
+\ifpdfoutput{
+  \hypersetup{bookmarksopen=false,bookmarksnumbered,linktocpage}
+}{}
+
+%% more fancy C++
+\DeclareRobustCommand{\cxx}{C\raisebox{0.25ex}{{\scriptsize +\kern-0.25ex +}}}
+
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% unknown hyphenations
+\hyphenation{
+}
+
+% MAKE SECTIONS AS CHAPTERS
+\renewcommand{\thesection}{\arabic{section}}
+\makeatletter
+\let\l@section\l@chapter
+\makeatother
+
+% FIX FIGURE NUMBERING
+\counterwithin{figure}{section}
+
+%% recalculate text area
+\typearea[current]{last}
+
+\makeindex
+\makenomenclature
+
+\begin{document}
+%\selectlanguage{ngerman}
+
+%%%%%
+%% customize (see readme.pdf for supported values)
+\HAWThesisProperties{Author={Lotte Steenbrink}
+                    ,Title={Ausarbeitung}
+                    ,EnglishTitle={Routing in the Internet of Things}
+                    ,ThesisType={Routing in the Internet of Things}
+                    %,ExaminationType={Bachelorprüfung}
+                    %,DegreeProgramme={Master of Science Angewandte Informatik}
+                    %,ThesisExperts={Prof. Dr. Erstprüfer \and Prof. Dr. Zweitprüfer}
+                    ,ReleaseDate={\today}
+                  }
+
+%% title
+\frontmatter
+%% output title page
+\maketitle
+
+\onehalfspacing
+
+%% add abstract pages
+%% note: this is one command on multiple lines
+%\HAWAbstractPage
+%% German abstract
+
+% TODO!!!
+%{Routing, 6LowPAN, IoT, MANET, LLN, DTN}%
+%{Dieses Dokument \ldots}
+%% English abstract
+%{keyword 1, keyword 2}%
+%{This document \ldots}
+
+\newpage
+\singlespacing
+
+\tableofcontents
+\newpage
+%% enable if these lists should be shown on their own page
+%%\listoftables
+\listoffigures
+%\lstlistoflistings
+\newpage
+
+\newpage
+\chapter*{Glossary}
+\printglossaries
+\newpage
+
+% make little page headers display section titles
+\newcommand{\currentsection}{}
+\let\oldsection\section
+\renewcommand{\section}[1]{\oldsection{#1}\renewcommand{\currentsection}{#1}}
+\ihead{\currentsection}
+
+%% main
+\mainmatter
+
+\onehalfspacing
+
+\input{text/1-motivation}
+\input{text/2-approaches}
+\input{text/3-protocols}
+\input{text/4-conclusion}
+
+
+%%%%
+
+%% appendix if used
+%%\appendix
+%%\typeout{===== File: appendix}
+%%\include{appendix}
+
+% bibliography and other stuff
+\backmatter
+
+\typeout{===== Section: literature}
+%% read the documentation for customizing the style
+\bibliographystyle{ieeetr}
+\bibliography{sample}
+\newpage
+
+%\typeout{===== Section: nomenclature}
+%% uncomment if a TOC entry is needed
+%\addcontentsline{toc}{chapter}{Glossary}
+%\renewcommand{\nomname}{Glossar}
+%\clearpage
+%\markboth{\nomname}{\nomname} %% see nomencl doc, page 9, section 4.1
+%\printnomenclature
+
+%% index
+\typeout{===== Section: index}
+\printindex
+
+\HAWasurency
+
+\end{document}

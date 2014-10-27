@@ -1,0 +1,99 @@
+\documentclass[10pt,a4paper,fleqn, twocolumn]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[left=3.5cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[ngerman]{babel}
+\usepackage{amsfonts,amsmath}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{url}
+
+\begin{document}
+
+  % Set defaults. (See docs/latex/templates/settings.tex)
+  \renewcommand{\labelenumi}{(\alph{enumi})}
+  \renewcommand\headrule{\vspace{+2pt}\hrule}
+  \newcommand{\solved}{\[\hfill\Box\]}
+  \setlength{\headheight}{2.5\baselineskip}
+  \pagestyle{fancyplain}
+  %\pagenumbering{Roman}
+
+  \rhead{\today}
+  \lhead{{\Large Routing im Internet of Things}\\ Lotte Steenbrink}
+ 
+%\begin{abstract}
+%  TODO: brauch ich den überhaupt?
+%\end{abstract}
+
+\section{Einführung}
+% Was ist das Internet of Things? Welche Hardware wird dort typischerweise eingesetzt, welche Kommunikationsmuster gibt es?
+
+Als \emph{Internet of Things} (IoT) wird die Vision autonomer Kommunikation zwischen intelligenten Gegenständen, so genannter \emph{smart devices} bezeichnet.
+Zum Einsatz kommen hierzu batteriebetriebene Sensorknoten mit vergleichsweise niedriger Rechenleistung und begrenzter Speicherkapazität\cite{KULeuven-314567}.
+Diese Umstände stellen Routingprotokolle vor Herausforderungen, die konventionelle Lösungen oft nur bedingt meistern können.
+
+%TODO kommunikationsmuster
+
+\section{Problemstellung}
+\label{sec:problemstellung}
+%==============================================================================
+% Was sind die besonderen Herausforderungen, denen sich ein IoT-Routingverfahren stellen muss? Mit welchen Umständen muss es umgehen können?
+
+\cite{RFC5826}, \cite{RFC5548} und \cite{RFC5867} beschreiben Anforderungen an ein Routingprotokoll für das Internet of Things: Es muss sich selbstständig %initialisieren und 
+organisieren können, auf mehrere tausend Knoten skalieren, es sollte die Ressourcen einzelner Knoten kommunizieren und berücksichtigen sowie annehmbare Latenzen garantieren.\\
+Da das aufwecken und betreiben von Transceivern teuer ist %(QUELLE)
+und die beschriebenen Sensorknoten oft über Jahre von ihrer Batterie zehren müssen, ist eine minimale Nutzung des Transceivers erstrebenswert. Aufgrund der geringen Speicherkapazität der eingesetzten Knoten ist außerdem ein Minimum an zu speichernden Metadaten wünschenswert.\\
+Eine Kategorisierung bestehender Ansätze, ergänzt durch Lösungen ähnlicher Forschungsfelder, böte einen guten Ausgangspunkt für die Erarbeitung neuer Strategien.
+
+\section{Vorhandene Ansätze}
+\label{sec:lsg}
+%==============================================================================
+Da das Konzept des Internet of Things noch relativ neu ist, sind dedizierte Konferenzen und Journals zum Thema rar und sehr jung. Daher ist es sinnvoll, zusätzlich themenverwandte Forschungsfelder zu beobachten. Besonders Publikationen zum Thema und LLNs, Wireless Sensor Networks (WSN) und Mobile Ad Hoc Networks (MANETs) sowie deren Spezialformen wie Vehicular Ad Hoc Networks (VANETs) bieten sich hier an. Die für das Thema relevante ACM Special Interest Group bildet die SIGCOMM.\\
+Neue Routingprotokolle oder Modifikationen bereits vorhandener Protokolle sollten %vor näherer Betrachtung
+ einige Relevanzkriterien erfüllen.
+\begin{description}
+\item[Eignung] Das Protokoll sollte einem signifikanten Teil der in Abschnitt \ref{sec:problemstellung} formulierten Anforderungen gerecht werden.
+\item[Standardisierung] Protokolle, die Ergebnis oder Teil eines Standardisierungsprozesses sind, werden bevorzugt.
+\item[Umsetzung] Es sollte mindestens eine Implementierung des Protokolls verfügbar sein.
+\end{description}
+Von esoterischeren Protokollen können dennoch besonders originelle oder hilfreiche Aspekte beleuchtet werden.
+
+% TODO: fokus auf ansätze statt protokolle? also rumor routing, reactive/proactive, hop by hop etc
+
+\paragraph{RPL}
+%Das von der ROLL-Arbeitsgruppe im März 2012 spezifizierte 
+Das Routing Protocol for Low power and Lossy Networks (RPL)\cite{RFC6550} wurde speziell für die Anwendung in IoT-ähnlichen Situationen spezifiziert. Die Annahmen, die beim Protokolldesign getroffen wurden und auf denen die Spezifikation beruht, sind jedoch nicht allgemein gültig. So ist das Protokoll für \emph{point-to-multipoint}- und \emph{point-to-point}-Kommunikation nur bedingt bis kaum geeignet, scheitert an teilweise unidirektionalen Links und verursacht unnötigen Overhead bei Veränderungen in der Netzwerktopologie\cite{RPL_eval_critical}.\\ %( letzten Satz ggf auskommentieren)
+RPL ist daher für viele Use Cases keine ideale Lösung, weshalb es sich lohnt, Alternativen zu inspizieren.
+
+%\paragraph{LOADng und AODV}
+%Sowohl LOADng\cite{LOADng} als auch AODVv2\cite{AODVv2} basieren auf dem reaktiven hop-by-hop-Routingprotokoll AODV. Obwohl nur selten explizit als IoT-Routingprotokoll beschrieben, erfüllen beide Protokolle viele der Anforderungen aus Abschnitt \ref{sec:problemstellung}. Sie eignen sich besonders zur point-to-point-Kommunikation, wobei eine LOADng auch point-to-multipoint ermöglicht\cite{loadng_p2mp}.
+% in 10 seiten ausarbeitung implementierungen, draft status etc erwähnen
+
+\paragraph{Reaktive Hop-by-Hop-Protokolle}
+wie LOADng\cite{LOADng} oder AODVv2\cite{AODVv2} bieten den Vorteil geringer Datenmengen sowie der Energieersparnis durch die Vermeidung regelmäßiger Routensuche. Sie eignen sich besonders zur point-to-point-Kommunikation, wobei eine LOADng-Erweiterung auch point-to-multipoint ermöglicht\cite{loadng_p2mp}.
+
+%\paragraph{Ant Routing Algorithm (ARA)}
+%TODO: Günes' Folien durchgehen (Relevanzkriterien?)
+
+% weitere vorschläge...
+% - rumor routing
+
+\paragraph{Multipath-Routingprotokolle} helfen, die Zuverlässigkeit des Netzes zu erhöhen und einzelne Knoten zu entlasten, indem sie Pakete über unterschiedliche Wege an ihr Ziel befördern\cite{multipath_survey}.
+
+\paragraph{Information-Centric-Networking} ist auf Informationen anstatt auf Adressen fokussiert. Dies eignet sich besonders für multipoint-to-point-traffic zwischen Knoten, die ähnliche Informationen austauschen (z.B. Temperaturdaten)\cite{icn_survey}.
+% TODO QUELLE!!! cite https://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6231276 ?
+
+%Zusätzlich bleiben gepufferte Daten über eine Netzwerkpartition hinaus erhalten.
+
+\paragraph{Metriken}
+Die Berücksichtigung von Energie- oder Rechenkapazitäten muss nicht integraler Bestandteil eines Routingprotokolls sein. Vielmehr lassen sich Routingentscheidungen auf dieser Basis auch durch die Verwendung geeigneter Metriken treffen. Beispielhaft können \cite{metric_energy_delay} und \cite{Singh_power_aware_metric} als Ansätze genannt werden.
+
+{\small
+\bibliographystyle{ieeetr}
+\bibliography{AW1_Ausarbeitung}
+}
+
+\end{document}
