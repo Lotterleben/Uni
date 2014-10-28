@@ -51,7 +51,7 @@ distinguish routes by locality: nearby routes are maintained in a proactive fash
 \section{One framework to rule them all?}
 While most existing hybrid routing protocols are based on existing reactive and proactive protocols (TODO: Beispiele?), they are based on there protocols only. This allows for fine-grained optimization: for example, P2P-RPL piggybacks its reactive Route Requests on the \gls{DIO} messages proactively distributed by RPL, the ``host protocol''. Additionally, specification authors can bring in their expertise when choosing reactive and protocols which fit together optimally.\\
 The downside to this is a loss of flexibility and re-utilizability: New developments in reactive or proactive routing can hardly trickle down to such hybrid routing protocols, since they may need thorough re-evaluation and severe changes. Existing codebases of proactive or reactive protocols can not be re-used or need to be manually adapted in order to be used by hybrid routing protocols.\\
-Frameworks such as (TODO) strive to resolve this. (TODO: ausbauen, besser vermarkten)
+The adoption of a hybrid routing \emph{framework} rather than a protocol might result in solutions which are easier to adopt to different network requirements as well as technological innovations. (TODO cite papers about frameworks)
 
 \section{Challenges}
 Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional, unique set of challenges.\\
@@ -60,13 +60,12 @@ The decision when-- or where, depending on the protocol's approach to prioritize
 Two fundamentally different approaches to routing have to be coordinated.\\ %TODO: ausbauen
 And finally, most research stems from a time when even the vision of an \gls{IoT} did not exist. Existing hybrid protocols or frameworks may have to be adjusted and advanced in order to adopt to the needs of \gls{IoT}-based deployments.
 
-\section{Conclusion}
+\section{Experiences}
+Hybrid routing protocols are a research field with big developmental potential. However, publications documenting real-world experience with hybrid deployments are rare. \cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
 
-% Alternativ kann auch BibTex verwendet werden
-%\begin{thebibliography}{}
-%\bibitem[Jenke, 2014]{jenke14} P. Jenke und S. Sarstedt: {\em AW2 ist ein wichtiger Baustein auf dem Weg zum Master}, Journal of NichtVeršffentlicht, 2014
-%\bibitem[Wolf]{wolf} Thomas Wolf: {\em www.foto-tw.de}.
-%\end{thebibliography}
+\section{Conclusion}
+Hybrid routing protocols are a promising paradigm which may be able to adopt to the diverse and changing network topologies which can be found in the Internet of Things.
+TODO: und jetzt?
 
 {\small
 \bibliographystyle{ieeetr}
