@@ -24,33 +24,44 @@
 \begin{document}
 
 % Titel
-\title{Hybrid routing for the IoT}
+\title{Hybrid routing for the Internet of Things}
 \subtitle{challenges and opportunities}
 \author{Lotte Steenbrink}
 \date{Wintersemester 2014/15}
 
 \maketitle
-
 \begin{abstract}
-
+\textit{
+With the emerging of new technologies in networking and hardware, the vision of an \gls{IoT} is slowly becoming reality. The vision of an IoT is also a vision for new use cases, some of which create network topologies which cannot be optimally served by either reactive pr proactive routing protocols. One example for this may be the lighting system in a smart home: Each lamp needs to maintain a stable connection to the control center of the house, forming a tree-like topology towards the sink node that is the central control. In addition to this, lamps may want to communicate spontaneously between each other, for example to create optimal lighting in the study when a homeowner sits down at their desk.\\
+One approach which may help serve these new network topologies are hybrid routing protocols. This class of routing protocols combines features of both reactive and proactive routing based on the current situation.
+}
+% TODO: second use case for are-specific hybrid?
 \end{abstract}
 
-\section{Introduction}
-% motivation: Why do we need hybrid routing protocols?
-% -> concrete use cases
-
+% TODO: add introdtuion subsection?
 %Kapitelübersicht bei Ausarbeitung nicht vergessen!
-Routing in
-
-\section{Challenges}
 
 \section{Existing approaches}
 % ZRP
-Existing approaches can be categorized as either area-centered or route-centered.\\
+Existing approaches to hybrid routing can be categorized as either area-centered or route-centered.\\
 \emph{Area-centered} routing protocols, such as the \gls{ZRP}\cite{ZRP-Draft} or (TODO: more protocols+ sources),
 distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively.\\
-\emph{Route-centered} protocols like the P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550} instead focus on the importance of a route: a connection to a \gls{sink node} may be crucial to the operation of a network and should be maintained proactively, while connections between arbitrary nodes
-may be short-lived and should only be established on-demand (i.e. reactively) in order to save resources and bandwidth.
+\emph{Route-centered} protocols like the P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550} instead focus on the importance of a route: a connection to a \gls{sink node} is usually crucial to the operation of a network. It should be maintained proactively, while connections between arbitrary nodes may be short-lived and should only be established on-demand (i.e. reactively) in order to save energy resources and bandwidth.
+
+\section{One framework to rule them all?}
+While most existing hybrid routing protocols are based on existing reactive and proactive protocols (TODO: Beispiele?), they are based on there protocols only. This allows for fine-grained optimization: for example, P2P-RPL piggybacks its reactive Route Requests on the \gls{DIO} messages proactively distributed by RPL, the ``host protocol''. Additionally, specification authors can bring in their expertise when choosing reactive and protocols which fit together optimally.\\
+The downside to this is a loss of flexibility and re-utilizability: New developments in reactive or proactive routing can hardly trickle down to such hybrid routing protocols, since they may need thorough re-evaluation and severe changes. Existing codebases of proactive or reactive protocols can not be re-used or need to be manually adapted in order to be used by hybrid routing protocols.\\
+Frameworks such as (TODO) strive to resolve this. (TODO: ausbauen, besser vermarkten)
+
+\section{Challenges}
+Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional, unique set of challenges.\\
+The decision when-- or where, depending on the protocol's approach to prioritized route selection, as described above-- to switch is not trivial. This decision has to be made carefully, taking into account changig factors such as network density, traffic volume and traffic flow patterns.
+%(TODO: I pulled this one out of my, umm, nose.. Is this actually correct?! Add sources!)
+
+% - coordinate 2 fundamentally different routing approaches
+% most research stems from time where IoT vision didnt exist -> necessary to adjust & advance
+
+
 \section{Conclusion}
 
 % Alternativ kann auch BibTex verwendet werden
