@@ -42,7 +42,7 @@ def get_ping_info(line):
         increment_value(curr_info, "TTL_Exc")
 
     elif("Request timeout" in line):
-        increment_value("req_to")
+        increment_value(curr_info, "req_to")
 
     elif("packets transmitted" in line):
         (successes, pkt_loss) = re.search("packets transmitted, (.) packets received, (.*)% packet loss", line).groups()
