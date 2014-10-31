@@ -1,0 +1,490 @@
+frankenbook-pro:TT1 lotte$ python net_test.py
+xoxoxoxo pinging routers...
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+92 bytes from 192.168.3.1: Destination Port Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 5103   0 0000  3b  01 607e 192.168.3.112  10.0.0.16
+
+Request timeout for icmp_seq 0
+64 bytes from 10.0.0.16: icmp_seq=1 ttl=62 time=22.268 ms
+64 bytes from 10.0.0.16: icmp_seq=2 ttl=62 time=7.401 ms
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 7.401/14.835/22.268/7.434 ms
+
+errors: None
+program output: PING 10.0.0.1 (10.0.0.1): 56 data bytes
+92 bytes from 192.168.3.1: Destination Port Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 75a2   0 0000  3d  01 39ee 192.168.3.112  10.0.0.1
+
+Request timeout for icmp_seq 0
+64 bytes from 10.0.0.1: icmp_seq=1 ttl=62 time=4.876 ms
+64 bytes from 10.0.0.1: icmp_seq=2 ttl=62 time=8.192 ms
+
+--- 10.0.0.1 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 4.876/6.534/8.192/1.658 ms
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+Request timeout for icmp_seq 0
+64 bytes from 10.0.0.16: icmp_seq=1 ttl=62 time=9.128 ms
+64 bytes from 10.0.0.16: icmp_seq=2 ttl=62 time=7.533 ms
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 7.533/8.331/9.128/0.797 ms
+
+errors: None
+program output: PING 10.0.0.15 (10.0.0.15): 56 data bytes
+64 bytes from 10.0.0.15: icmp_seq=0 ttl=62 time=16.882 ms
+64 bytes from 10.0.0.15: icmp_seq=1 ttl=62 time=10.080 ms
+64 bytes from 10.0.0.15: icmp_seq=2 ttl=62 time=10.735 ms
+
+--- 10.0.0.15 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 10.080/12.566/16.882/3.064 ms
+
+errors: None
+program output: PING 10.0.0.29 (10.0.0.29): 56 data bytes
+64 bytes from 10.0.0.29: icmp_seq=0 ttl=63 time=6.795 ms
+64 bytes from 10.0.0.29: icmp_seq=1 ttl=63 time=4.841 ms
+64 bytes from 10.0.0.29: icmp_seq=2 ttl=63 time=7.835 ms
+
+--- 10.0.0.29 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 4.841/6.490/7.835/1.241 ms
+
+errors: None
+program output: PING 10.0.0.27 (10.0.0.27): 56 data bytes
+64 bytes from 10.0.0.27: icmp_seq=0 ttl=63 time=8.363 ms
+64 bytes from 10.0.0.27: icmp_seq=1 ttl=63 time=6.662 ms
+64 bytes from 10.0.0.27: icmp_seq=2 ttl=63 time=6.287 ms
+
+--- 10.0.0.27 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 6.287/7.104/8.363/0.903 ms
+
+errors: None
+program output: PING 10.0.0.17 (10.0.0.17): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+92 bytes from 10.0.0.18: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 7bea   0 0000  3d  01 3396 192.168.3.112  10.0.0.17
+
+92 bytes from 10.0.0.18: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 4bc2   0 0000  3d  01 63be 192.168.3.112  10.0.0.17
+
+92 bytes from 10.0.0.18: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 8024   0 0000  3d  01 2f5c 192.168.3.112  10.0.0.17
+
+
+--- 10.0.0.17 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.3 (10.0.0.3): 56 data bytes
+64 bytes from 10.0.0.3: icmp_seq=0 ttl=64 time=5.239 ms
+Request timeout for icmp_seq 1
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=5.612 ms
+
+--- 10.0.0.3 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 5.239/5.425/5.612/0.187 ms
+
+errors: None
+program output: PING 10.0.0.1 (10.0.0.1): 56 data bytes
+64 bytes from 10.0.0.1: icmp_seq=0 ttl=62 time=200.940 ms
+Request timeout for icmp_seq 1
+64 bytes from 10.0.0.1: icmp_seq=1 ttl=62 time=1072.989 ms
+64 bytes from 10.0.0.1: icmp_seq=2 ttl=62 time=75.510 ms
+
+--- 10.0.0.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 75.510/449.813/1072.989/443.617 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+64 bytes from 10.0.0.25: icmp_seq=0 ttl=63 time=11.632 ms
+64 bytes from 10.0.0.25: icmp_seq=1 ttl=63 time=58.170 ms
+64 bytes from 10.0.0.25: icmp_seq=2 ttl=63 time=5.812 ms
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 5.812/25.205/58.170/23.431 ms
+
+errors: None
+program output: PING 10.0.0.3 (10.0.0.3): 56 data bytes
+64 bytes from 10.0.0.3: icmp_seq=0 ttl=64 time=4.867 ms
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=10.129 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=6.472 ms
+
+--- 10.0.0.3 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 4.867/7.156/10.129/2.202 ms
+
+errors: None
+program output: PING 10.0.0.22 (10.0.0.22): 56 data bytes
+64 bytes from 10.0.0.22: icmp_seq=0 ttl=63 time=4.488 ms
+64 bytes from 10.0.0.22: icmp_seq=1 ttl=63 time=8.017 ms
+64 bytes from 10.0.0.22: icmp_seq=2 ttl=63 time=5.582 ms
+
+--- 10.0.0.22 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 4.488/6.029/8.017/1.475 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+64 bytes from 10.0.0.25: icmp_seq=0 ttl=63 time=5.904 ms
+64 bytes from 10.0.0.25: icmp_seq=1 ttl=63 time=250.953 ms
+64 bytes from 10.0.0.25: icmp_seq=2 ttl=63 time=772.495 ms
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 5.904/343.117/772.495/319.673 ms
+
+errors: None
+program output: PING 10.0.0.15 (10.0.0.15): 56 data bytes
+64 bytes from 10.0.0.15: icmp_seq=0 ttl=62 time=28.215 ms
+64 bytes from 10.0.0.15: icmp_seq=1 ttl=62 time=44.170 ms
+64 bytes from 10.0.0.15: icmp_seq=2 ttl=62 time=10.406 ms
+
+--- 10.0.0.15 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 10.406/27.597/44.170/13.791 ms
+
+errors: None
+program output: PING 10.0.0.17 (10.0.0.17): 56 data bytes
+64 bytes from 10.0.0.17: icmp_seq=0 ttl=62 time=5.320 ms
+64 bytes from 10.0.0.17: icmp_seq=1 ttl=62 time=5.144 ms
+64 bytes from 10.0.0.17: icmp_seq=2 ttl=62 time=8.755 ms
+
+--- 10.0.0.17 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 5.144/6.406/8.755/1.662 ms
+
+errors: None
+program output: PING 10.0.0.3 (10.0.0.3): 56 data bytes
+64 bytes from 10.0.0.3: icmp_seq=0 ttl=64 time=4.748 ms
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=5.681 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=6.644 ms
+
+--- 10.0.0.3 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 4.748/5.691/6.644/0.774 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+64 bytes from 10.0.0.25: icmp_seq=0 ttl=63 time=3.783 ms
+64 bytes from 10.0.0.25: icmp_seq=1 ttl=63 time=5.865 ms
+64 bytes from 10.0.0.25: icmp_seq=2 ttl=63 time=3.450 ms
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 3.450/4.366/5.865/1.069 ms
+
+errors: None
+program output: PING 10.0.0.1 (10.0.0.1): 56 data bytes
+64 bytes from 10.0.0.1: icmp_seq=0 ttl=62 time=6.184 ms
+64 bytes from 10.0.0.1: icmp_seq=1 ttl=62 time=23.546 ms
+64 bytes from 10.0.0.1: icmp_seq=2 ttl=62 time=5.998 ms
+
+--- 10.0.0.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 5.998/11.909/23.546/8.229 ms
+
+errors: None
+program output: PING 10.0.0.20 (10.0.0.20): 56 data bytes
+64 bytes from 10.0.0.20: icmp_seq=0 ttl=61 time=22.924 ms
+64 bytes from 10.0.0.20: icmp_seq=1 ttl=61 time=10.892 ms
+64 bytes from 10.0.0.20: icmp_seq=2 ttl=61 time=114.966 ms
+
+--- 10.0.0.20 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 10.892/49.594/114.966/46.485 ms
+
+errors: None
+program output: PING 10.0.0.22 (10.0.0.22): 56 data bytes
+64 bytes from 10.0.0.22: icmp_seq=0 ttl=63 time=11.179 ms
+64 bytes from 10.0.0.22: icmp_seq=1 ttl=63 time=5.042 ms
+64 bytes from 10.0.0.22: icmp_seq=2 ttl=63 time=4.745 ms
+
+--- 10.0.0.22 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 4.745/6.989/11.179/2.965 ms
+
+errors: None
+program output: PING 10.0.0.17 (10.0.0.17): 56 data bytes
+64 bytes from 10.0.0.17: icmp_seq=0 ttl=62 time=12.093 ms
+64 bytes from 10.0.0.17: icmp_seq=1 ttl=62 time=49.027 ms
+
+--- 10.0.0.17 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 12.093/30.560/49.027/18.467 ms
+
+errors: None
+program output: PING 10.0.0.20 (10.0.0.20): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.20 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.15 (10.0.0.15): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.15 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+92 bytes from 10.0.0.18: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 6776   0 0000  3d  01 480b 192.168.3.112  10.0.0.16
+
+92 bytes from 10.0.0.18: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 73a3   0 0000  3d  01 3bde 192.168.3.112  10.0.0.16
+
+92 bytes from 10.0.0.18: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 8818   0 0000  3d  01 2769 192.168.3.112  10.0.0.16
+
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+92 bytes from 192.168.3.1: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 3e45   0 0000  3f  01 6f33 192.168.3.112  10.0.0.25
+
+92 bytes from 192.168.3.1: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 0598   0 0000  3f  01 a7e0 192.168.3.112  10.0.0.25
+
+92 bytes from 192.168.3.1: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 c989   0 0000  3f  01 e3ee 192.168.3.112  10.0.0.25
+
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.15 (10.0.0.15): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.15 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.29 (10.0.0.29): 56 data bytes
+64 bytes from 10.0.0.29: icmp_seq=0 ttl=62 time=11.616 ms
+64 bytes from 10.0.0.29: icmp_seq=1 ttl=62 time=9.740 ms
+64 bytes from 10.0.0.29: icmp_seq=2 ttl=62 time=12.799 ms
+
+--- 10.0.0.29 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 9.740/11.385/12.799/1.259 ms
+
+errors: None
+program output: PING 10.0.0.3 (10.0.0.3): 56 data bytes
+64 bytes from 10.0.0.3: icmp_seq=0 ttl=64 time=5.525 ms
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=7.179 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=6.023 ms
+
+--- 10.0.0.3 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 5.525/6.242/7.179/0.693 ms
+
+errors: None
+program output: PING 10.0.0.1 (10.0.0.1): 56 data bytes
+92 bytes from 10.0.0.22: Time to live exceeded
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 67b6   0 0000  01  01 83da 192.168.3.112  10.0.0.1
+
+Request timeout for icmp_seq 0
+92 bytes from 10.0.0.22: Time to live exceeded
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 7169   0 0000  01  01 7a27 192.168.3.112  10.0.0.1
+
+Request timeout for icmp_seq 1
+92 bytes from 10.0.0.22: Time to live exceeded
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 dc22   0 0000  01  01 0f6e 192.168.3.112  10.0.0.1
+
+
+--- 10.0.0.1 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.1 (10.0.0.1): 56 data bytes
+92 bytes from 10.0.0.22: Time to live exceeded
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 31c3   0 0000  01  01 b9cd 192.168.3.112  10.0.0.1
+
+Request timeout for icmp_seq 0
+92 bytes from 10.0.0.22: Time to live exceeded
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 ef2e   0 0000  01  01 fc61 192.168.3.112  10.0.0.1
+
+Request timeout for icmp_seq 1
+92 bytes from 10.0.0.22: Time to live exceeded
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 998a   0 0000  01  01 5206 192.168.3.112  10.0.0.1
+
+
+--- 10.0.0.1 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.22 (10.0.0.22): 56 data bytes
+64 bytes from 10.0.0.22: icmp_seq=0 ttl=63 time=9.785 ms
+64 bytes from 10.0.0.22: icmp_seq=1 ttl=63 time=7.360 ms
+64 bytes from 10.0.0.22: icmp_seq=2 ttl=63 time=6.874 ms
+
+--- 10.0.0.22 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 6.874/8.006/9.785/1.273 ms
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.22 (10.0.0.22): 56 data bytes
+64 bytes from 10.0.0.22: icmp_seq=0 ttl=63 time=6.798 ms
+64 bytes from 10.0.0.22: icmp_seq=1 ttl=63 time=6.678 ms
+64 bytes from 10.0.0.22: icmp_seq=2 ttl=63 time=5.832 ms
+
+--- 10.0.0.22 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 5.832/6.436/6.798/0.430 ms
+
+errors: None
+program output: PING 10.0.0.15 (10.0.0.15): 56 data bytes
+64 bytes from 10.0.0.15: icmp_seq=0 ttl=61 time=10.382 ms
+64 bytes from 10.0.0.15: icmp_seq=1 ttl=61 time=18.165 ms
+64 bytes from 10.0.0.15: icmp_seq=2 ttl=61 time=8.973 ms
+
+--- 10.0.0.15 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 8.973/12.507/18.165/4.042 ms
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+64 bytes from 10.0.0.16: icmp_seq=0 ttl=61 time=100.008 ms
+64 bytes from 10.0.0.16: icmp_seq=1 ttl=61 time=12.561 ms
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 12.561/56.284/100.008/43.724 ms
+
+errors: None
+program output: PING 10.0.0.20 (10.0.0.20): 56 data bytes
+92 bytes from 192.168.3.1: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 9594   0 0000  40  01 16e9 192.168.3.112  10.0.0.20
+
+Request timeout for icmp_seq 0
+92 bytes from 192.168.3.1: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 da9d   0 0000  40  01 d1df 192.168.3.112  10.0.0.20
+
+Request timeout for icmp_seq 1
+92 bytes from 192.168.3.1: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 6243   0 0000  40  01 4a3a 192.168.3.112  10.0.0.20
+
+
+--- 10.0.0.20 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.27 (10.0.0.27): 56 data bytes
+64 bytes from 10.0.0.27: icmp_seq=0 ttl=63 time=8.252 ms
+64 bytes from 10.0.0.27: icmp_seq=1 ttl=63 time=7.611 ms
+64 bytes from 10.0.0.27: icmp_seq=2 ttl=63 time=7.021 ms
+
+--- 10.0.0.27 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 7.021/7.628/8.252/0.503 ms
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+64 bytes from 10.0.0.16: icmp_seq=0 ttl=61 time=13.633 ms
+64 bytes from 10.0.0.16: icmp_seq=1 ttl=61 time=24.614 ms
+64 bytes from 10.0.0.16: icmp_seq=2 ttl=61 time=43.946 ms
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 13.633/27.398/43.946/12.531 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+92 bytes from 192.168.3.1: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 a931   0 0000  40  01 0347 192.168.3.112  10.0.0.25
+
+Request timeout for icmp_seq 0
+92 bytes from 192.168.3.1: Destination Host Unreachable
+Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst
+ 4  5  00 5400 f7e0   0 0000  40  01 b497 192.168.3.112  10.0.0.25
+
+Request timeout for icmp_seq 1
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.22 (10.0.0.22): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.22 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.3 (10.0.0.3): 56 data bytes
+64 bytes from 10.0.0.3: icmp_seq=0 ttl=64 time=8.286 ms
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=73.244 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=56.579 ms
+
+--- 10.0.0.3 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 8.286/46.036/73.244/27.547 ms
