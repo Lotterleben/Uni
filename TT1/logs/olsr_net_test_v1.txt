@@ -1,0 +1,402 @@
+frankenbook-pro:TT1 lotte$ olsr test
+-bash: olsr: command not found
+frankenbook-pro:TT1 lotte$ python net_test.py
+xoxoxoxo pinging routers...
+errors: None
+program output: PING 10.0.0.27 (10.0.0.27): 56 data bytes
+64 bytes from 10.0.0.27: icmp_seq=0 ttl=63 time=12.719 ms
+64 bytes from 10.0.0.27: icmp_seq=1 ttl=63 time=10.292 ms
+64 bytes from 10.0.0.27: icmp_seq=2 ttl=63 time=6.056 ms
+
+--- 10.0.0.27 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 6.056/9.689/12.719/2.753 ms
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+64 bytes from 10.0.0.16: icmp_seq=0 ttl=62 time=9.049 ms
+64 bytes from 10.0.0.16: icmp_seq=1 ttl=62 time=10.875 ms
+64 bytes from 10.0.0.16: icmp_seq=2 ttl=62 time=6.735 ms
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 6.735/8.886/10.875/1.694 ms
+
+errors: None
+program output: PING 10.0.0.27 (10.0.0.27): 56 data bytes
+64 bytes from 10.0.0.27: icmp_seq=0 ttl=63 time=6.174 ms
+64 bytes from 10.0.0.27: icmp_seq=1 ttl=63 time=7.585 ms
+64 bytes from 10.0.0.27: icmp_seq=2 ttl=63 time=28.023 ms
+
+--- 10.0.0.27 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 6.174/13.927/28.023/9.984 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+64 bytes from 10.0.0.25: icmp_seq=0 ttl=63 time=9.774 ms
+64 bytes from 10.0.0.25: icmp_seq=1 ttl=63 time=9.786 ms
+64 bytes from 10.0.0.25: icmp_seq=2 ttl=63 time=8.067 ms
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 8.067/9.209/9.786/0.808 ms
+
+errors: None
+program output: PING 10.0.0.29 (10.0.0.29): 56 data bytes
+64 bytes from 10.0.0.29: icmp_seq=0 ttl=61 time=25.301 ms
+Request timeout for icmp_seq 1
+
+--- 10.0.0.29 ping statistics ---
+3 packets transmitted, 1 packets received, 66.7% packet loss
+round-trip min/avg/max/stddev = 25.301/25.301/25.301/0.000 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+64 bytes from 10.0.0.25: icmp_seq=0 ttl=63 time=8.156 ms
+64 bytes from 10.0.0.25: icmp_seq=1 ttl=63 time=7.740 ms
+64 bytes from 10.0.0.25: icmp_seq=2 ttl=63 time=7.976 ms
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 7.740/7.957/8.156/0.170 ms
+
+errors: None
+program output: PING 10.0.0.16 (10.0.0.16): 56 data bytes
+64 bytes from 10.0.0.16: icmp_seq=0 ttl=62 time=7.945 ms
+64 bytes from 10.0.0.16: icmp_seq=1 ttl=62 time=50.765 ms
+64 bytes from 10.0.0.16: icmp_seq=2 ttl=62 time=13.208 ms
+
+--- 10.0.0.16 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 7.945/23.973/50.765/19.066 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+Request timeout for icmp_seq 0
+64 bytes from 10.0.0.25: icmp_seq=0 ttl=63 time=1634.477 ms
+64 bytes from 10.0.0.25: icmp_seq=1 ttl=63 time=1863.914 ms
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 1634.477/1749.195/1863.914/114.719 ms
+
+errors: None
+program output: PING 10.0.0.2 (10.0.0.2): 56 data bytes
+64 bytes from 10.0.0.2: icmp_seq=0 ttl=62 time=8.363 ms
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=62 time=12.723 ms
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=62 time=6.647 ms
+
+--- 10.0.0.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 6.647/9.244/12.723/2.558 ms
+
+errors: None
+program output: PING 10.0.0.22 (10.0.0.22): 56 data bytes
+64 bytes from 10.0.0.22: icmp_seq=0 ttl=61 time=10.853 ms
+64 bytes from 10.0.0.22: icmp_seq=1 ttl=61 time=9.396 ms
+64 bytes from 10.0.0.22: icmp_seq=2 ttl=61 time=13.161 ms
+
+--- 10.0.0.22 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 9.396/11.137/13.161/1.550 ms
+
+errors: None
+program output: PING 10.0.0.27 (10.0.0.27): 56 data bytes
+64 bytes from 10.0.0.27: icmp_seq=0 ttl=63 time=6.311 ms
+64 bytes from 10.0.0.27: icmp_seq=1 ttl=63 time=7.019 ms
+64 bytes from 10.0.0.27: icmp_seq=2 ttl=63 time=7.598 ms
+
+--- 10.0.0.27 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 6.311/6.976/7.598/0.526 ms
+
+errors: None
+program output: PING 10.0.0.15 (10.0.0.15): 56 data bytes
+64 bytes from 10.0.0.15: icmp_seq=0 ttl=62 time=7.911 ms
+64 bytes from 10.0.0.15: icmp_seq=1 ttl=62 time=14.289 ms
+64 bytes from 10.0.0.15: icmp_seq=2 ttl=62 time=14.229 ms
+
+--- 10.0.0.15 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 7.911/12.143/14.289/2.993 ms
+
+errors: None
+program output: PING 10.0.0.22 (10.0.0.22): 56 data bytes
+64 bytes from 10.0.0.22: icmp_seq=0 ttl=61 time=18.475 ms
+64 bytes from 10.0.0.22: icmp_seq=1 ttl=61 time=20.312 ms
+64 bytes from 10.0.0.22: icmp_seq=2 ttl=61 time=31.804 ms
+
+--- 10.0.0.22 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 18.475/23.530/31.804/5.898 ms
+
+errors: None
+program output: PING 10.0.0.27 (10.0.0.27): 56 data bytes
+64 bytes from 10.0.0.27: icmp_seq=0 ttl=63 time=9.377 ms
+64 bytes from 10.0.0.27: icmp_seq=1 ttl=63 time=12.011 ms
+64 bytes from 10.0.0.27: icmp_seq=2 ttl=63 time=25.928 ms
+
+--- 10.0.0.27 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 9.377/15.772/25.928/7.261 ms
+
+errors: None
+program output: PING 10.0.0.2 (10.0.0.2): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.2 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.2 (10.0.0.2): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.2 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.3 (10.0.0.3): 56 data bytes
+64 bytes from 10.0.0.3: icmp_seq=0 ttl=64 time=12.131 ms
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=28.524 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=48.062 ms
+
+--- 10.0.0.3 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 12.131/29.572/48.062/14.687 ms
+
+errors: None
+program output: PING 10.0.0.15 (10.0.0.15): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.15 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+64 bytes from 10.0.0.25: icmp_seq=0 ttl=63 time=13.460 ms
+64 bytes from 10.0.0.25: icmp_seq=1 ttl=63 time=7.365 ms
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 7.365/10.413/13.460/3.047 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+64 bytes from 10.0.0.25: icmp_seq=0 ttl=63 time=393.233 ms
+Request timeout for icmp_seq 1
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 1 packets received, 66.7% packet loss
+round-trip min/avg/max/stddev = 393.233/393.233/393.233/0.000 ms
+
+errors: None
+program output: PING 10.0.0.17 (10.0.0.17): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.17 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+errors: None
+program output: PING 10.0.0.3 (10.0.0.3): 56 data bytes
+64 bytes from 10.0.0.3: icmp_seq=0 ttl=64 time=5.713 ms
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=3.538 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=2.135 ms
+
+--- 10.0.0.3 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 2.135/3.795/5.713/1.472 ms
+
+errors: None
+program output: PING 10.0.0.25 (10.0.0.25): 56 data bytes
+Request timeout for icmp_seq 0
+64 bytes from 10.0.0.25: icmp_seq=1 ttl=63 time=12.656 ms
+64 bytes from 10.0.0.25: icmp_seq=2 ttl=63 time=7.478 ms
+
+--- 10.0.0.25 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 7.478/10.067/12.656/2.589 ms
+
+errors: None
+program output: PING 10.0.0.27 (10.0.0.27): 56 data bytes
+64 bytes from 10.0.0.27: icmp_seq=0 ttl=63 time=9.164 ms
+64 bytes from 10.0.0.27: icmp_seq=1 ttl=63 time=7.936 ms
+
+--- 10.0.0.27 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 7.936/8.550/9.164/0.614 ms
+
+errors: None
+program output: PING 10.0.0.20 (10.0.0.20): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 10.0.0.20 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss
+
+xoxoxoxo checking iperf servers...
+^[[Aread failed: Connection refused
+[  4] WARNING: did not receive ack of last datagram after 2 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.17, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 56901 connected with 10.0.0.17 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.22 MBytes  1.02 Mbits/sec
+[  4] Sent 893 datagrams
+
+read failed: Network is unreachable
+[  4] WARNING: did not receive ack of last datagram after 9 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.1, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 52413 connected with 10.0.0.1 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.24 MBytes  1.04 Mbits/sec
+[  4] Sent 893 datagrams
+
+read failed: Network is unreachable
+[  4] WARNING: did not receive ack of last datagram after 9 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.1, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 58388 connected with 10.0.0.1 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.24 MBytes  1.04 Mbits/sec
+[  4] Sent 893 datagrams
+
+read failed: Connection refused
+[  4] WARNING: did not receive ack of last datagram after 5 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.17, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 63475 connected with 10.0.0.17 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.23 MBytes  1.03 Mbits/sec
+[  4] Sent 893 datagrams
+
+read failed: Network is unreachable
+[  4] WARNING: did not receive ack of last datagram after 10 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.1, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 51427 connected with 10.0.0.1 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.22 MBytes  1.03 Mbits/sec
+[  4] Sent 893 datagrams
+
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.27, UDP port 5001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 60166 connected with 10.0.0.27 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.25 MBytes  1.05 Mbits/sec
+[  4] Sent 893 datagrams
+[  4] Server Report:
+[  4]  0.0-10.1 sec  1.19 MBytes   996 Kbits/sec  10.451 ms   42/  893 (4.7%)
+
+[  4] WARNING: did not receive ack of last datagram after 10 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.1, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 62849 connected with 10.0.0.1 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.25 MBytes  1.05 Mbits/sec
+[  4] Sent 893 datagrams
+
+[  4] WARNING: did not receive ack of last datagram after 10 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.1, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 59581 connected with 10.0.0.1 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.25 MBytes  1.05 Mbits/sec
+[  4] Sent 893 datagrams
+
+[  4] WARNING: did not receive ack of last datagram after 10 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.17, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 55257 connected with 10.0.0.17 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.25 MBytes  1.05 Mbits/sec
+[  4] Sent 893 datagrams
+
+[  4] WARNING: did not receive ack of last datagram after 10 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.1, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 59841 connected with 10.0.0.1 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.25 MBytes  1.05 Mbits/sec
+[  4] Sent 893 datagrams
+
+[  4] WARNING: did not receive ack of last datagram after 10 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.1, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 62778 connected with 10.0.0.1 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.25 MBytes  1.05 Mbits/sec
+[  4] Sent 893 datagrams
+
+[  4] WARNING: did not receive ack of last datagram after 10 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.27, UDP port 5001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 57381 connected with 10.0.0.27 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.25 MBytes  1.05 Mbits/sec
+[  4] Sent 893 datagrams
+
+[  4] WARNING: did not receive ack of last datagram after 10 tries.
+errors: None
+program output: ------------------------------------------------------------
+Client connecting to 10.0.0.1, UDP port 8001
+Sending 1470 byte datagrams
+UDP buffer size: 9.00 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.3.112 port 53505 connected with 10.0.0.1 port 8001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-10.0 sec  1.25 MBytes  1.05 Mbits/sec
+[  4] Sent 893 datagrams
