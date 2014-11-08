@@ -46,11 +46,14 @@ One approach that may help serve these new network topologies are hybrid routing
 %Kapitelübersicht bei Ausarbeitung nicht vergessen!
 
 \section{Introduction}
-Hybrid routing protocols combine reactive and proactive routing mechanisms in one protocol.
-Since proactive and reactive protocols are suitable under different circumstances, the decision which of the two routing paradigms is employed is made based the current network behavior.
+Hybrid routing protocols combine reactive and proactive routing mechanisms in one protocol. 
+% TODO: erwähnen, dass hierbei egtl fast immer bereits bekannte proactive & reactive protokolle eingestezt werden
+
+
+Since proactive and reactive protocols are suitable for different environments, the decision which of the two routing paradigms is employed is made based the current network behavior.
 Thus, it is important to first understand the characteristics of both proactive and reactive routing and der daraus folgenden (TODO: englisch) applicability.
 
-\section{pros \& cons of proactive vs reactive}
+\subsection{pros \& cons of proactive vs reactive}
 TODO (also: improve working title)
 what are the up- and downsides to both, what do we want to keep?
 
@@ -58,24 +61,25 @@ what are the up- and downsides to both, what do we want to keep?
 TODO: What should Hybrid routing protocols be good at?
 
 \section{Related Work} % TODO: section title too generic?
-
-
-
-Existing approaches to hybrid routing can be categorized as either area-centered or route-centered.\\
+Existing approaches to hybrid routing may be categorized as either area-centered or route-centered.\\
 \emph{Area-centered} routing protocols distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively.\\
-\emph{Route-centered} protocols instead focus on the importance of a route: a connection to a \gls{sink node} is usually crucial to the operation of a network. It should be maintained proactively, while connections between arbitrary nodes may be short-lived and should only be established on-demand (i.e. reactively) in order to save energy resources and bandwidth.
+\emph{Route-centered} protocols instead focus on the importance of a route: a connection to a \gls{sink node} is usually crucial to the operation of a network. It should be maintained proactively, while connections between arbitrary nodes may be short-lived and should only be established on-demand (i.e. reactively) in order to save energy resources and bandwidth.\\
 
+All hybrid routing protocols face one important design decision. They either may be a monolithic protocol which brings together a specific proactive and reactive protocol. Or, they may be designed as a mere framework which can be used to combine various proactive and reactive protocols with each other. Both approaches contain benefits and tradeoffs, which will be discussed in the following. Additionally, characteristics of Vertreter (TODO: englisch) of both protocol designs %TODO: less clumsy
+will be highlighted.
 
 \subsection{Protocols}
+The design of a monolithic hybrid protocol allows for fine-grained optimization: the protocol can specifically be tailored to the characteristics of the proactive and reactive protocols it combines. 
+%Additionally, specification authors can bring in their expertise when choosing reactive and protocols which fit together optimally.
+The downside to this is a loss of flexibility and re-utilizability: New developments in reactive or proactive routing can hardly trickle down to such hybrid routing protocols, since they may need thorough re-evaluation and severe changes. Existing codebases of proactive or reactive protocols can not be re-used or need to be manually adapted in order to be used by hybrid routing protocols.
 
-- the P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550}
+
+- the P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550} piggybacks its reactive Route Requests on the \gls{DIO} messages proactively distributed by RPL, the ``host protocol''.
 - gls{ZRP}\cite{ZRP-Draft}
 
 
 \subsection{Frameworks}
-% While most existing hybrid routing protocols are based on existing reactive and proactive protocols (TODO: Beispiele?), they are based on these protocols only. This allows for fine-grained optimization: for example, P2P-RPL piggybacks its reactive Route Requests on the \gls{DIO} messages proactively distributed by RPL, the ``host protocol''. Additionally, specification authors can bring in their expertise when choosing reactive and protocols which fit together optimally.\\
-%The downside to this is a loss of flexibility and re-utilizability: New developments in reactive or proactive routing can hardly trickle down to such hybrid routing protocols, since they may need thorough re-evaluation and severe changes. Existing codebases of proactive or reactive protocols can not be re-used or need to be manually adapted in order to be used by hybrid routing protocols.\\
-%The adoption of a hybrid routing \emph{framework} rather than a protocol might result in solutions which are easier to adopt to different network requirements as well as technological innovations. (TODO cite papers about frameworks)
+The adoption of a hybrid routing \emph{framework} rather than a protocol might result in solutions which are easier to adopt to different network requirements as well as technological innovations. (TODO cite papers about frameworks)
 
 
 \section{Experimental work}
@@ -83,7 +87,7 @@ Hybrid routing protocols are a research field with big potential. However, publi
 
 \subsection{Challenges}
 Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional, unique set of challenges.\\
-TODO: write about stuff that the papers from ``Experimental Work'' described
+TODO: write about stuff that the papers from ``Experimental Work'' describe.\\
 The decision when%-- or where, depending on the protocol's approach to prioritized route selection, as described above-- 
 to switch from proactove to reactive or back is not trivial. This decision has to be made carefully, taking into account changig factors such as network density, traffic volume and traffic flow patterns.\\
 %(TODO: I pulled this one out of my, umm, nose.. Is this actually correct?! Add sources!)
