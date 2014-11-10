@@ -46,16 +46,19 @@ One approach that may help serve these new network topologies are hybrid routing
 %Kapitelübersicht bei Ausarbeitung nicht vergessen!
 
 \section{Introduction}
-Hybrid routing protocols combine reactive and proactive routing mechanisms in one protocol. 
-% TODO: erwähnen, dass hierbei egtl fast immer bereits bekannte proactive & reactive protokolle eingestezt werden
-
+Hybrid routing protocols combine reactive and proactive routing mechanisms in one protocol. Usually, existing proactive and reactive protocols are used to create a hybrid protocol.
 
 Since proactive and reactive protocols are suitable for different environments, the decision which of the two routing paradigms is employed is made based the current network behavior.
-Thus, it is important to first understand the characteristics of both proactive and reactive routing and der daraus folgenden (TODO: englisch) applicability.
+Thus, it is important to first understand the characteristics of both proactive and reactive routing and their resulting applicability.
+%TODO
+%what are the up- and downsides to both, what do we want to keep?
+\begin{description}
+\item[proactive] protocols constantly discover and maintain routes and strive to have an overview over the whole network topoloy at any time. This means that routes can be used instantly, but requires constant control traffic. They are thus suitable for networks with low mobility and a high amount of traffic. % TODO: pkus reliable/proactibve routes
 
-\subsection{pros \& cons of proactive vs reactive}
-TODO (also: improve working title)
-what are the up- and downsides to both, what do we want to keep?
+\item[reactive] protocols establish routes on-demand. This minimizes control traffic overhead and routing table size, but comes at the cost of an increased latency. 
+They are most suited for networks with mobility and sparse traffic.% since control taffic explodes etc
+\end{description}
+
 
 \subsection{Requirements for Hybrid Routing}
 TODO: What should Hybrid routing protocols be good at?
@@ -64,19 +67,23 @@ TODO: What should Hybrid routing protocols be good at?
 Existing approaches to hybrid routing may be categorized as either area-centered or route-centered.\\
 \emph{Area-centered} routing protocols distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively.\\
 \emph{Route-centered} protocols instead focus on the importance of a route: a connection to a \gls{sink node} is usually crucial to the operation of a network. It should be maintained proactively, while connections between arbitrary nodes may be short-lived and should only be established on-demand (i.e. reactively) in order to save energy resources and bandwidth.\\
+% TODO: examples are 
+% -> roy et al, node-centric hybrid routing for ad hoc networks
+% -> SHARP
+% => einordnen in protocol vs framework!
 
-All hybrid routing protocols face one important design decision. They either may be a monolithic protocol which brings together a specific proactive and reactive protocol. Or, they may be designed as a mere framework which can be used to combine various proactive and reactive protocols with each other. Both approaches contain benefits and tradeoffs, which will be discussed in the following. Additionally, characteristics of Vertreter (TODO: englisch) of both protocol designs %TODO: less clumsy
-will be highlighted.
+All hybrid routing protocols face one important design decision. They either may be a monolithic protocol which brings together a specific proactive and reactive protocol. Or, they may be designed as a mere framework which can be used to combine various proactive and reactive protocols with each other. Both approaches contain benefits and tradeoffs, which will be discussed in the following. 
+Additionally, for each approach, characteristics of protocols implementing them will be highlighted.
 
 \subsection{Protocols}
 The design of a monolithic hybrid protocol allows for fine-grained optimization: the protocol can specifically be tailored to the characteristics of the proactive and reactive protocols it combines. 
 %Additionally, specification authors can bring in their expertise when choosing reactive and protocols which fit together optimally.
 The downside to this is a loss of flexibility and re-utilizability: New developments in reactive or proactive routing can hardly trickle down to such hybrid routing protocols, since they may need thorough re-evaluation and severe changes. Existing codebases of proactive or reactive protocols can not be re-used or need to be manually adapted in order to be used by hybrid routing protocols.
-
+% TODO example: most publications rely on olsr, but as of now, olsrv2 is a rfc and aodvv2 is in the making. also, other protocols exist (-> LOADng :3)
 
 - the P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550} piggybacks its reactive Route Requests on the \gls{DIO} messages proactively distributed by RPL, the ``host protocol''.
-- gls{ZRP}\cite{ZRP-Draft}
-
+- gls{ZRP}\cite{ZRP-Draft} + TZRP %(wobei ZRP gerne mal als Framework beschrieben wird.. TODO investigate!)
+- IZR ?!
 
 \subsection{Frameworks}
 The adoption of a hybrid routing \emph{framework} rather than a protocol might result in solutions which are easier to adopt to different network requirements as well as technological innovations. (TODO cite papers about frameworks)
