@@ -35,10 +35,10 @@
 
 \maketitle
 \begin{abstract}
-\textit{
+%\textit{
 With the emerging of new technologies in networking and hardware, the vision of an \gls{IoT} is slowly becoming reality. The vision of an IoT is also a vision for new use cases, some of which create network topologies that cannot be optimally served by either reactive or proactive routing protocols. One example for this may be the lighting system in a smart home: Each lamp needs to maintain a stable connection to the control center of the house, forming a tree-like topology towards the sink node that is the central control. In addition to this, lamps may want to communicate spontaneously between each other, for example to create optimal lighting in the study when homeowners sit down at their desk.\\
 One approach that may help serve these new network topologies are hybrid routing protocols. This class of routing protocols combines both reactive and proactive routing. %The decision which routing paradigm is employed is made based the current network behavior.
-} 
+%} 
 % TODO: second use case for area-specific hybrid?
 \end{abstract}
 
@@ -46,17 +46,11 @@ One approach that may help serve these new network topologies are hybrid routing
 %Kapitelübersicht bei Ausarbeitung nicht vergessen!
 
 \section{Introduction}
-Hybrid routing protocols combine reactive and proactive routing mechanisms in one protocol. Usually, existing proactive and reactive protocols are used to create a hybrid protocol.
-
-Since proactive and reactive protocols are suitable for different environments, the decision which of the two routing paradigms is employed is made based the current network behavior.
-Thus, it is important to first understand the characteristics of both proactive and reactive routing and their resulting applicability.
-%TODO
-%what are the up- and downsides to both, what do we want to keep?
+Hybrid routing protocols merge reactive and proactive routing protocols in order to create a flexible and highly adaptive protocol. They are able to switch between proactive and reactive routing, depending on changing factors like network topology, mobility, or traffic flow.
+Thus, it is important to first understand the characteristics of both routing paradigms and their resulting applicability to different scenarios.
 \begin{description}
-\item[proactive] protocols constantly discover and maintain routes and strive to have an overview over the whole network topoloy at any time. This means that routes can be used instantly, but requires constant control traffic. They are thus suitable for networks with low mobility and a high amount of traffic. % TODO: pkus reliable/proactibve routes
-
-\item[reactive] protocols establish routes on-demand. This minimizes control traffic overhead and routing table size, but comes at the cost of an increased latency. 
-They are most suited for networks with mobility and sparse traffic.% since control taffic explodes etc
+\item[proactive] protocols constantly discover and maintain routes and strive to have an overview over the whole network topology at any time. This means that routes can be used instantly, but requires constant control traffic. They are thus suitable for networks with low mobility and a high amount of traffic as well as situations in which instant low latency is crucial. 
+\item[reactive] protocols establish routes on-demand. This minimizes control traffic overhead and routing table size, but comes at the cost of an increased latency. Because control traffic explodes when routes have to be found frequently, they are most suited for networks with mobility and sparse traffic.
 \end{description}
 
 
@@ -72,8 +66,10 @@ Existing approaches to hybrid routing may be categorized as either area-centered
 % -> SHARP
 % => einordnen in protocol vs framework!
 
-All hybrid routing protocols face one important design decision. They either may be a monolithic protocol which brings together a specific proactive and reactive protocol. Or, they may be designed as a mere framework which can be used to combine various proactive and reactive protocols with each other. Both approaches contain benefits and tradeoffs, which will be discussed in the following. 
-Additionally, for each approach, characteristics of protocols implementing them will be highlighted.
+All hybrid routing protocols face one important design decision. They either may be a monolithic protocol which brings together a specific proactive and a reactive protocol. Or, they may be designed as a framework which can be used to combine various proactive and reactive protocols with each other. Both approaches have benefits and tradeoffs, which will be discussed in the following. 
+% Additionally, for each approach, characteristics of protocols implementing them will be highlighted.
+
+%TODO: lieber nach approach statt nacg proto&fw unterscheiden?
 
 \subsection{Protocols}
 The design of a monolithic hybrid protocol allows for fine-grained optimization: the protocol can specifically be tailored to the characteristics of the proactive and reactive protocols it combines. 
@@ -96,7 +92,7 @@ Hybrid routing protocols are a research field with big potential. However, publi
 Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional, unique set of challenges.\\
 TODO: write about stuff that the papers from ``Experimental Work'' describe.\\
 The decision when%-- or where, depending on the protocol's approach to prioritized route selection, as described above-- 
-to switch from proactove to reactive or back is not trivial. This decision has to be made carefully, taking into account changig factors such as network density, traffic volume and traffic flow patterns.\\
+to switch from proactive to reactive or back is not trivial. This decision has to be made carefully, taking into account changig factors such as network density, traffic volume and traffic flow patterns.\\
 %(TODO: I pulled this one out of my, umm, nose.. Is this actually correct?! Add sources!)
 Two fundamentally different approaches to routing have to be coordinated.\\ %TODO: ausbauen
 And finally, most research stems from a time when even the vision of an \gls{IoT} did not exist. Existing hybrid protocols or frameworks may have to be adjusted and advanced in order to adopt to the needs of \gls{IoT}-based deployments.
