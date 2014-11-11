@@ -58,20 +58,12 @@ Thus, it is important to first understand the characteristics of both routing pa
 TODO: What should Hybrid routing protocols be good at?
 
 \section{Related Work} % TODO: section title too generic?
-Existing approaches to hybrid routing may be categorized as either area-centered or route-centered.\\
-\emph{Area-centered} routing protocols distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively.\\
-\emph{Route-centered} protocols instead focus on the importance of a route: a connection to a \gls{sink node} is usually crucial to the operation of a network. It should be maintained proactively, while connections between arbitrary nodes may be short-lived and should only be established on-demand (i.e. reactively) in order to save energy resources and bandwidth.\\
-% TODO: examples are 
-% -> roy et al, node-centric hybrid routing for ad hoc networks
-% -> SHARP
-% => einordnen in protocol vs framework!
 
 All hybrid routing protocols face one important design decision. They either may be a monolithic protocol which brings together a specific proactive and a reactive protocol. Or, they may be designed as a framework which can be used to combine various proactive and reactive protocols with each other. Both approaches have benefits and tradeoffs, which will be discussed in the following. 
 % Additionally, for each approach, characteristics of protocols implementing them will be highlighted.
 
-%TODO: lieber nach approach statt nacg proto&fw unterscheiden?
-
-\subsection{Protocols}
+\begin{description}
+\item[Protocols]
 The design of a monolithic hybrid protocol allows for fine-grained optimization: the protocol can specifically be tailored to the characteristics of the proactive and reactive protocols it combines. 
 %Additionally, specification authors can bring in their expertise when choosing reactive and protocols which fit together optimally.
 The downside to this is a loss of flexibility and re-utilizability: New developments in reactive or proactive routing can hardly trickle down to such hybrid routing protocols, since they may need thorough re-evaluation and severe changes. Existing codebases of proactive or reactive protocols can not be re-used or need to be manually adapted in order to be used by hybrid routing protocols.
@@ -81,9 +73,19 @@ The downside to this is a loss of flexibility and re-utilizability: New developm
 - gls{ZRP}\cite{ZRP-Draft} + TZRP %(wobei ZRP gerne mal als Framework beschrieben wird.. TODO investigate!)
 - IZR ?!
 
-\subsection{Frameworks}
+\item[Frameworks]
 The adoption of a hybrid routing \emph{framework} rather than a protocol might result in solutions which are easier to adopt to different network requirements as well as technological innovations. (TODO cite papers about frameworks)
+\end{description}
 
+Existing approaches to hybrid routing may be categorized as either area-centered or route-centered.\\
+\subsection{Area-centered}
+These routing protocols distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively.\\
+\subsection{Route-centered} 
+Route-centered protocols instead focus on the importance of a route: a connection to a \gls{sink node} is usually crucial to the operation of a network. It should be maintained proactively, while connections between arbitrary nodes may be short-lived and should only be established on-demand (i.e. reactively) in order to save energy resources and bandwidth.\\
+% TODO: examples are 
+% -> roy et al, node-centric hybrid routing for ad hoc networks
+% -> SHARP
+% => einordnen in protocol vs framework!
 
 \section{Experimental work}
 Hybrid routing protocols are a research field with big potential. However, publications documenting real-world experience with hybrid deployments are rare. \cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
