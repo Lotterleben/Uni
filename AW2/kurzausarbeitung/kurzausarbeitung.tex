@@ -24,6 +24,10 @@
 % großer erster Buchstabe
 \usepackage{lettrine}
 
+% zeilenumbrüche in tabellen
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
 \begin{document}
 
 % Titel
@@ -64,10 +68,11 @@ Thus, it is important to first understand the characteristics of both routing pa
 		Name & Scope & Architecture \\
 		\hline
 		Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route-Centered & TODO \\
-		\gls{SHARP}\cite{SHARP} & Route-Centered & TODO \\ 
+		\gls{SHARP}\cite{SHARP} & Route-Centered & Framework\\ %TODO: only for reactive! 
 		P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550} & Route-Centered & Protocol\\
 		\gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area-Centered & Protocol\\
 		\gls{WARP}\cite{WARP} & Area-Centered & TODO\\
+		\gls{ZHLS}\cite{ZHLS} & TODO & TODO\\
 	\end{tabular}
 	\caption{Overview over existing hybrid protocols}
 	\label{fig:overview}
@@ -102,11 +107,14 @@ The downside to this approach is a loss of flexibility and re-utilizability: New
 %- IZR ?!
 
 \item[Frameworks]
-The adoption of a hybrid routing \emph{framework} rather than a protocol allows for a great deal of flexibility, since its proactive and reactive components can be individually chosen for each target environments. Innovations in routing protocol design can be adapted quickly, since protocols can be swapped, and existing codebases may be re-used. However, this might result in a less lightweight protocol, since a framework may not be fine-tuned to specific protocol characteristics.
+The adoption of a hybrid routing \emph{framework} rather than a protocol allows for a great deal of flexibility, since its proactive and reactive components can be individually chosen for each target environments. Innovations in routing protocol design can be adapted quickly, since protocols can be swapped, and existing codebases may be re-used. However, this might result in a less lightweight protocol, since a framework may not be fine-tuned to specific protocol characteristics.\\
+Some frameworks, like the \gls{SHARP}\cite{SHARP}, allow for the customization of only one part: in the case of ZHLS, any reactive routing protocol may be used, while the proactive component is fixed.
 \end{description}
 
 \section{Experimental work}
-Hybrid routing protocols are a research field with big potential. However, publications documenting real-world experience with hybrid deployments are rare. \cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
+Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead.
+Thus, publications documenting real-world experience with hybrid deployments are rare. \cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
+% TODO: what about simulations?
 
 \subsection{Challenges}
 Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional, unique set of challenges.\\
