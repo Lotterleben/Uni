@@ -1,0 +1,136 @@
+\documentclass[a4paper,10pt, twocolumn]{scrartcl}
+
+% Deutsche Umlaute (Mac)
+\usepackage[applemac]{inputenc}
+
+% Deutsche Umlaute (Windows)
+%\usepackage[ansinew]{inputenc}
+
+% Einbinden von Bildern
+\usepackage{graphicx}
+
+% Seitenfläche etwas mehr ausnutzen
+\usepackage{geometry}
+\geometry{a4paper,left=30mm,right=30mm, top=1cm, bottom=3cm}
+
+% Kein Einrücken bei zweispaltigen Bildunterschriften
+\usepackage[normal]{caption}
+
+% Lotte: Glossary benutzen
+\usepackage{glossaries}
+\loadglsentries[main]{glossary}
+\makeglossaries
+
+% großer erster Buchstabe
+\usepackage{lettrine}
+
+% zeilenumbrüche in tabellen
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\begin{document}
+
+% Titel
+\title{Hybrid routing for the Internet of Things}
+\subtitle{challenges and opportunities}
+\author{Lotte Steenbrink}
+\date{Wintersemester 2014/15}
+
+% TODO
+% fix citations! (-> fix magical plugin)
+% spellcheck on
+
+\maketitle
+\begin{abstract}\textit{
+With the emerging of new technologies in networking and hardware, the vision of an \gls{IoT} is slowly becoming reality. The IoT is also a vision for new use cases, some of which create network topologies that cannot be optimally served by either reactive or proactive routing protocols. One example for this may be the lighting system in a smart home: Each lamp needs to maintain a stable connection to the control center of the house, forming a tree-like topology towards the sink node that is the central control. In addition to this, lamps may want to communicate spontaneously between each other, for example to create optimal lighting in the study when homeowners sit down at their desk.\\
+Hybrid routing protocols are an approach that may help serve these new network topologies. This class of routing protocols combines both reactive and proactive routing. %The decision which routing paradigm is employed is made based the current network behavior.
+} 
+% TODO: second use case for area-specific hybrid?
+\end{abstract}
+
+% TODO: add introdtuion subsection?
+%Kapitelübersicht bei Ausarbeitung nicht vergessen!
+
+\section{Introduction}
+Hybrid routing protocols merge reactive and proactive routing protocols in order to create one flexible and highly adaptive protocol. They are able to switch between proactive and reactive routing, depending on changing factors like network topology, mobility, or traffic flow.
+Thus, it is important to first understand the characteristics of both routing paradigms and their resulting applicability to different scenarios.
+\begin{description}
+\item[proactive] protocols constantly discover and maintain routes, creating an overview over the whole network topology, making routing tables grow proportionally to the network size. In consequence, routes can be used instantly, but require constant control traffic. proactive protocols are thus suitable for networks with low mobility and a high amount of traffic as well as situations in which instant low latency is crucial. 
+\item[reactive] protocols establish routes on-demand. This minimizes control traffic overhead and routing table size, but comes at the cost of an increased latency. Because control traffic explodes when routes have to be found very frequently, they are most suited for networks with mobility and sparse traffic.
+\end{description}
+
+%\subsection{Requirements for Hybrid Routing}
+%TODO: What should Hybrid routing protocols be good at?
+
+\begin{table*}[t]
+ 	\begin{tabular}{p{0.62\textwidth}|l|l}
+		Name & Scope & Architecture \\
+		\hline
+		Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route-Centered & Framework \\
+		\gls{SHARP}\cite{SHARP} & Route-Centered & Framework\\ %TODO: only for reactive! 
+		P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route-Centered & Protocol\\
+		\gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area-Centered & Protocol\\
+		\gls{WARP}\cite{WARP} & Area-Centered & Protocol\\
+		\gls{ZHLS}\cite{ZHLS} & Area-Centered & Protocol\\ % TODO: beschreiben
+	\end{tabular}
+	\caption{Overview over existing hybrid protocols}
+	\label{fig:overview}
+\end{table*}
+
+\section{Protocol taxonomies} % TODO: section title too generic?
+Existing Hybrid routing protocols may be categorized along two axes, which will be detailed in the following, along with the presentation of protocol examples. An overview over all protocols and their categorization can be found in Table \ref{fig:overview}. 
+
+\subsection{Scope}
+\label{subsec:scope}
+%==============================================================================
+% TODO: überleitung
+Existing approaches to hybrid routing may be categorized as either area-centered or route-centered.
+\subsubsection{Area-centered}
+Area-centered routing protocols distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively. The most popular area-centered protocol is the \gls{ZRP}\cite{ZRP-Draft}, which creates dynamically adjustable proactive routing zones. Inter-zone traffic is routed reactively by a so-called bordercasting mechanism. ZRP has been the basis for extensions such as the \gls{TZRP}\cite{TZRP} and \cite{IZR} as well as new protocols, such as the \gls{WARP}\cite{WARP}, which adds \gls{QoS}-awareness.
+% TODO: what about clusteringthings?
+
+\subsubsection{Route-centered} 
+Route-centered protocols instead focus on the importance of a route: a connection to a \gls{sink node} is usually crucial to the operation of a network. It should be maintained proactively, while connections between arbitrary nodes may be short-lived and should only be established on-demand (i.e. reactively) in order to save energy resources and bandwidth.\\
+Examples for route-centered protocols are Node-Centric Hybrid Routing \cite{Roy_nodecentric}, \gls{SHARP} \cite{SHARP} and the P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550}, which was designed especially for IoT-like scenarios.\\ % TODO: RPL ist IoTlike! betonen?
+% TODO: einordnen in protocol vs framework!
+
+\subsection{Architecture}
+Additionally, all hybrid routing protocols face one important design decision. They either may be a monolithic protocol which brings together a specific proactive and a reactive protocol. Or, they may be designed as a framework which can be used to combine various proactive and reactive protocols with each other. % TODO: do this -> Both approaches have benefits and trade-offs, which will be discussed in the following. 
+
+\begin{description}
+\item[Protocols]
+The design of a monolithic hybrid protocol allows for fine-grained optimization: the protocol can specifically be tailored to the characteristics of the proactive and reactive protocols it combines. This leads to more lightweight solutions, which is crucial fr the IoT. One example for this is \cite{RFC-6997}, where reactive control traffic is piggybacked onto proactive traffic.
+The downside to this approach is a loss of flexibility and re-utilizability: New developments in reactive or proactive routing can hardly trickle down to such hybrid routing protocols, since they may need thorough re-evaluation and severe changes. Existing codebases of proactive or reactive protocols can not be re-used or need to be manually adapted in order to be used by hybrid routing protocols.
+% TODO example: most publications rely on olsr, but as of now, olsrv2 is a rfc and aodvv2 is in the making. also, other protocols exist (-> LOADng :3)
+
+\item[Frameworks]
+The adoption of a hybrid routing \emph{framework} rather than a protocol allows for a great deal of flexibility, since its proactive and reactive components can be individually chosen for each target environments. Innovations in routing protocol design can be adapted quickly, since protocols can be swapped, and existing codebases may be re-used. However, this might result in a less lightweight protocol, since a framework may not be fine-tuned to specific protocol characteristics.\\
+Some frameworks, like the \gls{SHARP}\cite{SHARP}, allow for the customization of only one part: %in the case of ZHLS, 
+any reactive routing protocol may be used, while the proactive component is fixed.
+\end{description}
+
+\section{Experimental work}
+Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead.
+Thus, publications documenting real-world experience with hybrid deployments are rare. \cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
+% TODO: what about simulations?
+
+\subsection{Challenges}
+Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional set of challenges.\\
+%TODO: write about stuff that the papers from ``Experimental Work'' describe.\\
+Switching from proactive to reactive or back is not trivial. The switching decision has to be made carefully, taking into account changing factors such as network density, traffic volume and traffic flow patterns.\\
+The tradeoff between flexibility and customizability has to be considered carefully.
+And finally, most research stems from a time when even the vision of an \gls{IoT} did not exist. Existing hybrid protocols or frameworks may have to be adjusted and advanced in order to adopt to the needs of \gls{IoT}-based deployments.
+
+\section{Conclusion and Outlook}
+Hybrid routing protocols are a promising paradigm which may be able to adopt to the diverse and changing network topologies of the Internet of Things.
+However, most research stems from a pre-IoT era, and will have to be updated to the advances in routing protocols and IoT technologies which have emerged since then. 
+Even though hybrid protocols promise more flexibility, their scope as discussed in \ref{subsec:scope}
+has to be chosen in accordance with IoT use cases, which should be evaluated thoroughly in order to advance hybrid routing for the IoT.
+
+{\small
+\bibliographystyle{ieeetr}
+\bibliography{kurzausarbeitung}
+}
+
+
+\end{document}
