@@ -62,17 +62,16 @@ Thus, it is important to first understand the characteristics of both routing pa
 %\subsection{Requirements for Hybrid Routing}
 %TODO: What should Hybrid routing protocols be good at?
 
-% TODO: fill out
 \begin{table*}[t]
  	\begin{tabular}{p{0.62\textwidth}|l|l}
 		Name & Scope & Architecture \\
 		\hline
-		Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route-Centered & TODO \\
+		Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route-Centered & Framework \\
 		\gls{SHARP}\cite{SHARP} & Route-Centered & Framework\\ %TODO: only for reactive! 
 		P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550} & Route-Centered & Protocol\\
 		\gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area-Centered & Protocol\\
-		\gls{WARP}\cite{WARP} & Area-Centered & TODO\\
-		\gls{ZHLS}\cite{ZHLS} & TODO & TODO\\
+		\gls{WARP}\cite{WARP} & Area-Centered & Protocol\\
+		\gls{ZHLS}\cite{ZHLS} & Area-Centered & Protocol\\ % TODO: beschreiben
 	\end{tabular}
 	\caption{Overview over existing hybrid protocols}
 	\label{fig:overview}
@@ -90,7 +89,7 @@ Area-centered routing protocols distinguish routes by locality: nearby routes ar
 
 \subsubsection{Route-centered} 
 Route-centered protocols instead focus on the importance of a route: a connection to a \gls{sink node} is usually crucial to the operation of a network. It should be maintained proactively, while connections between arbitrary nodes may be short-lived and should only be established on-demand (i.e. reactively) in order to save energy resources and bandwidth.\\
-Examples for route-centered protocols are \cite{Roy_nodecentric}, the \gls{SHARP}\cite{SHARP} and the P2P extension\cite{RFC-6997} of the \gls{RPL}\cite{RFC-6550}, which was designed especially for IoT-like scenarios.\\ % TODO: RPL ist IoTlike! betonen?
+Examples for route-centered protocols are Node-Centric Hybrid Routing \cite{Roy_nodecentric}, \gls{SHARP} \cite{SHARP} and the P2P extension\cite{RFC-6997} of \gls{RPL}\cite{RFC-6550}, which was designed especially for IoT-like scenarios.\\ % TODO: RPL ist IoTlike! betonen?
 % TODO: einordnen in protocol vs framework!
 
 \subsection{Architecture}
@@ -108,7 +107,8 @@ The downside to this approach is a loss of flexibility and re-utilizability: New
 
 \item[Frameworks]
 The adoption of a hybrid routing \emph{framework} rather than a protocol allows for a great deal of flexibility, since its proactive and reactive components can be individually chosen for each target environments. Innovations in routing protocol design can be adapted quickly, since protocols can be swapped, and existing codebases may be re-used. However, this might result in a less lightweight protocol, since a framework may not be fine-tuned to specific protocol characteristics.\\
-Some frameworks, like the \gls{SHARP}\cite{SHARP}, allow for the customization of only one part: in the case of ZHLS, any reactive routing protocol may be used, while the proactive component is fixed.
+Some frameworks, like the \gls{SHARP}\cite{SHARP}, allow for the customization of only one part: %in the case of ZHLS, 
+any reactive routing protocol may be used, while the proactive component is fixed.
 \end{description}
 
 \section{Experimental work}
