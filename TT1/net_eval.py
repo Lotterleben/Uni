@@ -30,7 +30,7 @@ def get_ping_info(line):
 
     if ("errors" in line):
         ping_info.append(curr_info)
-        curr_info = {}
+        curr_info = {"req_to" : 0}
 
         errors = line.split(": ")[1]
         if (not "None" in errors):
@@ -86,8 +86,24 @@ def get_max_rtt():
     max_rtts = [info['round_trip']['max'] for info in successful_pings]
     return max(max_rtts)
 
+def get_packet_losses():
+    # TODO: convert to float!!
+    return [info['pkt_loss'] for info in ping_info[1:]]
+
 def get_avg_pkt_loss():
-    pkt_losses = [info['pkt_loss'] for info in ping_info[1:]]
+    pkt_losses = get_packet_losses()
+    #TODO: again, google avg & return
+
+def get_max_pkt_loss():
+    # aution: bullshit right now because pkt_losses contains strings, not floats
+    pkt_losses = get_packet_losses()
+    return max(pkt_losses)
+
+def get_req_timeouts():
+    return [info for info in ping_info[1:]]
+
+def get_avg_req_timeouts():
+    req_timouts = get_req_timeouts()
     #TODO: again, google avg & return
 
 def eval_capture(file_str):
@@ -116,8 +132,11 @@ def eval_capture(file_str):
     pp.pprint(ping_info)
 
     print ping_info
-    print "average round trip time:", get_avg_rtt()
-    print "max round trip time:", get_max_rtt()
+    print "average round trip time: ", get_avg_rtt()
+    print "max round trip time: ", get_max_rtt()
+    print "average packet loss: ", get_avg_pkt_loss()
+    print "max packet loss: ", get_max_pkt_loss()
+    print "average request timeouts: ", get_avg_req_timeouts()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='eval captures')
