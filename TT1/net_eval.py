@@ -4,6 +4,8 @@ import traceback
 import sys
 import pprint
 
+import pretty_plots as pp
+
 ''''
  TTL exceeded -> routing loop
 
@@ -67,6 +69,20 @@ def increment_value(dict_, key):
     except:
         curr_info[key] = 1
 
+def get_successful_pings():
+    return [info for info in ping_info[1:] if info['successes']!='0']
+
+def get_avg_rtt():
+    successful_pings = get_successful_pings()
+    # not sure of the math is right here o.o
+    all_rtts = [info['round_trip']['avg'] for info in successful_pings]
+    # TODO: google how to compute average whe i have internet again
+
+def get_max_rtt():
+    successful_pings = get_successful_pings()
+    max_rtts = [info['round_trip']['max'] for info in successful_pings]
+    return max(max_rtts)
+
 def eval_capture(file_str):
     global infotype
     try:
@@ -91,6 +107,10 @@ def eval_capture(file_str):
     print "xxxx ping stats xxxxxx"
     pp = pprint.PrettyPrinter(indent=2)
     pp.pprint(ping_info)
+
+    print ping_info
+    print "average round trip time:", get_avg_rtt()
+    print "max round trip time:", get_max_rtt()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='eval captures')
