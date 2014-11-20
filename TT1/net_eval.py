@@ -7,6 +7,9 @@ import pprint
 import pretty_plots as pp
 
 ''''
+TODO: 
+_ I think I'm losing one data set..
+
  TTL exceeded -> routing loop
 
 average:
@@ -82,6 +85,10 @@ def get_max_rtt():
     successful_pings = get_successful_pings()
     max_rtts = [info['round_trip']['max'] for info in successful_pings]
     return max(max_rtts)
+
+def get_avg_pkt_loss():
+    pkt_losses = [info['pkt_loss'] for info in ping_info[1:]]
+    #TODO: again, google avg & return
 
 def eval_capture(file_str):
     global infotype
