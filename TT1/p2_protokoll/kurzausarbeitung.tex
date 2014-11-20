@@ -1,0 +1,81 @@
+\documentclass[a4paper,10pt]{scrartcl}
+
+% Deutsche Umlaute (Mac)
+\usepackage[applemac]{inputenc}
+
+% Deutsche Umlaute (Windows)
+%\usepackage[ansinew]{inputenc}
+
+% Einbinden von Bildern
+\usepackage{graphicx}
+
+% Seitenfläche etwas mehr ausnutzen
+\usepackage{geometry}
+\geometry{a4paper,left=30mm,right=30mm, top=1cm, bottom=3cm}
+
+% Kein Einrücken bei zweispaltigen Bildunterschriften
+\usepackage[normal]{caption}
+
+% Lotte: Glossary benutzen
+\usepackage{glossaries}
+\loadglsentries[main]{glossary}
+\makeglossaries
+
+% großer erster Buchstabe
+\usepackage{lettrine}
+
+% zeilenumbrüche in tabellen
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\begin{document}
+
+% Titel
+\title{TT1 Praktikumsbericht}
+\subtitle{OLSR vs BATMAN}
+\author{Alexander Piehl und Lotte Steenbrink}
+\date{\today}
+
+% TODO
+% fix citations! (-> fix magical plugin)
+% spellcheck on
+
+\maketitle
+
+% TODO: add introdtuion subsection?
+%Kapitelübersicht bei Ausarbeitung nicht vergessen!
+
+\section{Vorbereitungen}
+Es wurden 2 Router jeweils mit \textbf{OLSR} und \textbf{BATMAN} versehen und waehrend der entsprechenden Durchgaenge im Praktikum jeweils dem passenden Netz hinzugefuegt. Fuer die Durchfuehrung der Messungen wurde ein Rechner mit Mac Os 10.09 mit dem Netz verbunden.\\
+Um die Tests und Datenerfassung zu automatisieren, wurde ein kleines python-Skript (TODO: link zum skipt als footnote!) erstellt.
+
+\section{Durchfuehrung}
+Um die generelle Erreichbarkeit sowie packet loss und latenzen aller teilnehmenden Knoten zu testen wurde zunaechst \textbf{ping} verwendet.
+Die Verbindung zum allgemeinen iperf-server sowie zu im Netz verteilten iperf-Servern wurde logischerweise mit \textbf{iperf} gemessen.\\
+Neben den automatisierten Tests per skript wurden manuell stichtpobenartig pings und iperf-Anfragen verschickt.\\
+
+Leider haben wir uns bei der Durchfuehrungszeit und -Frequenz verschaetzt, und ping und iperf sequentiell durchgeführt, weshalb für iperf keine vollstaendigen automatisierten Daten vorliegen. Hier musste auf die Stichprobendaten zurueckgegriffen werden.
+
+% iperfserver immer wieder abgeschmiert -> schwer zuverlässig messbar
+\section{Beobachtungen}
+% leider hat die instabilität des netzes und 
+Im Folgenden werden zunaechst waehrend der Tests beobachtete Phaenomene beschrieben und dann anhand der erfassten Daten diskutiert.
+\subsection{OLSR}
+\begin{itemize}
+\item lalal
+\end{itemize}
+\subsection{BATMAN}
+
+\section{Zusammenfassung}
+TODO: graphen und beobachtung zusammenfassen
+
+Rueckblickend laesst sich ausserdem sagen, dass es klueger gewesen waere, iperf und ping semi-abwechselnd\footnote{zB 5 pings, ein iperf, da es mehr Knoten als iperf-server gab} durchzuführen, um Netzwerkschwankungen besser abzubilden. 
+Zusaetzlich haette die Verwendung von \textbf{traceroute} Aufschluss über den mittleren und maximalen Hop-Count geben können.
+
+%{\small
+%\bibliographystyle{ieeetr}
+%\bibliography{kurzausarbeitung}
+%}
+
+
+\end{document}
