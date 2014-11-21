@@ -9,6 +9,7 @@ import pretty_plots as pp
 ''''
 TODO: 
 _ I think I'm losing one data set..
+- mean rather than average, with those nifty little charts (boxplots, I think)! if I can do it in time... (use numpy?)
 
  TTL exceeded -> routing loop
 
@@ -78,17 +79,16 @@ def get_successful_pings():
 def get_avg_rtt():
     successful_pings = get_successful_pings()
     # not sure of the math is right here o.o
-    all_rtts = [info['round_trip']['avg'] for info in successful_pings]
+    all_rtts = [float(info['round_trip']['avg']) for info in successful_pings]
     # TODO: google how to compute average whe i have internet again
 
 def get_max_rtt():
     successful_pings = get_successful_pings()
-    max_rtts = [info['round_trip']['max'] for info in successful_pings]
+    max_rtts = [float(info['round_trip']['max']) for info in successful_pings]
     return max(max_rtts)
 
 def get_packet_losses():
-    # TODO: convert to float!!
-    return [info['pkt_loss'] for info in ping_info[1:]]
+    return [float(info['pkt_loss']) for info in ping_info[1:]]
 
 def get_avg_pkt_loss():
     pkt_losses = get_packet_losses()
@@ -100,7 +100,7 @@ def get_max_pkt_loss():
     return max(pkt_losses)
 
 def get_req_timeouts():
-    return [info for info in ping_info[1:]]
+    return [info['req_to'] for info in ping_info[1:]]
 
 def get_avg_req_timeouts():
     req_timouts = get_req_timeouts()
