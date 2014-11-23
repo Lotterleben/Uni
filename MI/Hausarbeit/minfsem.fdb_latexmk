@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex minfsem"] 1416774470 "minfsem.aux" "minfsem.bbl" "minfsem" 1416774490
-  "./IEEEbib.bst" 1393315276 17903 9ff833f4bf67f47893e44ee17b52d211 ""
-  "minfsem.aux" 1416774489 1739 d1e2dc6d3ff41053a38cfc1d3f407cfb ""
+["bibtex minfsem"] 1416777032 "minfsem.aux" "minfsem.bbl" "minfsem" 1416777085
+  "./IEEEbib.bst" 1416775747 17903 9ff833f4bf67f47893e44ee17b52d211 ""
+  "minfsem.aux" 1416777084 1809 356d63e49efc168dff44b425468a5120 ""
   "minfsem.bcf" 0 -1 0 ""
-  "minfsem_tmpl.bib" 1416774466 1071 a685df17b98bf1e522cde971d6881442 ""
+  "minfsem_tmpl.bib" 1416776263 1349 11061b3b54782a2f0e51ab0b94a6f240 ""
   (generated)
   "minfsem.blg"
   "minfsem.bbl"
-["pdflatex"] 1416774488 "minfsem.tex" "minfsem.pdf" "minfsem" 1416774490
+["pdflatex"] 1416777084 "minfsem.tex" "minfsem.pdf" "minfsem" 1416777085
   "/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/babel-english/english.ldf" 1367878877 6963 2e0cb3d93aa64508bdb0db58ae900d97 ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/babel/babel.def" 1395780385 49536 e1475dd245ff2196764ba5b91ac63714 ""
@@ -63,11 +63,11 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/times.sty" 1156702453 857 6c716f26c5eadfb81029fcd6ce2d45e6 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/subfig/subfig.sty" 1158586182 21369 9ef165ca6df8815c92e693146a376c92 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "minfsem.aux" 1416774489 1739 d1e2dc6d3ff41053a38cfc1d3f407cfb ""
-  "minfsem.bbl" 1416774471 613 f6a74a29252347eac78ef42a02e67709 "bibtex minfsem"
-  "minfsem.out" 1416774489 291 cadd78b9bb1dd9a91466ed1a96801bc3 ""
-  "minfsem.sty" 1393315276 12966 2a056feaa7e16301ecef76a30ab454bf ""
-  "minfsem.tex" 1416774487 6263 459b949e2b4d974802240610f28b1bfd ""
+  "minfsem.aux" 1416777084 1809 356d63e49efc168dff44b425468a5120 ""
+  "minfsem.bbl" 1416777032 763 893916a7458ac437534d86b474fb7737 "bibtex minfsem"
+  "minfsem.out" 1416777084 294 d61dfb9b82a78c3d162e32166113b6c2 ""
+  "minfsem.sty" 1416775747 12966 2a056feaa7e16301ecef76a30ab454bf ""
+  "minfsem.tex" 1416777083 6899 17f8f401b8bf891819b0956c6591fe4e ""
   (generated)
   "minfsem.out"
   "minfsem.aux"
