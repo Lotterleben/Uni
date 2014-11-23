@@ -4,7 +4,13 @@ import traceback
 import sys
 import pprint
 
+import pretty_plots as pp
+
 ''''
+TODO: 
+_ I think I'm losing one data set..
+- mean rather than average, with those nifty little charts (boxplots, I think)! if I can do it in time... (use numpy?)
+
  TTL exceeded -> routing loop
 
 average:
@@ -25,7 +31,7 @@ def get_ping_info(line):
 
     if ("errors" in line):
         ping_info.append(curr_info)
-        curr_info = {}
+        curr_info = {"req_to" : 0}
 
         errors = line.split(": ")[1]
         if (not "None" in errors):
@@ -67,6 +73,39 @@ def increment_value(dict_, key):
     except:
         curr_info[key] = 1
 
+def get_successful_pings():
+    return [info for info in ping_info[1:] if info['successes']!='0']
+
+def get_avg_rtt():
+    successful_pings = get_successful_pings()
+    # not sure of the math is right here o.o
+    all_rtts = [float(info['round_trip']['avg']) for info in successful_pings]
+    # TODO: google how to compute average whe i have internet again
+
+def get_max_rtt():
+    successful_pings = get_successful_pings()
+    max_rtts = [float(info['round_trip']['max']) for info in successful_pings]
+    return max(max_rtts)
+
+def get_packet_losses():
+    return [float(info['pkt_loss']) for info in ping_info[1:]]
+
+def get_avg_pkt_loss():
+    pkt_losses = get_packet_losses()
+    #TODO: again, google avg & return
+
+def get_max_pkt_loss():
+    # aution: bullshit right now because pkt_losses contains strings, not floats
+    pkt_losses = get_packet_losses()
+    return max(pkt_losses)
+
+def get_req_timeouts():
+    return [info['req_to'] for info in ping_info[1:]]
+
+def get_avg_req_timeouts():
+    req_timouts = get_req_timeouts()
+    #TODO: again, google avg & return
+
 def eval_capture(file_str):
     global infotype
     try:
@@ -91,6 +130,13 @@ def eval_capture(file_str):
     print "xxxx ping stats xxxxxx"
     pp = pprint.PrettyPrinter(indent=2)
     pp.pprint(ping_info)
+
+    print ping_info
+    print "average round trip time: ", get_avg_rtt()
+    print "max round trip time: ", get_max_rtt()
+    print "average packet loss: ", get_avg_pkt_loss()
+    print "max packet loss: ", get_max_pkt_loss()
+    print "average request timeouts: ", get_avg_req_timeouts()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='eval captures')
