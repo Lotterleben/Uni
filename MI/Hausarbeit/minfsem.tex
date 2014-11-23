@@ -1,0 +1,148 @@
+% Template LaTeX file for MInfSem papers
+%
+% To generate the correct references using BibTeX, run
+%     latex, bibtex, latex, latex
+% modified...
+% - from DAFx-00 to DAFx-02 by Florian Keiler, 2002-07-08
+% - from DAFx-02 to DAFx-03 by Gianpaolo Evangelista
+% - from DAFx-05 to DAFx-06 by Vincent Verfaille, 2006-02-05
+% - from DAFx-06 to DAFx-07 by Vincent Verfaille, 2007-01-05
+%                          and Sylvain Marchand, 2007-01-31
+% - from DAFx-07 to DAFx-08 by Henri Penttinen, 2007-12-12
+%                          and Jyri Pakarinen 2008-01-28
+% - from DAFx-08 to DAFx-09 by Giorgio Prandi, Fabio Antonacci 2008-10-03
+% - from DAFx-09 to DAFx-10 by Hannes Pomberger 2010-02-01
+% - from DAFx-10 to DAFx-12 by Jez Wells 2011
+% - from DAFx-12 to DAFx-14 by Sascha Disch 2013
+% - from DAFx-14 to MInfSem by Wolfgang Fohl 2014
+%
+% Template with hyper-references (links) active after conversion to pdf
+% (with the distiller) or if compiled with pdflatex.
+%
+% 20060205: added package 'hypcap' to correct hyperlinks to figures and tables
+%                      use of \papertitle and \paperauthorA, etc for same title in PDF and Metadata
+%
+% 1) Please compile using latex or pdflatex.
+% 2) If using pdflatex, you need your figures in a file format other than eps! e.g. png or jpg is working
+% 3) Please use "paperftitle" and "pdfauthor" definitions below
+
+%------------------------------------------------------------------------------------------
+%  !  !  !  !  !  !  !  !  !  !  !  ! user defined variables  !  !  !  !  !  !  !  !  !  !  !  !  !  !
+% Please use these commands to define title and author of the paper:
+\def\papertitle{Is it a bird? Is it a plane?}%\protect\\\small{An overview over object recognition problems and advances.}
+\def\paperauthorA{Lotte Steenbrink}
+
+
+%------------------------------------------------------------------------------------------
+\documentclass[twoside,a4paper]{article}
+\usepackage{minfsem}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{euscript}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ifpdf}
+
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{subfig, color}
+
+\usepackage{hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage[figure,table]{hypcap}
+
+\setcounter{page}{1}
+\ninept
+
+\usepackage{times}
+% Saves a lot of ouptut space in PDF... after conversion with the distiller
+% Delete if you cannot get PS fonts working on your system.
+
+% pdf-tex settings: detect automatically if run by latex or pdflatex
+\newif\ifpdf
+\ifx\pdfoutput\relax
+\else
+   \ifcase\pdfoutput
+      \pdffalse
+   \else
+      \pdftrue
+\fi
+
+%\ifpdf % compiling with pdflatex
+%  \usepackage[pdftex,
+%    pdftitle={\papertitle},
+%    pdfauthor={\paperauthorA},
+%    colorlinks=false, % links are activated as colror boxes instead of color text
+%    bookmarksnumbered, % use section numbers with bookmarks
+%    pdfstartview=XYZ % start with zoom=100% instead of full screen; especially useful if working with a big screen :-)
+%  ]{hyperref}
+%  \pdfcompresslevel=9
+%  \usepackage[pdftex]{graphicx}
+%  \usepackage[figure,table]{hypcap}
+%\else % compiling with latex
+%  \usepackage[dvips]{epsfig,graphicx}
+%  \usepackage[dvips,
+%    colorlinks=false, % no color links
+%    bookmarksnumbered, % use section numbers with bookmarks
+%    pdfstartview=XYZ % start with zoom=100% instead of full screen
+%  ]{hyperref}
+  % hyperrefs are active in the pdf file after conversion
+%  \usepackage[figure,table]{hypcap}
+%\fi
+
+\title{\papertitle}
+
+%--------------AUTHOR HEADER STARTS -----------------------
+\affiliation{
+\paperauthorA}
+{\href{http://www.haw-hamburg.de/ti-i}{Hamburg University of Applied Sciences,
+    Dept. Computer Science,} \\ Berliner Tor 7\\ 20099 Hamburg, Germany\\
+{\ttfamily \href{mailto:lotte.steenbrink@haw-hamburg.de}{lotte.steenbrink@haw-hamburg.de}}
+}
+%-----------------------------------AUTHOR HEADER ENDS------------------------------------------------------
+
+\begin{document}
+% more pdf-tex settings:
+\ifpdf % used graphic file format for pdflatex
+  \DeclareGraphicsExtensions{.png,.jpg,.pdf}
+\else  % used graphic file format for latex
+  \DeclareGraphicsExtensions{.eps}
+\fi
+
+\maketitle
+
+\begin{abstract}
+Recognizing an categorizing objects in an image is one of the problems which are harder to solve for computers than for humans. However, image recognition is imperative to make human-computer interaction more natural and improve the way information contained in images is stored and handled. In recent years, the field has seen a lot of progress. My homework would aim to provide an overview over the challenges faced by image recognition software, and available solutions as well as their limitations.
+\end{abstract}
+
+%\section{Introduction}
+%\label{sec:intro}
+%===============================================================================
+% three types: 1. die präsenz eines bestimmten(!) objekts/objektart zu erkennen in einem bild (detection), 2. die position eines bestimmten(!) objekts/objektart zu finden (localization)  oder z.b. auch 3. rauszufinden was für eine objektart den grade da ist (categorisation? da sind diese convolutional neural nets super drin. das ist aber superschwierig und deep learning ist da grade state of the art)
+
+\section{Sources}
+\label{sec:src}
+%===============================================================================
+There are plenty of sources discussing various aspects of object or image recognition. Below, three key papers will be discussed, each covering a different aspect. The first source provides an overview over the entire topic. The second one discusses recent, state-of-the-art advances in object recognition. the third offers an outlook into the possibilities of interdisciplinary applications of object recognition.
+
+\subsection{Overview}
+\label{sec:subsec_overview}
+%-------------------------------------------------------------------------------
+TODO
+
+\subsection{Recent advances in object categorization}
+\label{sec:subsec_advances}
+%-------------------------------------------------------------------------------
+\cite{Krizhevsky_imagenet} discusses the use of convolutional neural networks for object recognition. Its results are superior to most other research and can be considered state-of-the-art.
+
+\subsection{Outlook}
+\label{sec:subsec_outlook}
+%-------------------------------------------------------------------------------
+\cite{Vinyals2014} connects recent advances in computer vision and natural language processing in order to produce natural-language sentences describing the content of an image.
+
+\newpage
+\nocite{*}
+\bibliographystyle{IEEEbib}
+\bibliography{minfsem_tmpl} % requires file minfsem_tmpl.bib
+
+
+\end{document}
