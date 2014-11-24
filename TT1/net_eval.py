@@ -76,10 +76,11 @@ def increment_value(dict_, key):
 def get_successful_pings():
     return [info for info in ping_info[1:] if info['successes']!='0']
 
-def get_avg_rtt():
+def get_avg_rtts():
     successful_pings = get_successful_pings()
     # not sure of the math is right here o.o
     all_rtts = [float(info['round_trip']['avg']) for info in successful_pings]
+    return all_rtts
     # TODO: google how to compute average whe i have internet again
 
 def get_max_rtt():
@@ -133,7 +134,7 @@ def eval_capture(file_str):
     #pp.pprint(ping_info)
 
     #print ping_info
-    print "average round trip time: ", get_avg_rtt()
+    print "average round trip time: ", get_avg_rtts()
     print "max round trip time: ", get_max_rtt()
     print "average packet loss: ", get_avg_pkt_loss()
     print "max packet loss: ", get_max_pkt_loss()
@@ -141,7 +142,7 @@ def eval_capture(file_str):
     print "\n"
 
     return {"packet_losses": get_packet_losses(),
-            "req_timeouts": get_req_timeouts()}
+            "avg_rtts": get_avg_rtts()}
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='eval captures')
@@ -156,5 +157,9 @@ if __name__ == "__main__":
     print "packet loss graph:"
     #pretty_plots.plot_dots(("OLSR","BATMAN"),olsr_data["packet_losses"],
     #                        batman_data["packet_losses"], "packet loss in %", "time in 5 sec-intervals")
+
+    pretty_plots.plot_dots(("OLSR","BATMAN"),olsr_data["avg_rtts"],
+                            batman_data["avg_rtts"], "average round-trip times per 3 seconds", "time in 5 sec-intervals")
+
 
     print("done!")
