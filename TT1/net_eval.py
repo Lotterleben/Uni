@@ -4,10 +4,10 @@ import traceback
 import sys
 import pprint
 
-import pretty_plots as pp
+import pretty_plots
 
 ''''
-TODO: 
+TODO:
 _ I think I'm losing one data set..
 - mean rather than average, with those nifty little charts (boxplots, I think)! if I can do it in time... (use numpy?)
 
@@ -107,14 +107,15 @@ def get_avg_req_timeouts():
     #TODO: again, google avg & return
 
 def eval_capture(file_str):
-    global infotype
+    global infotype, curr_info, ping_info
     try:
         f = open(file_str)
     except:
-        #print("Error: couldn't find file. Aborting.", file=sys.stderr)
-        print "xoxoxo"
         traceback.print_exc(file=sys.stdout)
         return
+
+    curr_info = {}
+    ping_info = []
 
     for line in f:
         if ("xoxoxoxo pinging routers..." in line):
@@ -128,20 +129,32 @@ def eval_capture(file_str):
             get_iperf_info(line)
 
     print "xxxx ping stats xxxxxx"
-    pp = pprint.PrettyPrinter(indent=2)
-    pp.pprint(ping_info)
+    #pp = pprint.PrettyPrinter(indent=2)
+    #pp.pprint(ping_info)
 
-    print ping_info
+    #print ping_info
     print "average round trip time: ", get_avg_rtt()
     print "max round trip time: ", get_max_rtt()
     print "average packet loss: ", get_avg_pkt_loss()
     print "max packet loss: ", get_max_pkt_loss()
     print "average request timeouts: ", get_avg_req_timeouts()
+    print "\n"
+
+    return {"packet_losses": get_packet_losses(),
+            "req_timeouts": get_req_timeouts()}
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='eval captures')
-    parser.add_argument('-f','--file', type=str,required=True, help='olsr/batman log')
+    parser.add_argument('-o','--olsr_log', type=str,required=True, help='olsr logfile')
+    parser.add_argument('-b','--batman_log', type=str,required=True, help='batman logfile')
+
     args = parser.parse_args()
-    eval_capture(args.file)
+
+    olsr_data = eval_capture(args.olsr_log)
+    batman_data = eval_capture(args.batman_log)
+
+    print "packet loss graph:"
+    #pretty_plots.plot_dots(("OLSR","BATMAN"),olsr_data["packet_losses"],
+    #                        batman_data["packet_losses"], "packet loss in %", "time in 5 sec-intervals")
 
     print("done!")

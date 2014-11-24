@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid.axislines import Subplot
 from operator import add
+import random
 
 # TODO use as module
 
@@ -76,19 +77,22 @@ def plot_bars(legend, labels, success, fail):
 
 '''
 input:
-values : list
+valuelist : list of lists of values
 ylabel, xlabel: string
 '''
-def plot_curve(values, ylabel, xlabel):
+def plot_dots(legend, values1, values2, ylabel, xlabel):
 
     fig = plt.figure()
     ax = fig.gca()
     style_axes(ax)
 
-    plt.plot(values, color=c_default)
+    dot_set1 = plt.plot(values1, 'ro', color=(random.random(), random.random(), random.random()))[0]
+    dot_set2 = plt.plot(values2, 'ro', color=(random.random(), random.random(), random.random()))[0]
+
+    legend = ax.legend((dot_set1, dot_set2), legend, loc=2)
+
     plt.ylabel(ylabel)
     plt.xlabel(xlabel)
-
     plt.show()
 
 def plot_stacked_bars(legend, labels, group1, group2):
