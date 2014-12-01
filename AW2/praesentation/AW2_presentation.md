@@ -57,12 +57,14 @@ TODO: speaker notes that explain both approaches & give protocol examples
 
 
 ---
-# **For example...** 
-TODO: better headline
+#        **route                         area** 
 
-TODO: sketch route-centered vs area-centered, translated into application scnerario example
+![inline](./../images/route_centered_example.pdf)![inline](./../images/area_centered.pdf)
 
 ^TODO: speaker notes that explain both examples
+TODO: sketch area-centered, translated into application scnerario example
+TODO: attribution into bibliography: Computer designed by Ji Sub Jeong from the Noun Project, Light bulbs designed by Julien Deveaux from the Noun Project, 
+Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea from the Noun Project 
 
 ---
 # **Protocol vs Framework** 
