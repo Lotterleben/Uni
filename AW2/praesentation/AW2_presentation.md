@@ -8,7 +8,6 @@ slidenumbers: true
 - AW1: existing; either proactive || reactive 
 - new technologies & Use Cases @ IoT have emerged
 - with them: new network characteristic
-- *example:* Lighting system: central control (proactive); connection between sofa lamp & switch if person is in room (reactive)
 
 ---
 #       **proactive**         **reactive**
@@ -26,9 +25,11 @@ slidenumbers: true
 
 ---
 # **Quick history lesson** 
-TODO: insert pictures of 2000 vs 2014 hardware/visions for mobile nodes here
+
+![original](./../images/gracehopper_1.jpg)
 
 ^
+TODO: insert pictures of 2000 vs 2014 hardware/visions for mobile nodes here
 - ZRP etc: 2006 or earlier
 - research has stalled since them
 - failure or too early? -> too early.
@@ -59,12 +60,14 @@ TODO: speaker notes that explain both approaches & give protocol examples
 ---
 #        **route                         area** 
 
-![inline](./../images/route_centered_example.pdf)![inline](./../images/area_centered.pdf)
+![inline](./../images/route_centered_example.pdf)![inline](./../images/area_centered_example.pdf)
 
-^TODO: speaker notes that explain both examples
-TODO: sketch area-centered, translated into application scnerario example
+^
+- Lighting system: central control (proactive); connection between sofa lamp & switch if person is in room (reactive)
+- warehouse: truckload needsa to know abt each other, rest of warehouse less relevant
+
 TODO: attribution into bibliography: Computer designed by Ji Sub Jeong from the Noun Project, Light bulbs designed by Julien Deveaux from the Noun Project, 
-Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea from the Noun Project 
+Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea from the Noun Project || Rubber Duck designed by Simon Child from the Noun Project, Rocking Horse designed by Okan Benn from the Noun Project, Circus Elephant designed by Solène Troussé from the Noun Project, Lego designed by Okan Benn from the Noun Project, Lego designed by jon trillana from the Noun Project, Game Boy designed by Simon Child from the Noun Project
 
 ---
 # **Protocol vs Framework** 
@@ -85,7 +88,9 @@ TODO: okay cool, and what's suitable for the IoT now? how do we translate this t
 ---
 # **Thank You** 
 
-TODO: funny picture
+![](./../images/skating_cows.jpg)
+
+^TODO: attribution in references: Skating Cows by Mark Turnauckas
 
 
 ---
