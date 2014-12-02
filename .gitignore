@@ -29,7 +29,6 @@
 *.fdb_latexmk
 
 # other bloatiness
-*.pdf
 *.ppt
 *.mov
 *.mp4
