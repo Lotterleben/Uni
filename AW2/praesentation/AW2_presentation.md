@@ -1,8 +1,10 @@
 footer: Lotte Steenbrink, iNET HAW Hamburg	
 slidenumbers: true
 
-# **Hybrid Routing for the IoT**
-## challenges & opportunities
+<!-- TODO: QUELLEN!!!-->
+
+# [fit]**Hybrid Routing for the IoT**
+##  challenges & opportunities
 
 ^ 
 - AW1: existing; either proactive || reactive 
@@ -16,6 +18,7 @@ slidenumbers: true
 ![original](./../images/hybrid_venn.pdf)
 
 ^ 
+- short intro to proactive & reactive (1 sentence)
 - bring p&a together in hybrid prots this sem 
 - -> adapt to changes @ network characteristics
 - comes with own set of challenges:
@@ -24,12 +27,13 @@ slidenumbers: true
 	* most research stems from time where IoT vision didnt exist -> necessary to adjust & advance
 
 ---
-# **Quick history lesson** 
+# **Flashback** 
 
-![original](./../images/gracehopper_1.jpg)
+![original](./../images/gracehopper_1_filter.pdf)
 
 ^
 TODO: insert pictures of 2000 vs 2014 hardware/visions for mobile nodes here
+...aaactually, the use cases haven't chaned that much... => differenciate betwen MANET and IoT?
 - ZRP etc: 2006 or earlier
 - research has stalled since them
 - failure or too early? -> too early.
@@ -43,6 +47,8 @@ TODO: insert pictures of 2000 vs 2014 hardware/visions for mobile nodes here
 
 ---
 # **Some fancy headline which introduces that I'm going to talk about concepts now** 
+TODO: maybe I can just skip his & say what I want to say in the slide before this one
+
 ^
 - I'm not going to bore you with lists of outdated protocols
 - instead, i'm going to talk about concepts that they introduce and use some of them as examples
@@ -71,7 +77,23 @@ Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea from the
 
 ---
 # **Protocol vs Framework** 
-TODO: content
+TODO: gegenüberstellende Visualisierung (zB LEGOs?)
+
+^TODO: speaker notes
+
+---
+# **Protocol** 
+
+- fine-grained optimization [p2prpl]
+- inflexible
+	• protocol updates are hard
+	• re-use of existing codebases is hard
+
+^TODO: speaker notes
+
+---
+# **Framework** 
+TODO: content & examples
 
 ^TODO: speaker notes
 
@@ -79,6 +101,19 @@ TODO: content
 # **But what about the IoT?** 
 TODO: okay cool, and what's suitable for the IoT now? how do we translate this to the 21st century?
 
+<!--
+- look at:
+- network topology
+- traffic patterns
+
+pro framework:
+- IoT has lots of use cases-> framework can be customized to fit them
+- easier to keep pace with rapidly evolving technology
+
+pro protocol:
+- easy to install, less decisions
+- can be optimized for size, overhead, less abttery drain
+-->
 
 ---
 # **Conclusion** 
@@ -95,4 +130,4 @@ TODO: okay cool, and what's suitable for the IoT now? how do we translate this t
 
 ---
 # **References** 
-TODO
+[p2prpl] E. Baccelli, M. Philipp, and M. Goyal, “The p2p-rpl routing protocol for ipv6 sensor net- works: Testbed experiments,” in Software, Telecommunications and Computer Networks (SoftCOM), 2011 19th International Confer- ence on, pp. 1–6, Sept 2011.
