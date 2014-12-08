@@ -107,6 +107,7 @@ TODO: gegenüberstellende Visualisierung (zB LEGOs?)
 	• no protocol fine-tuning
 
 - semi-frameworks: one fixed, one flexible protocol [SHARP]
+
 ^TODO: speaker notes
 
 ---
