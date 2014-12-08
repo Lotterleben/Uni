@@ -85,6 +85,9 @@ TODO: gegenüberstellende Visualisierung (zB LEGOs?)
 # **Protocol** 
 
 - fine-grained optimization [p2prpl]
+	• size
+	• computation
+	• packet overhead
 - inflexible
 	• protocol updates are hard
 	• re-use of existing codebases is hard
@@ -93,8 +96,17 @@ TODO: gegenüberstellende Visualisierung (zB LEGOs?)
 
 ---
 # **Framework** 
-TODO: content & examples
+<!-- TODO: content & examples -->
 
+- flexible
+	• mix & match protocols
+	• update protocols
+	• re-use existing codebases
+
+- less lightweight
+	• no protocol fine-tuning
+
+- semi-frameworks: one fixed, one flexible protocol [SHARP]
 ^TODO: speaker notes
 
 ---
@@ -127,7 +139,17 @@ pro protocol:
 
 ^TODO: attribution in references: Skating Cows by Mark Turnauckas
 
+---
+
+# **References** 
+<sub>
+**[p2prpl]** E. Baccelli, M. Philipp, and M. Goyal, “The p2p-rpl routing protocol for ipv6 sensor net- works: Testbed experiments,” in Software, Telecommunications and Computer Networks (SoftCOM), 2011 19th International Conference on, pp. 1–6, Sept 2011.
+**[SHARP]** V. Ramasubramanian, Z. J. Haas, and E. G. Sirer, “SHARP: A Hybrid Adaptive Routing Protocol for Mobile Ad Hoc Networks,” in Proceedings of the 4th ACM International Symposium on Mobile Ad Hoc Networking & Computing, MobiHoc ’03, pp. 303–314, ACM, 2003.
+</sub>
 
 ---
-# **References** 
-[p2prpl] E. Baccelli, M. Philipp, and M. Goyal, “The p2p-rpl routing protocol for ipv6 sensor net- works: Testbed experiments,” in Software, Telecommunications and Computer Networks (SoftCOM), 2011 19th International Confer- ence on, pp. 1–6, Sept 2011.
+# **Image Credits**
+
+##pictograms
+Computer designed by Ji Sub Jeong from the Noun Project, Light bulbs designed by Julien Deveaux from the Noun Project, 
+Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea from the Noun Project || Rubber Duck designed by Simon Child from the Noun Project, Rocking Horse designed by Okan Benn from the Noun Project, Circus Elephant designed by Solène Troussé from the Noun Project, Lego designed by Okan Benn from the Noun Project, Lego designed by jon trillana from the Noun Project, Game Boy designed by Simon Child from the Noun Project
