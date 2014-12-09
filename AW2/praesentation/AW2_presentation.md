@@ -70,7 +70,11 @@ TODO: maybe I can just skip his & say what I want to say in the slide before thi
 ^
 - I'm not going to bore you with lists of outdated protocols
 - instead, i'm going to talk about concepts that they introduce and use some of them as examples
+- -> IoT solutions will ahve to be derived from that
 - comprehensive list can be found at TODO
+
+---
+# **Scope** 
 
 ---
 #        **route                         area** 
@@ -89,6 +93,9 @@ TODO: speaker notes that explain both approaches & give protocol examples
 ^
 - Lighting system: central control (proactive); connection between sofa lamp & switch if person is in room (reactive)
 - warehouse: truckload needs to know abt each other, rest of warehouse less relevant
+
+---
+# **Architecture** 
 
 ---
 #       **Protocol             Framework** 
@@ -129,22 +136,6 @@ TODO: speaker notes that explain both approaches & give protocol examples
 	• update protocols
 	• re-use existing codebases
 
-- less lightweight
-	• no protocol fine-tuning
-
-- semi-frameworks: one fixed, one flexible protocol [SHARP]
-
-^TODO: speaker notes
-
----
-
-# **Framework** 
-<!-- TODO: content & examples -->
-
-- flexible
-	• mix & match protocols
-	• update protocols
-	• re-use existing codebases
 ^TODO: speaker notes
 
 ---
@@ -181,10 +172,32 @@ TODO: speaker notes that explain both approaches & give protocol examples
 
 ---
 
-# **Transition to the IoT** 
-TODO: okay cool, and what's suitable for the IoT now? how do we translate this to the 21st century?
+# **Suitability for the IoT** 
+
+- Many Use Cases
+	• many topologies
+	• many traffic patterns
+
+---
+
+# **Suitability for the IoT** 
+## Scope
+- highly dependent on Use Case
+
+## Architecture
+- Framework more suitable
+	• challenge: make it lightweight
+
 
 <!--
+TODO: okay cool, and what's suitable for the IoT now? how do we translate this to the 21st century?
+
+
+Issues:
+- which proactive/reactive protocols translate to the IoT?
+- tradeoff flexibility of framework (good bc so may use cases) vs optimizability of protocol
+
+
 - look at:
 - network topology
 - traffic patterns
@@ -192,10 +205,19 @@ TODO: okay cool, and what's suitable for the IoT now? how do we translate this t
 pro framework:
 - IoT has lots of use cases-> framework can be customized to fit them
 - easier to keep pace with rapidly evolving technology
+con:
+- may be heavyweight
+
 
 pro protocol:
 - easy to install, less decisions
 - can be optimized for size, overhead, less abttery drain
+con:
+- slow with adaptions of new things
+- inflexible (many use cases)
+
+Framework pros probably win, but fw has to be designed to be lightweight!
+
 -->
 
 ---
