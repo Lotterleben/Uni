@@ -11,6 +11,16 @@ slidenumbers: true
 - new technologies & Use Cases @ IoT have emerged
 - with them: new network characteristic
 
+
+---
+# **Outline**
+- What is Hybrid Routing?
+- Existing Concepts
+	• area- vs route-centered
+	• protocol vs framework
+- Transition to the IoT
+- Conclusion & Outlook
+
 ---
 # **The big picture**
 
@@ -45,6 +55,9 @@ TODO: insert pictures of 2000 vs 2014 hardware/visions for mobile nodes here
 
 ---
 # **The time is now** 
+
+![original](./../images/the_time_is_now.jpg)
+
 
 ^research is 10 years old, BUT!! 
 - now we have the building blocks in place
@@ -90,6 +103,16 @@ TODO: speaker notes that explain both approaches & give protocol examples
 	• size
 	• computation
 	• packet overhead
+
+^TODO: speaker notes
+
+---
+# **Protocol** 
+
+- fine-grained optimization [p2prpl]
+	• size
+	• computation
+	• packet overhead
 - inflexible
 	• protocol updates are hard
 	• re-use of existing codebases is hard
@@ -97,6 +120,7 @@ TODO: speaker notes that explain both approaches & give protocol examples
 ^TODO: speaker notes
 
 ---
+
 # **Framework** 
 <!-- TODO: content & examples -->
 
@@ -113,7 +137,51 @@ TODO: speaker notes that explain both approaches & give protocol examples
 ^TODO: speaker notes
 
 ---
-# **But what about the IoT?** 
+
+# **Framework** 
+<!-- TODO: content & examples -->
+
+- flexible
+	• mix & match protocols
+	• update protocols
+	• re-use existing codebases
+^TODO: speaker notes
+
+---
+
+# **Framework** 
+<!-- TODO: content & examples -->
+
+- flexible
+	• mix & match protocols
+	• update protocols
+	• re-use existing codebases
+
+- less lightweight
+	• no protocol fine-tuning
+
+^TODO: speaker notes
+
+---
+
+# **Framework** 
+<!-- TODO: content & examples -->
+
+- flexible
+	• mix & match protocols
+	• update protocols
+	• re-use existing codebases
+
+- less lightweight
+	• no protocol fine-tuning
+
+- semi-frameworks: one fixed, one flexible protocol [SHARP]
+
+^TODO: speaker notes
+
+---
+
+# **Transition to the IoT** 
 TODO: okay cool, and what's suitable for the IoT now? how do we translate this to the 21st century?
 
 <!--
@@ -131,9 +199,9 @@ pro protocol:
 -->
 
 ---
-# **Conclusion** 
+# **Conclusion & Outlook** 
 
-
+TODO
 
 ---
 #[fit] **Thank You            ** 
