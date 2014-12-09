@@ -70,14 +70,11 @@ TODO: speaker notes that explain both approaches & give protocol examples
 
 ^
 - Lighting system: central control (proactive); connection between sofa lamp & switch if person is in room (reactive)
-- warehouse: truckload needsa to know abt each other, rest of warehouse less relevant
-
-TODO: attribution into bibliography: Computer designed by Ji Sub Jeong from the Noun Project, Light bulbs designed by Julien Deveaux from the Noun Project, 
-Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea from the Noun Project || Rubber Duck designed by Simon Child from the Noun Project, Rocking Horse designed by Okan Benn from the Noun Project, Circus Elephant designed by Solène Troussé from the Noun Project, Lego designed by Okan Benn from the Noun Project, Lego designed by jon trillana from the Noun Project, Game Boy designed by Simon Child from the Noun Project
+- warehouse: truckload needs to know abt each other, rest of warehouse less relevant
 
 ---
-# **Protocol vs Framework** 
-TODO: gegenüberstellende Visualisierung (zB LEGOs?)
+#       **Protocol             Framework** 
+![inline](./../images/icons/noun_12390.pdf)![inline](./../images/protocol_example.pdf)
 
 ^TODO: speaker notes
 
@@ -134,9 +131,9 @@ pro protocol:
 
 
 ---
-# **Thank You** 
-
-![](./../images/skating_cows.jpg)
+#[fit] **Thank You            ** 
+ 
+![original](./../images/thankyou3.jpg)
 
 ^TODO: attribution in references: Skating Cows by Mark Turnauckas
 
@@ -151,6 +148,6 @@ pro protocol:
 ---
 # **Image Credits**
 
-##pictograms
-Computer designed by Ji Sub Jeong from the Noun Project, Light bulbs designed by Julien Deveaux from the Noun Project, 
-Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea from the Noun Project || Rubber Duck designed by Simon Child from the Noun Project, Rocking Horse designed by Okan Benn from the Noun Project, Circus Elephant designed by Solène Troussé from the Noun Project, Lego designed by Okan Benn from the Noun Project, Lego designed by jon trillana from the Noun Project, Game Boy designed by Simon Child from the Noun Project
+##pictograms (all from the Noun Project)
+<sub>Computer designed by Ji Sub Jeong, Light bulbs designed by Julien Deveaux, Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea, Rubber Duck designed by Simon Child, Rocking Horse designed by Okan Benn, Circus Elephant designed by Solène Troussé, Lego designed by Okan Benn, Lego designed by jon trillana, Game Boy designed by Simon Child, Castle designed by Road Signs.
+</sub>
