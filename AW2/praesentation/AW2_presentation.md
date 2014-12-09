@@ -27,6 +27,11 @@ slidenumbers: true
 	* most research stems from time where IoT vision didnt exist -> necessary to adjust & advance
 
 ---
+# **The big picture**
+
+TODO: where do I want to go with this, thesis-wise?
+
+---
 # **Flashback** 
 
 ![original](./../images/gracehopper_1_filter.pdf)
@@ -76,7 +81,7 @@ TODO: speaker notes that explain both approaches & give protocol examples
 #       **Protocol             Framework** 
 ![inline](./../images/icons/noun_12390.pdf)![inline](./../images/protocol_example.pdf)
 
-^TODO: speaker notes
+^TODO: lieber disney castle? :D
 
 ---
 # **Protocol** 
@@ -141,8 +146,14 @@ pro protocol:
 
 # **References** 
 <sub>
-**[p2prpl]** E. Baccelli, M. Philipp, and M. Goyal, “The p2p-rpl routing protocol for ipv6 sensor net- works: Testbed experiments,” in Software, Telecommunications and Computer Networks (SoftCOM), 2011 19th International Conference on, pp. 1–6, Sept 2011.
+**[IZRP]** P. Samar, M. R. Pearlman, and Z. J. Haas, “Independent zone routing: An adaptive hybrid routing framework for ad hoc wireless networks,” IEEE/ACM Trans. Netw., vol. 12, pp. 595–608, Aug. 2004.
+**[NodeCentric]**S. Roy and J. J. Garcia-Luna-Aceves, “Node- Centric Hybrid Routing for Ad Hoc Networks,” in Proceedings of the International Workshop on Mobility and Wireless Access, MobiWac ’02, (Washington, DC, USA), pp. 63–, IEEE Com- puter Society, 2002.
+**[p2prpl]** E. Baccelli, M. Philipp, and M. Goyal, “The p2p-rpl routing protocol for ipv6 sensor networks: Testbed experiments,” in Software, Telecommunications and Computer Networks (SoftCOM), 2011 19th International Conference on, pp. 1–6, Sept 2011.
 **[SHARP]** V. Ramasubramanian, Z. J. Haas, and E. G. Sirer, “SHARP: A Hybrid Adaptive Routing Protocol for Mobile Ad Hoc Networks,” in Proceedings of the 4th ACM International Symposium on Mobile Ad Hoc Networking & Computing, MobiHoc ’03, pp. 303–314, ACM, 2003.
+**[TZRP]** L. Wang and S. Olariu, “A Two-Zone Hy- brid Routing Protocol for Mobile Ad Hoc Networks,” IEEE Trans. Parallel Distrib. Syst., vol. 15, pp. 1105–1116, Dec. 2004.
+**[WARP]**  P. Sholander, A. Yankopolus, P. Coccoli, and S. Tabrizi, “Experimental comparison of hybrid and proactive MANET routing protocols,” in MILCOM 2002. Proceedings, vol. 1, pp. 513– 518 vol.1, Oct 2002.
+**[ZHLS]** M. Joa-Ng and I.-T. Lu, “A peer-to-peer zone-based two-level link state routing for mobile ad hoc networks,” Selected Areas in Communications, IEEE Journal on, vol. 17, pp. 1415–1425, Aug 1999.
+**[ZRP]** Z. Haas, M. Pearlman, and P. Samar, “The Zone Routing Protocol (ZRP) for Ad Hoc Networks,” draft, IETF, July 2002.
 </sub>
 
 ---
