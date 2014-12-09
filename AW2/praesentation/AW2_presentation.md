@@ -12,6 +12,11 @@ slidenumbers: true
 - with them: new network characteristic
 
 ---
+# **The big picture**
+
+![inline](./../images/bigpicture.pdf)
+
+---
 #       **proactive**         **reactive**
 ###     
 
@@ -25,11 +30,6 @@ slidenumbers: true
 	* when/where to switch
 	* coordinate 2 fundamentally different routing approaches
 	* most research stems from time where IoT vision didnt exist -> necessary to adjust & advance
-
----
-# **The big picture**
-
-TODO: where do I want to go with this, thesis-wise?
 
 ---
 # **Flashback** 
@@ -79,7 +79,7 @@ TODO: speaker notes that explain both approaches & give protocol examples
 
 ---
 #       **Protocol             Framework** 
-![inline](./../images/icons/noun_12390.pdf)![inline](./../images/protocol_example.pdf)
+![inline](./../images/Walt_Disney_Castle.pdf)![inline](./../images/protocol_example.pdf)
 
 ^TODO: lieber disney castle? :D
 
@@ -163,7 +163,7 @@ pro protocol:
 </sub>
 
 ---
-# **Image Credits**
+# **Image Credit**
 
 ##pictograms (all from the Noun Project)
 <sub>Computer designed by Ji Sub Jeong, Light bulbs designed by Julien Deveaux, Lamps designed by Renee Ramsey-Passmore, Thomas Le Bas and Becca O'Shea, Rubber Duck designed by Simon Child, Rocking Horse designed by Okan Benn, Circus Elephant designed by Solène Troussé, Lego designed by Okan Benn, Lego designed by jon trillana, Game Boy designed by Simon Child, Castle designed by Road Signs.
