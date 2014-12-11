@@ -488,7 +488,6 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 
 		// establish connection
 		this.joinHelp(bootstrapURL);
-
 	}
 
 	public final void join(URL localURL1, ID localID1, URL bootstrapURL)
@@ -1115,11 +1114,22 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 	//send broadcast to all nodes in finger table
 	@Override
 	public void broadcast (ID target, Boolean hit) {
-		this.logger.debug("App called broadcast");
+		this.logger.error("ChordImpl: App called broadcast");
 		List<Node> fingerTable = getFingerTable();
+		logger.info("ChordImpl retrieved finger table entries:"+ fingerTable);
 		
-		for(Node n: fingerTable){
-			System.out.println("Node: " + n);
+		
+		// send to my node only
+		ID range = getID(); // TODO: figure out how to set this
+		int transaction= 1337; // TODO: use proper value
+		Broadcast broadcast = new Broadcast(range, getID(), target, transaction, hit);
+		
+		// notify Nodeimpl TODO
+		try {
+			this.localNode.broadcast(broadcast);
+		} catch (CommunicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

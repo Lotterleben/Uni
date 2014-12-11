@@ -65,7 +65,7 @@ final class Entries {
 	private final static Logger logger = Logger.getLogger(Entries.class);
 
 	private final static boolean debugEnabled = logger
-			.isEnabledFor(Logger.LogLevel.DEBUG);
+			.isEnabledFor(Logger.LogLevel.INFO);
 
 	/**
 	 * Local hash table for entries. Is synchronized, st. methods do not have to
