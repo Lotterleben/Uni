@@ -2,7 +2,7 @@
  *                                                                         *
  *                             Log4jLogger.java                            *
  *                            -------------------                          *
- *   date                 : 26. März 2004, 12:37                           *
+ *   date                 : 26. Mï¿½rz 2004, 12:37                           *
  *   copyright            : (C) 2004 Distributed and Mobile Systems Group  *
  *                              Lehrstuhl fuer Praktische Informatik       *
  *                              Universitaet Bamberg                       *
@@ -156,7 +156,7 @@ public class Log4jLogger extends Logger {
 				// configure with basic configurator
 				org.apache.log4j.BasicConfigurator.configure();
 				// and set logging to off.
-				org.apache.log4j.Level level = org.apache.log4j.Level.ALL;
+				org.apache.log4j.Level level = org.apache.log4j.Level.INFO; // FIXME I (lotte) set this from ALL to INFO to make logger STFU
 				org.apache.log4j.Logger.getRootLogger().setLevel(level);
 			}
 		}
