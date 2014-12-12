@@ -1118,7 +1118,48 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 		List<Node> fingerTable = getFingerTable();
 		logger.info("ChordImpl retrieved finger table entries:"+ fingerTable);
 		
+		/* Der Startknoten sendet das Broadcast-Paket an alle (unterschiedlichen) Knoten seiner
+		 * Finger Table, wobei der den jeweils darauffolgenden Finger-Table Eintrag in das
+		 * RangeHash - Feld notiert. 
+		 */
 		
+		ID range;
+		Node node;
+		int numFingerTableEntries = fingerTable.size()-1;
+		for (int i=0; i<numFingerTableEntries; i++) {
+			node = fingerTable.get(i);
+			if (i == numFingerTableEntries-1) { // TODO: evt einfach IDs vergleichen?
+				// we've reached our predecessor on the chord ring
+				range = getID();
+			} else {
+				// send broadcast to addresses between node and its successor
+				range = node.getNodeID();
+			}
+			
+			Integer transaction = 1337; // TODO: set to proper value (how?)
+			Broadcast broadcast = new Broadcast(range, getID(), target, transaction, hit);
+			try {
+				node.broadcast(broadcast);
+			} catch (CommunicationException e) {
+				e.printStackTrace();
+			}
+		}
+		/*
+		for (Node node : fingerTable) {
+			try {
+				// TODO: Ergibt das sinn so? (nope... geh nach finger tableindex!)
+				ID range = node.findSuccessor(node.getNodeID()).getNodeID();
+				Integer transaction = 1337; // TODO: set to proper value
+				Broadcast broadcast = new Broadcast(range, getID(), target, transaction, hit);
+				node.broadcast(broadcast);
+			} catch (CommunicationException e) {
+				e.printStackTrace();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		*/
+		/*
 		// send to my node only
 		ID range = getID(); // TODO: figure out how to set this
 		int transaction= 1337; // TODO: use proper value
@@ -1131,7 +1172,7 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 	}
 	
 	public void setCallback (NotifyCallback callback) {

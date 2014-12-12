@@ -8,15 +8,24 @@ import de.uniba.wiai.lspi.chord.service.NotifyCallback;
 import de.uniba.wiai.lspi.chord.service.PropertiesLoader;
 import de.uniba.wiai.lspi.chord.service.ServiceException;
 import de.uniba.wiai.lspi.chord.service.impl.ChordImpl;
+import de.uniba.wiai.lspi.util.logging.Logger;
 
 public class Chord_Battleship implements NotifyCallback{
 
 	private ChordImpl chord = null;
+	private ID myID = null;
+	private Logger logger;
+	private boolean hit;
 	
-	public void startServer(String serverURL) {
+	public Chord_Battleship () {
+		logger = Logger.getLogger(this.getClass().getName());
 		PropertiesLoader.loadPropertyFile();
 		chord = new ChordImpl();
 		chord.setCallback(this);
+	}
+	
+	public void startServer(String serverURL) {
+		
 		try {
 			URL url = new URL(serverURL);
 			chord.create(url);
@@ -27,12 +36,11 @@ public class Chord_Battleship implements NotifyCallback{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		myID = chord.getID();
 	}
 	
 	public void startClient(String client, String server) {
-		PropertiesLoader.loadPropertyFile();
-		chord = new ChordImpl();
-		chord.setCallback(this);
+
 		try {
 			URL clientURL = new URL(client);
 			URL bootstrapURL = new URL(server);
@@ -44,18 +52,28 @@ public class Chord_Battleship implements NotifyCallback{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		myID = chord.getID();
+		sendTest();
 	}
-	
+
+	// for testing purposes only TODO delete me
+	private void sendTest(){
+		logger.error("my ID: "+myID);
+		chord.retrieve(myID);
+		chord.broadcast(myID, hit);
+	}
+
 	@Override
 	public void retrieved(ID target) {
-		System.out.println("retrieved " + target);
+		logger.error("retrieved " + target);
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void broadcast(ID source, ID target, Boolean hit) {
-		System.out.println("broadcast ; source: " + source +" target: " + "hit: " + hit);
+		logger.error("broadcast ; source: " + source +" target: " + "hit: " + hit);
 		// TODO Auto-generated method stub
 		
 	}
