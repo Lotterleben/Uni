@@ -14,7 +14,18 @@ public class Main {
 		LogManager.getRootLogger().setLevel(Level.INFO);
 		
 		Chord_Battleship chord = new Chord_Battleship();
-		//chord.startServer(serverURL);
-		chord.startClient(clientURL, serverURL);
+
+		if(args.length > 0){
+			switch(args[0]){
+				case "-s":{
+					chord.startServer(serverURL);
+					break;
+				}
+				case "-c":{
+					chord.startClient(clientURL, serverURL);
+					break;
+				}
+			}
+		}
 	}
 }
