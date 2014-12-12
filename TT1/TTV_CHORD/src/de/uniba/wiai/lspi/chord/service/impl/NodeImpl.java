@@ -448,12 +448,12 @@ public final class NodeImpl extends Node {
 		int numFingerTableEntries = fingerTable.size()-1;
 		for (int i=0; i<numFingerTableEntries; i++) {
 			node = fingerTable.get(i);
-			if (i == numFingerTableEntries-1) { // TODO: evt einfach IDs vergleichen?
+			if (i == numFingerTableEntries) { // TODO: evt einfach IDs vergleichen?
 				// we've reached our predecessor on the chord ring
 				range = myID;
 			} else {
 				// send broadcast to addresses between node and its successor
-				range = node.getNodeID();
+				range = fingerTable.get(i+1).getNodeID();
 			}
 			
 			Integer transaction = 1337; // TODO: set to proper value (how?)
