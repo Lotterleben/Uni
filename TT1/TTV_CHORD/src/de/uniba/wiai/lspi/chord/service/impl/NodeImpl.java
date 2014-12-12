@@ -427,11 +427,42 @@ public final class NodeImpl extends Node {
 	}
 	
 	// TODO: implement this function in TTP
+	
+	/* Der Startknoten sendet das Broadcast-Paket an alle (unterschiedlichen) Knoten seiner
+	 * Finger Table, wobei der den jeweils darauffolgenden Finger-Table Eintrag in das
+	 * RangeHash - Feld notiert. 
+	 */
 	@Override
 	public final void broadcast(Broadcast info) throws CommunicationException {
 		this.logger.error("NodeImpl Send broadcast message");
 		if (this.logger.isEnabledFor(DEBUG)) {
 			this.logger.debug(" Send broadcast message");
+		}
+		
+		List<Node> fingerTable = impl.getFingerTable();
+		Node node;
+		ID range; 
+		ID myID = impl.getID();
+		
+		/* Leite Broadcast an alle Knoten meiner Finger Table weiter. */
+		int numFingerTableEntries = fingerTable.size()-1;
+		for (int i=0; i<numFingerTableEntries; i++) {
+			node = fingerTable.get(i);
+			if (i == numFingerTableEntries-1) { // TODO: evt einfach IDs vergleichen?
+				// we've reached our predecessor on the chord ring
+				range = myID;
+			} else {
+				// send broadcast to addresses between node and its successor
+				range = node.getNodeID();
+			}
+			
+			Integer transaction = 1337; // TODO: set to proper value (how?)
+			Broadcast broadcast = new Broadcast(range, myID, info.getTarget(), transaction, info.getHit());
+			try {
+				node.broadcast(broadcast);
+			} catch (CommunicationException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		// finally inform application
