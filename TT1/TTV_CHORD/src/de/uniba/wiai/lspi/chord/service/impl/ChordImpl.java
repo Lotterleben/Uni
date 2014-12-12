@@ -1115,16 +1115,17 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 	@Override
 	public void broadcast (ID target, Boolean hit) {
 		this.logger.error("ChordImpl: App called broadcast");
-		List<Node> fingerTable = getFingerTable();
-		logger.info("ChordImpl retrieved finger table entries:"+ fingerTable);
 		
-		/* Der Startknoten sendet das Broadcast-Paket an alle (unterschiedlichen) Knoten seiner
-		 * Finger Table, wobei der den jeweils darauffolgenden Finger-Table Eintrag in das
-		 * RangeHash - Feld notiert. 
-		 */
+		ID range = getPredecessorID();
+		Integer transaction = 1337; // TODO: set to proper value		
+		Broadcast broadcast = new Broadcast(range, getID(), target, transaction, hit);
+		try {
+			localNode.broadcast(broadcast);
+		} catch (CommunicationException e) {
+			e.printStackTrace();
+		}
 		
-		ID range;
-		Node node;
+		/*
 		int numFingerTableEntries = fingerTable.size()-1;
 		for (int i=0; i<numFingerTableEntries; i++) {
 			node = fingerTable.get(i);
@@ -1144,6 +1145,7 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 				e.printStackTrace();
 			}
 		}
+		*/
 		/*
 		for (Node node : fingerTable) {
 			try {
