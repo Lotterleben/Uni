@@ -12,7 +12,7 @@ public class Main {
 	// caution, these IPs are bullshit
 	static String serverURL = "ocsocket://141.22.28.170:12340/";
 	static String baseClientURL = "ocsocket://141.22.28.170:1234";
-	static int numClients = 1;
+	static int numClients = 2;
 	
 	public static void main(String[] args) {
 		
