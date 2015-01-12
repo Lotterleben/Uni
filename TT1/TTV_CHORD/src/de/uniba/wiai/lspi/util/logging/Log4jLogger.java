@@ -156,7 +156,7 @@ public class Log4jLogger extends Logger {
 				// configure with basic configurator
 				org.apache.log4j.BasicConfigurator.configure();
 				// and set logging to off.
-				org.apache.log4j.Level level = org.apache.log4j.Level.INFO; // FIXME I (lotte) set this from ALL to INFO to make logger STFU
+				org.apache.log4j.Level level = org.apache.log4j.Level.ALL; 
 				org.apache.log4j.Logger.getRootLogger().setLevel(level);
 			}
 		}

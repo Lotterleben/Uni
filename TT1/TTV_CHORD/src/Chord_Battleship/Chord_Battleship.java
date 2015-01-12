@@ -19,9 +19,12 @@ public class Chord_Battleship implements NotifyCallback{
 	
 	public Chord_Battleship () {
 		logger = Logger.getLogger(this.getClass().getName());
-		PropertiesLoader.loadPropertyFile();
 		chord = new ChordImpl();
 		chord.setCallback(this);
+		
+		org.apache.log4j.Level level = org.apache.log4j.Level.INFO;
+		org.apache.log4j.Logger.getRootLogger().setLevel(level);
+		System.out.println("ooo LOG LEVEL: "+ org.apache.log4j.Logger.getRootLogger().getLevel());
 	}
 	
 	public void startServer(String serverURL) {
@@ -54,7 +57,7 @@ public class Chord_Battleship implements NotifyCallback{
 		}
 		
 		myID = chord.getID();
-		sendTest();
+		//sendTest();
 	}
 
 	// for testing purposes only TODO delete me
