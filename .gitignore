@@ -35,3 +35,20 @@
 
 #Java
 *.class
+
+#untracked folders
+folien/
+bin/
+paper/
+
+#files
+AW1/ausarbeitung/*.pdf
+AW1/kurzausarbeitung/*.pdf
+AW1/praesentation/*.pdf
+AW2/eine_seite_kurzausarbeitung/*.pdf
+AW2/kurzausarbeitung/*.pdf
+AW2/praesentation/*.pdf
+AW2/ausarbeitung/*.pdf
+AW2/kurzpraesentation/*.pdf
+
+TT1/tt1_p1.pdf
