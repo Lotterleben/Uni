@@ -22,7 +22,7 @@ public class Main {
 			switch(args[0]){
 				case "-s":{
 					System.out.println("Starting server at" + serverURL);
-					Chord_Battleship chord = new Chord_Battleship();
+					BattleshipStategy chord = new BattleshipStategy();
 					chord.startServer(serverURL);
 					break;
 				}
@@ -45,11 +45,11 @@ public class Main {
 	
 	static class ChordClient implements Runnable {
 		String clientURL_ = "";
-		Chord_Battleship chord;
+		BattleshipStategy chord;
 		
 		public ChordClient(String clientURL) {
 		    clientURL_ = clientURL;
-			chord = new Chord_Battleship();
+			chord = new BattleshipStategy();
 		}
 	
 		public void run() {
