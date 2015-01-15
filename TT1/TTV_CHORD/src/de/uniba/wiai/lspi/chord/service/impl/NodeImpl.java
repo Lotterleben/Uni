@@ -440,6 +440,7 @@ public final class NodeImpl extends Node {
 		}
 		
 		List<Node> fingerTable = impl.getFingerTable();
+		
 		Node node;
 		ID range; 
 		ID myID = impl.getID();

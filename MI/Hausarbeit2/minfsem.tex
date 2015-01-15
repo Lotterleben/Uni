@@ -1,0 +1,142 @@
+% Template LaTeX file for MInfSem papers
+%
+% To generate the correct references using BibTeX, run
+%     latex, bibtex, latex, latex
+% modified...
+% - from DAFx-00 to DAFx-02 by Florian Keiler, 2002-07-08
+% - from DAFx-02 to DAFx-03 by Gianpaolo Evangelista
+% - from DAFx-05 to DAFx-06 by Vincent Verfaille, 2006-02-05
+% - from DAFx-06 to DAFx-07 by Vincent Verfaille, 2007-01-05
+%                          and Sylvain Marchand, 2007-01-31
+% - from DAFx-07 to DAFx-08 by Henri Penttinen, 2007-12-12
+%                          and Jyri Pakarinen 2008-01-28
+% - from DAFx-08 to DAFx-09 by Giorgio Prandi, Fabio Antonacci 2008-10-03
+% - from DAFx-09 to DAFx-10 by Hannes Pomberger 2010-02-01
+% - from DAFx-10 to DAFx-12 by Jez Wells 2011
+% - from DAFx-12 to DAFx-14 by Sascha Disch 2013
+% - from DAFx-14 to MInfSem by Wolfgang Fohl 2014
+%
+% Template with hyper-references (links) active after conversion to pdf
+% (with the distiller) or if compiled with pdflatex.
+%
+% 20060205: added package 'hypcap' to correct hyperlinks to figures and tables
+%                      use of \papertitle and \paperauthorA, etc for same title in PDF and Metadata
+%
+% 1) Please compile using latex or pdflatex.
+% 2) If using pdflatex, you need your figures in a file format other than eps! e.g. png or jpg is working
+% 3) Please use "paperftitle" and "pdfauthor" definitions below
+
+%------------------------------------------------------------------------------------------
+%  !  !  !  !  !  !  !  !  !  !  !  ! user defined variables  !  !  !  !  !  !  !  !  !  !  !  !  !  !
+% Please use these commands to define title and author of the paper:
+\def\papertitle{Re-thinking the Internet\protect\\ \vspace{2 mm} {\small Data-based communication through Information-Centric Networks}}
+\def\paperauthorA{Lotte Steenbrink}
+
+
+%------------------------------------------------------------------------------------------
+\documentclass[twoside,a4paper]{article}
+\usepackage{minfsem}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{euscript}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ifpdf}
+
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{subfig, color}
+
+\usepackage{hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage[figure,table]{hypcap}
+
+\setcounter{page}{1}
+\ninept
+
+\usepackage{times}
+% Saves a lot of ouptut space in PDF... after conversion with the distiller
+% Delete if you cannot get PS fonts working on your system.
+
+% pdf-tex settings: detect automatically if run by latex or pdflatex
+\newif\ifpdf
+\ifx\pdfoutput\relax
+\else
+   \ifcase\pdfoutput
+      \pdffalse
+   \else
+      \pdftrue
+\fi
+
+%\ifpdf % compiling with pdflatex
+%  \usepackage[pdftex,
+%    pdftitle={\papertitle},
+%    pdfauthor={\paperauthorA},
+%    colorlinks=false, % links are activated as colror boxes instead of color text
+%    bookmarksnumbered, % use section numbers with bookmarks
+%    pdfstartview=XYZ % start with zoom=100% instead of full screen; especially useful if working with a big screen :-)
+%  ]{hyperref}
+%  \pdfcompresslevel=9
+%  \usepackage[pdftex]{graphicx}
+%  \usepackage[figure,table]{hypcap}
+%\else % compiling with latex
+%  \usepackage[dvips]{epsfig,graphicx}
+%  \usepackage[dvips,
+%    colorlinks=false, % no color links
+%    bookmarksnumbered, % use section numbers with bookmarks
+%    pdfstartview=XYZ % start with zoom=100% instead of full screen
+%  ]{hyperref}
+  % hyperrefs are active in the pdf file after conversion
+%  \usepackage[figure,table]{hypcap}
+%\fi
+
+\title{\papertitle}
+
+%--------------AUTHOR HEADER STARTS -----------------------
+\affiliation{
+\paperauthorA}
+{\href{http://www.haw-hamburg.de/ti-i}{Hamburg University of Applied Sciences,
+    Dept. Computer Science,} \\ Berliner Tor 7\\ 20099 Hamburg, Germany\\
+{\ttfamily \href{mailto:lotte.steenbrink@haw-hamburg.de}{lotte.steenbrink@haw-hamburg.de}}
+}
+%-----------------------------------AUTHOR HEADER ENDS------------------------------------------------------
+
+\begin{document}
+% more pdf-tex settings:
+\ifpdf % used graphic file format for pdflatex
+  \DeclareGraphicsExtensions{.png,.jpg,.pdf}
+\else  % used graphic file format for latex
+  \DeclareGraphicsExtensions{.eps}
+\fi
+
+\maketitle
+
+\begin{abstract}
+Content-Centric Networking (CCN) presents a paradigm shift in internet technologies: Instead of thinking about data lying at addresses, CCN works with data \emph{directly}. Nodes retrieve data by directly asking the network for it, and let the underlying protocols figure out the rest. This allows for location-independent data storage and caching throughout the entire network, improving latencies, reducing network load, and even enabling the network to cope with partitioning without losing all the data. CCN was designed with the cabled Internet in mind, but may also be a promising approach for the Internet of Things. My Homework would explore recent developments in CCN research and their applicability to the IoT.
+\end{abstract}
+
+\section{Sources}
+\label{sec:src}
+%===============================================================================
+
+\subsection{Overview}
+\label{sec:subsec_overview}
+%-------------------------------------------------------------------------------
+\cite{ICN_survey} provides a detailed introduction to the field of Information-Centric Networks.
+
+\subsection{Named Data Networking}
+\label{sec:subsec_advances}
+%-------------------------------------------------------------------------------
+One of the most prominent approaches to ICN is Named Data Networking (NDN), which is detailed in \cite{394}.
+
+\subsection{Critical evaluation}
+\label{sec:subsec_advances}
+%-------------------------------------------------------------------------------
+\cite{Perino:2011:RCC:2018584.2018596} provides a critical evaluation of the Content-Centric Networking paradigm.
+
+\newpage
+\nocite{*}
+\bibliographystyle{IEEEbib}
+\bibliography{minfsem_tmpl} % requires file minfsem_tmpl.bib
+
+
+\end{document}
