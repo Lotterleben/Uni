@@ -1,6 +1,9 @@
 package Chord_Battleship;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Scanner;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -12,12 +15,14 @@ public class Main {
 	// caution, these IPs are bullshit
 	static String serverURL = "ocsocket://141.22.28.170:12340/";
 	static String baseClientURL = "ocsocket://141.22.28.170:1234";
-	static int numClients = 2;
+	static int numClients = 3;
+	static ArrayList<Thread> clientThreads = new ArrayList<Thread>();
+	private static ReentrantLock lock = new ReentrantLock();
 	
 	public static void main(String[] args) {
-		
+				
 		PropertiesLoader.loadPropertyFile();
-		
+		lock.lock();
 		if(args.length > 0) {
 			switch(args[0]){
 				case "-s":{
@@ -27,13 +32,7 @@ public class Main {
 					break;
 				}
 				case "-c":{
-					String clientURL;
-					for (int i=1; i<= numClients; i++) {
-						clientURL = baseClientURL+i+"/";
-						System.out.println("Starting client at: "+clientURL);
-						Runnable r = new ChordClient(clientURL);
-						new Thread(r).start();
-					}
+					launchClients();
 					break;
 				}
 			}
@@ -41,6 +40,29 @@ public class Main {
 			System.out.println("Missing arguments. aborting.");
 			return;
 		}
+		
+		lock.unlock();
+	
+	}
+	
+	static void launchClients() {
+		String clientURL;
+		for (int i=1; i<= numClients; i++) {
+			clientURL = baseClientURL+i+"/";
+			System.out.println("Starting client at: "+clientURL);
+			Runnable r = new ChordClient(clientURL);
+			Thread t = new Thread(r); 
+			clientThreads.add(t);
+			t.start();
+		}
+		
+		System.out.println("\nAll clients launched. Press enter to start the battle:\n");
+		lock.lock();
+		Scanner in = new Scanner(System.in);
+		in.nextLine();
+		in.close();
+		System.out.println("Begun, the battleship wars have.");
+		lock.unlock();
 	}
 	
 	static class ChordClient implements Runnable {
@@ -54,6 +76,10 @@ public class Main {
 	
 		public void run() {
 			chord.startClient(clientURL_, serverURL);
+			lock.lock();
+			lock.unlock();
+			System.out.println("client "+clientURL_+" unlocked");
+			chord.startBattle();
 		}
 	}
 }

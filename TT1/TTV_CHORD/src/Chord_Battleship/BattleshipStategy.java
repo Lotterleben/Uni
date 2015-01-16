@@ -59,20 +59,19 @@ public class BattleshipStategy implements NotifyCallback{
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
-		initClient();
-	}
 
-	private void initClient() {
 		myID = chord.getID();
 		
 		setShips();
-		
+	}
+	
+	public void startBattle() {
 		// TODO: wann ist der "startschuss"?
 		if (iGoFirst()) {
 			logger.error("I AM FIRST! WOHOO! My ID: "+myID);
 			shoot(myID); // TODO. select proper target
 		}
+		
 	}
 
 	/* Check if this node has the biggest ID and thus gets to shoot first */
