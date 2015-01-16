@@ -41,6 +41,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import Chord_Battleship.TransactionID;
 import de.uniba.wiai.lspi.chord.com.Broadcast;
 import de.uniba.wiai.lspi.chord.com.CommunicationException;
 import de.uniba.wiai.lspi.chord.com.Entry;
@@ -198,7 +199,7 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 	private ID localID;
 	
 	private NotifyCallback localCallback;
-
+	
 	/* constructor */
 
 	/**
@@ -1117,64 +1118,16 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 		this.logger.error("ChordImpl: App called broadcast");
 		
 		ID range = getPredecessorID();
-		Integer transaction = 1337; // TODO: set to proper value		
+		// Increment transaction ID
+		TransactionID.getInstance();
+		TransactionID.incTransactionID();
+		Integer transaction = TransactionID.getTransactionID();
 		Broadcast broadcast = new Broadcast(range, getID(), target, transaction, hit);
 		try {
 			localNode.broadcast(broadcast);
 		} catch (CommunicationException e) {
 			e.printStackTrace();
 		}
-		
-		/*
-		int numFingerTableEntries = fingerTable.size()-1;
-		for (int i=0; i<numFingerTableEntries; i++) {
-			node = fingerTable.get(i);
-			if (i == numFingerTableEntries-1) { // TODO: evt einfach IDs vergleichen?
-				// we've reached our predecessor on the chord ring
-				range = getID();
-			} else {
-				// send broadcast to addresses between node and its successor
-				range = node.getNodeID();
-			}
-			
-			Integer transaction = 1337; // TODO: set to proper value (how?)
-			Broadcast broadcast = new Broadcast(range, getID(), target, transaction, hit);
-			try {
-				node.broadcast(broadcast);
-			} catch (CommunicationException e) {
-				e.printStackTrace();
-			}
-		}
-		*/
-		/*
-		for (Node node : fingerTable) {
-			try {
-				// TODO: Ergibt das sinn so? (nope... geh nach finger tableindex!)
-				ID range = node.findSuccessor(node.getNodeID()).getNodeID();
-				Integer transaction = 1337; // TODO: set to proper value
-				Broadcast broadcast = new Broadcast(range, getID(), target, transaction, hit);
-				node.broadcast(broadcast);
-			} catch (CommunicationException e) {
-				e.printStackTrace();
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		*/
-		/*
-		// send to my node only
-		ID range = getID(); // TODO: figure out how to set this
-		int transaction= 1337; // TODO: use proper value
-		Broadcast broadcast = new Broadcast(range, getID(), target, transaction, hit);
-		
-		// notify Nodeimpl TODO
-		try {
-			this.localNode.broadcast(broadcast);
-		} catch (CommunicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
 	}
 	
 	public void setCallback (NotifyCallback callback) {

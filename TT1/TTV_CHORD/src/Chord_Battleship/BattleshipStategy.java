@@ -66,9 +66,12 @@ public class BattleshipStategy implements NotifyCallback{
 	private void initClient() {
 		myID = chord.getID();
 		
+		setShips();
+		
+		// TODO: wann ist der "startschuss"?
 		if (iGoFirst()) {
 			logger.error("I AM FIRST! WOHOO! My ID: "+myID);
-			shoot();
+			shoot(myID); // TODO. select proper target
 		}
 	}
 
@@ -78,6 +81,23 @@ public class BattleshipStategy implements NotifyCallback{
 		return biggestKey.isInInterval(chord.getPredecessorID(), BattleshipTools.increaseID(myID));
 	}
 	
+	private void setShips() {
+		// TODO: einfach range zwischen mir & predecessor raussuchen & verteilen?
+	}
+	
+	/* Select suitable node and shoot at their part of the "sea". The strategy for this is as folloes:
+	 * TODO
+	 */
+	private void shoot(ID target) {
+		// wait a while until everybody is ready again
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		// TODO
+		chord.retrieve(target);
+	}
 	
 	/* This callback is called if I am the target of a retrieve, which attacks the "Sea" at target
 	 * "coordinate". If a ship exists at target, it will be destroyed.
@@ -94,7 +114,8 @@ public class BattleshipStategy implements NotifyCallback{
 		chord.broadcast(myID, hit);
 		
 		// Now it's our turn to shoot 
-		shoot();
+		// TODO: choose proper target
+		shoot(myID);
 	}
 	
 	/* This callback is called whenever a broadcast is sent by any node.
@@ -105,13 +126,4 @@ public class BattleshipStategy implements NotifyCallback{
 		logger.error("\n\t"+ myID + " received broadcast \n\t\t source: " + source +" target: " + target + "hit: " + hit);
 		// TODO log things and stuff 
 	}
-	
-	/* Select suitable node and shoot at their part of the "sea". The strategy for this is as folloes:
-	 * TODO
-	 */
-	private void shoot() {
-		// TODO
-		// chord.retrieve(myID);
-	}
-
 }

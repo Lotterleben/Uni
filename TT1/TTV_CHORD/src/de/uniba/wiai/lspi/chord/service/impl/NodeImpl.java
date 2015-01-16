@@ -38,6 +38,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import Chord_Battleship.TransactionID;
 import de.uniba.wiai.lspi.chord.com.Broadcast;
 import de.uniba.wiai.lspi.chord.com.CommunicationException;
 import de.uniba.wiai.lspi.chord.com.Endpoint;
@@ -447,18 +448,22 @@ public final class NodeImpl extends Node {
 		
 		/* Leite Broadcast an alle Knoten meiner Finger Table weiter. */
 		int numFingerTableEntries = fingerTable.size()-1;
+		Integer transactionID = info.getTransaction();
+
 		for (int i=0; i<numFingerTableEntries; i++) {
 			node = fingerTable.get(i);
 			if (i == numFingerTableEntries) { // TODO: evt einfach IDs vergleichen?
 				// we've reached our predecessor on the chord ring
 				range = myID;
+				// update our knowledge about the current global transactionID
+				TransactionID.getInstance();
+				TransactionID.setTransactionID(transactionID);
 			} else {
 				// send broadcast to addresses between node and its successor
 				range = fingerTable.get(i+1).getNodeID();
 			}
 			
-			Integer transaction = 1337; // TODO: set to proper value (how?)
-			Broadcast broadcast = new Broadcast(range, myID, info.getTarget(), transaction, info.getHit());
+			Broadcast broadcast = new Broadcast(range, myID, info.getTarget(), transactionID, info.getHit());
 			try {
 				node.broadcast(broadcast);
 			} catch (CommunicationException e) {
