@@ -447,16 +447,21 @@ public final class NodeImpl extends Node {
 		ID myID = impl.getID();
 		
 		/* Leite Broadcast an alle Knoten meiner Finger Table weiter. */
-		int numFingerTableEntries = fingerTable.size()-1;
+		TransactionID.getInstance();
+		Integer currTransactionID = TransactionID.getTransactionID();
 		Integer transactionID = info.getTransaction();
-
+		if (currTransactionID >= transactionID) {
+			// This broadcast isn't news.
+			return;
+		}
+		
+		int numFingerTableEntries = fingerTable.size()-1;
 		for (int i=0; i<numFingerTableEntries; i++) {
 			node = fingerTable.get(i);
 			if (i == numFingerTableEntries) { // TODO: evt einfach IDs vergleichen?
 				// we've reached our predecessor on the chord ring
 				range = myID;
 				// update our knowledge about the current global transactionID
-				TransactionID.getInstance();
 				TransactionID.setTransactionID(transactionID);
 			} else {
 				// send broadcast to addresses between node and its successor
