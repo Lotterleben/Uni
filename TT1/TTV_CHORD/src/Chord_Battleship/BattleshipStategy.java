@@ -2,6 +2,7 @@ package Chord_Battleship;
 
 import java.math.BigInteger;
 import java.net.MalformedURLException;
+import java.util.Random;
 
 import de.uniba.wiai.lspi.chord.data.ID;
 import de.uniba.wiai.lspi.chord.data.URL;
@@ -24,6 +25,10 @@ public class BattleshipStategy implements NotifyCallback{
 	private Logger logger;
 	private boolean hit;
 	private static final ID biggestKey = ID.valueOf(BigInteger.valueOf(2).pow(160).subtract(BigInteger.ONE));
+	private Participant myNavy;
+	private int intervalSz = 100;
+	private int numShips = 10;
+	private int chopSz = 5;
 	
 	public BattleshipStategy () {
 		logger = Logger.getLogger(this.getClass().getName());
@@ -49,7 +54,6 @@ public class BattleshipStategy implements NotifyCallback{
 	}
 	
 	public void startClient(String client, String server) {
-
 		try {
 			URL clientURL = new URL(client);
 			URL bootstrapURL = new URL(server);
@@ -62,6 +66,7 @@ public class BattleshipStategy implements NotifyCallback{
 
 		myID = chord.getID();
 		
+		myNavy = new Participant(myID, intervalSz, numShips);
 		setShips();
 	}
 	
@@ -81,7 +86,17 @@ public class BattleshipStategy implements NotifyCallback{
 	}
 	
 	private void setShips() {
-		// TODO: einfach range zwischen mir & predecessor raussuchen & verteilen?
+		Random rand = new Random();
+
+		// chop beginning/end off to avoid easy "iterate through beginning/end" hits
+		int min = intervalSz / chopSz;
+		int max = intervalSz - min;
+		int shipPosition;
+		
+	    for (int i=0; i<numShips; i++) {
+	    	shipPosition = rand.nextInt((max - min) + 1) + min;
+	    	myNavy.setShip(shipPosition, 1);
+	    }	    
 	}
 	
 	/* Select suitable node and shoot at their part of the "sea". The strategy for this is as folloes:
@@ -107,7 +122,9 @@ public class BattleshipStategy implements NotifyCallback{
 	public void retrieved(ID target) {
 		logger.error("\n\t" + myID + "retrieved\n\t\t target: " + target);
 		// TODO were we harmed?
-		hit = !hit; // TODO actual code and stuff
+		hit = !hit;
+		
+		// TODO: setShip() to transactionID if hit
 		
 		// inform all participants about the attack and its outcome.
 		chord.broadcast(myID, hit);
