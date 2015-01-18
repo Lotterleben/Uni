@@ -24,6 +24,14 @@ public class Participant {
 		ships = new int[intervalSz];
 	}
 	
+	public void setID(ID id) {
+		this.id = id;
+	}
+	
+	public ID getID() {
+		return this.id;
+	}
+	
 	public void setShip(int position, int value) {
 		ships[position] = value;
 	}

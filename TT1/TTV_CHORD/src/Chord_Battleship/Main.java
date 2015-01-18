@@ -13,6 +13,7 @@ public class Main {
 	static String serverURL = "ocsocket://192.168.1.91:12350/";
 	static String baseClientURL = "ocsocket://192.168.1.91:1235";
 	static int numClients = 3;
+
 	static ArrayList<Thread> clientThreads = new ArrayList<Thread>();
 	private static ReentrantLock lock = new ReentrantLock();
 	

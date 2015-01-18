@@ -2,8 +2,11 @@ package Chord_Battleship;
 
 import java.math.BigInteger;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.Random;
 
+import de.uniba.wiai.lspi.chord.com.CommunicationException;
+import de.uniba.wiai.lspi.chord.com.Node;
 import de.uniba.wiai.lspi.chord.data.ID;
 import de.uniba.wiai.lspi.chord.data.URL;
 import de.uniba.wiai.lspi.chord.service.NotifyCallback;
@@ -26,6 +29,7 @@ public class BattleshipStategy implements NotifyCallback{
 	private boolean hit;
 	private static final ID biggestKey = ID.valueOf(BigInteger.valueOf(2).pow(160).subtract(BigInteger.ONE));
 	private Participant myNavy;
+	private ArrayList<Participant> participants;
 	private int intervalSz = 100;
 	private int numShips = 10;
 	private int chopSz = 5;
@@ -71,14 +75,44 @@ public class BattleshipStategy implements NotifyCallback{
 	}
 	
 	public void startBattle() {
-		// TODO: wann ist der "startschuss"?
+		logger.error("xoxo");
 		if (iGoFirst()) {
 			logger.error("I AM FIRST! WOHOO! My ID: "+myID);
 			shoot(myID); // TODO. select proper target
+			// TODO: move up. This is only here for debugging purposes.
+			try {
+				initParticipants();
+			} catch (CommunicationException e) {
+				e.printStackTrace();
+				return;
+			}
 		}
 		
 	}
 
+	private void initParticipants() throws CommunicationException {
+		participants = new ArrayList<Participant>();
+		Participant participant;
+		ID nextID;
+		
+		// find the node that is responsible for the successor ID of my ID
+		Node succNode = chord.getFingerTable().get(0).findSuccessor(BattleshipTools.increaseID(myID));
+		nextID = succNode.getNodeID();
+		participant = new Participant(nextID, intervalSz, numShips);
+		participants.add(participant);
+		
+		// Go from successor to successor until i'm back at my ID
+		while (nextID != myID){
+			succNode = chord.getFingerTable().get(0).findSuccessor(BattleshipTools.increaseID(nextID));
+			nextID = succNode.getNodeID();
+			
+			logger.error(myID+" found new participant:\n\t"+nextID);
+			
+			participant = new Participant(nextID, intervalSz, numShips);
+			participants.add(participant);
+		}
+	}
+	
 	/* Check if this node has the biggest ID and thus gets to shoot first */
 	private boolean iGoFirst() {
 		/* because isInterval doesn't include the start or end ID, we have to increment our ID */
@@ -99,8 +133,7 @@ public class BattleshipStategy implements NotifyCallback{
 	    }	    
 	}
 	
-	/* Select suitable node and shoot at their part of the "sea". The strategy for this is as folloes:
-	 * TODO
+	/* Select suitable node and shoot at their part of the "sea".
 	 */
 	private void shoot(ID target) {
 		// wait a while until everybody is ready again
