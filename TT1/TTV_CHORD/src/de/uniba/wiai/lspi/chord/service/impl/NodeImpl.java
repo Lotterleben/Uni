@@ -450,8 +450,9 @@ public final class NodeImpl extends Node {
 		TransactionID.getInstance();
 		Integer currTransactionID = TransactionID.getTransactionID();
 		Integer transactionID = info.getTransaction();
-		if (currTransactionID >= transactionID) {
+		if (currTransactionID > transactionID) {
 			// This broadcast isn't news.
+			logger.error("This broadcast isn't news.\n\tcurrTransactionID: "+currTransactionID+"\n\ttransactionID: "+transactionID);
 			return;
 		}
 		
