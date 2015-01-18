@@ -12,7 +12,6 @@ public class Participant {
 	private Logger logger;
 	private ID id,pred;
 	private int numSpaces;
-	private int numShips;
 	BigInteger spaceSz;
 	boolean hasWraparound;
 	BigInteger wrapInterval;
@@ -24,9 +23,8 @@ public class Participant {
 						 						transactionID if ship was sunk,
 						 						0 otherwise */
 	
-	public Participant(ID id, int numSpaces, int numShips){
+	public Participant(ID id, int numSpaces){
 		this.id = id;
-		this.numShips = numShips;
 		this.numSpaces = numSpaces;
 		ships = new int[numSpaces];
 		

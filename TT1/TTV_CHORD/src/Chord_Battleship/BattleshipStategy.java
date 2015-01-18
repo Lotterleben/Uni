@@ -68,7 +68,7 @@ public class BattleshipStategy implements NotifyCallback{
 		}
 
 		myID = chord.getID();
-		myNavy = new Participant(myID, intervalSz, numShips);
+		myNavy = new Participant(myID, intervalSz);
 		setShips();
 	}
 	
@@ -102,7 +102,7 @@ public class BattleshipStategy implements NotifyCallback{
 			logger.error(myID+" found new participant:\n\t"+currID);
 			
 			if (currID != myID) {
-				participant = new Participant(currID, intervalSz, numShips);
+				participant = new Participant(currID, intervalSz);
 				participant.setPredecessor(prevID);
 				participant.calcInterval();
 				participants.add(participant);
