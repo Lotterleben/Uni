@@ -14,6 +14,9 @@ public class Participant {
 	private int numSpaces;
 	private int numShips;
 	BigInteger spaceSz;
+	boolean hasWraparound;
+	BigInteger wrapInterval;
+	
 	private int[] ships; /* field values for...
 							other participants: transactionID that sunk the ship,
 												0 otherwise 
@@ -32,6 +35,13 @@ public class Participant {
 		
 	public void setPredecessor(ID pred) {
 		this.pred = pred;
+		if (BattleshipTools.increaseID(this.pred).toBigInteger()
+							.compareTo(id.toBigInteger()) == 1) {
+			hasWraparound = true;
+			wrapInterval = MAX_ID.subtract(pred.toBigInteger());
+		} else {
+			hasWraparound = false;
+		}
 	}
 	
 	public void setID(ID id) {
@@ -61,9 +71,7 @@ public class Participant {
 	
 		/* wraparound */
 		if(start.compareTo(id_bi) == 1) {
-			BigInteger diff = MAX_ID.subtract(start);
-			start = BigInteger.valueOf(0);
-			id_bi = diff.add(id_bi);
+			id_bi = wraparoundNormalize(start, id_bi);
 		}
 
 		/* position = (id-start)/spaceSz */
@@ -79,8 +87,27 @@ public class Participant {
 	}
 	
 	public ID positionToID(int position){
-		// TODO: return ID in the middle of space at position
-		return null;
+		ID posID;
+
+		/*calculate offset*/
+		BigInteger b = BigInteger.valueOf(position).multiply(spaceSz);
+		
+		if(hasWraparound) {
+			// TODO
+			if (b.compareTo(wrapInterval) == 1) {
+				/* offset is bigger than the interval between predecessor
+				 * and 0 => we have to be careful here */
+				b = b.subtract(wrapInterval);
+			}
+		} else {
+			/* add to start */
+			b = b.add(BattleshipTools.increaseID(pred).toBigInteger());
+		}
+		
+		/* make sure we shoot in the middle of the field */
+		b = b.add(spaceSz.divide(BigInteger.valueOf(2)));
+		posID = new ID(b.toByteArray());
+		return posID;
 	}
 	
 	/* Calculate the size of each space for a ship with respect to the 
@@ -91,19 +118,31 @@ public class Participant {
 			logger.error("predeccessor mist be set first!");
 		}
 
-		BigInteger from = this.id.toBigInteger();
-		BigInteger to = BattleshipTools.increaseID(this.pred).toBigInteger();
+		BigInteger from = BattleshipTools.increaseID(this.pred).toBigInteger();
+		BigInteger to = this.id.toBigInteger();
 
-		BigInteger diff = to.subtract(from);
+		BigInteger diff;
 
-		/* account for ID value wraparound */
-		// TODO i think this is BS
-        if(diff.compareTo(BigInteger.ZERO) == -1){
-            diff = MAX_ID.add(diff);
-        }
+		if(hasWraparound) {
+			diff = wraparoundNormalize(from, to);
+		} else {
+			diff = to.subtract(from);
+		}
         
         /*TODO: what about the rest?*/
         spaceSz = diff.divide(BigInteger.valueOf(numSpaces));
+	}
+	
+	/* When the predecessor of an ID is bigger than the ID
+	 * (i.e. the interval between them crosses point 0 of the
+	 * CHORD ring), "normalize" the interval between them
+	 * by shifting it to start on point 0 and return the
+	 * "new", normalized ID (pred is implicitly 0 then)
+	 */
+	private BigInteger wraparoundNormalize(BigInteger start, BigInteger id_bi) {
+		BigInteger diff = MAX_ID.subtract(start);
+		start = BigInteger.valueOf(0);
+		return diff.add(id_bi);
 	}
 	
 	@Override
