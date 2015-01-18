@@ -1,20 +1,17 @@
 package Chord_Battleship;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
-
 import de.uniba.wiai.lspi.chord.service.PropertiesLoader;
-import de.uniba.wiai.lspi.util.logging.Log4jLogger;
 
 public class Main {
-	// caution, these IPs are bullshit
-	static String serverURL = "ocsocket://141.22.28.170:12340/";
-	static String baseClientURL = "ocsocket://141.22.28.170:1234";
+	// NOTE: If join operations fail, make sure you changed these
+	// IPs to yours! (No time to implement this in a way that works on windows,
+	// Linux and Mac OS. sorry.)
+	static String serverURL = "ocsocket://192.168.1.91:12350/";
+	static String baseClientURL = "ocsocket://192.168.1.91:1235";
 	static int numClients = 3;
 	static ArrayList<Thread> clientThreads = new ArrayList<Thread>();
 	private static ReentrantLock lock = new ReentrantLock();
