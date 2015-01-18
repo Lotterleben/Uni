@@ -30,14 +30,14 @@ public class BattleshipStategy implements NotifyCallback{
 	private Participant myNavy;
 	private ArrayList<Participant> participants;
 	private int intervalSz = 100;
-	private int numShips = 10;
+	private int numShips = 30;
 	private int chopSz = 5;
 	
 	public BattleshipStategy () {
 		logger = Logger.getLogger(this.getClass().getName());
 		chord = new ChordImpl();
 		chord.setCallback(this);
-		
+		TransactionID.getInstance();
 		org.apache.log4j.Level level = org.apache.log4j.Level.WARN;
 		org.apache.log4j.Logger.getRootLogger().setLevel(level);
 		System.out.println("ooo LOG LEVEL: "+ org.apache.log4j.Logger.getRootLogger().getLevel());
@@ -68,20 +68,17 @@ public class BattleshipStategy implements NotifyCallback{
 		}
 
 		myID = chord.getID();
-		
 		myNavy = new Participant(myID, intervalSz, numShips);
 		setShips();
 	}
 	
 	public void startBattle() {
-
 		try {
 			initParticipants();
 		} catch (CommunicationException e) {
 			e.printStackTrace();
 			return;
 		}
-		
 		if (iGoFirst()) {
 			logger.error("I AM FIRST! WOHOO! My ID: "+myID);
 			shoot(myID); // TODO. select proper target
@@ -92,22 +89,28 @@ public class BattleshipStategy implements NotifyCallback{
 		logger.error(myID+" initializing participants...");
 		participants = new ArrayList<Participant>();
 		Participant participant;
+		ID succID;
 		ID nextID=myID;
 		boolean hereBeDragons = true;
 		
 		Node succNode = chord.getFingerTable().get(0).findSuccessor(BattleshipTools.increaseID(myID));
-
+		
 		while (hereBeDragons){
-			succNode = chord.getFingerTable().get(0).findSuccessor(BattleshipTools.increaseID(nextID));
+			succID = nextID;
 			nextID = succNode.getNodeID();
 			
 			logger.error(myID+" found new participant:\n\t"+nextID);
 			
 			if (nextID != myID) {
 				participant = new Participant(nextID, intervalSz, numShips);
+				participant.setSuccessor(succID);
+				participant.calcInterval();
 				participants.add(participant);
+				succNode = succNode.findSuccessor(BattleshipTools.increaseID(nextID));
 			} else {
 				hereBeDragons = false;
+				myNavy.setSuccessor(succID);
+				myNavy.calcInterval();
 			}
 		}
 		System.out.println(participants);
@@ -154,18 +157,20 @@ public class BattleshipStategy implements NotifyCallback{
 	@Override
 	public void retrieved(ID target) {
 		logger.error("\n\t" + myID + "retrieved\n\t\t target: " + target);
-		// TODO were we harmed?
-		hit = !hit;
 		
-		// TODO: setShip() to transactionID if hit
-		
-		
+		if (myNavy.isShip(target)){
+			logger.error(myID+"HIT AT position "+myNavy.idToPosition(target));
+			hit = true;
+			myNavy.setShip(myNavy.idToPosition(target),
+						   TransactionID.getTransactionID());
+		} else {
+			hit = false;
+		}
 		
 		// inform all participants about the attack and its outcome.
 		chord.broadcast(myID, hit);
 		
 		// Now it's our turn to shoot 
-		// TODO: choose proper target
 		shoot(myID);
 	}
 	
