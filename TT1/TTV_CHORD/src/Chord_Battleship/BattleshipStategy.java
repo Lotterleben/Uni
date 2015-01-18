@@ -28,7 +28,7 @@ public class BattleshipStategy implements NotifyCallback{
 	private boolean hit;
 	private static final ID biggestKey = ID.valueOf(BigInteger.valueOf(2).pow(160).subtract(BigInteger.ONE));
 	private Participant myNavy;
-	private HashMap<ID,Participant> participants;
+	private ArrayList<Participant> participants;
 	private int intervalSz = 100;
 	private int numShips = 30;
 	private int chopSz = 5;
@@ -87,7 +87,7 @@ public class BattleshipStategy implements NotifyCallback{
 
 	private void initParticipants() throws CommunicationException {
 		logger.error(myID+" initializing participants...");
-		participants = new HashMap<ID, Participant>();
+		participants = new ArrayList<Participant>();
 		Participant participant;
 		ID prevID;
 		ID currID=myID;
@@ -105,7 +105,7 @@ public class BattleshipStategy implements NotifyCallback{
 				participant = new Participant(currID, intervalSz);
 				participant.setPredecessor(prevID);
 				participant.calcInterval();
-				participants.put(currID, participant);
+				participants.add(participant);
 				currNode = currNode.findSuccessor(BattleshipTools.increaseID(currID));
 			} else {
 				hereBeDragons = false;
@@ -184,6 +184,6 @@ public class BattleshipStategy implements NotifyCallback{
 		logger.error("\n\t"+ myID + " received broadcast \n\t\t source: " + source +" target: " + target + "hit: " + hit);
 		// TODO log things and stuff
 		
-		
+		//Participant t = participants.get(target)
 	}
 }
