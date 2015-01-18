@@ -3,6 +3,7 @@ package Chord_Battleship;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import de.uniba.wiai.lspi.chord.com.CommunicationException;
@@ -27,7 +28,7 @@ public class BattleshipStategy implements NotifyCallback{
 	private boolean hit;
 	private static final ID biggestKey = ID.valueOf(BigInteger.valueOf(2).pow(160).subtract(BigInteger.ONE));
 	private Participant myNavy;
-	private ArrayList<Participant> participants;
+	private HashMap<ID,Participant> participants;
 	private int intervalSz = 100;
 	private int numShips = 30;
 	private int chopSz = 5;
@@ -80,13 +81,13 @@ public class BattleshipStategy implements NotifyCallback{
 		}
 		if (iGoFirst()) {
 			logger.error("I AM FIRST! WOHOO! My ID: "+myID);
-			shoot(BattleshipTools.increaseID(myID)); // TODO. select proper target
+			shoot(); // TODO. select proper target
 		}
 	}
 
 	private void initParticipants() throws CommunicationException {
 		logger.error(myID+" initializing participants...");
-		participants = new ArrayList<Participant>();
+		participants = new HashMap<ID, Participant>();
 		Participant participant;
 		ID prevID;
 		ID currID=myID;
@@ -104,7 +105,7 @@ public class BattleshipStategy implements NotifyCallback{
 				participant = new Participant(currID, intervalSz);
 				participant.setPredecessor(prevID);
 				participant.calcInterval();
-				participants.add(participant);
+				participants.put(currID, participant);
 				currNode = currNode.findSuccessor(BattleshipTools.increaseID(currID));
 			} else {
 				hereBeDragons = false;
@@ -137,14 +138,16 @@ public class BattleshipStategy implements NotifyCallback{
 	
 	/* Select suitable node and shoot at their part of the "sea".
 	 */
-	private void shoot(ID target) {
+	private void shoot() {
 		// wait a while until everybody is ready again
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		// TODO
+		// TODO select target to shoot
+		ID target = BattleshipTools.increaseID(myID);
+		
 		chord.retrieve(target);
 	}
 	
@@ -169,8 +172,8 @@ public class BattleshipStategy implements NotifyCallback{
 		// inform all participants about the attack and its outcome.
 		chord.broadcast(myID, hit);
 		
-		// Now it's our turn to shoot 
-		shoot(myID);
+		// Now it's our turn to shoot
+		shoot();
 	}
 	
 	/* This callback is called whenever a broadcast is sent by any node.
@@ -179,6 +182,8 @@ public class BattleshipStategy implements NotifyCallback{
 	@Override
 	public void broadcast(ID source, ID target, Boolean hit) {
 		logger.error("\n\t"+ myID + " received broadcast \n\t\t source: " + source +" target: " + target + "hit: " + hit);
-		// TODO log things and stuff 
+		// TODO log things and stuff
+		
+		
 	}
 }
