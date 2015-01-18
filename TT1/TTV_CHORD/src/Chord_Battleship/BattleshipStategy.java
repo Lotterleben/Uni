@@ -15,7 +15,6 @@ import de.uniba.wiai.lspi.chord.service.impl.ChordImpl;
 import de.uniba.wiai.lspi.util.logging.Logger;
 
 /* TODO 
- * - allocate ships
  * - figure out which ranges our neighbors have
  * - attack (retrieve()) them according to SuperAwesomeUnicornStrategy
  */

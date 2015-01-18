@@ -63,7 +63,7 @@ public class Participant {
 		return ships[position] > 0;
 	}
 	
-	public int idToPosition(ID id) {
+	public int idToPosition(ID   	id) {
 		BigInteger start = BattleshipTools.increaseID(pred).toBigInteger();
 		BigInteger id_bi = id.toBigInteger();
 	
@@ -91,7 +91,6 @@ public class Participant {
 		BigInteger b = BigInteger.valueOf(position).multiply(spaceSz);
 		
 		if(hasWraparound) {
-			// TODO
 			if (b.compareTo(wrapInterval) == 1) {
 				/* offset is bigger than the interval between predecessor
 				 * and 0 => we have to be careful here */
@@ -117,7 +116,7 @@ public class Participant {
 		}
 
 		BigInteger from = BattleshipTools.increaseID(this.pred).toBigInteger();
-		BigInteger to = this.id.toBigInteger();
+		BigInteger to = BattleshipTools.decreaseID(this.id).toBigInteger();
 
 		BigInteger diff;
 
