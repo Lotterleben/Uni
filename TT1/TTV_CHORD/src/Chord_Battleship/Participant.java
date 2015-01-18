@@ -42,6 +42,6 @@ public class Participant {
 	
 	@Override
 	public String toString() {
-		return("Ship ID: "+id+"\nShips at: "+Arrays.toString(ships));
+		return("Ship ID: "+id+"\nShips at: "+Arrays.toString(ships)+"\n");
 	}
 }

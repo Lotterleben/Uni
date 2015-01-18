@@ -10,7 +10,6 @@ import de.uniba.wiai.lspi.chord.com.Node;
 import de.uniba.wiai.lspi.chord.data.ID;
 import de.uniba.wiai.lspi.chord.data.URL;
 import de.uniba.wiai.lspi.chord.service.NotifyCallback;
-import de.uniba.wiai.lspi.chord.service.PropertiesLoader;
 import de.uniba.wiai.lspi.chord.service.ServiceException;
 import de.uniba.wiai.lspi.chord.service.impl.ChordImpl;
 import de.uniba.wiai.lspi.util.logging.Logger;
@@ -75,42 +74,43 @@ public class BattleshipStategy implements NotifyCallback{
 	}
 	
 	public void startBattle() {
-		logger.error("xoxo");
+
+		try {
+			initParticipants();
+		} catch (CommunicationException e) {
+			e.printStackTrace();
+			return;
+		}
+		
 		if (iGoFirst()) {
 			logger.error("I AM FIRST! WOHOO! My ID: "+myID);
 			shoot(myID); // TODO. select proper target
-			// TODO: move up. This is only here for debugging purposes.
-			try {
-				initParticipants();
-			} catch (CommunicationException e) {
-				e.printStackTrace();
-				return;
-			}
 		}
-		
 	}
 
 	private void initParticipants() throws CommunicationException {
+		logger.error(myID+" initializing participants...");
 		participants = new ArrayList<Participant>();
 		Participant participant;
-		ID nextID;
+		ID nextID=myID;
+		boolean hereBeDragons = true;
 		
-		// find the node that is responsible for the successor ID of my ID
 		Node succNode = chord.getFingerTable().get(0).findSuccessor(BattleshipTools.increaseID(myID));
-		nextID = succNode.getNodeID();
-		participant = new Participant(nextID, intervalSz, numShips);
-		participants.add(participant);
-		
-		// Go from successor to successor until i'm back at my ID
-		while (nextID != myID){
+
+		while (hereBeDragons){
 			succNode = chord.getFingerTable().get(0).findSuccessor(BattleshipTools.increaseID(nextID));
 			nextID = succNode.getNodeID();
 			
 			logger.error(myID+" found new participant:\n\t"+nextID);
 			
-			participant = new Participant(nextID, intervalSz, numShips);
-			participants.add(participant);
+			if (nextID != myID) {
+				participant = new Participant(nextID, intervalSz, numShips);
+				participants.add(participant);
+			} else {
+				hereBeDragons = false;
+			}
 		}
+		System.out.println(participants);
 	}
 	
 	/* Check if this node has the biggest ID and thus gets to shoot first */
@@ -158,6 +158,8 @@ public class BattleshipStategy implements NotifyCallback{
 		hit = !hit;
 		
 		// TODO: setShip() to transactionID if hit
+		
+		
 		
 		// inform all participants about the attack and its outcome.
 		chord.broadcast(myID, hit);
