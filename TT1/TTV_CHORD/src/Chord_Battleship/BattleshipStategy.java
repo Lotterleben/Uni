@@ -81,7 +81,7 @@ public class BattleshipStategy implements NotifyCallback{
 		}
 		if (iGoFirst()) {
 			logger.error("I AM FIRST! WOHOO! My ID: "+myID);
-			shoot(myID); // TODO. select proper target
+			shoot(BattleshipTools.increaseID(myID)); // TODO. select proper target
 		}
 	}
 
@@ -89,27 +89,27 @@ public class BattleshipStategy implements NotifyCallback{
 		logger.error(myID+" initializing participants...");
 		participants = new ArrayList<Participant>();
 		Participant participant;
-		ID succID;
-		ID nextID=myID;
+		ID prevID;
+		ID currID=myID;
 		boolean hereBeDragons = true;
 		
-		Node succNode = chord.getFingerTable().get(0).findSuccessor(BattleshipTools.increaseID(myID));
+		Node currNode = chord.getFingerTable().get(0).findSuccessor(BattleshipTools.increaseID(myID));
 		
 		while (hereBeDragons){
-			succID = nextID;
-			nextID = succNode.getNodeID();
+			prevID = currID;
+			currID = currNode.getNodeID();
 			
-			logger.error(myID+" found new participant:\n\t"+nextID);
+			logger.error(myID+" found new participant:\n\t"+currID);
 			
-			if (nextID != myID) {
-				participant = new Participant(nextID, intervalSz, numShips);
-				participant.setSuccessor(succID);
+			if (currID != myID) {
+				participant = new Participant(currID, intervalSz, numShips);
+				participant.setPredecessor(prevID);
 				participant.calcInterval();
 				participants.add(participant);
-				succNode = succNode.findSuccessor(BattleshipTools.increaseID(nextID));
+				currNode = currNode.findSuccessor(BattleshipTools.increaseID(currID));
 			} else {
 				hereBeDragons = false;
-				myNavy.setSuccessor(succID);
+				myNavy.setPredecessor(prevID);
 				myNavy.calcInterval();
 			}
 		}

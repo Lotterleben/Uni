@@ -10,7 +10,7 @@ import de.uniba.wiai.lspi.util.logging.Logger;
 public class Participant {
 	private static final BigInteger MAX_ID = BigInteger.valueOf(2).pow(160).subtract(BigInteger.ONE);
 	private Logger logger;
-	private ID id, succ, pred;
+	private ID id,pred;
 	private int numSpaces;
 	private int numShips;
 	BigInteger spaceSz;
@@ -29,11 +29,9 @@ public class Participant {
 		
 		logger = Logger.getLogger(this.getClass().getName());
 	}
-	
-	//!!!! WORK WITH PREDECESSORS, NOT SUCCESSORS
-	
-	public void setSuccessor(ID successor) {
-		this.succ = successor;
+		
+	public void setPredecessor(ID pred) {
+		this.pred = pred;
 	}
 	
 	public void setID(ID id) {
@@ -60,10 +58,20 @@ public class Participant {
 	public int idToPosition(ID id) {
 		BigInteger start = BattleshipTools.increaseID(pred).toBigInteger();
 		BigInteger id_bi = id.toBigInteger();
+	
+		/* wraparound */
+		if(start.compareTo(id_bi) == 1) {
+			BigInteger diff = MAX_ID.subtract(start);
+			start = BigInteger.valueOf(0);
+			id_bi = diff.add(id_bi);
+		}
+
 		/* position = (id-start)/spaceSz */
-		BigInteger position = (id_bi.subtract(start)).divide(spaceSz);
+		BigInteger sub = id_bi.subtract(start);
+		BigInteger position = (sub).divide(spaceSz);
 		
-		if (position.intValue() > numSpaces) {
+		if (position.intValue() > numSpaces 
+			|| position.intValue() < 0 ) {
 			logger.error("something went terribly wrong.");
 		}
 		
@@ -79,16 +87,17 @@ public class Participant {
 	 * interval size
 	 */
 	public void calcInterval(){
-		if (this.succ == null){
-			logger.error("successor mist be set first!");
+		if (this.pred == null){
+			logger.error("predeccessor mist be set first!");
 		}
 
 		BigInteger from = this.id.toBigInteger();
-		BigInteger to = BattleshipTools.increaseID(this.succ).toBigInteger();
+		BigInteger to = BattleshipTools.increaseID(this.pred).toBigInteger();
 
 		BigInteger diff = to.subtract(from);
 
 		/* account for ID value wraparound */
+		// TODO i think this is BS
         if(diff.compareTo(BigInteger.ZERO) == -1){
             diff = MAX_ID.add(diff);
         }
