@@ -107,7 +107,7 @@ public class Strategy implements NotifyCallback {
 		myNavy.calcInterval();
 
 		Participant participant;
-		Node currentNode = chord.findSuccessor(Util.increaseID(myID));
+		Node currentNode = chord.findSuccessor(Util.incrementID(myID));
 		ID predID = myID;
 		
 		while (!currentNode.getNodeID().equals(myID)) {
@@ -117,7 +117,7 @@ public class Strategy implements NotifyCallback {
 			participants.add(participant);
 		
 			predID = currentNode.getNodeID(); 
-			currentNode = currentNode.findSuccessor(Util.increaseID(currentNode.getNodeID()));
+			currentNode = currentNode.findSuccessor(Util.incrementID(currentNode.getNodeID()));
 		}
 		logger.warn("[INIT PARTICIPANTS] ID: "+myID
 					+"\n\tfound "+participants.size()+" other participants");
@@ -126,7 +126,7 @@ public class Strategy implements NotifyCallback {
 	/* Check if this node has the biggest ID and thus gets to shoot first */
 	private boolean iGoFirst() {
 		/* because isInterval doesn't include the start or end ID, we have to increment our ID */
-		return biggestKey.isInInterval(chord.getPredecessorID(), Util.increaseID(myID));
+		return biggestKey.isInInterval(chord.getPredecessorID(), Util.incrementID(myID));
 	}
 
 }

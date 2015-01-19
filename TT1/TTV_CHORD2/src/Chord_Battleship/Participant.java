@@ -1,5 +1,6 @@
 package Chord_Battleship;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -7,10 +8,15 @@ import de.uniba.wiai.lspi.chord.data.ID;
 import de.uniba.wiai.lspi.util.logging.Logger;
 
 public class Participant {
+	
+	private static final BigInteger MAX_ID = BigInteger.valueOf(2).pow(160).subtract(BigInteger.ONE);
 	private Logger logger;
 	private ID id;
 	private ID predecessor;
 	private int intervalSize;
+	BigInteger spaceSize;
+	private boolean hasWraparound;
+	BigInteger wrapInterval;
 	
 	private int[] ships; /* field values for...
 							other participants: transactionID that sunk the ship,
@@ -33,6 +39,12 @@ public class Participant {
 	
 	public void setPredecessor(ID predecessor) {
 		this.predecessor = predecessor;
+		if (this.predecessor.compareTo(id) == 1) {
+			hasWraparound = true;
+			wrapInterval = MAX_ID.subtract(predecessor.toBigInteger());
+		} else {
+			hasWraparound = false;
+		}
 	}
 	
 	/* Set ships according to our strategy. 
@@ -53,7 +65,38 @@ public class Participant {
 	    logger.warn("[SET SHIPS]\n\tpositions:"+Arrays.toString(ships));
 	}
 	
-	public void calcInterval() {
-		// TODO
+	public BigInteger calcInterval() {
+		if (this.predecessor == null){
+			logger.error("[PARTICIPANT] predeccessor must be set first!");
+			throw new RuntimeException();
+		}
+		
+		BigInteger from = Util.incrementID(predecessor).toBigInteger();
+		BigInteger to = Util.decrementID(id).toBigInteger();
+		
+		BigInteger diff;
+		
+		if(hasWraparound) {
+			diff = wraparoundNormalize(from, to);
+		} else {
+			diff = to.subtract(from);
+		}
+		
+        /*TODO: what about the rest?*/
+        spaceSize = diff.divide(BigInteger.valueOf(intervalSize));
+        
+        return spaceSize;
 	}
+	
+	/* When the predecessor of an ID is bigger than the ID
+	 * (i.e. the interval between them crosses point 0 of the
+	 * CHORD ring), "normalize" the interval between them
+	 * by shifting it to start on point 0 and return the
+	 * "new", normalized ID (pred is implicitly 0 then)
+	 */
+	private BigInteger wraparoundNormalize(BigInteger start, BigInteger end) {
+		BigInteger diff = MAX_ID.subtract(start);
+		return diff.add(end);
+	}
+	
 }

@@ -21,7 +21,11 @@ public class Util {
         return probe.compareTo(start) == 1 ^ probe.compareTo(end) == -1;
     }
 	
-    public static ID increaseID(ID id){
+    public static ID incrementID(ID id){
     	return ID.valueOf(id.toBigInteger().add(BigInteger.ONE).mod(BigInteger.valueOf(2).pow(160)));
+    }
+    
+    public static ID decrementID(ID id){
+    	return ID.valueOf(id.toBigInteger().subtract(BigInteger.ONE).mod(BigInteger.valueOf(2).pow(160)));
     }
 }
