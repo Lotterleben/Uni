@@ -932,8 +932,9 @@ public final class ChordImpl implements Chord, Report, AsynChord {
 	 * @throws NullPointerException
 	 *             If given ID is <code>null</code>.
 	 * @return Responsible node.
+	 * NOTE: @lotte changed this to public
 	 */
-	final Node findSuccessor(ID key) {
+	public final Node findSuccessor(ID key) {
 
 		if (key == null) {
 			NullPointerException e = new NullPointerException(

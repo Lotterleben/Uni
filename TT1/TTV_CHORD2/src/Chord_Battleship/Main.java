@@ -41,9 +41,10 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		serverNode.test();
 		
-		
+		for (Strategy node: nodes) {
+			node.startBattle();
+		}
 
 	}
 	

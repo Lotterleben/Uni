@@ -38,8 +38,8 @@ public class BattleshipStategy implements NotifyCallback{
 		chord = new ChordImpl();
 		chord.setCallback(this);
 		TransactionID.getInstance();
-		//org.apache.log4j.Level level = org.apache.log4j.Level.DEBUG;
-	//org.apache.log4j.Logger.getRootLogger().setLevel(level);
+		org.apache.log4j.Level level = org.apache.log4j.Level.WARN;
+		org.apache.log4j.Logger.getRootLogger().setLevel(level);
 		System.out.println("ooo LOG LEVEL: "+ org.apache.log4j.Logger.getRootLogger().getLevel());
 	}
 	
