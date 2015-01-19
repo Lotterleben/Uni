@@ -90,10 +90,22 @@ public class Strategy implements NotifyCallback {
 	@Override
 	public void retrieved(ID target) {
 		logger.error("[RETRIEVED]\n\t" + "My ID: " + myID + "\n\tTarget:" + target);
+		boolean hit;
 		
 		// TODO: Calculate if hit
+		int position = myNavy.idToPosition(target);
+		int shipStatus = myNavy.getShipstatusOnPosition(position);
+		if (shipStatus == 0){
+			hit = false;
+		} else if (shipStatus == 1){
+			hit = true;
+		} else {
+			logger.warn("[RETRIEVED] Shot at ship that aleady sunk.. Ha ha!");
+			hit = true;
+		}
+		
 		// inform all participants about the attack and its outcome.
-		chord.broadcast(target, false);
+		chord.broadcast(target, hit);
 	}
 
 	@Override

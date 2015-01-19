@@ -66,6 +66,10 @@ public class Participant {
 	    logger.warn("[SET SHIPS]\n\tpositions:"+Arrays.toString(ships));
 	}
 	
+	public int getShipstatusOnPosition(int position){
+		return ships[position];
+	}
+	
 	public BigInteger calcInterval() {
 		if (this.predecessor == null){
 			logger.error("[PARTICIPANT] predeccessor must be set first!");
