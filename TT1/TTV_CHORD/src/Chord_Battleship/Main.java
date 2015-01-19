@@ -10,38 +10,60 @@ public class Main {
 	// NOTE: If join operations fail, make sure you changed these
 	// IPs to yours! (No time to implement this in a way that works on windows,
 	// Linux and Mac OS. sorry.)
-	static String serverURL = "ocsocket://192.168.1.91:12350/";
-	static String baseClientURL = "ocsocket://192.168.1.91:1235";
+//	static String serverURL = "ocsocket://192.168.1.91:12350/";
+//	static String baseClientURL = "ocsocket://192.168.1.91:1235";
+	
+	static String serverURL = "ocsocket://127.0.0.1:12350/";
+	static String baseClientURL = "ocsocket://127.0.0.1:1235";
 	static int numClients = 3;
 
 	static ArrayList<Thread> clientThreads = new ArrayList<Thread>();
 	private static ReentrantLock lock = new ReentrantLock();
 	
+	static BattleshipStategy chord;
 	public static void main(String[] args) {
 				
 		PropertiesLoader.loadPropertyFile();
 		lock.lock();
-		if(args.length > 0) {
-			switch(args[0]){
-				case "-s":{
-					System.out.println("Starting server at" + serverURL);
-					BattleshipStategy chord = new BattleshipStategy();
-					chord.startServer(serverURL);
-					break;
-				}
-				case "-c":{
-					launchClients();
-					break;
-				}
-			}
-		} else {
-			System.out.println("Missing arguments. aborting.");
-			return;
+//		if(args.length > 0) {
+//			switch(args[0]){
+//				case "-s":{
+//					System.out.println("Starting server at" + serverURL);
+//					BattleshipStategy chord = new BattleshipStategy();
+//					chord.startServer(serverURL);
+//					break;
+//				}
+//				case "-c":{
+//					
+//					break;
+//				}
+//			}
+//		} else {
+//			System.out.println("Missing arguments. aborting.");
+//			return;
+//		}
+		
+		System.out.println("Starting server at" + serverURL);
+		chord = new BattleshipStategy();
+		chord.startServer(serverURL);
+		lock.unlock();
+		
+		lock.lock();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
+		
+		launchClients();
 		lock.unlock();
+		
+		
 	
 	}
+	
 	
 	static void launchClients() {
 		String clientURL;
@@ -60,6 +82,7 @@ public class Main {
 		in.nextLine();
 		in.close();
 		System.out.println("Begun, the battleship wars have.");
+		chord.startBattle(); // start battle for server
 		lock.unlock();
 	}
 	
