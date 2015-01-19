@@ -63,7 +63,7 @@ public class Participant {
 		return ships[position] > 0;
 	}
 	
-	public int idToPosition(ID   	id) {
+	public int idToPosition(ID id) {
 		BigInteger start = BattleshipTools.increaseID(pred).toBigInteger();
 		BigInteger id_bi = id.toBigInteger();
 	

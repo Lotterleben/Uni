@@ -20,6 +20,7 @@ public class Participant {
 	
 	private int[] ships; /* field values for...
 							other participants: transactionID that sunk the ship,
+												-1 if shot but no ship sunk,
 												0 otherwise 
 						 	my navy: 			1 if ship,
 						 						transactionID if ship was sunk,
@@ -88,6 +89,35 @@ public class Participant {
         return spaceSize;
 	}
 	
+	public boolean isMyTerritory(ID id) {
+		return Util.isIDinRange(predecessor, this.id, id);
+	}
+	
+	public int idToPosition(ID id) {
+		BigInteger start = Util.incrementID(predecessor).toBigInteger();
+		BigInteger end = id.toBigInteger();
+		
+		/* wraparound */
+		if(start.compareTo(end) == 1) {
+			end = wraparoundNormalize(start, end);
+			start = BigInteger.valueOf(0);
+		}
+
+		/* position = (id-start)/spaceSz */
+		BigInteger sub = end.subtract(start);
+		BigInteger position = (sub).divide(spaceSize);
+		
+		if (position.intValue() > intervalSize) {
+			// caution dirty hack
+			position = BigInteger.valueOf(intervalSize-1);
+		} else if (position.intValue() < 0 ) {
+			logger.error("[ID TO POSITION] calculated position out of bounds: "+position+"expected: 0<=position<"+intervalSize);
+			return -1;
+		}
+		
+		return position.intValue();
+	}
+	
 	/* When the predecessor of an ID is bigger than the ID
 	 * (i.e. the interval between them crosses point 0 of the
 	 * CHORD ring), "normalize" the interval between them
@@ -95,7 +125,7 @@ public class Participant {
 	 * "new", normalized ID (pred is implicitly 0 then)
 	 */
 	private BigInteger wraparoundNormalize(BigInteger start, BigInteger end) {
-		BigInteger diff = MAX_ID.subtract(start);
+		BigInteger diff = MAX_ID.subtract(start).add(BigInteger.ONE);
 		return diff.add(end);
 	}
 	

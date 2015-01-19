@@ -82,6 +82,11 @@ public class Strategy implements NotifyCallback {
 		}
 	}
 	
+	private void shoot() {
+		chord.retrieve(ID.valueOf(BigInteger.valueOf(23)));
+		// TODO
+	}
+	
 	@Override
 	public void retrieved(ID target) {
 		logger.error("[RETRIEVED]\n\t" + "My ID: " + myID + "\n\tTarget:" + target);
@@ -94,10 +99,24 @@ public class Strategy implements NotifyCallback {
 	@Override
 	public void broadcast(ID source, ID target, Boolean hit) {
 		logger.error("[BROADCAST RECEIVED]\n\t" + "My ID: " + myID + "\n\tSource: " + source + "\n\tTarget:" + target + "\n\tHit:" + hit);
-	}
-	
-	private void shoot() {
-		// TODO
+		
+		Participant participant = null;
+		
+		for (Participant p: participants) {
+			if (p.isMyTerritory(target)){
+				participant = p;
+				break;
+			}
+		}
+		if (participant == null) {
+			logger.error("[SOS] No matching participant found for target "+target);
+			return;
+		}
+		if (hit) {
+			participant.setShip(participant.idToPosition(target), TransactionID.get());
+		} else {
+			participant.setShip(participant.idToPosition(target), -1);
+		}
 	}
 
 	private void initParticipants() throws CommunicationException {
