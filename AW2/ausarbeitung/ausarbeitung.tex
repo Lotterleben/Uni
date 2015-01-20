@@ -8,6 +8,7 @@
 
 % Einbinden von Bildern
 \usepackage{graphicx}
+\usepackage{todonotes}
 
 % SeitenflŠche etwas mehr ausnutzen
 \usepackage{geometry}
@@ -49,6 +50,7 @@ One approach which may provide solutions for the problems which arise with these
 
 % TODO: add introdtuion subsection?
 %Kapitelübersicht bei Ausarbeitung nicht vergessen!
+% TODO: was ist mit http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=5622053 und http://www.sciencedirect.com/science/article/pii/S0140366410001143?
 
 \section{Introduction}
 Hybrid routing protocols merge reactive and proactive routing protocols in order to create one flexible and highly adaptive protocol. They are able to switch between proactive and reactive routing, depending on changing factors like network topology, mobility, or traffic flow.\\
@@ -122,11 +124,18 @@ any reactive routing protocol may be used, while the proactive component is fixe
 \end{description}
 
 \section{Experimental work}
-Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead.
-Thus, publications documenting real-world experience with hybrid deployments are rare. \cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
+Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead. \todo{sources, examples}
+Thus, publications documenting real-world experience with hybrid deployments are rare.\\
+\cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
+\cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
 % TODO: what about simulations?
 
-\subsection{Suitability for the IoT}
+\todo{publiactions abt experiences with proactive/reactive protocols?}
+
+\cite{4220981} \todo{Lists benefits of testbeds etc}
+\cite{5375690} \todo{real world experiences!(why does freifunk use olsr if batman seems to be better?)}
+
+\section{Suitability for the IoT}
 
 \section{Conclusion and Outlook}
 Hybrid routing protocols are a promising paradigm which may be able to adopt to the diverse and changing network topologies of the Internet of Things.
