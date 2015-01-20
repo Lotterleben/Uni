@@ -17,6 +17,8 @@ public class Participant {
 	BigInteger spaceSize;
 	private boolean hasWraparound;
 	BigInteger wrapInterval;
+	private int sunkShips;
+	private int lastSunkShip;
 	
 	private int[] ships; /* field values for...
 							other participants: transactionID that sunk the ship,
@@ -30,12 +32,18 @@ public class Participant {
 		this.id = id;
 		this.intervalSize = intervalSize;
 		ships = new int[intervalSize];
+		sunkShips = 0;
+		lastSunkShip = 0;
 		
 		logger = Logger.getLogger(this.getClass().getName());
 	}
 	
 	public void setShip(int position, int value) {
 		ships[position] = value;
+		if (value > 0) {
+			sunkShips++;
+			lastSunkShip = position;
+		}
 	}
 	
 	public void setPredecessor(ID predecessor) {
@@ -66,8 +74,16 @@ public class Participant {
 	    logger.warn("[SET SHIPS]\n\tpositions:"+Arrays.toString(ships));
 	}
 	
-	public int getShipstatusOnPosition(int position){
+	public int getShipStatusOn(int position){
 		return ships[position];
+	}
+	
+	public int getLastSunkShip() {
+		return lastSunkShip;
+	}
+	
+	public int numSunkShips() {
+		return sunkShips;
 	}
 	
 	public BigInteger calcInterval() {
@@ -120,6 +136,29 @@ public class Participant {
 		}
 		
 		return position.intValue();
+	}
+	
+	public ID positionToID(int position){
+		ID posID;
+
+		/*calculate offset*/
+		BigInteger b = BigInteger.valueOf(position).multiply(spaceSize);
+		
+		if(hasWraparound) {
+			if (b.compareTo(wrapInterval) == 1) {
+				/* offset is bigger than the interval between predecessor
+				 * and 0 => we have to be careful here */
+				b = b.subtract(wrapInterval);
+			}
+		} else {
+			/* add to start */
+			b = b.add(Util.incrementID(predecessor).toBigInteger());
+		}
+		
+		/* make sure we shoot in the middle of the field */
+		b = b.add(spaceSize.divide(BigInteger.valueOf(2)));
+		posID = new ID(b.toByteArray());
+		return posID;
 	}
 	
 	/* When the predecessor of an ID is bigger than the ID

@@ -78,13 +78,58 @@ public class Strategy implements NotifyCallback {
 		
 		if (iGoFirst()) {
 			logger.error("I AM FIRST! WOHOO! My ID: "+myID);
-			shoot();
+			
+			// select random participant and shoot at their last field
+			ID target = Util.decrementID(chord.getPredecessorID());
+			shoot(target);
 		}
 	}
 	
-	private void shoot() {
-		chord.retrieve(ID.valueOf(BigInteger.valueOf(23)));
-		// TODO
+	private ID selectTarget() {
+		// find the one with the fewest ships (yes, clumsy, could be done better)
+		Participant targetParticipant = participants.get(0);
+		int maxSunkShips = targetParticipant.numSunkShips();
+		for (Participant p: participants) {
+			if (p.numSunkShips() > maxSunkShips) {
+				targetParticipant = p;
+				maxSunkShips = p.numSunkShips();
+			}
+		}
+		
+		boolean foundPosition = false;
+		int offset = 1;
+		int position = targetParticipant.getLastSunkShip();
+		while (!foundPosition){
+			if (offset+position >= intervalSize) {
+				// do nothing
+			} else if (offset +position < 0) {
+				// do nothing
+			} else {
+				if (targetParticipant.getShipStatusOn(position+offset) == 0) {
+					return targetParticipant.positionToID(position+offset);
+				}
+			}
+			
+			if (offset>0){
+				offset *= (-1);
+			} else {
+				offset *= (-1);
+				offset += 1;
+			}
+		}
+		
+		// we're doomed.
+		return null;
+	}
+	
+	private void shoot(ID target) {
+		// wait a while until everybody is ready again
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}	
+		chord.retrieve(target);
 	}
 	
 	@Override
@@ -92,9 +137,8 @@ public class Strategy implements NotifyCallback {
 		logger.error("[RETRIEVED]\n\t" + "My ID: " + myID + "\n\tTarget:" + target);
 		boolean hit;
 		
-		// TODO: Calculate if hit
 		int position = myNavy.idToPosition(target);
-		int shipStatus = myNavy.getShipstatusOnPosition(position);
+		int shipStatus = myNavy.getShipStatusOn(position);
 		if (shipStatus == 0){
 			hit = false;
 		} else if (shipStatus == 1){
@@ -106,6 +150,8 @@ public class Strategy implements NotifyCallback {
 		
 		// inform all participants about the attack and its outcome.
 		chord.broadcast(target, hit);
+		target = selectTarget();
+		shoot(target);
 	}
 
 	@Override
@@ -123,6 +169,8 @@ public class Strategy implements NotifyCallback {
 		if (participant == null) {
 			logger.error("[SOS] No matching participant found for target "+target);
 			return;
+		} else {
+			logger.error("Dound matching participnat for "+target);
 		}
 		if (hit) {
 			participant.setShip(participant.idToPosition(target), TransactionID.get());

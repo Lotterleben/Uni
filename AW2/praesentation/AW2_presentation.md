@@ -62,19 +62,13 @@ TODO: insert pictures of 2000 vs 2014 hardware/visions for mobile nodes here
 ^research is 10 years old, BUT!! 
 - now we have the building blocks in place
 - let's take the old ideas and translate them to 2014+
-
----
-# **Some fancy headline which introduces that I'm going to talk about concepts now** 
-TODO: maybe I can just skip his & say what I want to say in the slide before this one
-
-^
-- I'm not going to bore you with lists of outdated protocols
+- -> I'm not going to bore you with lists of outdated protocols
 - instead, i'm going to talk about concepts that they introduce and use some of them as examples
-- -> IoT solutions will ahve to be derived from that
-- comprehensive list can be found at TODO
+- -> IoT solutions will have to be derived from that
+- comprehensive list can be found at TODO (appendix?)
 
 ---
-# **Scope** 
+#[fit]**Scope               ** 
 
 ---
 #        **route                         area** 
@@ -95,7 +89,7 @@ TODO: speaker notes that explain both approaches & give protocol examples
 - warehouse: truckload needs to know abt each other, rest of warehouse less relevant
 
 ---
-# **Architecture** 
+#[fit] **Architecture** 
 
 ---
 #       **Protocol             Framework** 
@@ -171,22 +165,23 @@ TODO: speaker notes that explain both approaches & give protocol examples
 ^TODO: speaker notes
 
 ---
+#[fit] **Experimental**
+#[fit] **work                **
 
-# **Suitability for the IoT** 
-
-- Many Use Cases
-	• many topologies
-	• many traffic patterns
+---
+#[fit] **Suitability for**
+#[fit] **the IoT             ** 
 
 ---
 
 # **Suitability for the IoT** 
-## Scope
-- highly dependent on Use Case
 
-## Architecture
-- Framework more suitable
-	• challenge: make it lightweight
+![inline](./../images/iot_suitability.pdf)
+
+^
+-Scope highly dependent on Use Case
+- Architecture
+	• challenge: make FW lightweight
 
 
 <!--
@@ -221,9 +216,8 @@ Framework pros probably win, but fw has to be designed to be lightweight!
 -->
 
 ---
-# **Conclusion & Outlook** 
-
-TODO
+#[fit] **Conclusion    **
+#[fit] **& Outlook      ** 
 
 ---
 #[fit] **Thank You            ** 
