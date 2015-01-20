@@ -77,15 +77,16 @@ Thus, it is important to first understand the characteristics of both routing pa
 %TODO: What should Hybrid routing protocols be good at?
 
 \begin{table*}[t]
-    \begin{tabular}{p{0.62\textwidth}|l|l}
-        Name & Scope & Architecture \\
+    \begin{tabular}{p{0.6\textwidth}|l|l|l}
+        Name & Scope & Architecture & Published \\
         \hline
-        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route-Centered & Framework \\
-        \gls{SHARP}\cite{SHARP} & Route-Centered & Framework\\ %TODO: only for reactive!
-        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route-Centered & Protocol\\
-        \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area-Centered & Protocol\\
-        \gls{WARP}\cite{WARP} & Area-Centered & Protocol\\
-        \gls{ZHLS}\cite{ZHLS} & Area-Centered & Protocol\\ % TODO: beschreiben
+        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\
+        \gls{SHARP}\cite{SHARP} & Route & Framework & 2003 \\ %TODO: only for reactive!
+        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
+        \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area & Protocol & 2002/2004\\
+        \gls{WARP}\cite{WARP} & Area & Protocol & 2002\\
+        \gls{ZHLS}\cite{ZHLS} & Area & Protocol & 1999\\ % TODO: beschreiben
+        % TODO: what about HYMAD? http://www.sciencedirect.com/science/article/pii/S0140366410001143?
     \end{tabular}
     \caption{Overview over existing hybrid protocols}
     \label{fig:overview}
@@ -128,6 +129,7 @@ Most research concerning hybrid routing protocols stems from a time where large 
 Thus, publications documenting real-world experience with hybrid deployments are rare.\\
 \cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
 \cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
+\cite{WARP} Also compares itself to OLSR in experiments with ``real'' network, but is pretty old and uses 14 laptops \todo{elaborate}
 % TODO: what about simulations?
 
 \todo{publiactions abt experiences with proactive/reactive protocols?}
