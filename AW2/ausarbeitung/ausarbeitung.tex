@@ -55,7 +55,9 @@ One approach which may provide solutions for the problems which arise with these
 \section{Introduction}
 Hybrid routing protocols merge reactive and proactive routing protocols in order to create one flexible and highly adaptive protocol. They are able to switch between proactive and reactive routing, depending on changing factors like network topology, mobility, or traffic flow.\\
 
-Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional set of challenges.\\
+The pool from which one may draw suitable protocols is gigantic: spanning from protocols for the ``Big Internet'' such as BGP\todo{cite or obvious?} to protocols for \glspl{LLN} such as RPL\cite{RFC-6550}, these protocols were designed with very different environments and use cases in mind. When picking candidate proactive or reactive protocols for hybrid IoT routing, it is thus advisable to consider fields with similarities to the IoT. Most notably, those fields are \glspl{DTN}, \glspl{MANET} and, to a certain extent, \glspl{VANET}.\\
+
+Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional set of challenges.
 %TODO: write about stuff that the papers from ``Experimental Work'' describe.\\
 Switching from proactive to reactive or back is not trivial. The switching decision has to be made carefully, taking into account changing factors such as network density, traffic volume and traffic flow patterns.\\
 %The tradeoff between flexibility and customizability has to be considered carefully.
@@ -63,7 +65,7 @@ Switching from proactive to reactive or back is not trivial. The switching decis
 However, most hybrid routing protocol specifications stem from an era where mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves. This has since changed: The IETF has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown.\\
 Additionally, the \gls{IoT} was not even a vision yet. Hybrid routing protocols were developed for different topologies and use cases.\\
 The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built.\\
-The rest of this paper is organized as follows. TODO!
+The rest of this paper is organized as follows. \todo{TODO!}
 
 \section{Building Blocks}
 Hybrid routing protocols rely on proactive and reactive protocols at their very foundation.
@@ -85,8 +87,8 @@ Thus, it is important to first understand the characteristics of both routing pa
         P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
         \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area & Protocol & 2002/2004\\
         \gls{WARP}\cite{WARP} & Area & Protocol & 2002\\
-        \gls{ZHLS}\cite{ZHLS} & Area & Protocol & 1999\\ % TODO: beschreiben
-        % TODO: what about HYMAD? http://www.sciencedirect.com/science/article/pii/S0140366410001143?
+        \gls{ZHLS}\cite{ZHLS} & Area & Protocol & 1999\\
+        \gls{HYMAD}\cite{HYMAD} & Area & TODO & 2010\\
     \end{tabular}
     \caption{Overview over existing hybrid protocols}
     \label{fig:overview}
@@ -101,7 +103,8 @@ Existing Hybrid routing protocols may be categorized along two axes, which will 
 % TODO: überleitung
 Existing approaches to hybrid routing may be categorized as either area-centered or route-centered.
 \subsubsection{Area-centered}
-Area-centered routing protocols distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively. The most popular area-centered protocol is the \gls{ZRP}\cite{ZRP-Draft}, which creates dynamically adjustable proactive routing zones. Inter-zone traffic is routed reactively by a so-called bordercasting mechanism. ZRP has been the basis for extensions such as the \gls{TZRP}\cite{TZRP} and \cite{IZR} as well as new protocols, such as the \gls{WARP}\cite{WARP}, which adds \gls{QoS}-awareness.
+Area-centered routing protocols distinguish routes by locality: nearby routes are maintained in a proactive fashion, while routes to destinations farther away in the network are maintained reactively. The most popular area-centered protocol is the \gls{ZRP}\cite{ZRP-Draft}, which creates dynamically adjustable proactive routing zones. Inter-zone traffic is routed reactively by a so-called bordercasting mechanism. ZRP has been the basis for extensions such as the \gls{TZRP}\cite{TZRP} and \cite{IZR} as well as new protocols, such as the \gls{WARP}\cite{WARP}, which adds \gls{QoS}-awareness.\\
+A variation of this scheme is presented by the \gls{HYMAD}\cite{HYMAD}, which relies on protocols designed for \gls{DTN} instead of a reactive protocol to deliver data to farther-away destinations. This adds the ability to communicate over extremely sparse, even temporarily partitioned networks. \todo{elaborate}
 % TODO: what about clusteringthings?
 
 \subsubsection{Route-centered}
