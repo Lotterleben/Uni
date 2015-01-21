@@ -4,22 +4,17 @@ slidenumbers: true
 # [fit]**Hybrid Routing for the IoT**
 ##  challenges & opportunities
 
-^
-- AW1: existing; either proactive || reactive
-- new technologies & Use Cases @ IoT have emerged
-- with them: new network characteristic
-
-
 ---
 # **Outline**
+- Roadmap
 - What is Hybrid Routing?
-- Existing Concepts
-	• area- vs route-centered
-	• protocol vs framework
-- Transition to the IoT
+- Existing concepts
+- Experimental work
+- Suitability for the Internet of Things
 - Conclusion & Outlook
 
 ---
+
 # **The big picture**
 
 ![inline](./../images/bigpicture.pdf)
@@ -31,13 +26,15 @@ slidenumbers: true
 ![original](./../images/hybrid_venn.pdf)
 
 ^
-- short intro to proactive & reactive (1 sentence)
-- bring p&a together in hybrid prots this sem
+- AW1: existing; either proactive || reactive
+- new technologies & Use Cases @ IoT emerged
+- with them: new network characteristic that p/r can't satisfy
+- bring p&a together in hybrid
 - -> adapt to changes @ network characteristics
+°
 - comes with own set of challenges:
 	* when/where to switch
 	* coordinate 2 fundamentally different routing approaches
-	* most research stems from time where IoT vision didnt exist -> necessary to adjust & advance
 
 ---
 #[fit]**Flashback         **
@@ -45,7 +42,8 @@ slidenumbers: true
 ![original](./../images/gracehopper_1_filter.pdf)
 
 ^
-...aaactually, the use cases haven't changed that much... => differenciate betwen MANET and IoT?
+- no iot hybrid specifically
+- Take ideas from MANET, VANET, DTN
 - ZRP etc: 2006 or earlier
 - research has stalled since them
 - failure or too early? -> too early.
@@ -57,15 +55,25 @@ slidenumbers: true
 ![original](./../images/the_time_is_now.jpg)
 
 
-^research is 10 years old, BUT!!
+^
 - now we have the building blocks in place
-- let's take the old ideas and translate them to 2014+
-- -> I'm not going to bore you with lists of outdated protocols
-- instead, i'm going to talk about concepts that they introduce and use some of them as examples
+- let's take the old ideas and translate them to 2015+
+- -> not bore you w/ lists of outdated protocols
+- instead -> talk abt concepts that they introduce and use some of them as examples
 - -> IoT solutions will have to be derived from that
 
 ---
 #[fit]**Scope               **
+
+---
+<!--#        **route                         area** -->
+###         
+
+![inline](./../images/route_centered_example.pdf)![inline](./../images/area_centered_example.pdf)
+
+^
+- Lighting system: central control (proactive); connection between sofa lamp & switch if person is in room (reactive)
+- warehouse: truckload needs to know abt each other, rest of warehouse less relevant
 
 ---
 #        **route                         area**
@@ -73,23 +81,11 @@ slidenumbers: true
 ![inline](./../images/route_centered.pdf)![inline](./../images/area_centered.pdf)
 
 ^route:
-
 - maintain important routes proac
 - unimportant reac
-
 area:
-
 - create routing zones (proac)
 - route between zones (DTN[HYMAD] or reactive)
-
----
-#        **route                         area**
-
-![inline](./../images/route_centered_example.pdf)![inline](./../images/area_centered_example.pdf)
-
-^
-- Lighting system: central control (proactive); connection between sofa lamp & switch if person is in room (reactive)
-- warehouse: truckload needs to know abt each other, rest of warehouse less relevant
 
 ---
 #[fit] **Architecture**
@@ -102,10 +98,10 @@ area:
 ---
 # **Protocol**
 
-- fine-grained optimization [p2prpl]
+- fine-grained optimization
 	• size
 	• computation
-	• packet overhead
+	• packet overhead [p2prpl]
 
 ^examples:
 - P2P-RPL
@@ -117,10 +113,10 @@ area:
 ---
 # **Protocol**
 
-- fine-grained optimization [p2prpl]
+- fine-grained optimization
 	• size
 	• computation
-	• packet overhead
+	• packet overhead [p2prpl]
 - inflexible
 	• protocol updates are hard
 	• re-use of existing codebases is hard
@@ -251,6 +247,7 @@ Framework pros probably win, but fw has to be designed to be lightweight!
 ---
 #[fit] **Conclusion    **
 #[fit] **& Outlook      **
+^TODO!!!
 
 ---
 #[fit] **Thank You            **
