@@ -4,6 +4,8 @@ slidenumbers: true
 # [fit]**Hybrid Routing for the IoT**
 ##  challenges & opportunities
 
+^bu
+
 ---
 # **Outline**
 - Roadmap
@@ -178,40 +180,9 @@ area:
 - HYMAD (half)
 
 ---
-#[fit] **Experimental**
-#[fit] **work                **
-
-^
-- real-world experience mostly proactive (OLSR, BATMAN) (what abt loadNG?)
-- testbed studies rare:
-	* few nodes & simple topologies
-	(802.15.4, 12 cm // 14 laptops in WARP paper )
-
----
-
-#[fit] **IoT-Lab             **
-![original](./../images/iot-lab.jpg)
-
-^
-- we need more realistic evals
-- ->PJ goal
-
----
 
 #[fit] **Suitability for**
 #[fit] **the IoT             **
-
----
-
-# **Suitability for the IoT**
-
-![inline](./../images/iot_suitability.pdf)
-
-^
--Scope highly dependent on Use Case
-- Architecture
-	* challenge: make FW lightweight
-
 
 <!--
 TODO: okay cool, and what's suitable for the IoT now? how do we translate this to the 21st century?
@@ -243,6 +214,36 @@ con:
 Framework pros probably win, but fw has to be designed to be lightweight!
 
 -->
+
+---
+
+# **Suitability for the IoT**
+
+![inline](./../images/iot_suitability.pdf)
+
+^
+-Scope highly dependent on Use Case
+- Architecture
+	* challenge: make FW lightweight
+
+---
+#[fit] **Experimental**
+#[fit] **work                **
+
+^
+- real-world experience mostly proactive (OLSR, BATMAN) (what abt loadNG?)
+- testbed studies rare:
+	* few nodes & simple topologies
+	(802.15.4, 12 cm // 14 laptops in WARP paper )
+
+---
+
+#[fit] **IoT-Lab             **
+![original](./../images/iot-lab.jpg)
+
+^
+- we need more realistic evals
+- ->PJ goal
 
 ---
 #[fit] **Conclusion    **
