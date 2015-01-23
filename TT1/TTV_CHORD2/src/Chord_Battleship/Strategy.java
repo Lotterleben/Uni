@@ -142,7 +142,7 @@ public class Strategy implements NotifyCallback {
 	}
 	
 	@Override
-	public void retrieved(ID target) {
+	public void retrieved(final ID target) {
 		new Thread(new Runnable(){
 			public void run(){
 				logger.error("[RETRIEVED]\n\t" + "My ID: " + myID + "\n\tTarget:" + target);
