@@ -436,7 +436,7 @@ public final class NodeImpl extends Node {
 		List<Node> sortedFingertable = new ArrayList<Node>(impl.getFingerTable());
 		java.util.Collections.sort(sortedFingertable);
 		
-		logger.error("[BROADCAST]\n\t" 
+		logger.debug("[BROADCAST]\n\t" 
 				+ "My ID: " + getNodeID() 
 				+ "\n\tRange:" + info.getRange() 
 				+ "\n\tTarget:" + info.getTarget() 
@@ -483,7 +483,7 @@ public final class NodeImpl extends Node {
 				
 				Broadcast bc = new Broadcast(updatedRange, info.getSource(),info.getTarget(), info.getTransaction(), info.getHit());
 				
-				logger.error("[SENDING BROADCAST]\n\t" 
+				logger.debug("[SENDING BROADCAST]\n\t" 
 						+ "My ID: " + getNodeID() 
 						+ "\n\tTo Node: " + currentNode.getNodeID() 
 						+ "\n\tRange:" + bc.getRange() 
@@ -492,7 +492,7 @@ public final class NodeImpl extends Node {
 				
 				currentNode.broadcast(bc);
 			} else {
-				logger.error("[BROADCAST] not relaying the broadcast to " + currentNode.getNodeID());
+				logger.debug("[BROADCAST] not relaying the broadcast to " + currentNode.getNodeID());
 			}
 		
 				

@@ -4,7 +4,8 @@ slidenumbers: true
 # [fit]**Hybrid Routing for the IoT**
 ##  challenges & opportunities
 
-^bu
+^
+- intro to IoT! (not just e2e comm.)
 
 ---
 # **Outline**
@@ -34,6 +35,7 @@ slidenumbers: true
 - bring p&a together in hybrid
 - -> adapt to changes @ network characteristics
 °
+- legacy probs proactive/reactive
 - comes with own set of challenges:
 	* when/where to switch
 	* coordinate 2 fundamentally different routing approaches
@@ -75,7 +77,7 @@ slidenumbers: true
 
 ^
 - Lighting system: central control (proactive); connection between sofa lamp & switch if person is in room (reactive)
-- warehouse: truckload needs to know abt each other, rest of warehouse less relevant
+- warehouse: SCANNER | truckload needs to know abt each other, rest of warehouse less relevant
 
 ---
 #        **route                         area**
@@ -139,6 +141,7 @@ area:
 	• re-use existing codebases
 
 ^examples:
+- LOOSE COUPLING
 - Node-Centric Hybrid
 - SHARP (half)
 - HYMAD (half)
@@ -224,6 +227,8 @@ Framework pros probably win, but fw has to be designed to be lightweight!
 ^
 -Scope highly dependent on Use Case
 - Architecture
+	* high fluctuation
+	* comp to big internet: no fixed infrastructure
 	* challenge: make FW lightweight
 
 ---
@@ -231,17 +236,19 @@ Framework pros probably win, but fw has to be designed to be lightweight!
 #[fit] **work                **
 
 ^
+- VALIDATION vs EVALUATION
 - real-world experience mostly proactive (OLSR, BATMAN) (what abt loadNG?)
 - testbed studies rare:
-	* few nodes & simple topologies
-	(802.15.4, 12 cm // 14 laptops in WARP paper )
-
+	• 802.15.4, 12 cm
+	• 14 laptops in WARP paper
+	• p2prpl: 5 nodes, testbed
 ---
 
 #[fit] **IoT-Lab             **
 ![original](./../images/iot-lab.jpg)
 
 ^
+- also: DES-Testbed etc
 - we need more realistic evals
 - ->PJ goal
 

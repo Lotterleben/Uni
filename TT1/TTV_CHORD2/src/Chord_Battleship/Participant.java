@@ -82,6 +82,10 @@ public class Participant {
 		return lastSunkShip;
 	}
 	
+	public ID getID(){
+		return this.id;
+	}
+	
 	public int numSunkShips() {
 		return sunkShips;
 	}

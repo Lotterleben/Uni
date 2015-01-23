@@ -163,24 +163,30 @@ public class Strategy implements NotifyCallback {
 	public void broadcast(ID source, ID target, Boolean hit) {
 		logger.error("[BROADCAST RECEIVED]\n\t" + "My ID: " + myID + "\n\tSource: " + source + "\n\tTarget:" + target + "\n\tHit:" + hit);
 		
+		if (myNavy.isMyTerritory(target)) {
+			logger.error("[BROADCAST RECEIVED] Target is me; ignoring broadcast");
+			return;
+		}
+		
 		Participant participant = null;
 		
 		for (Participant p: participants) {
+			logger.warn("[BROADCAST RECEIVED] Checking "+p.getID());
 			if (p.isMyTerritory(target)){
 				participant = p;
 				break;
 			}
 		}
 		if (participant == null) {
-			logger.error("[SOS] No matching participant found for target "+target);
-			return;
+			logger.error("[BROADCAST RECEIVED] [SOS] No matching participant found for target "+target+"\n\t My ID: "+myID);
+			// TODO error handling
 		} else {
-			logger.error("Dound matching participnat for "+target);
-		}
-		if (hit) {
-			participant.setShip(participant.idToPosition(target), TransactionID.get());
-		} else {
-			participant.setShip(participant.idToPosition(target), -1);
+			logger.error("[BROADCAST RECEIVED] Found matching participant for "+target+": "+participant.getID());
+			if (hit) {
+				participant.setShip(participant.idToPosition(target), TransactionID.get());
+			} else {
+				participant.setShip(participant.idToPosition(target), -1);
+			}
 		}
 	}
 

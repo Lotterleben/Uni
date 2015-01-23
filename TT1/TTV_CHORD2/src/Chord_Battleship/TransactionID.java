@@ -21,22 +21,22 @@ public class TransactionID {
 	}
 	
 	public static synchronized Integer get() {
-		getInstance().printChange();
+		//getInstance().printChange();
 		return getInstance().id;
 	}
 	
 	public static synchronized void set(Integer transactionID) {
-		getInstance().printChange();
+		//getInstance().printChange();
 		getInstance().id = transactionID;
 	}
 	
 	public static synchronized void inc() {
-		getInstance().printChange();
+		//getInstance().printChange();
 		getInstance().id++;
 	}
 
 	// only for debugging purposes
 	private void printChange(){
-		logger.error("[TransactionID]\n\t" + "ID: " + id);
+		logger.debug("[TransactionID]\n\t" + "ID: " + id);
 	}
 }
