@@ -185,7 +185,7 @@ public class Strategy implements NotifyCallback {
 		Participant participant = null;
 		
 		for (Participant p: participants) {
-			//logger.warn("[BROADCAST RECEIVED] Checking "+p.getID());
+			logger.warn("[BROADCAST RECEIVED] Checking "+p.getID());
 			if (p.isMyTerritory(target)){
 				participant = p;
 				break;

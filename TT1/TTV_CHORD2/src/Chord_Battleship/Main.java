@@ -8,8 +8,8 @@ import de.uniba.wiai.lspi.chord.service.PropertiesLoader;
 
 public class Main {
 
-	static String serverURL = "ocsocket://127.0.0.1:12350/";
-	static String baseClientURL = "ocsocket://127.0.0.1:1235";
+	static String serverURL = "ocsocket://192.168.14.112:55555/";
+	static String baseClientURL = "ocsocket://192.168.14.112:1235";
 	static int numClients = 3;
 	
 	static List<Strategy> nodes = new ArrayList<Strategy>();
