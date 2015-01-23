@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import de.uniba.wiai.lspi.chord.com.CommunicationException;
 import de.uniba.wiai.lspi.chord.com.Node;
 import de.uniba.wiai.lspi.chord.data.ID;
@@ -125,7 +126,7 @@ public class Strategy implements NotifyCallback {
 	private void shoot(ID target) {
 		// wait a while until everybody is ready again
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}	
@@ -153,8 +154,13 @@ public class Strategy implements NotifyCallback {
 				
 				// inform all participants about the attack and its outcome.
 				chord.broadcast(target, hit);
-				ID newTarget = selectTarget();
-				shoot(newTarget);
+				if (myNavy.getSunkShips() == 100) {
+					logger.error("[retrieved] OH NO! WE LOST!!! :((");
+					throw new NotImplementedException();
+				} else {
+					ID newTarget = selectTarget();
+					shoot(newTarget);	
+				}
 			}
 		}).start();
 	}
