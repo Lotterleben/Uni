@@ -138,7 +138,7 @@ public class Participant {
 		if (position.intValue() >= intervalSize) {
 			// caution dirty hack
 			position = BigInteger.valueOf(intervalSize-1);
-			logger.warn("[ID TO POSITION] Decremented position by 1");
+			logger.debug("[ID TO POSITION] Decremented position by 1");
 		} else if (position.intValue() < 0 ) {
 			logger.error("[ID TO POSITION] calculated position out of bounds: "+position+"expected: 0<=position<"+intervalSize);
 			return -1;

@@ -90,6 +90,8 @@ public class Strategy implements NotifyCallback {
 		// find the one with the fewest ships (yes, clumsy, could be done better)
 		Participant targetParticipant = participants.get(0);
 		int maxSunkShips = targetParticipant.numSunkShips();
+		logger.error("[SELECTTARGET]");
+
 		for (Participant p: participants) {
 			if (p.numSunkShips() > maxSunkShips) {
 				targetParticipant = p;
@@ -107,6 +109,10 @@ public class Strategy implements NotifyCallback {
 				// do nothing
 			} else {
 				if (targetParticipant.getShipStatusOn(position+offset) == 0) {
+					logger.error("[SELECTTARGET] selected Target Participant "
+								+"\n\tmy ID:"+myID
+								+"\n\tparticipant:"+targetParticipant.getID()
+								+"\n\ttarget: "+targetParticipant.positionToID(position+offset));
 					return targetParticipant.positionToID(position+offset);
 				}
 			}
@@ -117,7 +123,8 @@ public class Strategy implements NotifyCallback {
 				offset *= (-1);
 				offset += 1;
 			}
-		}
+		}		
+		logger.error("[SELECTTARGET] Couldn't find suitable target. We're doomed.");
 		
 		// we're doomed.
 		return null;
@@ -125,6 +132,7 @@ public class Strategy implements NotifyCallback {
 	
 	private void shoot(ID target) {
 		// wait a while until everybody is ready again
+		logger.error("[SHOOT] \n\tmy ID:"+myID+"\n\ttarget:"+target);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -141,7 +149,7 @@ public class Strategy implements NotifyCallback {
 				boolean hit;
 				
 				int position = myNavy.idToPosition(target);
-				logger.error("Getting Ship status for position:"+position);
+				//logger.error("Getting Ship status for position:"+position);
 				int shipStatus = myNavy.getShipStatusOn(position);
 				if (shipStatus == 0){
 					hit = false;
@@ -177,7 +185,7 @@ public class Strategy implements NotifyCallback {
 		Participant participant = null;
 		
 		for (Participant p: participants) {
-			logger.warn("[BROADCAST RECEIVED] Checking "+p.getID());
+			//logger.warn("[BROADCAST RECEIVED] Checking "+p.getID());
 			if (p.isMyTerritory(target)){
 				participant = p;
 				break;
