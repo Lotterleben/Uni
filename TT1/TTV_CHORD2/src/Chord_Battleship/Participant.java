@@ -115,7 +115,7 @@ public class Participant {
 	
 	public int idToPosition(ID id) {
 		BigInteger start = Util.incrementID(predecessor).toBigInteger();
-		BigInteger end = id.toBigInteger();
+		BigInteger end = Util.decrementID(id).toBigInteger(); // our ID is not part of the interval
 		
 		/* wraparound */
 		if(start.compareTo(end) == 1) {
@@ -127,9 +127,10 @@ public class Participant {
 		BigInteger sub = end.subtract(start);
 		BigInteger position = (sub).divide(spaceSize);
 		
-		if (position.intValue() > intervalSize) {
+		if (position.intValue() >= intervalSize) {
 			// caution dirty hack
 			position = BigInteger.valueOf(intervalSize-1);
+			logger.warn("[ID TO POSITION] Decremented position by 1");
 		} else if (position.intValue() < 0 ) {
 			logger.error("[ID TO POSITION] calculated position out of bounds: "+position+"expected: 0<=position<"+intervalSize);
 			return -1;

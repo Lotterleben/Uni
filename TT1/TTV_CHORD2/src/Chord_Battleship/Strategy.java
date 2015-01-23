@@ -134,24 +134,29 @@ public class Strategy implements NotifyCallback {
 	
 	@Override
 	public void retrieved(ID target) {
-		logger.error("[RETRIEVED]\n\t" + "My ID: " + myID + "\n\tTarget:" + target);
-		boolean hit;
-		
-		int position = myNavy.idToPosition(target);
-		int shipStatus = myNavy.getShipStatusOn(position);
-		if (shipStatus == 0){
-			hit = false;
-		} else if (shipStatus == 1){
-			hit = true;
-		} else {
-			logger.warn("[RETRIEVED] Shot at ship that aleady sunk.. Ha ha!");
-			hit = true;
-		}
-		
-		// inform all participants about the attack and its outcome.
-		chord.broadcast(target, hit);
-		target = selectTarget();
-		shoot(target);
+		new Thread(new Runnable(){
+			public void run(){
+				logger.error("[RETRIEVED]\n\t" + "My ID: " + myID + "\n\tTarget:" + target);
+				boolean hit;
+				
+				int position = myNavy.idToPosition(target);
+				logger.error("Getting Ship status for position:"+position);
+				int shipStatus = myNavy.getShipStatusOn(position);
+				if (shipStatus == 0){
+					hit = false;
+				} else if (shipStatus == 1){
+					hit = true;
+				} else {
+					logger.warn("[RETRIEVED] Shot at ship that aleady sunk.. Ha ha!");
+					hit = true;
+				}
+				
+				// inform all participants about the attack and its outcome.
+				chord.broadcast(target, hit);
+				ID newTarget = selectTarget();
+				shoot(newTarget);
+			}
+		}).start();
 	}
 
 	@Override
