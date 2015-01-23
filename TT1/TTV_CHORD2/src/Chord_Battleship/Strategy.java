@@ -193,6 +193,13 @@ public class Strategy implements NotifyCallback {
 			} else {
 				participant.setShip(participant.idToPosition(target), -1);
 			}
+			if (myNavy.getID().equals(source)) {
+				if (participant.getSunkShips() == 100) {
+					for (int i = 0; i< 6; i++ ) {
+						logger.error("[BROADCAST RECEIVED] WE WON! WE WON! WE WON!");
+					}
+				}
+			}
 		}
 	}
 
