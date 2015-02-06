@@ -40,8 +40,7 @@
 \maketitle
 
 \begin{abstract}
-
-
+I am an abstract. Write me!
 \end{abstract}
 
 \section{Introduction}
@@ -53,23 +52,41 @@
 %==============================================================================
 The \gls{IoT} envisions autonomous communication between tiny computers installed in everyday objects such as furniture, toys, clothing, or tools with the goal of making them smarter and improving their user experience. IoT devices typically are very constrained devices with no constant power supply. Therefor, they need to be resourceful in terms of computation, storage, RAM and energy usage.
 To communicate amongst each other, IoT nodes form spontaneous, wireless mesh networks.
-The vision of the Internet of Things is rapidly becoming reality, and with its rise, new demands for routig protocols that serve these kinds of mesh networks arise.
-
+The vision of the Internet of Things is rapidly becoming reality, and with its rise, new demands for routig protocols that serve these kinds of mesh networks surface which cannot be optimally served by either reactive or proactive routing protocols alone.\\
+One example for this may be the lighting system in a smart home: Each lamp needs to maintain a stable connection to the control center of the house, forming a tree-like topology towards the sink node that is the central control. In addition to this, lamps may want to communicate spontaneously between each other, for example to create optimal lighting in the study when homeowners sit down at their desk.
 
 \subsection{What is Hybrid Routing?}
 \label{subsec:hybrid}
 %==============================================================================
+Hybrid Routing protocols combine two central routing paradigms into one protocol: Recative and proactive routing. While reactive protocols stay idle until a route is needed and then \emph{react} to this demand, proactive protocols constantly monitor their network for peers and link qualities, (re-)calculating routes as they gather new data. The former class of protocols perform well in sparse, very mobile networks and save energy by generating less control overhead. The latter are best suited for networks with high demands in terms of throughput, reliability and latency.\\
+Hybrid routing protocols aim to adjust their routing strategy from proactove to reactive and back depending on the circumstances: Routes or areas that are deemed important or see a lot of traffic requie proactive attention, while sparsely, less important or very mobile areas or routes are best served reactively.\\
+In th example of section \ref{subsec:IoT}, all lamps would maintain a proactive route towards the control center, while inter-lamp communication may be set up reactively.
 
+\section{A new dawn?}
+\label{sec:xoxo}
+%==============================================================================
+Most hybrid routing protocol specifications stem from an era where mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves. This has since changed: The IETF has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown.\\
+Additionally, the \gls{IoT} was not even a vision yet. Hybrid routing protocols were developed for different topologies and use cases.\\
+The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built.\\
+The rest of this paper is organized as follows. \todo{TODO!}
 
-\section{related work}
+\section{Challenges}
+\label{sec:Celated_work}
+%==============================================================================
+Albeit standing on the shoulders of existing work on proactive and reactive routing protocols, hybrid protocols are faced with an additional set of challenges.
+%TODO: write about stuff that the papers from ``Experimental Work'' describe.\\
+Switching from proactive to reactive or back is not trivial. The switching decision has to be made carefully, taking into account changing factors such as network density, traffic volume and traffic flow patterns.\\
+
+\section{Related work}
 \label{sec:related_work}
 %==============================================================================
-Talk about the past, mostly. briefly mention experimental work, esp emmanuels, reference 
+Talk about the past, mostly. talk about areas of research we can steal from.
+briefly mention experimental work, esp emmanuels, reference \ref{sec:experiments}.
 
 \section{Key aspects of Hybrid Routing Protocols}
 \label{sec:key_aspects}
 %==============================================================================
-The protocols discussed in \ref{sec:related_work} share common approaches, some of which fundamentally shape the way a routing protocols sees and serves a network. The following sections will identify these key aspects and discuss them with regard to the requirements of IoT environment
+The protocols discussed in section \ref{sec:related_work} share common approaches, some of which fundamentally shape the way a routing protocols sees and serves a network. The following sections will identify these key aspects and discuss them with regard to the requirements of IoT environment
 
 
 \subsection{Scope}
@@ -81,7 +98,7 @@ The protocols discussed in \ref{sec:related_work} share common approaches, some 
 %==============================================================================
 
 \section{Suitability for the IoT}
-\label{sec:key_aspects}
+\label{sec:suitability}
 %==============================================================================
 
 \section{Experimental work}
