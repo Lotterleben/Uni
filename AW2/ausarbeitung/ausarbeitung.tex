@@ -72,13 +72,56 @@ briefly mention experimental work, esp emmanuels, reference \ref{subsec:experime
 
 Most research on hybrid routing protocols stems from an era where wireless mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves, and while proactive and reactive protocols were eveloped and examined, research in hybrid routing stalled. 
 
-This has since changed: The IETF has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \ref{baccelli_p2p_prl}\\
+This has since changed: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \ref{baccelli_p2p_prl}\\
 
-%Additionally, the \gls{IoT} was not even a vision yet. Hybrid routing protocols were developed for different topologies and use cases.\\
+But while this milestone has been reached, the amount of protocols of any kind specifically targeted at IoT-like environents is very small. By the time of this writing, the \gls{RPL} is the only dedicated IoT protocol available, and it cannot cover the entire diverse set of requirements that can be found under the umbrella term of ``Internet of Things''. Thus, it is necessary to evaluate protocols designed for environments that share Eigenschaften\todo{translate} with the Internet of Things and may be customized to be a good fit, such as \glspl{DTN}, \glspl{MANET} and, to a certain extent, \glspl{VANET}.\\
 
 \subsection{Existing Protocols}
 \label{subsec:existing_protocols}
 %-------------------------------------------------------------------------------
+An Overview over all existing hybrid routing protocols for \glspl{MANET} and \glspl{DTN} %TODO: was ist mit vanets?
+can be found in table \ref{fig:overview}. In the following, a short introdusction to each protocol and its charasteristic mechanisms will be provided.
+
+\subsubsection{\gls{ZHLS}}
+\label{subsec:sharp}
+%...............................................................................
+
+\subsubsection{Node-Centric Hybrid Routing}
+\label{subsec:existing_protocols}
+%...............................................................................
+
+\subsubsection{\gls{SHARP}}
+\label{subsec:sharp}
+%...............................................................................
+
+\subsubsection{\gls{ZRP}}
+\label{subsec:sharp}
+%...............................................................................
+
+\subsubsection{\gls{WARP}}
+\label{subsec:sharp}
+%...............................................................................
+
+\subsubsection{\gls{HYMAD}}
+\label{subsec:sharp}
+%...............................................................................
+
+
+\begin{table*}[t]
+    \begin{tabular}{p{0.6\textwidth}|l|l|l}
+        Name & Scope & Architecture & Published \\
+        \hline
+        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\
+        \gls{SHARP}\cite{SHARP} & Route & Framework & 2003 \\ %TODO: only for reactive!
+        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
+        \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area & Protocol & 2002/2004\\
+        \gls{WARP}\cite{WARP} & Area & Protocol & 2002\\
+        \gls{ZHLS}\cite{ZHLS} & Area & Protocol & 1999\\
+        \gls{HYMAD}\cite{HYMAD} & Area & Framework & 2010\\ % Only DTN protocol is variable!
+    \end{tabular}
+    \caption{Overview over existing hybrid protocols}
+    \label{fig:overview}
+\end{table*}
 
 \subsection{Experimental work}
 \label{subsec:experiments}
@@ -88,12 +131,17 @@ This has since changed: The IETF has standardized \gls{OLSR}, OLSRv2  and \gls{A
 \section{Key aspects of Hybrid Routing Protocols}
 \label{sec:key_aspects}
 %==============================================================================
-The protocols discussed in section \ref{sec:related_work} share common approaches, some of which fundamentally shape the way a routing protocols sees and serves a network. The following sections will identify these key aspects and discuss them with regard to the requirements of IoT environment
-
+The protocols discussed in section \ref{sec:related_work} share common approaches, some of which fundamentally shape the way a routing protocols sees and serves a network. The goal of this section is to identify these key aspects and discuss them with regard to the requirements of IoT environment.
 
 \subsection{Scope}
 \label{subsec:scope}
 %==============================================================================
+\todo{add visualization pix!}
+Hybrid protocols differ in the way they prioritize routes and decide which of them should be maintained proactively or set up reactively. There are two approaches to this, which this paper dubs the \emph{route-centered} and the \emph{area-centered} approach repectively.\\
+
+The \emph{route-centered} approach serves networks in which some nodes, near or far, are more important than others. This is illustrated by fig. \ref{TODO}, which shows the different lamps of a house and the house's control center. Each lamp needs a stable connection to this control center, be it to switch on/off occaionally to confuse burglars, or exchange status info and configurations. Thus, this connection is maintained proactively, as indicated in the diagram by the thick straight line. Additionally, they may want to communicate with each other upon user interaction. Because this happens spontaneously and sparsely, the connections amongst all lamps are set up reactively, as indicated by the dotted lines.\\
+Protocols with an \emph{area-centered} approach assume all nodes are equal in principle, but nearby nodes are more important than nodes which are farther away. 
+
 
 \subsection{Architecture}
 \label{subsec:architecture}
