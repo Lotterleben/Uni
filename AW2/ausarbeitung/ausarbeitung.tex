@@ -126,11 +126,6 @@ can be found in table \ref{fig:overview}. In the following, a short introdusctio
     \label{fig:overview}
 \end{table*}
 
-\subsection{Experimental work}
-\label{subsec:experiments}
-%-------------------------------------------------------------------------------
-
-
 \section{Key aspects of Hybrid Routing Protocols}
 \label{sec:key_aspects}
 %==============================================================================
@@ -139,7 +134,6 @@ The protocols discussed in section \ref{sec:related_work} share common approache
 \subsection{Scope}
 \label{subsec:scope}
 %==============================================================================
-\todo{add visualization pix!}
 
 \begin{figure}
         \centering
@@ -155,17 +149,21 @@ The protocols discussed in section \ref{sec:related_work} share common approache
                 \caption{Example of an area-centered network: Goods in a delivery truck and warehouse}
                 \label{fig:ac_img}
         \end{subfigure}
-        \caption{Pictures of animals}\label{fig:animals}
+        \caption{TODO}\label{fig:scope}
 \end{figure}
 
 Hybrid protocols differ in the way they prioritize routes and decide which of them should be maintained proactively or set up reactively. There are two approaches to this, which this paper dubs the \emph{route-centered} and the \emph{area-centered} approach repectively.\\
 
-The \emph{route-centered} approach serves networks in which some nodes, near or far, are more important than others. This is illustrated by fig. \ref{TODO}, which shows the different lamps of a house and the house's control center. Each lamp needs a stable connection to this control center, be it to switch on/off occaionally to confuse burglars, or exchange status info and configurations. Thus, this connection is maintained proactively, as indicated in the diagram by the thick straight line. Additionally, they may want to communicate with each other upon user interaction. Because this happens spontaneously and sparsely, the connections amongst all lamps are set up reactively, as indicated by the dotted lines.\\
-Protocols with an \emph{area-centered} approach assume all nodes are equal in principle, but nearby nodes are more important than nodes which are farther away. 
-
+The \emph{route-centered} approach serves networks in which some nodes, near or far, are more important than others. This is illustrated by fig. \ref{fig:rc_img}, which shows the different lamps of a house and the house's control center. Each lamp needs a stable connection to this control center, be it to switch on/off occaionally to confuse burglars, or exchange status info and configurations. Thus, this connection is maintained proactively, as indicated in the diagram by the thick straight line. Additionally, they may want to communicate with each other upon user interaction. Because this happens spontaneously and sparsely, the connections amongst all lamps are set up reactively, as indicated by the dotted lines.\\
+Protocols with an \emph{area-centered} approach assume all nodes are equal in principle, but nearby nodes are both more important than nodes which are farther away and know their neighborhood best. They cluster the network into so-called ``routing zones''. Nodes that are in the same zone maintain their connections among each other proactively, and routes towards nodes from foreign zones are established reactively. \todo{write about intra-zone routing, border nodes etc}
+One example application for this may be a warehouse as illustrated in \ref{fig:ac_img} whose goods (or their packaging) are equipped ith IoT hardware. Employees are thus able to tell details about the stock simply by asking their scanner, which commincated with the other IoT devices. In case a truckload of new goods arrives, \todo{write less fussy}
 
 \subsection{Architecture}
 \label{subsec:architecture}
+%==============================================================================
+
+\section{Experimental work}
+\label{sec:experiments}
 %==============================================================================
 
 \section{Suitability for the IoT}
