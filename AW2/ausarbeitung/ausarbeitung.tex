@@ -20,6 +20,9 @@
 % == Lottes Änderungen ===
 % großer erster Buchstabe
 \usepackage{lettrine}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 % Glossary benutzen
 \usepackage{glossaries}
@@ -131,12 +134,30 @@ can be found in table \ref{fig:overview}. In the following, a short introdusctio
 \section{Key aspects of Hybrid Routing Protocols}
 \label{sec:key_aspects}
 %==============================================================================
-The protocols discussed in section \ref{sec:related_work} share common approaches, some of which fundamentally shape the way a routing protocols sees and serves a network. The goal of this section is to identify these key aspects and discuss them with regard to the requirements of IoT environment.
+The protocols discussed in section \ref{sec:related_work} share common approaches, some of which fundamentally shape the way a routing protocol sees and serves a network. The goal of this section is to identify these key aspects and discuss them with regard to the requirements of IoT environment.
 
 \subsection{Scope}
 \label{subsec:scope}
 %==============================================================================
 \todo{add visualization pix!}
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \includegraphics[width=\textwidth]{../images/route_centered_example}
+                \caption{Example of a route-centered network: lights and control center in a smart home.}
+                \label{fig:rc_img}
+        \end{subfigure}%
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.5\textwidth}
+                \includegraphics[width=\textwidth]{../images/area_centered_example}
+                \caption{Example of an area-centered network: Goods in a delivery truck and warehouse}
+                \label{fig:ac_img}
+        \end{subfigure}
+        \caption{Pictures of animals}\label{fig:animals}
+\end{figure}
+
 Hybrid protocols differ in the way they prioritize routes and decide which of them should be maintained proactively or set up reactively. There are two approaches to this, which this paper dubs the \emph{route-centered} and the \emph{area-centered} approach repectively.\\
 
 The \emph{route-centered} approach serves networks in which some nodes, near or far, are more important than others. This is illustrated by fig. \ref{TODO}, which shows the different lamps of a house and the house's control center. Each lamp needs a stable connection to this control center, be it to switch on/off occaionally to confuse burglars, or exchange status info and configurations. Thus, this connection is maintained proactively, as indicated in the diagram by the thick straight line. Additionally, they may want to communicate with each other upon user interaction. Because this happens spontaneously and sparsely, the connections amongst all lamps are set up reactively, as indicated by the dotted lines.\\
