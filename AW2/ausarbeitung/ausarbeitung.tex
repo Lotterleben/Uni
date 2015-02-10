@@ -8,7 +8,6 @@
 
 % Einbinden von Bildern
 \usepackage{graphicx}
-\usepackage{todonotes}
 
 % SeitenflŠche etwas mehr ausnutzen
 \usepackage{geometry}
@@ -18,6 +17,8 @@
 \usepackage[normal]{caption}
 
 % == Lottes Änderungen ===
+\usepackage{todonotes}
+
 % großer erster Buchstabe
 \usepackage{lettrine}
 \usepackage{graphicx}
@@ -57,7 +58,7 @@ The goal of this paper is thus to explore how hybrid routing can be advanced wit
 %==============================================================================
 The \gls{IoT} envisions autonomous communication between tiny computers installed in everyday objects such as furniture, toys, clothing, or tools with the goal of making them smarter and improving their user experience. IoT devices typically are very constrained devices with no constant power supply. Therefor, they need to be resourceful in terms of computation, storage, RAM and energy usage.
 To communicate amongst each other, IoT nodes form spontaneous, wireless mesh networks.
-The vision of the Internet of Things is rapidly becoming reality, and with its rise, new demands for routig protocols that serve these kinds of mesh networks surface which cannot be optimally served by either reactive or proactive routing protocols alone.\\
+The vision of the Internet of Things is rapidly becoming reality, and with its rise, new demands for routing protocols that serve these kinds of mesh networks surface which cannot be optimally served by either reactive or proactive routing protocols alone.\\
 One example for this may be the lighting system in a smart home: Each lamp needs to maintain a stable connection to the control center of the house, forming a tree-like topology towards the sink node that is the central control. In addition to this, lamps may want to communicate spontaneously between each other, for example to create optimal lighting in the study when homeowners sit down at their desk.
 
 \subsection{What is Hybrid Routing?}
@@ -161,10 +162,28 @@ One example application for this may be a warehouse as illustrated in \ref{fig:a
 \subsection{Architecture}
 \label{subsec:architecture}
 %==============================================================================
+Because hybrid protocols incorporate proactive and reactive protocols as building blocks, their design in terms of architecture-- how it all goes together-- may be more than just a sequence of instructions.
+\todo{gibt es uberhaupt ``pure'' frameworks?}
+- flexibility, esp. as IoT is relatively new \& broad
+- lightweightness
+- 
 
 \section{Experimental work}
 \label{sec:experiments}
 %==============================================================================
+Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead. \todo{sources, examples}
+Thus, publications documenting real-world experience with hybrid deployments are rare.\\
+While simulations have proven to be useful for protocol design and evaluation, there are two main problems to a simulation-based approach: \todo{find a source for this. STAT.}
+\begin{enumerate}
+\item A simulation is only as good as its model. Without data from ``real world'' experiments, verifying that a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, non?}
+\item Even when the model is adequately accurate, it can never account for the unforeseen quirks which will be encountered in a real environment. Especially in wireless networking, a node's environment (i.e. flying bids, surfaces reflecting differently based on time or weather conditions, unforeseeable radio propagation...) is a big and unforeseeable influence.
+\end{enumerate}
+
+\cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
+\cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
+\cite{WARP} Also compares itself to OLSR in experiments with ``real'' network, but is pretty old and uses 14 laptops \todo{elaborate}
+% TODO: what about simulations?
+
 
 \section{Suitability for the IoT}
 \label{sec:suitability}
@@ -173,7 +192,7 @@ One example application for this may be a warehouse as illustrated in \ref{fig:a
 \section{Conclusion}
 \label{sec:conclusion}
 %==============================================================================
-tanslate old shit. Framework good, protocol bad. scope depends on deployment. framework may be able to accomodate that too. simulations mostly suck. real-world experiences are rare. hooray for testbeds!
+translate old shit. Framework good, protocol bad. scope depends on deployment. framework may be able to accomodate that too. simulations mostly suck. real-world experiences are rare. hooray for testbeds!
 
 \section{Outlook}
 \label{sec:outlook}
