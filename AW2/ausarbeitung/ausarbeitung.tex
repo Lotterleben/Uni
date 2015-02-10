@@ -64,8 +64,8 @@ One example for this may be the lighting system in a smart home: Each lamp needs
 \subsection{What is Hybrid Routing?}
 \label{subsec:hybrid}
 %==============================================================================
-Hybrid Routing protocols combine two central routing paradigms into one protocol: Recative and proactive routing. While reactive protocols stay idle until a route is needed and then \emph{react} to this demand, proactive protocols constantly monitor their network for peers and link qualities, (re-)calculating routes as they gather new data. The former class of protocols perform well in sparse, very mobile networks and save energy by generating less control overhead. The latter are best suited for networks with high demands in terms of throughput, reliability and latency.\\
-Hybrid routing protocols aim to adjust their routing strategy from proactove to reactive and back depending on the circumstances: Routes or areas that are deemed important or see a lot of traffic requie proactive attention, while sparsely, less important or very mobile areas or routes are best served reactively.\\
+Hybrid Routing protocols combine two central routing paradigms into one protocol: Reactive and proactive routing. While reactive protocols stay idle until a route is needed and then \emph{react} to this demand, proactive protocols constantly monitor their network for peers and link qualities, (re-)calculating routes as they gather new data. The former class of protocols perform well in sparse, very mobile networks and save energy by generating less control overhead. The latter are best suited for networks with high demands in terms of throughput, reliability and latency.\\
+Hybrid routing protocols aim to adjust their routing strategy from proactive to reactive and back depending on the circumstances: Routes or areas that are deemed important or see a lot of traffic require proactive attention, while sparsely, less important or very mobile areas or routes are best served reactively.\\
 In th example of section \ref{subsec:IoT}, all lamps would maintain a proactive route towards the control center, while inter-lamp communication may be set up reactively.
 
 \section{Related work}
@@ -74,17 +74,17 @@ In th example of section \ref{subsec:IoT}, all lamps would maintain a proactive 
 \todo{Talk about the past, mostly. talk about areas of research we can steal from.
 briefly mention experimental work, esp emmanuels, reference \ref{subsec:experiments}.}
 
-Most research on hybrid routing protocols stems from an era where wireless mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves, and while proactive and reactive protocols were eveloped and examined, research in hybrid routing stalled. 
+Most research on hybrid routing protocols stems from an era where wireless mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves, and while proactive and reactive protocols were developed and examined, research in hybrid routing stalled. 
 
 This has since changed: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \ref{baccelli_p2p_prl}\\
 
-But while this milestone has been reached, the amount of protocols of any kind specifically targeted at IoT-like environents is very small. By the time of this writing, the \gls{RPL} is the only dedicated IoT protocol available, and it cannot cover the entire diverse set of requirements that can be found under the umbrella term of ``Internet of Things''. Thus, it is necessary to evaluate protocols designed for environments that share Eigenschaften\todo{translate} with the Internet of Things and may be customized to be a good fit, such as \glspl{DTN}, \glspl{MANET} and, to a certain extent, \glspl{VANET}.\\
+But while this milestone has been reached, the amount of protocols of any kind specifically targeted at IoT-like environments is very small. By the time of this writing, the \gls{RPL} is the only dedicated IoT protocol available, and it cannot cover the entire diverse set of requirements that can be found under the umbrella term of ``Internet of Things''. Thus, it is necessary to evaluate protocols designed for environments that share some characteristics with the Internet of Things and may be customized to be a good fit, such as \glspl{DTN}, \glspl{MANET} and, to a certain extent, \glspl{VANET}.\\
 
 \subsection{Existing Protocols}
 \label{subsec:existing_protocols}
 %-------------------------------------------------------------------------------
 An Overview over all existing hybrid routing protocols for \glspl{MANET} and \glspl{DTN} %TODO: was ist mit vanets?
-can be found in table \ref{fig:overview}. In the following, a short introdusction to each protocol and its charasteristic mechanisms will be provided.
+can be found in table \ref{fig:overview}. In the following, a short introduction to each protocol and its characteristic mechanisms will be provided.
 
 \subsubsection{\gls{ZHLS}}
 \label{subsec:sharp}
@@ -155,9 +155,9 @@ The protocols discussed in section \ref{sec:related_work} share common approache
 
 Hybrid protocols differ in the way they prioritize routes and decide which of them should be maintained proactively or set up reactively. There are two approaches to this, which this paper dubs the \emph{route-centered} and the \emph{area-centered} approach repectively.\\
 
-The \emph{route-centered} approach serves networks in which some nodes, near or far, are more important than others. This is illustrated by fig. \ref{fig:rc_img}, which shows the different lamps of a house and the house's control center. Each lamp needs a stable connection to this control center, be it to switch on/off occaionally to confuse burglars, or exchange status info and configurations. Thus, this connection is maintained proactively, as indicated in the diagram by the thick straight line. Additionally, they may want to communicate with each other upon user interaction. Because this happens spontaneously and sparsely, the connections amongst all lamps are set up reactively, as indicated by the dotted lines.\\
+The \emph{route-centered} approach serves networks in which some nodes, near or far, are more important than others. This is illustrated by fig. \ref{fig:rc_img}, which shows the different lamps of a house and the house's control center. Each lamp needs a stable connection to this control center, be it to switch on/off occasionally to confuse burglars, or exchange status info and configurations. Thus, this connection is maintained proactively, as indicated in the diagram by the thick straight line. Additionally, they may want to communicate with each other upon user interaction. Because this happens spontaneously and sparsely, the connections amongst all lamps are set up reactively, as indicated by the dotted lines.\\
 Protocols with an \emph{area-centered} approach assume all nodes are equal in principle, but nearby nodes are both more important than nodes which are farther away and know their neighborhood best. They cluster the network into so-called ``routing zones''. Nodes that are in the same zone maintain their connections among each other proactively, and routes towards nodes from foreign zones are established reactively. \todo{write about intra-zone routing, border nodes etc}
-One example application for this may be a warehouse as illustrated in \ref{fig:ac_img} whose goods (or their packaging) are equipped ith IoT hardware. Employees are thus able to tell details about the stock simply by asking their scanner, which commincated with the other IoT devices. In case a truckload of new goods arrives, \todo{write less fussy}
+One example application for this may be a warehouse as illustrated in \ref{fig:ac_img} whose goods (or their packaging) are equipped with IoT hardware. Employees are thus able to tell details about the stock simply by asking their scanner, which communicated with the other IoT devices. In case a truckload of new goods arrives, \todo{write less fussy}
 
 \subsection{Architecture}
 \label{subsec:architecture}
@@ -192,7 +192,7 @@ While simulations have proven to be useful for protocol design and evaluation, t
 \section{Conclusion}
 \label{sec:conclusion}
 %==============================================================================
-translate old shit. Framework good, protocol bad. scope depends on deployment. framework may be able to accomodate that too. simulations mostly suck. real-world experiences are rare. hooray for testbeds!
+translate old shit. Framework good, protocol bad. scope depends on deployment. framework may be able to accommodate that too. simulations mostly suck. real-world experiences are rare. hooray for testbeds!
 
 \section{Outlook}
 \label{sec:outlook}
