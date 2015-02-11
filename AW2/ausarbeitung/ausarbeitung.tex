@@ -18,6 +18,7 @@
 
 % == Lottes Änderungen ===
 \usepackage{todonotes}
+\usepackage{hyperref}
 
 % großer erster Buchstabe
 \usepackage{lettrine}
@@ -171,19 +172,19 @@ Because hybrid protocols incorporate proactive and reactive protocols as buildin
 \section{Experimental work}
 \label{sec:experiments}
 %==============================================================================
-Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead. \todo{sources, examples}
-Thus, publications documenting real-world experience with hybrid deployments are rare.\\
+Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead. \todo{sources, examples} Thus, publications documenting real-world experience with hybrid deployments are rare.\\
+
+\cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
+\cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
+\cite{WARP} Also compares itself to OLSR in experiments with ``real'' network, but is pretty old and uses 14 laptops \todo{elaborate}\\
+
 While simulations have proven to be useful for protocol design and evaluation, there are two main problems to a simulation-based approach: \todo{find a source for this. STAT.}
 \begin{enumerate}
 \item A simulation is only as good as its model. Without data from ``real world'' experiments, verifying that a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, non?}
 \item Even when the model is adequately accurate, it can never account for the unforeseen quirks which will be encountered in a real environment. Especially in wireless networking, a node's environment (i.e. flying bids, surfaces reflecting differently based on time or weather conditions, unforeseeable radio propagation...) is a big and unforeseeable influence.
 \end{enumerate}
-
-\cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
-\cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
-\cite{WARP} Also compares itself to OLSR in experiments with ``real'' network, but is pretty old and uses 14 laptops \todo{elaborate}
-% TODO: what about simulations?
-
+In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \todo{list examples: DES-Testbed, IoT-Lab, what else?}
+The IoT-Lab\footnote{\url{https://www.iot-lab.info}} was created specifically for experiments revolving around the IoT. It gives access to 2728 wireless sensor nodes located at 6 different sites, which can be bonded\todo{fnd better word} to form a seamless network.\todo{Toll, und jetzt?}
 
 \section{Suitability for the IoT}
 \label{sec:suitability}
