@@ -84,8 +84,17 @@ But while this milestone has been reached, the amount of protocols of any kind s
 \subsection{Existing Protocols}
 \label{subsec:existing_protocols}
 %-------------------------------------------------------------------------------
-An Overview over all existing hybrid routing protocols for \glspl{MANET} and \glspl{DTN} %TODO: was ist mit vanets?
+An Overview over all existing hybrid routing protocols for \glspl{MANET} and \glspl{DTN}\todo{was ist mit vanets?}
 can be found in table \ref{fig:overview}. In the following, a short introduction to each protocol and its characteristic mechanisms will be provided.
+
+\subsubsection{\gls{ZRP}}
+\label{subsec:sharp}
+%...............................................................................
+The Zone Routing Protocol was originally developed for \glspl{MANET} and is one of the most-referenced and -extended hybrid routing protocols to date. It was originally described in an Internet-draft which expired on January 2003\cite{ZRP-Draft}.
+It clusters nodes into so-called \emph{Routing Zones}, which adapt their diameter to the network's degree of mobility and traffic density. Routes inside these routing zones are discovered and maintained in a proactive fashion. In addition to the topology inside their zone, nodes are also aware of topology which all routing zones form.
+To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided.\\
+The draft describes ZRP as a routing \emph{framework}, but describes its own proactive and reactive frameworks, namely the \gls{IARP}\cite{draft-ietf-manet-zone-iarp} for proactive routing inside routing zones, and the \gls{IERP}\cite{draft-ietf-manet-zone-ierp} to discover routes between zones reactively.\\
+There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP} and the \gls{IZR}\cite{IZR}. \todo{do I need to elaborate here?}
 
 \subsubsection{\gls{ZHLS}}
 \label{subsec:sharp}
@@ -96,10 +105,6 @@ can be found in table \ref{fig:overview}. In the following, a short introduction
 %...............................................................................
 
 \subsubsection{\gls{SHARP}}
-\label{subsec:sharp}
-%...............................................................................
-
-\subsubsection{\gls{ZRP}}
 \label{subsec:sharp}
 %...............................................................................
 
@@ -130,6 +135,7 @@ can be found in table \ref{fig:overview}. In the following, a short introduction
 \section{Key aspects of Hybrid Routing Protocols}
 \label{sec:key_aspects}
 %==============================================================================
+\todo{maybe move this so it comes before the existing protocols?}
 The protocols discussed in section \ref{sec:related_work} share common approaches, some of which fundamentally shape the way a routing protocol sees and serves a network. The goal of this section is to identify these key aspects and discuss them with regard to the requirements of IoT environment.
 
 \subsection{Scope}
@@ -150,7 +156,7 @@ The protocols discussed in section \ref{sec:related_work} share common approache
                 \caption{Example of an area-centered network: Goods in a delivery truck and warehouse}
                 \label{fig:ac_img}
         \end{subfigure}
-        \caption{TODO}\label{fig:scope}
+        \caption{Application Scenarios for hybrid routing protocols}\label{fig:scope}
 \end{figure}
 
 Hybrid protocols differ in the way they prioritize routes and decide which of them should be maintained proactively or set up reactively. There are two approaches to this, which this paper dubs the \emph{route-centered} and the \emph{area-centered} approach repectively.\\
