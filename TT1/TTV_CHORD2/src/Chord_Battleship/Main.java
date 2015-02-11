@@ -8,19 +8,21 @@ import de.uniba.wiai.lspi.chord.service.PropertiesLoader;
 
 public class Main {
 
-	static String serverURL = "ocsocket://192.168.14.112:55555/";
-	static String baseClientURL = "ocsocket://192.168.14.112:1235";
-	static int numClients = 3;
+	static String serverURL = "ocsocket://192.168.14.260:5555/";
+	static String baseClientURL = "ocsocket://192.168.14.141:5000";
+	static int numClients = 1;
 	
 	static List<Strategy> nodes = new ArrayList<Strategy>();
 	
 	public static void main(String[] args) {
 		PropertiesLoader.loadPropertyFile();
 		
+		/*
 		System.out.println("Starting server at" + serverURL);
 		Strategy serverNode = new Strategy();
 		serverNode.startServer(serverURL);
 		nodes.add(serverNode);
+		*/
 		
 		launchClients();
 		
