@@ -113,11 +113,15 @@ The \emph{route-centered} approach serves networks in which some nodes, near or 
 Protocols with an \emph{area-centered} approach assume all nodes are equal in principle, but nearby nodes are both more important than nodes which are farther away and know their neighborhood best. They cluster the network into so-called ``routing zones''. Nodes that are in the same zone maintain their connections among each other proactively, and routes towards nodes from foreign zones are established reactively. \todo{write about intra-zone routing, border nodes etc}
 One example application for this may be a warehouse as illustrated in \ref{fig:ac_img} whose goods (or their packaging) are equipped with IoT hardware. Employees are thus able to tell details about the stock simply by asking their scanner, which communicated with the other IoT devices. In case a truckload of new goods arrives, \todo{write less fussy}
 
+\todo{vor- und nachteile?}
+
 \subsection{Architecture}
 \label{subsec:architecture}
 %==============================================================================
 Because hybrid protocols incorporate proactive and reactive protocols as building blocks, their design in terms of architecture-- how it all goes together-- may be more than just a sequence of instructions.
 \todo{gibt es uberhaupt ``pure'' frameworks?}
+
+
 - flexibility, esp. as IoT is relatively new \& broad
 - lightweightness
 - ability to adopt to changes in underlying protocols
@@ -130,7 +134,7 @@ An Overview over all existing hybrid routing protocols for \glspl{MANET} and \gl
 can be found in table \ref{fig:overview}. In the following, a short introduction to each protocol and its characteristic mechanisms will be provided.
 
 \subsubsection{\gls{ZRP}}
-\label{subsec:sharp}
+\label{subsec:zrp}
 %...............................................................................
 The Zone Routing Protocol was originally developed for \glspl{MANET} and is one of the most-referenced and -extended hybrid routing protocols to date. It was originally described in an Internet-draft which expired on January 2003\cite{ZRP-Draft}.
 It clusters nodes into so-called \emph{Routing Zones}, which adapt their diameter to the network's degree of mobility and traffic density. Routes inside these routing zones are discovered and maintained in a proactive fashion. In addition to the topology inside their zone, nodes are also aware of topology which all routing zones form.
@@ -156,11 +160,11 @@ This protocol design bears the dangerous assumption that physical proximity guar
 %...............................................................................
 
 \subsubsection{\gls{WARP}}
-\label{subsec:sharp}
+\label{subsec:warp}
 %...............................................................................
 
 \subsubsection{\gls{HYMAD}}
-\label{subsec:sharp}
+\label{subsec:hymad}
 %...............................................................................
 Just like ZRP and ZHLS\todo{and more?}, nodes form proactively maintained zones. The difference to all previously named protocols is that HYMAD borrows its approach to inter-zone roting not from traditional \gls{MANET} schemes, but from Delay-Tolerant Networks (DTN), where nodes store data until they move and meet other nodes with which they can communicate (this is called \emph{store-and-forward}).
 
@@ -203,6 +207,7 @@ In conclusion, experiences from real-world experiments or deployments are vital 
 \item[Software management \& tools:] Simulation scenario configuration, may it be mobility patterns, hardware configurations, or low-level device control, should be easily accessible.
 \end{description}
 Based on this analysis, it provides an overview over existing facilities and their features. The two biggest testbeds, IoT-Lab\footnote{\url{https://www.iot-lab.info}} and smartsantander\footnote{\url{http://www.smartsantander.eu}} feature between 2,728 and 20,000 nodes and, even though their primary target are \glspl{WSN}, provide mobility through toy trains (IoT-Lab) or public buses (senslab). The latter has an impact on the reproduceability of experiments and limits the influence an experiment designer has on mobility patterns.
+% + conclusion -> use iot-lab?
 
 \section{Suitability for the IoT}
 \label{sec:suitability}
@@ -216,7 +221,7 @@ is rare, as detailed in \ref{sec:experiments}, so all statements about suitabili
 \section{Conclusion}
 \label{sec:conclusion}
 %==============================================================================
-translate old shit. Framework good, protocol bad. scope depends on deployment. framework may be able to accommodate that too. simulations mostly suck. real-world experiences are rare. hooray for testbeds!
+translate old shit. Framework good, protocol bad. scope depends on deployment. framework may be able to accommodate that too. simulations mostly suck. real-world experiences are rare. hooray for testbeds! Use IoT-Lab!
 
 \section{Outlook}
 \label{sec:outlook}
