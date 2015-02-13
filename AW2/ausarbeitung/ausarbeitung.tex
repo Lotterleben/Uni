@@ -195,9 +195,16 @@ While simulations have proven to be useful for protocol design and evaluation, t
 \item A simulation is only as good as its model. Without data from ``real world'' experiments, verifying that a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, non?}
 \item Even when the model is adequately accurate, it can never account for the unforeseen quirks which will be encountered in a real environment. Especially in wireless networking, a node's environment (i.e. flying bids, surfaces reflecting differently based on time or weather conditions, unforeseeable radio propagation...) is a big and unforeseeable influence.
 \end{enumerate}
-In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \cite{testbed-survey} provides a requirement analysis for IoT-ready test beds, as well as an overview over existing facilities and their features. 
- \todo{list examples: DES-Testbed, IoT-Lab, what else?}
-The IoT-Lab\footnote{\url{https://www.iot-lab.info}} was created specifically for experiments revolving around the IoT. It gives access to 2728 wireless sensor nodes located at 6 different sites, which can be bonded\todo{fnd better word} to form a seamless network.\todo{Toll, und jetzt?}
+In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \cite{testbed-survey} provides a requirement analysis for IoT-ready testbeds. It concludes that in order to be suitable for meaningful research, testbeds need to offer the following features to their users:
+\begin{description}
+\item[Experimentation:] The ability to specify, interact with, monitor, and repeat an experiment in a straightforward way. Additionally, the ability to run an experiment through simulation, with conditions similar to the testbed, should be given.  
+\item[Hardware Features:] The hardware provided should be heterogeneous, with various capabilities and sensor types. The number of available devices should be possibly in the hundreds, with the possibly to add more recent devices in the future. In case of testbeds that span across several sites, the possibility of federating them into a big network should be given. The hardware should be subject to regular maintenance.
+\item[Mobility:] Devices of the testbed should be able to move around in various patterns with the help of robotic and automation systems.
+\item[Software management \& tools:] Simulation scenario configuration, may it be mobility patterns, hardware configurations, or low-level device control, should be easily accessible.
+\end{description}
+Based on this analysis, it provides an overview over existing facilities and their features. The two biggest testbeds, IoT-Lab\footnote{\url{https://www.iot-lab.info}} and smartsantander\footnote{\url{http://www.smartsantander.eu}} feature between 2,728 and 20,000 nodes and, even though their primary target are \glspl{WSN}, provide mobility through toy trains (IoT-Lab) or public buses (senslab).
+
+%The IoT-Lab\footnote{\url{https://www.iot-lab.info}} was created specifically for experiments revolving around the IoT. It gives access to 2728 wireless sensor nodes located at 6 different sites, which can be bonded\todo{find better word} to form a seamless network.\todo{Toll, und jetzt?}
 
 \section{Suitability for the IoT}
 \label{sec:suitability}
