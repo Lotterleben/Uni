@@ -77,7 +77,7 @@ briefly mention experimental work, esp emmanuels, reference \ref{sec:experiments
 
 Most research on hybrid routing protocols stems from an era where wireless mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves, and while proactive and reactive protocols were developed and examined, research in hybrid routing stalled. 
 
-This has since changed: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \ref{baccelli_p2p_prl}\\
+This has since changed: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \cite{baccelli_p2p_rpl}\\
 
 But while this milestone has been reached, the amount of protocols of any kind specifically targeted at IoT-like environments is very small. By the time of this writing, the \gls{RPL} is the only dedicated IoT protocol available, and it cannot cover the entire diverse set of requirements that can be found under the umbrella term of ``Internet of Things''. Thus, it is necessary to evaluate protocols designed for environments that share some characteristics with the Internet of Things and may be customized to be a good fit, such as \glspl{DTN}, \glspl{MANET} and, to a certain extent, \glspl{VANET}.\\
 
@@ -139,12 +139,17 @@ The draft describes ZRP as a routing \emph{framework}, but describes its own pro
 There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP} and the \gls{IZR}\cite{IZR}. \todo{do I need to elaborate here?}
 
 \subsubsection{\gls{ZHLS}}
-\label{subsec:sharp}
+\label{subsec:zhls}
 %...............................................................................
+ZHLS is a hierarchical, GPS-based roting protocol. 
+ZHLS clusters all nodes into non-overlapping routing zones based on their location. These clusters form a hierarchy, with the nodes at its very bottom.
+On startup, each node determines their location and joins the zone which spans across the area they're in. Route discovery within the zones is done in a proactive fashion. Whenever a packet needs to travel outside the cluster, it is routed along the zone hierarchy. Because there are no cluster heads, a lot of flooding happens. \todo{disentangle the general WTFness of this protocols's operation}
+This protocol design bears the dangerous assumption that physical proximity guarantees near-optimal connectivity, which has been debunked by \cite{mistaken-axioms}. \todo{go into troubles of georouting?}
 
 \subsubsection{Node-Centric Hybrid Routing}
-\label{subsec:existing_protocols}
+\label{subsec:nchr}
 %...............................................................................
+
 
 \subsubsection{\gls{SHARP}}
 \label{subsec:sharp}
@@ -157,6 +162,8 @@ There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP} and the \gls{IZR}\cit
 \subsubsection{\gls{HYMAD}}
 \label{subsec:sharp}
 %...............................................................................
+Just like ZRP and ZHLS\todo{and more?}, nodes form proactively maintained zones. The difference to all previously named protocols is that HYMAD borrows its approach to inter-zone roting not from traditional \gls{MANET} schemes, but from Delay-Tolerant Networks (DTN), where nodes store data until they move and meet other nodes with which they can communicate (this is called \emph{store-and-forward}).
+
 
 \begin{table*}[t]
     \begin{tabular}{p{0.6\textwidth}|l|l|l}
@@ -181,19 +188,25 @@ Most research concerning hybrid routing protocols stems from a time where large 
 
 \cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
 \cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
-\cite{WARP} Also compares itself to OLSR in experiments with ``real'' network, but is pretty old and uses 14 laptops \todo{elaborate}\\
+In \cite{WARP}, WARP is compared to OLSR in experiments with a ``real'' network, which turns out to consist of 14 unidentified laptops connected to an unspecified number of stationary PCs over ethernet. This research is from 2002, a time when WiFi hardware wasn't necessarily standard in consumer-grade laptops.\\
 
 While simulations have proven to be useful for protocol design and evaluation, there are two main problems to a simulation-based approach: \todo{find a source for this. STAT.}
 \begin{enumerate}
 \item A simulation is only as good as its model. Without data from ``real world'' experiments, verifying that a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, non?}
 \item Even when the model is adequately accurate, it can never account for the unforeseen quirks which will be encountered in a real environment. Especially in wireless networking, a node's environment (i.e. flying bids, surfaces reflecting differently based on time or weather conditions, unforeseeable radio propagation...) is a big and unforeseeable influence.
 \end{enumerate}
-In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \todo{list examples: DES-Testbed, IoT-Lab, what else?}
+In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \cite{testbed-survey} provides a requirement analysis for IoT-ready test beds, as well as an overview over existing facilities and their features. 
+ \todo{list examples: DES-Testbed, IoT-Lab, what else?}
 The IoT-Lab\footnote{\url{https://www.iot-lab.info}} was created specifically for experiments revolving around the IoT. It gives access to 2728 wireless sensor nodes located at 6 different sites, which can be bonded\todo{fnd better word} to form a seamless network.\todo{Toll, und jetzt?}
 
 \section{Suitability for the IoT}
 \label{sec:suitability}
 %==============================================================================
+Because most of the discussed hybrid protocols have not been designed for the IoT, not all of their key characteristics may be suitable for such a deployment. As discussed in \ref{sec:key_aspects}, routes can be categorized to be either route- or area-centered in terms of scope, and either frameworks or monolithic protocols in terms of architecture. 
+Some of these aspects may foster behavior which is more suitable for the IoT than others.
+Experience with both hybrid protocols and IoT environments \todo{das kann doch nicht wahr sein.. noch mal nach papers suchen!}
+is rare, as detailed in \ref{sec:experiments}, so all statements about suitability have to be taken as educated guesses rather than hard truths.
+
 
 \section{Conclusion}
 \label{sec:conclusion}
