@@ -85,6 +85,7 @@ But while this milestone has been reached, the amount of protocols of any kind s
 
 The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built.\\ 
 The rest of this paper is organized as follows. \todo{TODO! double-check!}
+In the next section, key aspects of hybrid routing protocols will be introduced. Section \ref{sec:existing_protocols} will then go into the specifics of existing protocols, and how they exhibit these characteristics. Following up, section \ref{sec:suitability} will discuss which of these aspects and protocols are the most promising for the IoT, and section \ref{sec:experiments} will explain how this has been and will be verified through experiments. Finally, sections \ref{sec:conclusion} and \ref{sec:outlook} will provide a conclusion and an outlook towards future work.
 
 \section{Key aspects of Hybrid Routing Protocols}
 \label{sec:key_aspects}
@@ -136,13 +137,13 @@ Of course, this comes at the cost of lightweightedness: Approaches which are ver
 %- ability to adopt to changes in underlying protocols
 %- customizability? (depending on deployment)
 
-\subsection{Existing Protocols}
-\label{subsec:existing_protocols}
+\section{Existing Protocols}
+\label{sec:existing_protocols}
 %-------------------------------------------------------------------------------
 An Overview over all existing hybrid routing protocols for \glspl{MANET} and \glspl{DTN}\todo{was ist mit vanets?}
 can be found in table \ref{fig:overview}. In the following, a short introduction to each protocol and its characteristic mechanisms will be provided.
 
-\subsubsection{\gls{ZRP}}
+\subsection{\gls{ZRP}}
 \label{subsec:zrp}
 %...............................................................................
 The Zone Routing Protocol was originally developed for \glspl{MANET} and is one of the most-referenced and -extended hybrid routing protocols to date. It was originally described in an Internet-draft which expired on January 2003\cite{ZRP-Draft}.
@@ -151,7 +152,7 @@ To find routes to nodes in foreign routing zones, the reactive protocol makes us
 The draft describes ZRP as a routing \emph{framework}, but describes its own proactive and reactive frameworks, namely the \gls{IARP}\cite{draft-ietf-manet-zone-iarp} for proactive routing inside routing zones, and the \gls{IERP}\cite{draft-ietf-manet-zone-ierp} to discover routes between zones reactively.\\
 There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP} and the \gls{IZR}\cite{IZR}. \todo{do I need to elaborate here?}
 
-\subsubsection{\gls{ZHLS}}
+\subsection{\gls{ZHLS}}
 \label{subsec:zhls}
 %...............................................................................
 ZHLS is a hierarchical, GPS-based roting protocol. 
@@ -159,20 +160,20 @@ ZHLS clusters all nodes into non-overlapping routing zones based on their locati
 On startup, each node determines their location and joins the zone which spans across the area they're in. Route discovery within the zones is done in a proactive fashion. Whenever a packet needs to travel outside the cluster, it is routed along the zone hierarchy. Because there are no cluster heads, a lot of flooding happens. \todo{disentangle the general WTFness of this protocols's operation}
 This protocol design bears the dangerous assumption that physical proximity guarantees near-optimal connectivity, which has been debunked by \cite{mistaken-axioms}. \todo{go into troubles of georouting?}
 
-\subsubsection{Node-Centric Hybrid Routing}
+\subsection{Node-Centric Hybrid Routing}
 \label{subsec:nchr}
 %...............................................................................
 NCHR serves networks which contain some nodes , called \emph{netmarks}, that offer services to their peers, such as being a DNS server or an Internet Access Point.
 
-\subsubsection{\gls{SHARP}}
+\subsection{\gls{SHARP}}
 \label{subsec:sharp}
 %...............................................................................
 
-\subsubsection{\gls{WARP}}
+\subsection{\gls{WARP}}
 \label{subsec:warp}
 %...............................................................................
 
-\subsubsection{\gls{HYMAD}}
+\subsection{\gls{HYMAD}}
 \label{subsec:hymad}
 %...............................................................................
 Just like ZRP and ZHLS\todo{and more?}, nodes form proactively maintained zones. The difference to all previously named protocols is that HYMAD borrows its approach to inter-zone roting not from traditional \gls{MANET} schemes, but from Delay-Tolerant Networks (DTN), where nodes store data until they move and meet other nodes with which they can communicate (this is called \emph{store-and-forward}).
