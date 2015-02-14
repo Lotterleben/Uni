@@ -56,6 +56,7 @@ With the \gls{IoT}, new use cases and requirements for mobile mesh networks have
 %==============================================================================
 TODO
 
+
 \subsection{What is the Internet of Things?}
 \label{subsec:IoT}
 %==============================================================================
@@ -161,7 +162,7 @@ This protocol design bears the dangerous assumption that physical proximity guar
 \subsubsection{Node-Centric Hybrid Routing}
 \label{subsec:nchr}
 %...............................................................................
-
+NCHR serves networks which contain some nodes , called \emph{netmarks}, that offer services to their peers, such as being a DNS server or an Internet Access Point.
 
 \subsubsection{\gls{SHARP}}
 \label{subsec:sharp}
@@ -199,7 +200,7 @@ Just like ZRP and ZHLS\todo{and more?}, nodes form proactively maintained zones.
 Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead. \todo{sources, examples} Thus, publications documenting real-world experience with hybrid deployments are rare.\\
 
 \cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
-\cite{baccelli_p2p_prl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
+\cite{baccelli_p2p_rpl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
 In \cite{WARP}, WARP is compared to OLSR in experiments with a ``real'' network, which turns out to consist of 14 unidentified laptops connected to an unspecified number of stationary PCs over ethernet. This research is from 2002, a time when WiFi hardware wasn't necessarily standard in consumer-grade laptops.\\
 
 While simulations have proven to be useful for protocol design and evaluation, there are two main problems to a simulation-based approach: \todo{find a source for this. STAT.}
