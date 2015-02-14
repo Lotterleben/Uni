@@ -77,7 +77,7 @@ briefly mention experimental work, esp emmanuels, reference \ref{sec:experiments
 
 Most research on hybrid routing protocols stems from an era where wireless mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves, and while proactive and reactive protocols were developed and examined, research in hybrid routing stalled. 
 
-This has since changed: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \cite{baccelli_p2p_rpl}\\
+This has since changed: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} has been deployed in large-scale energy grid networks (TODO: quelle). The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \cite{baccelli_p2p_rpl} \cite{HYMAD}\\
 
 But while this milestone has been reached, the amount of protocols of any kind specifically targeted at IoT-like environments is very small. By the time of this writing, the \gls{RPL} is the only dedicated IoT protocol available, and it cannot cover the entire diverse set of requirements that can be found under the umbrella term of ``Internet of Things''. Thus, it is necessary to evaluate protocols designed for environments that share some characteristics with the Internet of Things and may be customized to be a good fit, such as \glspl{DTN}, \glspl{MANET} and, to a certain extent, \glspl{VANET}.\\
 
@@ -118,14 +118,18 @@ One example application for this may be a warehouse as illustrated in \ref{fig:a
 \subsection{Architecture}
 \label{subsec:architecture}
 %==============================================================================
-Because hybrid protocols incorporate proactive and reactive protocols as building blocks, their design in terms of architecture-- how it all goes together-- may be more than just a sequence of instructions.
-\todo{gibt es uberhaupt ``pure'' frameworks?}
+Because hybrid protocols incorporate proactive and reactive protocols as building blocks, their design in terms of architecture-- how it all goes together-- may be more than just a sequence of instructions. \todo{gibt es uberhaupt ``pure'' frameworks?}
+They may either be \emph{monolithic protocols} which have a reactive and a proactive component firmly in place. Oftentimes, these components are variations of well-known proactive and reactive protocols, customized to improve the hybrid protocol's overall performance or decrease traffic- or computational overhead. For example, \cite{baccelli_p2p_rpl} piggybacks reactive control traffic onto already existing, proactive RPL messages, thus avoiding unnecessary traffic and saving battery life. \todo{mehr Beispielprotokolle auflistem}
+This bears great potential for optimization, but complicates code re-use and the deployment of updates.\\
+Or, hybrid solutions may be organized as a mere \emph{framework} with which can be used to bring together different proactive or reactive protocols. Many existing hybrid solutions such as SHARP, Node-Centric Hybrid Routing and HYMAD chose this route, but with a twist: one component, for example the reactive protocol, is fixed, while the proactive protocol can be exchanged at will. This architecture allows for a great deal of flexibility: If a new version of a protocol that is in use surfaces, it can be adopted quickly. The same with alternative protocols which prove to serve some or all use-cases better. Existing implementations of well-known proactive or reactive protocols can be integrated and re-used.
+A hybrid framework bears the possibility to be customized for certain deployments, because the most suitable proactive and reactive protocols for the task may be picked and combined seamlessly.
+Of course, this comes at the cost of lightweightedness: Approaches which are very flexible usually produce a higher amount of overhead. Additionally, if preexisting specifications and implementations are used, it may be hard to optimize them in terms of size and computational or traffic overhead.
 
 
-- flexibility, esp. as IoT is relatively new \& broad
-- lightweightness
-- ability to adopt to changes in underlying protocols
-- customizability? (depending on deployment)
+%- flexibility, esp. as IoT is relatively new \& broad
+%- lightweightness
+%- ability to adopt to changes in underlying protocols
+%- customizability? (depending on deployment)
 
 \subsection{Existing Protocols}
 \label{subsec:existing_protocols}
@@ -173,7 +177,7 @@ Just like ZRP and ZHLS\todo{and more?}, nodes form proactively maintained zones.
     \begin{tabular}{p{0.6\textwidth}|l|l|l}
         Name & Scope & Architecture & Published \\
         \hline
-        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\
+        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\ % proactive fixed
         \gls{SHARP}\cite{SHARP} & Route & Framework & 2003 \\ %TODO: only for reactive!
         P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
         \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area & Protocol & 2002/2004\\
