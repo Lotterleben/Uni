@@ -174,7 +174,7 @@ The Zone Routing Protocol was originally developed for \glspl{MANET} and is one 
 It clusters nodes into so-called \emph{Routing Zones}, which adapt their diameter to the network's degree of mobility and traffic density. Routes inside these routing zones are discovered and maintained in a proactive fashion. In addition to the topology inside their zone, nodes are also aware of topology which all routing zones form.
 To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided.\\
 The draft describes ZRP as a routing \emph{framework}, but describes its own proactive and reactive frameworks, namely the \gls{IARP}\cite{draft-ietf-manet-zone-iarp} for proactive routing inside routing zones, and the \gls{IERP}\cite{draft-ietf-manet-zone-ierp} to discover routes between zones reactively.\\
-There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP} and the \gls{IZR}\cite{IZR}. \todo
+There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{WARP}  and the \gls{IZR}\cite{IZR}. \todo
 {do I need to elaborate here?}
 
 \subsection{\gls{ZHLS}}
@@ -203,10 +203,6 @@ For reactive routing, AODV is used, but may be exchanged for any other reactive 
 
 \cite{SHARP} does not offer a solution as to how hot destinations may be identified by the participating nodes.
 
-\subsection{\gls{WARP}}
-\label{subsec:warp}
-%...............................................................................
-
 \subsection{\gls{HYMAD}}
 \label{subsec:hymad}
 %...............................................................................
@@ -220,8 +216,8 @@ Just like ZRP and ZHLS\todo{and more?}, nodes participating in HYMAD \cite{HYMAD
         Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\ % proactive fixed
         \gls{SHARP}\cite{SHARP} & Area and Route & Framework & 2003 \\ %TODO: only for reactive!
         P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
-        \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area & Protocol & 2002/2004\\
-        \gls{WARP}\cite{WARP} & Area and Route & Protocol & 2002\\
+        \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} \cite{WARP} & Area & Protocol & 2002/2004\\
+%        \gls{WARP}\cite{WARP} & Area and Route & Protocol & 2002\\
         \gls{ZHLS}\cite{ZHLS} & Area & Protocol & 1999\\
         \gls{HYMAD}\cite{HYMAD} & Area & Framework & 2010\\ % Only DTN protocol is variable!
     \end{tabular}
