@@ -86,7 +86,7 @@ But while this milestone has been reached, the amount of protocols of any kind s
 \item[\glspl{VANET}] Unfortunately, while \glspl{VANET} have seen a lot of research concerning hybrid protocols, their characteristics differ too drastically from the IoT: node mobility in VANETs is extremely high, with somewhat ordered movement patterns, as cars usually only move on streets, which are known beforehand. And because it has access to a car's energy system, battery life is not as critical.
 \end{description}
 
-The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built.\\
+The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built.\\ \todo{mehr herausarbeiten? Aber wohin damit? :(}
 The rest of this paper is organized as follows. % \todo{TODO! double-check!}
 In the next section, requirements for a hybrid routing protocol will be listed, followed by an introduction to key aspects of hybrid routing protocols. Section \ref{sec:existing_protocols} will then go into the specifics of existing protocols, and how they exhibit these characteristics. Following up, section \ref{sec:suitability} will discuss which of these aspects and protocols are the most promising for the IoT, and section \ref{sec:experiments} will explain how this has been and will be verified through experiments. Finally, sections \ref{sec:conclusion} and \ref{sec:outlook} will provide a conclusion and an outlook towards future work.
 
@@ -186,11 +186,15 @@ This protocol design bears the dangerous assumption that physical proximity guar
 \subsection{Node-Centric Hybrid Routing}
 \label{subsec:nchr}
 %...............................................................................
-NCHR serves networks which contain some nodes, called \emph{netmarks}, that offer services to their peers, such as being a DNS server or an Internet Access Point. All nodes in the network maintain proactive routes towards the netmarks, while other connections are established reactively. The draft uses SOAR\cite{SOAR} for this, but maintains that AODV\cite{RFC-3561} or DSR\cite{DSR} may be used just as easily.
+NCHR\cite{Roy_nodecentric} serves networks which contain some nodes, called \emph{netmarks}, that offer services to their peers, such as being a DNS server or an Internet Access Point. All nodes in the network maintain proactive routes towards the netmarks, while other connections are established reactively. The draft uses SOAR\cite{SOAR} for this, but maintains that AODV\cite{RFC-3561} or DSR\cite{DSR} may be used just as easily.
 
 \subsection{\gls{SHARP}}
 \label{subsec:sharp}
 %...............................................................................
+This protocol offers each application the possibility to specify their needs in terms of latency and loss rate in the form of a metric, which is then used to guide the trade-off between proactive protocol overhead and reactive loss of reliability and latency.
+SHARP combines both area-centered and route-centered paradigms. Roting zones are established around \emph{hot destinations}, i.e. nodes at which a majority of the traffic is directed. Gateways, nodes that offer a service, or sink nodes which collect sensor data in a Wireless Sensor Network may qualify as such a hot destination.
+
+\cite{SHARP} does not offer a solution as to how hot destinations may be identified by the participating nodes.
 
 \subsection{\gls{WARP}}
 \label{subsec:warp}
@@ -199,18 +203,18 @@ NCHR serves networks which contain some nodes, called \emph{netmarks}, that offe
 \subsection{\gls{HYMAD}}
 \label{subsec:hymad}
 %...............................................................................
-Just like ZRP and ZHLS\todo{and more?}, nodes form proactively maintained zones. The difference to all previously named protocols is that HYMAD borrows its approach to inter-zone roting not from traditional \gls{MANET} schemes, but from Delay-Tolerant Networks (DTN), where nodes store data until they move and meet other nodes with which they can communicate (this is called \emph{store-and-forward}).
+Just like ZRP and ZHLS\todo{and more?}, nodes participating in HYMAD \cite{HYMAD} form proactively maintained zones. The difference to all previously named protocols is that HYMAD borrows its approach to inter-zone roting not from traditional \gls{MANET} schemes, but from Delay-Tolerant Networks (DTN), where nodes store data until they move and meet other nodes with which they can communicate (this is called \emph{store-and-forward}).
 
 
 \begin{table*}[t]
-    \begin{tabular}{p{0.6\textwidth}|l|l|l}
+    \begin{tabular}{p{0.5\textwidth}|l|l|l}
         Name & Scope & Architecture & Published \\
         \hline
         Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\ % proactive fixed
         \gls{SHARP}\cite{SHARP} & Route & Framework & 2003 \\ %TODO: only for reactive!
         P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
         \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area & Protocol & 2002/2004\\
-        \gls{WARP}\cite{WARP} & Area & Protocol & 2002\\
+        \gls{WARP}\cite{WARP} & Area and Route & Protocol & 2002\\
         \gls{ZHLS}\cite{ZHLS} & Area & Protocol & 1999\\
         \gls{HYMAD}\cite{HYMAD} & Area & Framework & 2010\\ % Only DTN protocol is variable!
     \end{tabular}
@@ -257,13 +261,15 @@ Experience with both hybrid protocols and IoT environments is rare, as detailed 
 Provided there are ways to slim down the code to a manageable size and control overhead, frameworks appear to be the more suitable approach, as they are future-proof and flexible.
 
 
-\section{Conclusion}
+\section{Conclusion and Outlook}
 \label{sec:conclusion}
 %==============================================================================
 translate old stuff. Framework good, protocol bad. scope depends on deployment. framework may be able to accommodate that too. simulations mostly suck. real-world experiences are rare. get them! \todo{but with what?} hooray for testbeds! Use IoT-Lab!
 
-\section{Outlook}
-\label{sec:outlook}
+As shown, many existing roting protocols reinvent the wheel by specifying their own proactive or reactive components. While these are often based on well-known protocols such as AODV or \todo{which proactive basis is often used? sure isnt OLSR...}, each modification should be thoroughly justified. The re-use of existing, standardized and well-understood proactive and reactive protocols may help to avoid specification mishaps and save time.
+
+%\section{Outlook}
+%\label{sec:outlook}
 %==============================================================================
 figure out ways to slim down frameworks. get real-world experiences. verify vermutungen oder auch nicht. so much to do!
 
