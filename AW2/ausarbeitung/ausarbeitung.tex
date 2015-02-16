@@ -53,7 +53,7 @@ With the \gls{IoT}, new use cases and requirements for mobile mesh networks have
 \section{Introduction}
 \label{sec:Intro}
 %==============================================================================
-TODO
+%TODO
 
 
 \subsection{What is the Internet of Things?}
@@ -149,7 +149,7 @@ Because hybrid protocols incorporate proactive and reactive protocols as buildin
 \begin{description}
 \item[protocol] They may either be \emph{monolithic protocols} which have a reactive and a proactive component firmly in place. Oftentimes, these components are variations of well-known proactive and reactive protocols, customized to improve the hybrid protocol's overall performance or decrease traffic- or computational overhead. For example, \cite{baccelli_p2p_rpl} piggybacks reactive control traffic onto already existing, proactive RPL messages, thus avoiding unnecessary traffic and saving battery life. %\todo{mehr Beispielprotokolle auflistem}
 This bears great potential for optimization, but complicates code re-use and the deployment of updates.\\
-\item[framework] Or, hybrid solutions may be organized as a mere \emph{framework} with which can be used to bring together different proactive or reactive protocols. Many existing hybrid solutions such as SHARP, Node-Centric Hybrid Routing and HYMAD chose this route, but with a twist: one component, for example the reactive protocol, is fixed, while the proactive protocol can be exchanged at will. This architecture allows for a great deal of flexibility: If a new version of a protocol that is in use surfaces, it can be adopted quickly. The same with alternative protocols which prove to serve some or all use-cases better. Existing implementations of well-known proactive or reactive protocols can be integrated and re-used.
+\item[framework] Or, hybrid solutions may be organized as a mere \emph{framework} with which can be used to bring together different proactive or reactive protocols. All existing hybrid solutions such as SHARP, Node-Centric Hybrid Routing and HYMAD chose this route, but with a twist: one component, for example the reactive protocol, is fixed, while the proactive protocol can be exchanged at will. This architecture allows for a great deal of flexibility: If a new version of a protocol that is in use surfaces, it can be adopted quickly. The same with alternative protocols which prove to serve some or all use-cases better. Existing implementations of well-known proactive or reactive protocols can be integrated and re-used.
 A hybrid framework bears the possibility to be customized for certain deployments, because the most suitable proactive and reactive protocols for the task may be picked and combined seamlessly.
 Of course, this comes at the cost of lightweightedness: Approaches which are very flexible usually produce a higher amount of overhead. Additionally, if preexisting specifications and implementations are used, it may be hard to optimize them in terms of size and computational or traffic overhead.
 \end{description}
@@ -168,6 +168,8 @@ can be found in table \ref{fig:overview}. In the following, a short introduction
 \subsection{\gls{ZRP}}
 \label{subsec:zrp}
 %...............................................................................
+\todo{Illustration einfügen}
+
 The Zone Routing Protocol was originally developed for \glspl{MANET} and is one of the most-referenced and -extended hybrid routing protocols to date. It was originally described in an Internet-draft which expired on January 2003\cite{ZRP-Draft}.
 It clusters nodes into so-called \emph{Routing Zones}, which adapt their diameter to the network's degree of mobility and traffic density. Routes inside these routing zones are discovered and maintained in a proactive fashion. In addition to the topology inside their zone, nodes are also aware of topology which all routing zones form.
 To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided.\\
@@ -191,8 +193,13 @@ NCHR\cite{Roy_nodecentric} serves networks which contain some nodes, called \emp
 \subsection{\gls{SHARP}}
 \label{subsec:sharp}
 %...............................................................................
-This protocol offers each application the possibility to specify their needs in terms of latency and loss rate in the form of a metric, which is then used to guide the trade-off between proactive protocol overhead and reactive loss of reliability and latency.
-SHARP combines both area-centered and route-centered paradigms. Roting zones are established around \emph{hot destinations}, i.e. nodes at which a majority of the traffic is directed. Gateways, nodes that offer a service, or sink nodes which collect sensor data in a Wireless Sensor Network may qualify as such a hot destination.
+This protocol claims to offer each application the possibility to specify their needs in terms of latency and loss rate in the form of a metric, which is then used to guide the trade-off between proactive protocol overhead and reactive loss of reliability and latency.
+SHARP combines both area-centered and route-centered paradigms in what could be called a route-centered-in-area-centered approach. Routing zones are established around \emph{hot destinations}, i.e. nodes at which a majority of the traffic is directed. Gateways, nodes that offer a service, or sink nodes which collect sensor data in a Wireless Sensor Network may qualify as such a hot destination. Inside these routing zones, a \gls{DODAG} is formed with the hot destination as root, and proactive routes are kept \emph{only towards the hot destination node}. SHARP claims that this help meet the application requirements stated above, but it comes at the cost of enhanced traffic overhead and uneven battery draining, because nodes closer to the hot destination will forward more traffic than the ones on the outskirts.\\
+If the desired destination is outside of the routing zone, a reactive route discovery is initiated. This is similar to ZRP's approach.\\
+SHARP's routing strategy relies heavily on the assumption that only special nodes are the target of traffic, and is likely to fail in environments where all nodes are equal.\\
+\todo{Illustration einfügen}
+SHARP defines its own proactive protocol, the SHARP Proactive Routing protocol (SPR), which is based on DSDV\cite{DSDV} and TORA\cite{TORA}. Neither of there protocols are relevant in MANET routing as of today.
+For reactive routing, AODV is used, but may be exchanged for any other reactive protocol.
 
 \cite{SHARP} does not offer a solution as to how hot destinations may be identified by the participating nodes.
 
@@ -211,7 +218,7 @@ Just like ZRP and ZHLS\todo{and more?}, nodes participating in HYMAD \cite{HYMAD
         Name & Scope & Architecture & Published \\
         \hline
         Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\ % proactive fixed
-        \gls{SHARP}\cite{SHARP} & Route & Framework & 2003 \\ %TODO: only for reactive!
+        \gls{SHARP}\cite{SHARP} & Area and Route & Framework & 2003 \\ %TODO: only for reactive!
         P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
         \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} & Area & Protocol & 2002/2004\\
         \gls{WARP}\cite{WARP} & Area and Route & Protocol & 2002\\
@@ -258,8 +265,10 @@ Because most of the discussed hybrid protocols have not been designed for the Io
 Some of these aspects may foster behavior which is more suitable for the IoT than others.
 Experience with both hybrid protocols and IoT environments is rare, as detailed in \ref{sec:experiments}, so all statements about suitability have to be taken as educated guesses rather than hard truths.
 
-Provided there are ways to slim down the code to a manageable size and control overhead, frameworks appear to be the more suitable approach, as they are future-proof and flexible.
+The scope of a routing protocol heavily depends on the kind of network it serves. Therefore, none of the discussed approaches is necessarily better than the other. Time may tell which kind of use case and thus which kind of scope is more common.
+\todo{what if I ``hack'' a route-centered one in such a way that I define all n-hop neighbors as sink nodes, too? I'd have a hybrid-hybrid :D SHARP and ZHLS basically do this...}
 
+Provided there are ways to slim down the code to a manageable size and control overhead, frameworks appear to be the more suitable approach, as they are future-proof and flexible. As mentioned in \ref{sec:existing_protocols}, many of the protocols that were the basis for modifications are considered outdated now. While this took decades in this instance, the IoT may be considered to be just as established a field as MANETs were at the turn of the millennium. Thus, it is not unlikely it will be subject to changes and paradigm shifts, too, and a hybrid routing protocol for the IoT should be able to account for this to a certain extent.
 
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
