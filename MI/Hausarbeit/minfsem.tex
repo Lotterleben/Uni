@@ -50,8 +50,13 @@
 \usepackage[pdftex]{graphicx}
 \usepackage[figure,table]{hypcap}
 
-%=== lottes changes
+%=== lottes changes ===
 \usepackage{todonotes}
+
+% Glossary benutzen
+\usepackage{glossaries}
+\loadglsentries[main]{glossary}
+\makeglossaries
 
 \setcounter{page}{1}
 \ninept
@@ -145,14 +150,17 @@ While this is a relatively easy task for humans, computers still struggle with t
   \label{fig:xkcd}
 \end{figure}
 
-The term \enph{Open Source Intelligence (OSINT)} describes publicly accessible information which has been gathered and grouped in order to answer a specific question. While this information can be gathered from anywhere, including newspaper reports, public registries \todo{mehr analogweltbeispiele}, the internet has grown to be a fruitful source of OSINT. Communication has moved online, and, in part, into the public eye, with people debating on twitter, facebook or through their own blogs. Users display their knowledge and interests on their public profiles and help sites such as StackExchange or Quora, oost their resumé on LinkedIn and track and document their lives with the help of fitness apps, Instagram, swarm.app and yelp. Even with more prohibitive privacy settings, researchers can oftentimes extract metadata from the traces a person's online activity leaves:\\
-Through nickname reuse, full identities can be reconstructed even from seemingly anonymous interactions. Even if a facebook profile is not public, access to its friend lists and their fried lists reveals information about social structures and cliques. Twitter can be searched for \@-mentions to a public profile, reconstructing the contents of a tweet from the public reactions to it.
+The term \emph{\gls{OSINT}} describes publicly accessible information which has been gathered, processed, exploited, analyzed and grouped in order to support a specific mission.
+While this information can be gathered from anywhere, including newspaper, radio or TV reports, public registries \todo{mehr analogweltbeispiele}, the Internet has grown to be a fruitful source of OSINT. Communication has moved online, and, in part, into the public eye, with people debating on twitter, facebook or through their own blogs. Users display their knowledge and interests on their public profiles and help sites such as StackExchange or Quora, post their resumé on LinkedIn and track and document their lives with the help of fitness apps, Instagram, swarm.app and yelp. Even with more prohibitive privacy settings, researchers can oftentimes extract metadata from the traces a person's online activity leaves:\\
+Through nickname reuse, full identities can be reconstructed even from seemingly anonymous interactions. Even if a facebook profile is not public, access to its friend lists and their fried lists reveals information about social structures and cliques which can be identified through \gls{SNA}. Twitter can be searched for \@-mentions to a public profile, reconstructing the contents of a tweet from the public reactions to it.
 
 \todo{what about grindr, tinder? what about privacy policies?}
 \todo{sorce, except for handbook of intelligence?}
 \section{Object vs. Face Recognition}
 \label{sec:object_vs_face}
 %===============================================================================
+
+
 
 
 
