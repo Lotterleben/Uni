@@ -52,6 +52,7 @@
 
 %=== lottes changes ===
 \usepackage{todonotes}
+\usepackage{wrapfig}
 
 % Glossary benutzen
 \usepackage{glossaries}
@@ -143,19 +144,20 @@ While this is a relatively easy task for humans, computers still struggle with t
 \item[Object Localization:] Where is the chair in this picture?
 \end{description}
 
-\begin{figure}
-  \centering
-    \includegraphics[width=0.3\textwidth]{images/xkcd}
-  \caption{TODO cite xkcd}
-  \label{fig:xkcd}
-\end{figure}
-
 The term \emph{\gls{OSINT}} describes publicly accessible information which has been gathered, processed, exploited, analyzed and grouped in order to support a specific mission.
-While this information can be gathered from anywhere, including newspaper, radio or TV reports, public registries \todo{mehr analogweltbeispiele}, the Internet has grown to be a fruitful source of OSINT. Communication has moved online, and, in part, into the public eye, with people debating on twitter, facebook or through their own blogs. Users display their knowledge and interests on their public profiles and help sites such as StackExchange or Quora, post their resumé on LinkedIn and track and document their lives with the help of fitness apps, Instagram, swarm.app and yelp. Even with more prohibitive privacy settings, researchers can oftentimes extract metadata from the traces a person's online activity leaves:\\
+While this information can be gathered from anywhere, including newspaper, radio or TV reports, public registries \todo{mehr analogweltbeispiele}, the Internet has grown to be a fruitful source of OSINT. Communication has moved online, and, in part, into the public eye, with people debating on twitter, facebook or through their own blogs. Users display their knowledge and interests on their public profiles and help sites such as StackExchange or Quora, post their resumé on LinkedIn and track and document their lives with the help of fitness apps, Instagram, swarm.app, flickr, YouTube, yelp, and many more. Even with more prohibitive privacy settings, researchers can oftentimes extract metadata from the traces a person's online activity leaves:\\
 Through nickname reuse, full identities can be reconstructed even from seemingly anonymous interactions. Even if a facebook profile is not public, access to its friend lists and their fried lists reveals information about social structures and cliques which can be identified through \gls{SNA}. Twitter can be searched for \@-mentions to a public profile, reconstructing the contents of a tweet from the public reactions to it.
 
 \todo{what about grindr, tinder? what about privacy policies?}
 \todo{sorce, except for handbook of intelligence?}
+
+\begin{figure}[h!]
+\centering
+    \includegraphics[width=0.3\textwidth]{images/xkcd}
+\caption{bla}
+\label{blubb}
+\end{figure}
+
 \section{Object vs. Face Recognition}
 \label{sec:object_vs_face}
 %===============================================================================
@@ -166,6 +168,8 @@ Through nickname reuse, full identities can be reconstructed even from seemingly
 
 
 \newpage
+\printglossary
+
 \nocite{*}
 \bibliographystyle{IEEEbib}
 \bibliography{minfsem_tmpl} % requires file minfsem_tmpl.bib
