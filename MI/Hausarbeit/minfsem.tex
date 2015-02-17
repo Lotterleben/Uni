@@ -29,7 +29,7 @@
 %------------------------------------------------------------------------------------------
 %  !  !  !  !  !  !  !  !  !  !  !  ! user defined variables  !  !  !  !  !  !  !  !  !  !  !  !  !  !
 % Please use these commands to define title and author of the paper:
-\def\papertitle{Is it a bird? Is it a plane? It's...\protect\\ \vspace{2 mm} {\small An overview over object recognition problems and advances.}}
+\def\papertitle{Is it a bird? Is it a plane? It's...\protect\\ \vspace{2 mm} {\small An overview over object recognition problems and advances with regard to the requirements of Open Source Intelligence.}}
 \def\paperauthorA{Lotte Steenbrink}
 
 
@@ -128,6 +128,21 @@ Recognizing an categorizing objects in an image is one of the problems which are
 \section{Introduction}
 \label{sec:intro}
 %===============================================================================
+
+The term \emph{\gls{OSINT}} describes publicly accessible information which has been gathered, processed, exploited, analyzed and grouped in order to support a specific mission.\todo{source, except for handbook of intelligence?}
+While this information can be gathered from anywhere, including newspaper, radio or TV reports, public registries \todo{mehr analogweltbeispiele}, the Internet has grown to be a fruitful source of OSINT. Communication has moved online, and, in part, into the public eye, with people debating on twitter, facebook or through their own blogs. Users display their knowledge and interests on their public profiles and help sites such as StackExchange or Quora, post their resumé on LinkedIn and track and document their lives with the help of fitness apps, Instagram, swarm.app, flickr, YouTube, yelp, and many more. Even with more prohibitive privacy settings, researchers can oftentimes extract metadata from the traces a person's online activity leaves:\\
+Through nickname reuse, full identities can be reconstructed even from seemingly anonymous interactions. Even if a facebook profile is not public, access to its friend lists and their fried lists reveals information about social structures and cliques which can be identified through \gls{SNA}. Twitter can be searched for \@-mentions to a public profile, reconstructing the contents of a tweet from the public reactions to it.\\ \todo{what about grindr, tinder? what about privacy policies?}
+The ability to sift through pictures, tag, classify and put them into context automatically would pose a big step forward for the accumulation of OSINT.
+<nette ueberleitung>
+
+
+
+\begin{figure}[h!]
+\centering
+    \includegraphics[width=0.3\textwidth]{images/xkcd}
+\caption{TODO}
+\label{fig:xkcd}
+\end{figure}
 % three types: 1. die präsenz eines bestimmten(!) objekts/objektart zu erkennen in einem bild (detection), 2. die position eines bestimmten(!) objekts/objektart zu finden (localization)  oder z.b. auch 3. rauszufinden was für eine objektart den grade da ist (categorisation? da sind diese convolutional neural nets super drin. das ist aber superschwierig und deep learning ist da grade state of the art)
 
 
@@ -139,32 +154,48 @@ While this is a relatively easy task for humans, computers still struggle with t
 % There are several subfields that make up the umbrella term of ``Object recognition''. some of which rely on each other:
 \begin{description}
 \item[Object detection] Is there a chair in this image?
-\item[Object Identification:] Is that a chair?
-\item[Object Categorization:] Does this image contain furniture?
-\item[Object Localization:] Where is the chair in this picture?
+\item[Object identification:] Is that a chair?
+\item[Object categorization:] Does this image contain furniture?
+\item[Object localization:] Where is the chair in this picture?
 \end{description}
 
-The term \emph{\gls{OSINT}} describes publicly accessible information which has been gathered, processed, exploited, analyzed and grouped in order to support a specific mission.
-While this information can be gathered from anywhere, including newspaper, radio or TV reports, public registries \todo{mehr analogweltbeispiele}, the Internet has grown to be a fruitful source of OSINT. Communication has moved online, and, in part, into the public eye, with people debating on twitter, facebook or through their own blogs. Users display their knowledge and interests on their public profiles and help sites such as StackExchange or Quora, post their resumé on LinkedIn and track and document their lives with the help of fitness apps, Instagram, swarm.app, flickr, YouTube, yelp, and many more. Even with more prohibitive privacy settings, researchers can oftentimes extract metadata from the traces a person's online activity leaves:\\
-Through nickname reuse, full identities can be reconstructed even from seemingly anonymous interactions. Even if a facebook profile is not public, access to its friend lists and their fried lists reveals information about social structures and cliques which can be identified through \gls{SNA}. Twitter can be searched for \@-mentions to a public profile, reconstructing the contents of a tweet from the public reactions to it.
+Significant leaps have been made in the subfield of face and human detection and recognition: Consumer-grade cameras have been able to detect smiles and faces for more than a decade now \todo{quelle}, and reliable face recognition is hardly news in both surveillance\todo{src: biometric cams} and civil\todo{src facebook, apple/iphoto face recognition} applications.\todo{what about govt/agency tools?}
+The recognition of other objects, however, nevertheless poses a significant challenge. Over the course of this paper, challenges to both object detection and computer vision-aided OSINT gathering will be discussed.
 
-\todo{what about grindr, tinder? what about privacy policies?}
-\todo{sorce, except for handbook of intelligence?}
+The rest of this paper is organized as follows. TODO
 
-\begin{figure}[h!]
-\centering
-    \includegraphics[width=0.3\textwidth]{images/xkcd}
-\caption{bla}
-\label{blubb}
-\end{figure}
 
-\section{Object vs. Face Recognition}
-\label{sec:object_vs_face}
+\section{Object detection}
+\label{sec:object_det}
 %===============================================================================
 
 
+\section{Object identification}
+\label{sec:object_id}
+%===============================================================================
+
+\subsection{Object vs. Face Recognition}
+\label{subsec:object_vs_face}
+%...............................................................................
+
+\section{Object categorization}
+\label{sec:object_cat}
+%===============================================================================
+
+\section{Object localization}
+\label{sec:object_loc}
+%===============================================================================
 
 
+\section{Computer Vision in practice}
+\label{sec:zusammenhang}
+%===============================================================================
+
+Flickr park or bird, facebook things, @interesting\_jpg (womit wird das gemacht?)
+
+\section{Computer Vision and OSINT}
+\label{sec:zusammenhang}
+%===============================================================================
 
 
 \newpage
