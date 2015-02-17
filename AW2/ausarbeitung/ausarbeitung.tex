@@ -19,6 +19,7 @@
 % == Lottes Änderungen ===
 \usepackage{todonotes}
 \usepackage{hyperref}
+\usepackage{wrapfig}
 
 % großer erster Buchstabe
 \usepackage{lettrine}
@@ -165,14 +166,39 @@ Of course, this comes at the cost of lightweightedness: Approaches which are ver
 An Overview over all existing hybrid routing protocols for \glspl{MANET} and \glspl{DTN}
 can be found in table \ref{fig:overview}. In the following, a short introduction to each protocol and its characteristic mechanisms will be provided.
 
+\begin{table*}[t]
+    \begin{tabular}{p{0.5\textwidth}|l|l|l}
+        Name & Scope & Architecture & Published \\
+        \hline
+        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\ % proactive fixed
+        \gls{SHARP}\cite{SHARP} & Area and Route & Framework & 2003 \\ %TODO: only for reactive!
+        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
+        \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} \cite{WARP} & Area & Protocol & 2002/2004\\
+%        \gls{WARP}\cite{WARP} & Area and Route & Protocol & 2002\\
+        \gls{ZHLS}\cite{ZHLS} & Area & Protocol & 1999\\
+        \gls{HYMAD}\cite{HYMAD} & Area & Framework & 2010\\ % Only DTN protocol is variable!
+    \end{tabular}
+    \caption{Overview over existing hybrid protocols}
+    \label{fig:overview}
+\end{table*}
+
+\newpage % TODO maybe remove me
+
 \subsection{\gls{ZRP}}
 \label{subsec:zrp}
 %...............................................................................
-\todo{Illustration einfügen}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{../images/ZRP}
+  \end{center}
+  \caption{Sketch of area-centered routing, as practiced by ZRP, ZHLS and HYMAD}
+  \label{fig:area_centered}
+\end{wrapfigure}
 
 The Zone Routing Protocol was originally developed for \glspl{MANET} and is one of the most-referenced and -extended hybrid routing protocols to date. It was originally described in an Internet-draft which expired on January 2003\cite{ZRP-Draft}.
 It clusters nodes into so-called \emph{Routing Zones}, which adapt their diameter to the network's degree of mobility and traffic density. Routes inside these routing zones are discovered and maintained in a proactive fashion. In addition to the topology inside their zone, nodes are also aware of topology which all routing zones form.
-To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided.\\
+To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided. An illustration of this clustering can be found in fig. \ref{fig:area_centered}\\
 The draft describes ZRP as a routing \emph{framework}, but describes its own proactive and reactive frameworks, namely the \gls{IARP}\cite{draft-ietf-manet-zone-iarp} for proactive routing inside routing zones, and the \gls{IERP}\cite{draft-ietf-manet-zone-ierp} to discover routes between zones reactively.\\
 There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{WARP}  and the \gls{IZR}\cite{IZR}. \todo
 {do I need to elaborate here?}
@@ -189,41 +215,47 @@ This protocol design bears the dangerous assumption that physical proximity guar
 \label{subsec:nchr}
 %...............................................................................
 NCHR\cite{Roy_nodecentric} serves networks which contain some nodes, called \emph{netmarks}, that offer services to their peers, such as being a DNS server or an Internet Access Point. All nodes in the network maintain proactive routes towards the netmarks, while other connections are established reactively. The draft uses SOAR\cite{SOAR} for this, but maintains that AODV\cite{RFC-3561} or DSR\cite{DSR} may be used just as easily.
-
-\subsection{\gls{SHARP}}
-\label{subsec:sharp}
-%...............................................................................
-This protocol claims to offer each application the possibility to specify their needs in terms of latency and loss rate in the form of a metric, which is then used to guide the trade-off between proactive protocol overhead and reactive loss of reliability and latency.
-SHARP combines both area-centered and route-centered paradigms in what could be called a route-centered-in-area-centered approach. Routing zones are established around \emph{hot destinations}, i.e. nodes at which a majority of the traffic is directed. Gateways, nodes that offer a service, or sink nodes which collect sensor data in a Wireless Sensor Network may qualify as such a hot destination. Inside these routing zones, a \gls{DODAG} is formed with the hot destination as root, and proactive routes are kept \emph{only towards the hot destination node}. SHARP claims that this help meet the application requirements stated above, but it comes at the cost of enhanced traffic overhead and uneven battery draining, because nodes closer to the hot destination will forward more traffic than the ones on the outskirts.\\
-If the desired destination is outside of the routing zone, a reactive route discovery is initiated. This is similar to ZRP's approach.\\
-SHARP's routing strategy relies heavily on the assumption that only special nodes are the target of traffic, and is likely to fail in environments where all nodes are equal.\\
-\todo{Illustration einfügen}
-SHARP defines its own proactive protocol, the SHARP Proactive Routing protocol (SPR), which is based on DSDV\cite{DSDV} and TORA\cite{TORA}. Neither of there protocols are relevant in MANET routing as of today.
-For reactive routing, AODV is used, but may be exchanged for any other reactive protocol.
-
-\cite{SHARP} does not offer a solution as to how hot destinations may be identified by the participating nodes.
+\todo{elaborate}
 
 \subsection{\gls{HYMAD}}
 \label{subsec:hymad}
 %...............................................................................
 Just like ZRP and ZHLS\todo{and more?}, nodes participating in HYMAD \cite{HYMAD} form proactively maintained zones. The difference to all previously named protocols is that HYMAD borrows its approach to inter-zone roting not from traditional \gls{MANET} schemes, but from Delay-Tolerant Networks (DTN), where nodes store data until they move and meet other nodes with which they can communicate (this is called \emph{store-and-forward}).
 
+\newpage % TODO maybe remove me
 
-\begin{table*}[t]
-    \begin{tabular}{p{0.5\textwidth}|l|l|l}
-        Name & Scope & Architecture & Published \\
-        \hline
-        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\ % proactive fixed
-        \gls{SHARP}\cite{SHARP} & Area and Route & Framework & 2003 \\ %TODO: only for reactive!
-        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
-        \gls{ZRP} \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} \cite{WARP} & Area & Protocol & 2002/2004\\
-%        \gls{WARP}\cite{WARP} & Area and Route & Protocol & 2002\\
-        \gls{ZHLS}\cite{ZHLS} & Area & Protocol & 1999\\
-        \gls{HYMAD}\cite{HYMAD} & Area & Framework & 2010\\ % Only DTN protocol is variable!
-    \end{tabular}
-    \caption{Overview over existing hybrid protocols}
-    \label{fig:overview}
-\end{table*}
+\subsection{\gls{SHARP}}
+\label{subsec:sharp}
+%...............................................................................
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{../images/SHARP}
+  \end{center}
+  \label{fig:area_centered}
+  \caption{Sketch of the SHARP topology}
+\end{wrapfigure}
+
+This protocol claims to offer each application the possibility to specify their needs in terms of latency and loss rate in the form of a metric, which is then used to guide the trade-off between proactive protocol overhead and reactive loss of reliability and latency.
+SHARP combines both area-centered and route-centered paradigms in what could be called a route-centered-in-area-centered approach. Routing zones are established around \emph{hot destinations}, i.e. nodes at which a majority of the traffic is directed. Gateways, nodes that offer a service, or sink nodes which collect sensor data in a Wireless Sensor Network may qualify as such a hot destination. Inside these routing zones, a \gls{DODAG} is formed with the hot destination as root, and proactive routes are kept \emph{only towards the hot destination node}. SHARP claims that this help meet the application requirements stated above, but it comes at the cost of enhanced traffic overhead and uneven battery draining, because nodes closer to the hot destination will forward more traffic than the ones on the outskirts.\\
+If the desired destination is outside of the routing zone, a reactive route discovery is initiated. This is similar to ZRP's approach.\\
+SHARP's routing strategy relies heavily on the assumption that only special nodes are the target of traffic, and is likely to fail in environments where all nodes are equal.\\
+\todo{Illustration einfuegen}
+SHARP defines its own proactive protocol, the SHARP Proactive Routing protocol (SPR), which is based on DSDV\cite{DSDV} and TORA\cite{TORA}. Neither of there protocols are relevant in MANET routing as of today.
+For reactive routing, AODV is used, but may be exchanged for any other reactive protocol.\\
+\cite{SHARP} does not offer a solution as to how hot destinations may be identified by the participating nodes.
+
+\subsection{P2P-RPL}
+\label{subsec:p2prpl}
+%...............................................................................
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{../images/p2pRPL}
+  \end{center}
+  \label{fig:area_centered}
+  \caption{Sketch of the P2P-RPL topology}
+\end{wrapfigure}
+
+The P2P-RPL protocol is an extension of the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL)\cite{RPL}. RPL itself was designed for IoT-like circumstances, but focus primarily on networks which feature a \emph{sink node} towards which all traffic is directed. RPL constructs a \gls{DODAG} whose root is the sink node. All traffic is then routed towards the sink node. Parent nodes in the DODAG do not necessarily know about their children, so communication towards any other than the sink node is not possible in all configurations of the RPL protocol. In case it is possible, packets from one leaf node to another will always have to travel to the sink node first to be sent back, even if they are in close proximity. In networks with a substantial amount of peer to peer traffic, this leads to battery draining and traffic bottlenecks close to the sink node. This is why \cite{baccelli_p2p_rpl} suggests to extend the protocol with reactive route request messages which are piggybacked onto regular RPL traffic whenever a node S wants to communicate with a neighbor D, which is not the sink node. As soon as it receives this route request, D answers with a route reply. Through the distribution of these messages, a DODAG originating at S is formed, along which the peer to peer traffic can now be routed.
 
 \section{Experimental work}
 \label{sec:experiments}
