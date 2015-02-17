@@ -77,7 +77,7 @@ In th example of section \ref{subsec:IoT}, all lamps would maintain a proactive 
 %==============================================================================
 
 Most research on hybrid routing protocols stems from an era where wireless mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves. While proactive and reactive protocols were developed and examined, research in hybrid routing stalled until a more thorough understanding of proactive and reactive has been reached.\\
-This has since been achieved: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} will be deployed in the large-scale smart grid network of France \cite{X800}(TODO: quelle). The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \cite{baccelli_p2p_rpl} \cite{HYMAD}\\
+This has since been achieved: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} will be deployed in the large-scale smart grid network of France \cite{X800}. The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \cite{baccelli_p2p_rpl} \cite{HYMAD}\\
 
 But while this milestone has been reached, the amount of protocols of any kind specifically targeted at IoT-like environments is very small. By the time of this writing, the \gls{RPL} is the only dedicated IoT protocol available, and it cannot cover the entire diverse set of requirements that can be found under the umbrella term of ``Internet of Things''. Thus, it is necessary to evaluate protocols designed for environments that share some characteristics with the Internet of Things and may be customized to be a good fit. Suitable environments are as follows:
 \begin{description}
@@ -140,12 +140,12 @@ One example application for this may be a warehouse as illustrated in \ref{fig:a
 
 \todo{what about combinations of the two?}
 
-Because the IoT is an umbrella term for many different use cases, none of these approaches is necessarily better than the other. Which approach is suitable depends on traffic patterns (caused by different usage scenarios) and the roles of all nodes involved.\todo{what about mobility and mobility patterns?}
+Because the IoT is an umbrella term for many different use cases, none of these approaches is necessarily better than the other. Which approach is suitable depends on traffic patterns (caused by different usage scenarios) and the roles of all nodes involved.%\todo{what about mobility and mobility patterns?}
 
 \subsection{Architecture}
 \label{subsec:architecture}
 %==============================================================================
-Because hybrid protocols incorporate proactive and reactive protocols as building blocks, their design in terms of architecture-- how it all goes together-- may be more than just a sequence of instructions. \todo{gibt es uberhaupt ``pure'' frameworks?}
+Because hybrid protocols incorporate proactive and reactive protocols as building blocks, their design in terms of architecture-- how it all goes together-- may be more than just a sequence of instructions.
 \todo{nette ueberleitung}
 \begin{description}
 \item[protocol] They may either be \emph{monolithic protocols} which have a reactive and a proactive component firmly in place. Oftentimes, these components are variations of well-known proactive and reactive protocols, customized to improve the hybrid protocol's overall performance or decrease traffic- or computational overhead. For example, \cite{baccelli_p2p_rpl} piggybacks reactive control traffic onto already existing, proactive RPL messages, thus avoiding unnecessary traffic and saving battery life. %\todo{mehr Beispielprotokolle auflistem}
@@ -200,8 +200,7 @@ The Zone Routing Protocol was originally developed for \glspl{MANET} and is one 
 It clusters nodes into so-called \emph{Routing Zones}, which adapt their diameter to the network's degree of mobility and traffic density. Routes inside these routing zones are discovered and maintained in a proactive fashion. In addition to the topology inside their zone, nodes are also aware of topology which all routing zones form.
 To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided. An illustration of this clustering can be found in fig. \ref{fig:area_centered}\\
 The draft describes ZRP as a routing \emph{framework}, but describes its own proactive and reactive frameworks, namely the \gls{IARP}\cite{draft-ietf-manet-zone-iarp} for proactive routing inside routing zones, and the \gls{IERP}\cite{draft-ietf-manet-zone-ierp} to discover routes between zones reactively.\\
-There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{WARP}  and the \gls{IZR}\cite{IZR}. \todo
-{do I need to elaborate here?}
+There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{WARP}  and the \gls{IZR}\cite{IZR}. \todo{do I need to elaborate here?}
 
 \subsection{\gls{ZHLS}}
 \label{subsec:zhls}
@@ -270,7 +269,7 @@ In \cite{WARP}, WARP is compared to OLSR in experiments with a ``real'' network,
 While simulations have proven to be useful for protocol design and evaluation, there are three main problems to a simulation-only approach: %\todo{find a source for this. STAT.}
 \begin{enumerate}
 \item A simulation is only as good as its model. As shown by \cite{mistaken-axioms} and \cite{exp_eval_wsn_assumptions}, many simulations conducted in wireless network research are based on flawed assumptions about the environment they are trying to model, resulting in drastic deviations from reality. Additionally, as shown by \cite{sim_accuracy}, results of the same experiment may vary from simulator to simulator.
-\item Without data from ``real world'' experiments, verifying that a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, non?}
+\item Without data from ``real world'' experiments, verifying that a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, right?}
 \item Especially in wireless networking, a node's environment (i.e. flying bids, surfaces reflecting differently based on time or weather conditions, unforeseeable radio propagation...) is a big and unforeseeable influence. Even when the model is adequately accurate, it can never account for the unforeseen quirks which will be encountered in a real environment. This can be a great benefit when testing specific aspects of a protocol, because it is possible to observe just this aspect. But in order to test if a protocol can cope with the challenges the real world brings, it has to be tested in a lifelike environment.
 \end{enumerate}
 In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \cite{testbed-survey} provides a requirement analysis for IoT-ready testbeds. It concludes that in order to be suitable for meaningful research, testbeds need to offer the following features to their users:
@@ -294,21 +293,18 @@ Some of these aspects may foster behavior which is more suitable for the IoT tha
 Experience with both hybrid protocols and IoT environments is rare, as detailed in \ref{sec:experiments}, so all statements about suitability have to be taken as educated guesses rather than hard truths.
 
 The scope of a routing protocol heavily depends on the kind of network it serves. Therefore, none of the discussed approaches is necessarily better than the other. Time may tell which kind of use case and thus which kind of scope is more common.
-\todo{what if I ``hack'' a route-centered one in such a way that I define all n-hop neighbors as sink nodes, too? I'd have a hybrid-hybrid :D SHARP and ZHLS basically do this...}
+\todo{what if I ``hack'' a route-centered one in such a way that I define all n-hop neighbors as sink nodes, too? I'd have a hybrid-hybrid :D}
 
 Provided there are ways to slim down the code to a manageable size and control overhead, frameworks appear to be the more suitable approach, as they are future-proof and flexible. As mentioned in \ref{sec:existing_protocols}, many of the protocols that were the basis for modifications are considered outdated now. While this took decades in this instance, the IoT may be considered to be just as established a field as MANETs were at the turn of the millennium. Thus, it is not unlikely it will be subject to changes and paradigm shifts, too, and a hybrid routing protocol for the IoT should be able to account for this to a certain extent.
 
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
 %==============================================================================
-translate old stuff. Framework good, protocol bad. scope depends on deployment. framework may be able to accommodate that too. simulations mostly suck. real-world experiences are rare. get them! \todo{but with what?} hooray for testbeds! Use IoT-Lab!
+-> write nicely: translate old stuff. Framework good, protocol bad. scope depends on deployment. framework may be able to accommodate that too. simulations mostly suck. real-world experiences are rare. get them! \todo{but with what?} hooray for testbeds! Use IoT-Lab!
+figure out ways to slim down frameworks. get real-world experiences. verify vermutungen oder auch nicht. so much to do!
 
 As shown, many existing roting protocols reinvent the wheel by specifying their own proactive or reactive components. While these are often based on well-known protocols such as AODV or \todo{which proactive basis is often used? sure isnt OLSR...}, each modification should be thoroughly justified. The re-use of existing, standardized and well-understood proactive and reactive protocols may help to avoid specification mishaps and save time.
 
-%\section{Outlook}
-%\label{sec:outlook}
-%==============================================================================
-figure out ways to slim down frameworks. get real-world experiences. verify vermutungen oder auch nicht. so much to do!
 
 
 \printglossaries
