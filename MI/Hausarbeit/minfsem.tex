@@ -50,6 +50,9 @@
 \usepackage[pdftex]{graphicx}
 \usepackage[figure,table]{hypcap}
 
+%=== lottes changes
+\usepackage{todonotes}
+
 \setcounter{page}{1}
 \ninept
 
@@ -111,33 +114,48 @@
 \maketitle
 
 \begin{abstract}
-Recognizing an categorizing objects in an image is one of the problems which are harder to solve for computers than for humans. However, image recognition is imperative to make human-computer interaction more natural and improve the way information contained in images is stored and handled. In recent years, the field has seen a lot of progress. My homework would aim to provide an overview over the challenges faced by image recognition software, and available solutions as well as their limitations.
+\todo{go into Open Source Intelligence}
+Recognizing an categorizing objects in an image is one of the problems which are harder to solve for computers than for humans. However, image recognition is imperative to make human-computer interaction more natural and improve the way information contained in images is stored and handled. In recent years, the field has seen a lot of progress. This paper aims to provide an overview over the challenges faced by image recognition software, and available solutions as well as their limitations.
 \end{abstract}
 
-%\section{Introduction}
-%\label{sec:intro}
+
+\section{Introduction}
+\label{sec:intro}
 %===============================================================================
 % three types: 1. die präsenz eines bestimmten(!) objekts/objektart zu erkennen in einem bild (detection), 2. die position eines bestimmten(!) objekts/objektart zu finden (localization)  oder z.b. auch 3. rauszufinden was für eine objektart den grade da ist (categorisation? da sind diese convolutional neural nets super drin. das ist aber superschwierig und deep learning ist da grade state of the art)
 
-\section{Sources}
-\label{sec:src}
+
+% neingeist: ABER: detection wird auch häufig wie meine defintion von localization benutzt (also “where is $objectclass”)
+
+The research field of \emph{Computer Vision} aims to teach computers how to understand images and video footage. This involves recognizing, locating and classifying the objects shown, and understanding the context they're in.
+%The task of locating and identifying an object in an image is widely referred to as \emph{Object recognition}.
+While this is a relatively easy task for humans, computers still struggle with this as of today. Understanding an image can be divided into different subtasks, all of which rely on each other:
+% There are several subfields that make up the umbrella term of ``Object recognition''. some of which rely on each other:
+\begin{description}
+\item[Object detection] Is there a chair in this image?
+\item[Object Identification:] Is that a chair?
+\item[Object Categorization:] Does this image contain furniture?
+\item[Object Localization:] Where is the chair in this picture?
+\end{description}
+
+\begin{figure}
+  \centering
+    \includegraphics[width=0.3\textwidth]{images/xkcd}
+  \caption{TODO cite xkcd}
+  \label{fig:xkcd}
+\end{figure}
+
+The term \enph{Open Source Intelligence (OSINT)} describes publicly accessible information which has been gathered and grouped in order to answer a specific question. While this information can be gathered from anywhere, including newspaper reports, public registries \todo{mehr analogweltbeispiele}, the internet has grown to be a fruitful source of OSINT. Communication has moved online, and, in part, into the public eye, with people debating on twitter, facebook or through their own blogs. Users display their knowledge and interests on their public profiles and help sites such as StackExchange or Quora, oost their resumé on LinkedIn and track and document their lives with the help of fitness apps, Instagram, swarm.app and yelp. Even with more prohibitive privacy settings, researchers can oftentimes extract metadata from the traces a person's online activity leaves:\\
+Through nickname reuse, full identities can be reconstructed even from seemingly anonymous interactions. Even if a facebook profile is not public, access to its friend lists and their fried lists reveals information about social structures and cliques. Twitter can be searched for \@-mentions to a public profile, reconstructing the contents of a tweet from the public reactions to it.
+
+\todo{what about grindr, tinder? what about privacy policies?}
+\todo{sorce, except for handbook of intelligence?}
+\section{Object vs. Face Recognition}
+\label{sec:object_vs_face}
 %===============================================================================
-There are plenty of sources discussing various aspects of object or image recognition. Below, three key papers will be discussed, each covering a different aspect. The first source provides an overview over the entire topic. The second one discusses recent, state-of-the-art advances in object recognition. the third offers an outlook into the possibilities of interdisciplinary applications of object recognition.
 
-\subsection{Overview}
-\label{sec:subsec_overview}
-%-------------------------------------------------------------------------------
-\cite{forsyth2012computer} provides an overview over the field of computer vision, including the basics of object recognition and categorization as well as current strategies for object recognition.
 
-\subsection{Recent advances in object categorization}
-\label{sec:subsec_advances}
-%-------------------------------------------------------------------------------
-\cite{Krizhevsky_imagenet} discusses the use of convolutional neural networks for object recognition. Its results are superior to most other research and can be considered state-of-the-art.
 
-\subsection{Outlook}
-\label{sec:subsec_outlook}
-%-------------------------------------------------------------------------------
-\cite{Vinyals2014} connects recent advances in computer vision and natural language processing in order to produce natural-language sentences describing the content of an image.
 
 \newpage
 \nocite{*}
