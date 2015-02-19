@@ -129,6 +129,8 @@ Recognizing an categorizing objects in an image is one of the problems which are
 \label{sec:intro}
 %===============================================================================
 
+
+
 The term \emph{\gls{OSINT}} describes publicly accessible information which has been gathered, processed, exploited, analyzed and grouped in order to support a specific mission.\todo{source, except for handbook of intelligence?}
 While this information can be gathered from anywhere, including newspaper, radio or TV reports, public registries \todo{mehr analogweltbeispiele}, the Internet has grown to be a fruitful source of OSINT. Communication has moved online, and, in part, into the public eye, with people debating on twitter, facebook or through their own blogs. Users display their knowledge and interests on their public profiles and help sites such as StackExchange or Quora, post their resumé on LinkedIn and track and document their lives with the help of fitness apps, Instagram, swarm.app, flickr, YouTube, yelp, and many more. Even with more prohibitive privacy settings, researchers can oftentimes extract metadata from the traces a person's online activity leaves:\\
 Through nickname reuse, full identities can be reconstructed even from seemingly anonymous interactions. Even if a facebook profile is not public, access to its friend lists and their fried lists reveals information about social structures and cliques which can be identified through \gls{SNA}. Twitter can be searched for \@-mentions to a public profile, reconstructing the contents of a tweet from the public reactions to it.\\ \todo{what about grindr, tinder? what about privacy policies?}
@@ -150,13 +152,14 @@ The ability to sift through pictures, tag, classify and put them into context au
 
 The research field of \emph{Computer Vision} aims to teach computers how to understand images and video footage. This involves recognizing, locating and classifying the objects shown, and understanding the context they're in.
 %The task of locating and identifying an object in an image is widely referred to as \emph{Object recognition}.
-While this is a relatively easy task for humans, computers still struggle with this as of today. Understanding an image can be divided into different subtasks, all of which rely on each other:
+While this is a relatively easy task for humans, computers still struggle with this as of today. Understanding an image can be divided into different subtasks, some of which rely on each other:
 % There are several subfields that make up the umbrella term of ``Object recognition''. some of which rely on each other:
 \begin{description}
 \item[Object detection] Is there a chair in this image?
 \item[Object identification:] Is that a chair?
-\item[Object categorization:] Does this image contain furniture?
 \item[Object localization:] Where is the chair in this picture?
+\item[Object categorization:] Does this image contain furniture?
+\item[Image classification:] What is this picture about?
 \end{description}
 
 Significant leaps have been made in the subfield of face and human detection and recognition: Consumer-grade cameras have been able to detect smiles and faces for more than a decade now \todo{quelle}, and reliable face recognition is hardly news in both surveillance\todo{src: biometric cams} and civil\todo{src facebook, apple/iphoto face recognition} applications.\todo{what about govt/agency tools?}
@@ -167,7 +170,8 @@ The rest of this paper is organized as follows. TODO
 \section{Computer Vision Challenges}
 \label{sec:object_det}
 %===============================================================================
-
+In some subtasks, computer vision capabilities are starting to compare to human abilities. Other subtasks still remain unreliable even with state-of-the-art approaches, often requiring novice readers to adjust their expectations in terms of what may be considered ``exceptionally good performance''.\footnote{See \url{http://abstrusegoose.com/496} for a humorous depiction of this process.} % idee: die comic panels zur strukturierung?
+This section will go into the different tasks mentioned in section \ref{sec:intro}, discussing specific challenges for this type of image processing, and pointing towards state-of-the-art solutions. 
 
 \subsection{Object detection}
 \label{sec:object_det}
@@ -177,11 +181,20 @@ The rest of this paper is organized as follows. TODO
 \subsection{Object identification}
 \label{sec:object_id}
 %...............................................................................
+The human brain is able to recognize objects with astonishing precision. As \cite{liter_or_into} points out, humans will have no problem recognizing all but one chair in fig. \ref{TODO: add pic} are of the same make, even though they are captured at different angles. The tiny chair on top of the table will be obvious as decoration and the shadow on the wall will be obvious to be just that-- a shadow, not a piece of furniture.
 
+For a computer, this is fairly less obvious.\todo{elaborate}
+
+Neural Networks, siehe u.a.
+http://code.flickr.net/2014/10/20/introducing-flickr-park-or-bird/
 
 \subsubsection{Object vs. Face Recognition}
 \label{subsec:object_vs_face}
 %...............................................................................
+
+Even with different lighting, a different environment and angle, humans are able to tell with 97,5\% precision whether two pictures show the same person\cite{Taigman_2014_CVPR}\todo{find firsthand source}\todo{same measurements for objects?}.
+
+
 
 \subsection{Object categorization}
 \label{sec:object_cat}
@@ -192,8 +205,13 @@ The rest of this paper is organized as follows. TODO
 \label{sec:object_loc}
 %...............................................................................
 
+\subsection{Image classification}
+\label{sec:img_cls}
+%...............................................................................
+Image Classification is defined as the process of looking at an image and classifying it into a set of categories\cite{forsyth2012computer} based on the content of the image. The most common applications for this process are the filtering of sexually explicit images. which may be forbidden by legislation or workplace policies, and preventing the placement of ads near content that the target audience may find distressing.
 
-\ {Computer Vision in practice}
+
+\section{Computer Vision in practice}
 \label{sec:zusammenhang}
 %===============================================================================
 
@@ -207,18 +225,23 @@ Flickr park or bird, facebook things, @interesting\_jpg (womit wird das gemacht?
 
 OSINT can, in capable hands, be a powerful tool. \todo{Praxisbeispiel recherche}
 Who uses OSINT?
-- govt agencies
-- law enforcement (?)
+\emph{For government agencies}, OSINT can add context to classified information.\\
+\emph{law enforcement}
 - political groups
-- pen testers; security community in general
+- pen testers\cite{unauth_access}; security community in general
 - journalists
+- doxxing asshats? ()
 
 \subsection{OSINT requirements}
 \label{subsec:osint_req}
 %...............................................................................
-but!
-- ansprüche höher weil fehler folgenschwerer als zB bei facebook
-- OSINT zum proaktiven ausspaehen (siehe folien) problematisch
+%but!
+%- ansprüche höher weil fehler folgenschwerer als zB bei facebook
+%- OSINT zum proaktiven ausspaehen (siehe folien) problematisch
+
+When used for OSINT tools, no matter by whom, computer vision results have to satisfy much higher expectations than in civil, everyday use. Being wrongly tagged in a photo on facebook is a nuisance at worst. But, as \cite{derosa2004data} points out, the same mistake made by a government agency tool may seriously impact the falsely targeted person's life, including stigmatization, wrongful prosecution or even the endangering of lives.\\
+Even without the monopoly on legitimate use of force, journalists or political activists are able to wreak havoc in a person's life.
+
 
 \subsection{OSINT applications}
 \label{subsec:osint_app}
