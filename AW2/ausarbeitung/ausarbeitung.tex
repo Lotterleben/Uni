@@ -47,7 +47,8 @@
 
 \begin{abstract}
 %I am an abstract. Write me!
-With the \gls{IoT}, new use cases and requirements for mobile mesh networks have begun to blossom. In order to meet these requirements, routing protocols are needed to manage connectivity and prepare the transport of packets. These protocols need to be able to adopt to a rapidly changing environment, and do so autonomously and efficiently. Because traditional approaches to routing may not be feasible for this task, \emph{hybrid roting protocols} have begun to resurface. This paper will introduce existing approaches to hybrid routing and aims to provide pointers on how to evolve them to make them a perfect fit for the IoT.
+With the \gls{IoT}, new use cases and requirements for mobile mesh networks have begun to blossom. In order to meet these requirements, routing protocols are needed to manage connectivity and prepare the transport of packets. Traditionally, proactive protocols have been used for environments with more traffic and high constraints in terms of latency, while reactive protocols have been used for sparse, high-mobility networks. IoT networks may exhibit all of the aforementioned characteristics at the same time, or change from one set to another depending on their environment. This is why neither pure proactive or reactive routing may be able to satisfy the IoT's demands: Protocols need to be able to adopt to a rapidly changing environment, and do so autonomously and efficiently.
+Because traditional approaches to routing may not be feasible for this task, \emph{hybrid roting protocols} have begun to resurface. This paper will introduce existing approaches to hybrid routing and aims to provide suggestions on how to evolve them to make them a better fit for the IoT.
 
 \end{abstract}
 
@@ -60,45 +61,46 @@ With the \gls{IoT}, new use cases and requirements for mobile mesh networks have
 \subsection{What is the Internet of Things?}
 \label{subsec:IoT}
 %==============================================================================
-The \gls{IoT} envisions autonomous communication between tiny computers installed in everyday objects such as furniture, toys, clothing, or tools with the goal of making them smarter and improving their user experience. IoT devices typically are very constrained devices with no constant power supply. Therefor, they need to be resourceful in terms of computation, storage, RAM and energy usage.
+The \gls{IoT} envisions autonomous communication between computers installed in everyday objects such as furniture, toys, clothing, or tools with the goal of making them smarter and improving their user experience. Some IoT devices are very constrained, with no constant power supply. Therefor, they need to be resourceful in terms of computation, storage, RAM and energy usage. Other devices may not exhibit one or any of these characteristics. For example, a sensor built into a lamp can tap into the available power supply and is therefor not restricted by battery life concerns. A computer controlling a smart home may have more computation resources than the IoT nodes it manages, and so on. In other words, IoT networks are comprised of hardware which are homogeneous in terms of abilities and requirements, but most nodes are constrained in some way.\\
+
 To communicate amongst each other, IoT nodes form spontaneous, wireless mesh networks.
-The vision of the Internet of Things is rapidly becoming reality, and with its rise, new demands for routing protocols that serve these kinds of mesh networks surface which cannot be optimally served by either reactive or proactive routing protocols alone.\\
-One example for this may be the lighting system in a smart home: Each lamp needs to maintain a stable connection to the control center of the house, forming a tree-like topology towards the sink node that is the central control. In addition to this, lamps may want to communicate spontaneously between each other, for example to create optimal lighting in the study when homeowners sit down at their desk.
+The vision of the Internet of Things is rapidly becoming reality, and with its rise, environments which cannot be optimally served by either reactive or proactive routing protocols alone are created. Thus, the demand for a new kind of routing protocol is created, too.\\
+One example for this may be the lighting system in a smart home: Each lamp needs to maintain a stable connection to the control center of the house. This means that a substantial amount of control traffic is directed at the sink node that is the central control. Because of its direction, this traffic forms a tree-like topology. In addition to this, lamps may want to communicate spontaneously between each other, for example to create optimal lighting in the study when homeowners sit down at their desk.
 
 \subsection{What is Hybrid Routing?}
 \label{subsec:hybrid}
 %==============================================================================
-Hybrid Routing protocols combine two central routing paradigms into one protocol: Reactive and proactive routing. While reactive protocols stay idle until a route is needed and then \emph{react} to this demand, proactive protocols constantly monitor their network for peers and link qualities, (re-)calculating routes as they gather new data. The former class of protocols perform well in sparse, very mobile networks and save energy by generating less control overhead. The latter are best suited for networks with high demands in terms of throughput, reliability and latency.\\
-Hybrid routing protocols aim to adjust their routing strategy from proactive to reactive and back depending on the circumstances: Routes or areas that are deemed important or see a lot of traffic require proactive attention, while sparsely, less important or very mobile areas or routes are best served reactively.\\
-In th example of section \ref{subsec:IoT}, all lamps would maintain a proactive route towards the control center, while inter-lamp communication may be set up reactively.
+Hybrid Routing protocols combine two central routing paradigms in one protocol: Reactive and proactive routing. While reactive protocols stay idle until a route is needed and then \emph{react} to this demand, proactive protocols constantly monitor their network for peers and link qualities, (re-)calculating routes as they gather new data. The former class of protocols perform well in sparse, very mobile networks and save energy by generating less control overhead. The latter are best suited for networks with high demands in terms of throughput, reliability and latency.\\
+Hybrid routing protocols aim to adjust their routing strategy from proactive to reactive and, conversely, from reactive to proactive, depending on the circumstances: Routes or areas that are deemed important or see a lot of traffic require proactive attention, while sparsely, less important or very mobile areas or routes are best served reactively.\\
+In the example of section \ref{subsec:IoT}, all lamps would maintain a proactive route towards the control center, while inter-lamp communication may be set up reactively.\\
 
-\section{Related work}
+The rest of this paper is organized as follows. \todo{TODO! double-check!}
+In the next section, requirements for a hybrid routing protocol will be listed, followed by an introduction to key aspects of hybrid routing protocols. Section \ref{sec:existing_protocols} will then go into the specifics of existing protocols, and how they exhibit these characteristics. Following up, section \ref{sec:suitability} will discuss which of these aspects and protocols are the most promising for the IoT, and section \ref{sec:experiments} will explain how this has been and will be verified through experiments. Finally, sections \ref{sec:conclusion} and \ref{sec:outlook} will provide a conclusion and an outlook towards future work.
+
+\section{the history of hybrid protocol research}
 \label{sec:related_work}
 %==============================================================================
-
 Most research on hybrid routing protocols stems from an era where wireless mesh routing was at its very beginning. This meant that the building blocks for hybrid routing, namely proactive and reactive routing protocols, were under construction themselves. While proactive and reactive protocols were developed and examined, research in hybrid routing stalled until a more thorough understanding of proactive and reactive has been reached.\\
-This has since been achieved: The \gls{IETF} has standardized \gls{OLSR}, OLSRv2  and \gls{AODV}, AODVv2 is on its way to become a standard, and \gls{LOADng} will be deployed in the large-scale smart grid network of France \cite{X800}. The body of experience with both reactive and proactive protocols has grown, and research towards hybrid protocols has begun to blossom \cite{baccelli_p2p_rpl} \cite{HYMAD}\\
+This has since been achieved: The \gls{IETF} has standardized \gls{OLSR}\cite{RFC-3626}, OLSRv2\cite{RFC-7181} and \gls{AODV}\cite{RFC-3561}, AODVv2\cite{draft-ietf-manet-aodvv2-06} is on its way to become a standard, and \gls{LOADng}\cite{draft-yi-loadngct-02} will be deployed in the large-scale smart grid network of France \cite{X800}. The body of experience with both reactive and proactive protocols has grown and created the building blocks needed to pick up hybrid routing protocol research again.\\
 
-But while this milestone has been reached, the amount of protocols of any kind specifically targeted at IoT-like environments is very small. By the time of this writing, the \gls{RPL} is the only dedicated IoT protocol available, and it cannot cover the entire diverse set of requirements that can be found under the umbrella term of ``Internet of Things''. Thus, it is necessary to evaluate protocols designed for environments that share some characteristics with the Internet of Things and may be customized to be a good fit. Suitable environments are as follows:
+But while this milestone has been reached, the amount of protocols of any kind specifically targeted at IoT-like environments is very small. By the time of this writing, the \gls{RPL}\cite{RFC-6550} is the only dedicated IoT protocol available, and it cannot cover the entire diverse set of requirements that are found under the umbrella term of ``Internet of Things''. Thus, it is necessary to evaluate protocols designed for environments that share some characteristics with the Internet of Things and may be customized to be a good fit. Suitable environments are as follows:
 \begin{description}
-\item[\glspl{DTN}], which are designed to cope with network partitioning, which my be caused by movement or lossy links.
+\item[\glspl{DTN}] are designed to cope with network partitioning, which my be caused by movement or lossy links.
 \item[\glspl{MANET}] share the characteristic mobility challenges and ad-hoc nature of their infrastructure with the IoT.
 \item[\glspl{LLN}] match IoT requirements the closest: nodes are expected to be constrained in terms of battery and computation resources, and links are expected to be lossy. One might say that The IoT consists of many LLNs, attached to the big Internet through border routers.
-\item[\glspl{VANET}] Unfortunately, while \glspl{VANET} have seen a lot of research concerning hybrid protocols, their characteristics differ too drastically from the IoT: node mobility in VANETs is extremely high, with somewhat ordered movement patterns, as cars usually only move on streets, which are known beforehand. And because it has access to a car's energy system, battery life is not as critical.
+\item[\glspl{VANET}] have seen a lot of research concerning hybrid protocols. Unfortunately, their characteristics differ too drastically from the IoT: node mobility in VANETs is extremely high, with somewhat ordered movement patterns as cars usually only move on streets, which are known beforehand. %And because it has access to the energy system of a car, battery life is not as critical.
 \end{description}
 
 The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built.\\ \todo{mehr herausarbeiten? Aber wohin damit? :(}
-The rest of this paper is organized as follows. % \todo{TODO! double-check!}
-In the next section, requirements for a hybrid routing protocol will be listed, followed by an introduction to key aspects of hybrid routing protocols. Section \ref{sec:existing_protocols} will then go into the specifics of existing protocols, and how they exhibit these characteristics. Following up, section \ref{sec:suitability} will discuss which of these aspects and protocols are the most promising for the IoT, and section \ref{sec:experiments} will explain how this has been and will be verified through experiments. Finally, sections \ref{sec:conclusion} and \ref{sec:outlook} will provide a conclusion and an outlook towards future work.
 
 \section{Requirements for hybrid IoT routing protocols}
 \label{subsec:requirements}
 %...............................................................................
-\cite{SHARP} lists three core properties a hybrid routing protocol needs to have. Altough originally written with mobile ad-hoc networks in mind, these principles can be adapted to the IoT.
+Ramasubramanian et al. \cite{SHARP} list three core properties a hybrid routing protocol needs to have. Although originally written with mobile ad-hoc networks in mind, these principles can be adapted to the IoT.
 \begin{description}
-\item[Adaptivity] Because IoT use cases are as numerous as its environments are subject to changes, the protocol should be able to adapt to a wide array of circumstances. It should adjust its behavior to changes in mobility, traffic patterns, link quality, and other qualities.
+\item[Adaptivity] Because IoT use cases are as numerous as its environments are subject to changes, the protocol should be able to adapt to a wide variety of circumstances. It should adjust its behavior to changes in mobility, traffic patterns, link quality, and other qualities.
 \item[Flexibility] The protocol should be able to satisfy the requirements of different applications in terms of reliability, latency or throughput.
-\item[Efficiency and practicality] The protocol should strive to be efficient in terms of energy consumption, traffic and computational overhead, all the while maintaining satisfying route quality wherever possible. It must perform as well as or better than purely reactive or proactive protocols in the same situation.
+\item[Efficiency and robustness] The protocol should strive to be efficient in terms of energy consumption, traffic and computational overhead, all the while maintaining the ability to reliably find routes through the network. It must perform equally well or better than purely reactive or proactive protocols in the same situation.
 \end{description}
 
 
@@ -183,7 +185,7 @@ can be found in table \ref{fig:overview}. In the following, a short introduction
     \label{fig:overview}
 \end{table*}
 
-\newpage % TODO maybe remove me
+%\newpage % TODO maybe remove me
 
 \subsection{\gls{ZRP}}
 \label{subsec:zrp}
@@ -194,12 +196,12 @@ can be found in table \ref{fig:overview}. In the following, a short introduction
     \includegraphics[width=0.48\textwidth]{../images/ZRP}
   \end{center}
   \caption{Sketch of area-centered routing, as practiced by ZRP, ZHLS and HYMAD}
-  \label{fig:area_centered}
+  \label{fig:zrp_area_centered}
 \end{wrapfigure}
 
 The Zone Routing Protocol was originally developed for \glspl{MANET} and is one of the most-referenced and -extended hybrid routing protocols to date. It was originally described in an Internet-draft which expired on January 2003\cite{ZRP-Draft}.
 It clusters nodes into so-called \emph{Routing Zones}, which adapt their diameter to the network's degree of mobility and traffic density. Routes inside these routing zones are discovered and maintained in a proactive fashion. In addition to the topology inside their zone, nodes are also aware of topology which all routing zones form.
-To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided. An illustration of this clustering can be found in fig. \ref{fig:area_centered}\\
+To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided. An illustration of this clustering can be found in fig. \ref{fig:zrp_area_centered}\\
 The draft describes ZRP as a routing \emph{framework}, but describes its own proactive and reactive frameworks, namely the \gls{IARP}\cite{draft-ietf-manet-zone-iarp} for proactive routing inside routing zones, and the \gls{IERP}\cite{draft-ietf-manet-zone-ierp} to discover routes between zones reactively.\\
 There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{WARP}  and the \gls{IZR}\cite{IZR}. \todo{do I need to elaborate here?}
 
@@ -222,7 +224,7 @@ NCHR\cite{Roy_nodecentric} serves networks which contain some nodes, called \emp
 %...............................................................................
 Just like ZRP and ZHLS\todo{and more?}, nodes participating in HYMAD \cite{HYMAD} form proactively maintained zones. The difference to all previously named protocols is that HYMAD borrows its approach to inter-zone roting not from traditional \gls{MANET} schemes, but from Delay-Tolerant Networks (DTN), where nodes store data until they move and meet other nodes with which they can communicate (this is called \emph{store-and-forward}).
 
-\newpage % TODO maybe remove me
+%\newpage % TODO maybe remove me
 
 \subsection{\gls{SHARP}}
 \label{subsec:sharp}
@@ -239,7 +241,6 @@ This protocol claims to offer each application the possibility to specify their 
 SHARP combines both area-centered and route-centered paradigms in what could be called a route-centered-in-area-centered approach. Routing zones are established around \emph{hot destinations}, i.e. nodes at which a majority of the traffic is directed. Gateways, nodes that offer a service, or sink nodes which collect sensor data in a Wireless Sensor Network may qualify as such a hot destination. Inside these routing zones, a \gls{DODAG} is formed with the hot destination as root, and proactive routes are kept \emph{only towards the hot destination node}. SHARP claims that this help meet the application requirements stated above, but it comes at the cost of enhanced traffic overhead and uneven battery draining, because nodes closer to the hot destination will forward more traffic than the ones on the outskirts.\\
 If the desired destination is outside of the routing zone, a reactive route discovery is initiated. This is similar to ZRP's approach.\\
 SHARP's routing strategy relies heavily on the assumption that only special nodes are the target of traffic, and is likely to fail in environments where all nodes are equal.\\
-\todo{Illustration einfuegen}
 SHARP defines its own proactive protocol, the SHARP Proactive Routing protocol (SPR), which is based on DSDV\cite{DSDV} and TORA\cite{TORA}. Neither of there protocols are relevant in MANET routing as of today.
 For reactive routing, AODV is used, but may be exchanged for any other reactive protocol.\\
 \cite{SHARP} does not offer a solution as to how hot destinations may be identified by the participating nodes.
@@ -251,7 +252,7 @@ For reactive routing, AODV is used, but may be exchanged for any other reactive 
   \begin{center}
     \includegraphics[width=0.48\textwidth]{../images/p2pRPL}
   \end{center}
-  \label{fig:area_centered}
+  \label{fig:p2p}
   \caption{Sketch of the P2P-RPL topology}
 \end{wrapfigure}
 
