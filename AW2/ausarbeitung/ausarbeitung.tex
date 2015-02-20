@@ -150,7 +150,7 @@ There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{
 ZHLS is a hierarchical, GPS-based roting protocol.
 ZHLS clusters all nodes into non-overlapping routing zones based on their location. These clusters form a hierarchy, with the nodes at its very bottom.
 On startup, each node determines their location and joins the zone which spans across the area they're in. Route discovery within the zones is done in a proactive fashion. Whenever a packet needs to travel outside the cluster, it is routed along the zone hierarchy. Because there are no cluster heads, a lot of flooding happens. \todo{disentangle the general WTFness of this protocols's operation}
-This protocol design bears the dangerous assumption that physical proximity guarantees near-optimal connectivity, which has been debunked by \cite{mistaken-axioms}. \todo{go into troubles of georouting?}
+This protocol design bears the often erroneous assumption that physical proximity guarantees near-optimal connectivity, which has been debunked by \cite{mistaken-axioms}. \todo{go into troubles of georouting?}
 
 \subsection{Node-Centric Hybrid Routing}
 \label{subsec:nchr}
@@ -191,6 +191,9 @@ For reactive routing, AODV is used, but may be exchanged for any other reactive 
 \subsection{P2P-RPL}
 \label{subsec:p2prpl}
 %...............................................................................
+\todo{S, D.. beschriften}
+
+
 \begin{wrapfigure}{r}{0.5\textwidth}
   \begin{center}
     \includegraphics[width=0.48\textwidth]{../images/p2pRPL}
@@ -199,7 +202,8 @@ For reactive routing, AODV is used, but may be exchanged for any other reactive 
   \caption{Sketch of the P2P-RPL topology}
 \end{wrapfigure}
 
-The P2P-RPL protocol is an extension of the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL)\cite{RPL}. RPL itself was designed for IoT-like circumstances, but focus primarily on networks which feature a \emph{sink node} towards which all traffic is directed. RPL constructs a \gls{DODAG} whose root is the sink node. All traffic is then routed towards the sink node. Parent nodes in the DODAG do not necessarily know about their children, so communication towards any other than the sink node is not possible in all configurations of the RPL protocol. In case it is possible, packets from one leaf node to another will always have to travel to the sink node first to be sent back, even if they are in close proximity. In networks with a substantial amount of peer to peer traffic, this leads to battery draining and traffic bottlenecks close to the sink node. This is why \cite{baccelli_p2p_rpl} suggests to extend the protocol with reactive route request messages which are piggybacked onto regular RPL traffic whenever a node S wants to communicate with a neighbor D, which is not the sink node. As soon as it receives this route request, D answers with a route reply. Through the distribution of these messages, a DODAG originating at S is formed, along which the peer to peer traffic can now be routed.
+
+The P2P-RPL protocol is an extension of the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL)\cite{RPL}. RPL itself was designed for IoT-like circumstances, but focus primarily on networks which feature a \emph{sink node} towards which all traffic is directed. RPL constructs a \gls{DODAG} whose root is the sink node. All traffic is then routed towards the sink node. Parent nodes in the DODAG do not necessarily know about their children, so communication towards any other than the sink node is not possible in all configurations of the RPL protocol. In case it is possible, packets from one leaf node to another will always have to travel to the root node first to be sent back, even if they are in close proximity. In networks with a substantial amount of peer to peer traffic, this leads to battery draining and traffic bottlenecks close to the sink node. This is why \cite{baccelli_p2p_rpl} suggests to extend the protocol with reactive route request messages which are piggybacked onto regular RPL traffic whenever a node S wants to communicate with a neighbor D, which is not the sink node. As soon as it receives this route request, D answers with a route reply. Through the distribution of these messages, a DODAG originating at S is formed, along which the peer to peer traffic can now be routed.
 
 
 \section{Key aspects of Hybrid Routing Protocols}
@@ -276,7 +280,7 @@ In \cite{WARP}, WARP is compared to OLSR in experiments with a ``real'' network,
 While simulations have proven to be useful for protocol design and evaluation, there are three main problems to a simulation-only approach: %\todo{find a source for this. STAT.}
 \begin{enumerate}
 \item A simulation is only as good as its model. As shown by \cite{mistaken-axioms} and \cite{exp_eval_wsn_assumptions}, many simulations conducted in wireless network research are based on flawed assumptions about the environment they are trying to model, resulting in drastic deviations from reality. Additionally, as shown by \cite{sim_accuracy}, results of the same experiment may vary from simulator to simulator.
-\item Without data from ``real world'' experiments, verifying that a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, right?}
+\item Without data from ``real world'' experiments, the verification  a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, right?}
 \item Especially in wireless networking, a node's environment (i.e. flying bids, surfaces reflecting differently based on time or weather conditions, unforeseeable radio propagation...) is a big and unforeseeable influence. Even when the model is adequately accurate, it can never account for the unforeseen quirks which will be encountered in a real environment. This can be a great benefit when testing specific aspects of a protocol, because it is possible to observe just this aspect. But in order to test if a protocol can cope with the challenges the real world brings, it has to be tested in a lifelike environment.
 \end{enumerate}
 In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \cite{testbed-survey} provides a requirement analysis for IoT-ready testbeds. It concludes that in order to be suitable for meaningful research, testbeds need to offer the following features to their users:
@@ -295,14 +299,14 @@ Based on this analysis, it provides an overview over existing facilities and the
 
 % I feel like I'm just winging it here.. this doesn't feel right. :/ TODO: mit schmidt absprechen!
 
-Because most of the discussed hybrid protocols have not been designed for the IoT, not all of their key characteristics may be suitable for such a deployment. As discussed in \ref{sec:key_aspects}, routes can be categorized to be either route- or area-centered in terms of scope, and either frameworks or monolithic protocols in terms of architecture.
+Because most of the discussed hybrid protocols have not been designed for the IoT, not all of their key characteristics may be suitable for such a deployment. As discussed in section \ref{sec:key_aspects}, routes can be categorized to be either route- or area-centered in terms of scope, and either frameworks or monolithic protocols in terms of architecture.
 Some of these aspects may foster behavior which is more suitable for the IoT than others.
-Experience with both hybrid protocols and IoT environments is rare, as detailed in \ref{sec:experiments}, so all statements about suitability have to be taken as educated guesses rather than hard truths.
+Experience with both hybrid protocols and IoT environments is rare, as detailed in section \ref{sec:experiments}, so all statements about suitability have to be taken as educated guesses rather than hard truths.
 
 The scope of a routing protocol heavily depends on the kind of network it serves. Therefore, none of the discussed approaches is necessarily better than the other. Time may tell which kind of use case and thus which kind of scope is more common.
 \todo{what if I ``hack'' a path-centered one in such a way that I define all n-hop neighbors as sink nodes, too? I'd have a hybrid-hybrid :D}
 
-Provided there are ways to slim down the code to a manageable size and control overhead, frameworks appear to be the more suitable approach, as they are future-proof and flexible. As mentioned in \ref{sec:existing_protocols}, many of the protocols that were the basis for modifications are considered outdated now. While this took decades in this instance, the IoT may be considered to be just as established a field as MANETs were at the turn of the millennium. Thus, it is not unlikely it will be subject to changes and paradigm shifts, too, and a hybrid routing protocol for the IoT should be able to account for this to a certain extent.
+Provided there are ways to slim down the code to a manageable size and control overhead, frameworks appear to be the more suitable approach, as they are future-proof and flexible. As mentioned in section \ref{sec:existing_protocols}, many of the protocols that were the basis for modifications are considered outdated now. While this took decades in this instance, the IoT may be considered to be just as established a field as MANETs were at the turn of the millennium. Thus, it is not unlikely it will be subject to changes and paradigm shifts, too, and a hybrid routing protocol for the IoT should be able to account for this to a certain extent.
 
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
