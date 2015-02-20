@@ -149,12 +149,13 @@ ZHLS is a hierarchical, GPS-based roting protocol.
 ZHLS clusters all nodes into non-overlapping routing zones based on their location. These clusters form a hierarchy, with the nodes at its very bottom.
 On startup, each node determines their location and joins the zone which spans across the area they're in. Route discovery within the zones is done in a proactive fashion. Whenever a packet needs to travel outside the cluster, it is routed along the zone hierarchy. Because there are no cluster heads, a lot of flooding happens. \todo{disentangle the general WTFness of this protocols's operation}
 This protocol design bears the often erroneous assumption that physical proximity guarantees near-optimal connectivity, which has been debunked by \cite{mistaken-axioms}. \todo{go into troubles of georouting?}
+\cite{ZHLS-GF} reintroduces the 
 
 \subsection{Node-Centric Hybrid Routing}
 \label{subsec:nchr}
 %...............................................................................
 NCHR\cite{Roy_nodecentric} serves networks which contain some nodes, called \emph{netmarks}, that offer services to their peers, such as being a DNS server or an Internet Access Point. All nodes in the network maintain proactive routes towards the netmarks, while other connections are established reactively. The draft uses SOAR\cite{SOAR} for this, but maintains that AODV\cite{RFC-3561} or DSR\cite{DSR} may be used just as easily.
-\todo{elaborate}
+Hamma et al.\todo{elaborate} propose to reintroduce gateway flooding to ZHLS.
 
 \subsection{\gls{HYMAD}}
 \label{subsec:hymad}
@@ -197,12 +198,12 @@ For reactive routing, AODV is used, but may be exchanged for any other reactive 
   \caption{Sketch of the P2P-RPL topology}
 \end{wrapfigure}
 
-The P2P-RPL protocol is an extension of the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL)\cite{RPL}. RPL itself was designed for IoT-like circumstances, but focus primarily on networks which feature a \emph{sink node} towards which all traffic is directed. RPL constructs a \gls{DODAG} whose root is the sink node. All traffic is then routed towards the sink node. Parent nodes in the DODAG do not necessarily know about their children, so communication towards any other than the sink node is not possible in all configurations of the RPL protocol. In case it is possible, packets from one leaf node to another will always have to travel to the root node first to be sent back, even if they are in close proximity. In networks with a substantial amount of peer to peer traffic, this leads to battery draining and traffic bottlenecks close to the sink node. This is why \cite{baccelli_p2p_rpl} suggests to extend the protocol with reactive route request messages which are piggybacked onto regular RPL traffic whenever a node S wants to communicate with a neighbor D, which is not the sink node. As soon as it receives this route request, D answers with a route reply. Through the distribution of these messages, a DODAG originating at S is formed, along which the peer to peer traffic can now be routed.
+The P2P-RPL protocol is an extension of the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL)\cite{RFC-6550}. RPL itself was designed for IoT-like circumstances, but focus primarily on networks which feature a \emph{sink node} towards which all traffic is directed. RPL constructs a \gls{DODAG} whose root is the sink node. All traffic is then routed towards the sink node. Parent nodes in the DODAG do not necessarily know about their children, so communication towards any other than the sink node is not possible in all configurations of the RPL protocol. In case it is possible, packets from one leaf node to another will always have to travel to the root node first to be sent back, even if they are in close proximity. In networks with a substantial amount of peer to peer traffic, this leads to battery draining and traffic bottlenecks close to the sink node. This is why \cite{baccelli_p2p_rpl} suggests to extend the protocol with reactive route request messages which are piggybacked onto regular RPL traffic whenever a node S wants to communicate with a neighbor D, which is not the sink node. As soon as it receives this route request, D answers with a route reply. Through the distribution of these messages, a DODAG originating at S is formed, along which the peer to peer traffic can now be routed.
 
 \section{Key aspects of Hybrid Routing Protocols}
 \label{sec:key_aspects}
 %==============================================================================
-All hybrid protocols discussed in section \ref{sec:existing_protocols} share commonalities, some of which fundamentally shape the way a routing protocol sees and serves a network. The goal of this section is to identify these key aspects and discuss them with regard to the requirements of IoT environment.
+All hybrid protocols discussed in section \ref{sec:existing_protocols} share commonalities, some of which fundamentally shape the way a routing protocol sees and serves a network. The goal of this section is to identify these key aspects and discuss them with regard to the requirements of IoT environment.\footnote{Note that the taxonomies presented are not common in previous work, but were created by the author due to a lack of naming in other literature.}
 
 \subsection{Scope}
 \label{subsec:scope}
@@ -243,7 +244,7 @@ Because the IoT is an umbrella term for many different use cases, none of these 
 \subsection{Architecture}
 \label{subsec:architecture}
 %==============================================================================
-Because hybrid protocols incorporate proactive and reactive protocols as building blocks, the relationship between its reactive and proactive components-- how it all goes together-- may be more than just a sequence of instructions. All hybrid protocols presented in section \ref{sec:existing_protocols} can be classified as one of the two following architectural types\footnote{Note that these names are not common in previous workf, but were created by the author due to a lack of naming in other literature.}. 
+Because hybrid protocols incorporate proactive and reactive protocols as building blocks, the relationship between its reactive and proactive components-- how it all goes together-- may be more than just a sequence of instructions. All hybrid protocols presented in section \ref{sec:existing_protocols} can be classified as one of the two following architectural types.
 \begin{description}
 \item[Monolithic] protocols have a reactive and a proactive component firmly in place. Oftentimes, these components are variations of well-known proactive and reactive protocols, customized to improve the hybrid protocol's overall performance or decrease traffic- or computational overhead. For example, \cite{baccelli_p2p_rpl} piggybacks reactive control traffic onto already existing, proactive RPL messages, thus avoiding unnecessary traffic and saving battery life. %\todo{mehr Beispielprotokolle auflistem}
 This bears great potential for optimization, but complicates code re-use and the deployment of updates.\\
@@ -262,7 +263,7 @@ Of course, this comes at the cost of lightweightedness: Approaches which are ver
 \section{Experimental work}
 \label{sec:experiments}
 %==============================================================================
-Most research concerning hybrid routing protocols stems from a time where large testbeds were technically not feasible and simulations were conducted instead. %\todo{sources, examples}
+Most research concerning hybrid routing protocols stems from a time where large testbeds were technically not feasible and simulations were conducted instead. 
 Thus, publications documenting real-world experience with hybrid deployments are rare.\\
 
 \cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
@@ -275,7 +276,8 @@ While simulations have proven to be useful for protocol design and evaluation, t
 \item Without data from ``real world'' experiments, the verification  a model represents real conditions satisfactorily is hard.
 \item Especially in wireless networking, a node's environment (i.e. flying bids, surfaces reflecting differently based on time or weather conditions, unforeseeable radio propagation...) is a big and unforeseeable influence. Even when the model is adequately accurate, it can never account for the unforeseen quirks which will be encountered in a real environment. This can be a great benefit when testing specific aspects of a protocol, because it is possible to observe just this aspect. But in order to test if a protocol can cope with the challenges the real world brings, it has to be tested in a lifelike environment.
 \end{enumerate}
-In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \cite{testbed-survey} provides a requirement analysis for IoT-ready testbeds. It concludes that in order to be suitable for meaningful research, testbeds need to offer the following features to their users:
+Of course, even data from testbed experiments or even real-world deployments can never fully reproduce real conditions either: The collected data can never be a complete map of the situation, and by deciding which data to collect, information is prioritized and quantified. This decision, too, is influenced by assumptions about the environment which is monitored.
+Still, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \cite{testbed-survey} provides a requirement analysis for IoT-ready testbeds. It concludes that in order to be suitable for meaningful research, testbeds need to offer the following features to their users:
 \begin{description}
 \item[Experimentation:] The ability to specify, interact with, monitor, and repeat an experiment in a straightforward way. Additionally, the ability to run an experiment through simulation, with conditions similar to the testbed, should be given.
 \item[Hardware Features:] The hardware provided should be heterogeneous, with various capabilities and sensor types. The number of available devices should be possibly in the hundreds, with the possibly to add more recent devices in the future. In case of testbeds that span across several sites, the possibility of federating them into a big network should be given. The hardware should be subject to regular maintenance.
@@ -310,10 +312,21 @@ Thus the, creation, evaluation and optimization of monolithic protocols with a c
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
 %==============================================================================
--> write nicely: translate old stuff. Framework good, protocol bad. scope depends on deployment. framework may be able to accommodate that too. simulations mostly suck. real-world experiences are rare. get them! \todo{but with what?} hooray for testbeds! Use IoT-Lab!
-figure out ways to slim down frameworks. get real-world experiences. verify vermutungen oder auch nicht. so much to do!
+In conclusion, there is some ground work to build on, but most of it has to be updated to not only to suit the IoT, but also to respect the leaps MANET, DTN and LLN routing research has made. The fundamental building blocks of hybrid routing protocols, proactive and reactive routing protocols, have changed and evolved since the majority of hybrid protocols were conducted. Many proactive or reactive protocols which were used in said research are now irrelevant or have been replaced by more recent versions.\\
 
-As shown, many existing roting protocols reinvent the wheel by specifying their own proactive or reactive components. While these are often based on well-known protocols such as AODV or \todo{which proactive basis is often used? sure isnt OLSR...}, each modification should be thoroughly justified. The re-use of existing, standardized and well-understood proactive and reactive protocols may help to avoid specification mishaps and save time.
+It has been demonstrated that there are two categories for hybrid protocols in terms of architecture and scope. 
+Architecturally, both monolithic and compositional protocols have their merits and downsides. Monolithic protocols have to find a way to incorporate future progress in the proactive and reactive routing protocols they are based on, while compositional protocols face the challenge of reducing overhead and prevent additional routing loops problems. Because of their increased complexity, compositional protocols may require a deeper understanding of hybrid routing before feasible solutions can be proposed. This understanding may, as has been mentioned, be gained through thorough and comparable testbed experiments, which could be conducted in the IoT-Lab. The IoT-Lab constitutes a testbed specifically constructed for IoT research. It features a number of nodes large enough to create significant results and gives researchers a high degree of control over their experiments.\\
+With regard to scope, both approaches-- area-centered and path-centered-- may work for distinct sets of use cases. As the IoT evolves, time will tell which of these use cases is more common, and whether the clear distinction made in section \ref{subsec:architecture} can be made at all. 
+
+In order to be able to draw resilient conclusions about the suitability of different hybrid protocols, comparable results have to be created. One way to achieve this may be through testbed experiments in which several promising hybrid routing protocols face the same challenges and are evaluated for their performance in dealing with them. Through this process, the correctness of the suggestions made in this paper can be disproved or verified.
+Conducting simulations may help in the startup process of these efforts, but can not be a substitute for real-world experiences.\\
+
+\todo{netter schlussatz}
+
+%-> write nicely: translate old stuff. Framework good, protocol bad. scope depends on deployment. framework may be able to accommodate that too. simulations mostly suck. real-world experiences are rare. get them! \todo{but with what?} hooray for testbeds! Use IoT-Lab!
+%figure out ways to slim down frameworks. get real-world experiences. verify vermutungen oder auch nicht. so much to do!
+
+%As shown, many existing roting protocols reinvent the wheel by specifying their own proactive or reactive components. While these are often based on well-known protocols such as AODV or \todo{which proactive basis is often used? sure isnt OLSR...}, each modification should be thoroughly justified. The re-use of existing, standardized and well-understood proactive and reactive protocols may help to avoid specification mishaps and save time.
 
 \printglossaries
 
