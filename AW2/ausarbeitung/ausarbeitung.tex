@@ -191,9 +191,6 @@ For reactive routing, AODV is used, but may be exchanged for any other reactive 
 \subsection{P2P-RPL}
 \label{subsec:p2prpl}
 %...............................................................................
-\todo{S, D.. beschriften}
-
-
 \begin{wrapfigure}{r}{0.5\textwidth}
   \begin{center}
     \includegraphics[width=0.48\textwidth]{../images/p2pRPL}
@@ -202,9 +199,7 @@ For reactive routing, AODV is used, but may be exchanged for any other reactive 
   \caption{Sketch of the P2P-RPL topology}
 \end{wrapfigure}
 
-
 The P2P-RPL protocol is an extension of the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL)\cite{RPL}. RPL itself was designed for IoT-like circumstances, but focus primarily on networks which feature a \emph{sink node} towards which all traffic is directed. RPL constructs a \gls{DODAG} whose root is the sink node. All traffic is then routed towards the sink node. Parent nodes in the DODAG do not necessarily know about their children, so communication towards any other than the sink node is not possible in all configurations of the RPL protocol. In case it is possible, packets from one leaf node to another will always have to travel to the root node first to be sent back, even if they are in close proximity. In networks with a substantial amount of peer to peer traffic, this leads to battery draining and traffic bottlenecks close to the sink node. This is why \cite{baccelli_p2p_rpl} suggests to extend the protocol with reactive route request messages which are piggybacked onto regular RPL traffic whenever a node S wants to communicate with a neighbor D, which is not the sink node. As soon as it receives this route request, D answers with a route reply. Through the distribution of these messages, a DODAG originating at S is formed, along which the peer to peer traffic can now be routed.
-
 
 \section{Key aspects of Hybrid Routing Protocols}
 \label{sec:key_aspects}
