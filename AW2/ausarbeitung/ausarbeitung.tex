@@ -91,7 +91,7 @@ But while this milestone has been reached, the amount of protocols of any kind s
 \item[\glspl{VANET}] have seen a lot of research concerning hybrid protocols. Unfortunately, their characteristics differ too drastically from the IoT: node mobility in VANETs is extremely high, with somewhat ordered movement patterns as cars usually only move on streets, which are known beforehand. %And because it has access to the energy system of a car, battery life is not as critical.
 \end{description}
 
-The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built.\\ \todo{mehr herausarbeiten? Aber wohin damit? :(}
+The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built. It aims to provide a critical overview over existing work and challenges which might arise in hybrid protocol design for the IoT.\\ %\todo{mehr herausarbeiten? Aber wohin damit? :(}
 
 \section{Requirements for hybrid IoT routing protocols}
 \label{subsec:requirements}
@@ -285,7 +285,7 @@ In conclusion, experiences from real-world experiments or deployments are vital 
 \item[Mobility:] Devices of the testbed should be able to move around in various patterns with the help of robotic and automation systems.
 \item[Software management \& tools:] Simulation scenario configuration, may it be mobility patterns, hardware configurations, or low-level device control, should be easily accessible.
 \end{description}
-Based on this analysis, it provides an overview over existing facilities and their features. The two biggest testbeds, IoT-Lab\footnote{\url{https://www.iot-lab.info}} and smartsantander\footnote{\url{http://www.smartsantander.eu}} feature between 2,728 and 20,000 nodes and, even though their primary target are \glspl{WSN}, provide mobility through toy trains (IoT-Lab) or public buses (senslab). The latter has an impact on the reproduceability of experiments and limits the influence an experiment designer has on mobility patterns.
+Based on this analysis, it provides an overview over existing facilities and their features. The two biggest testbeds, IoT-Lab\footnote{\url{https://www.iot-lab.info}} and smartsantander\footnote{\url{http://www.smartsantander.eu}} feature between 2,728 and 20,000 nodes and, even though their primary target are \glspl{WSN}, provide mobility through toy trains (IoT-Lab) or public buses (senslab). The latter has an impact on the reproducibility of experiments and limits the influence an experiment designer has on mobility patterns.
 % + conclusion -> use iot-lab?
 
 \section{Suitability for the IoT}
@@ -294,14 +294,19 @@ Based on this analysis, it provides an overview over existing facilities and the
 
 % I feel like I'm just winging it here.. this doesn't feel right. :/ TODO: mit schmidt absprechen!
 
-Because most of the discussed hybrid protocols have not been designed for the IoT, not all of their key characteristics may be suitable for such a deployment. As discussed in section \ref{sec:key_aspects}, routes can be categorized to be either route- or area-centered in terms of scope, and either frameworks or monolithic protocols in terms of architecture.
-Some of these aspects may foster behavior which is more suitable for the IoT than others.
-Experience with both hybrid protocols and IoT environments is rare, as detailed in section \ref{sec:experiments}, so all statements about suitability have to be taken as educated guesses rather than hard truths.
+Because most of the discussed hybrid protocols have not been designed for the IoT, not all of their key characteristics may be suitable for such a deployment. This section discusses possibilities on how to advance the propositioned hybrid protocol solutions towards suitability for the IoT. However, experience with both hybrid protocols and IoT environments is rare, as detailed in section \ref{sec:experiments}, so all statements about suitability have to be taken as educated guesses rather than hard truths.\\
 
-The scope of a routing protocol heavily depends on the kind of network it serves. Therefore, none of the discussed approaches is necessarily better than the other. Time may tell which kind of use case and thus which kind of scope is more common.
-\todo{what if I ``hack'' a path-centered one in such a way that I define all n-hop neighbors as sink nodes, too? I'd have a hybrid-hybrid :D}
+As discussed in section \ref{sec:key_aspects}, routing protocols can be categorized to be either path- or area-centered in terms of scope, and either composite or monolithic protocols in terms of architecture. % Some of these aspects may foster behavior which may be more suitable for the IoT than others.
 
-Provided there are ways to slim down the code to a manageable size and control overhead, frameworks appear to be the more suitable approach, as they are future-proof and flexible. As mentioned in section \ref{sec:existing_protocols}, many of the protocols that were the basis for modifications are considered outdated now. While this took decades in this instance, the IoT may be considered to be just as established a field as MANETs were at the turn of the millennium. Thus, it is not unlikely it will be subject to changes and paradigm shifts, too, and a hybrid routing protocol for the IoT should be able to account for this to a certain extent.
+The scope of a routing protocol heavily depends on the kind of network it serves: are there sink nodes, or are all nodes created equal? Which routes are considered most important, and how are they determined? All answers to these questions are valid, but produce very different requirements a protocol must fulfill.
+Therefore, none of the discussed approaches is necessarily better than the other. Time may tell which kind of use case and thus which kind of scope is more common. Alternatively, it might be discovered that this clear distinguishment may not be found in the wild, and that a hybrid protocol has to serve both (or even more) kinds of networks. One way of implementing this may involve defining all \emph{n}-hop neighbors of a node in a path-centered protocol as sink nodes, thus artificially creating routing zones.\\
+Ideally, a hybrid protocol for the IoT would be able to identify the kind of environment it is operating in and adjust to its needs, but building such a protocol likely depends on the development of more use-case oriented protocols first.\\
+
+One of the main problems in protocol design is guaranteeing loop-freeness. A routing protocol has to ensure that no routes are created which form a circle rather than a path, so-called routing loops. Each protocol has its own protection mechanism against this. When two routing protocols serve the same network, the probability of routing loops increases. What protects one protocol from routing loops might not apply to the other protocol, or, in the worst case, might counter the other protocol's loop prevention mechanisms. This is even bigger a challenge if the hybrid protocol to be designed is not of the monolithic kind, but a composition of two interchangeable base protocols. In this case, the proactive and reactive protocols which are used cannot be modified statically. Instead, a flexible solution which applies to any and unknown protocol combinations has to be created.
+
+Provided there are ways to slim down the code to a manageable size and control overhead, frameworks for hybrid protocol composition appear to be the more appealing approach, as they are likely to be more future-proof and flexible. As mentioned in section \ref{sec:existing_protocols}, many of the protocols that were the basis for modifications are considered outdated now. While this took decades in this instance, the IoT may be considered to be just as established a field as MANETs were at the turn of the millennium. Thus, it is not unlikely it will be subject to changes and paradigm shifts, too, and a hybrid routing protocol for the IoT should be able to account for this to a certain extent. However, it might also take many more years and failed attempts at IoT hybrid routing until the subject is understood well enough to create such a framework. this includes, but is not limited to, handling the increased complexity of avoiding routing loops, as sketched above.
+
+Thus the, creation, evaluation and optimization of monolithic protocols with a clear use case and mission may help gaining the knowledge which is necessary to develop more flexible and capable hybrid routing frameworks.
 
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
