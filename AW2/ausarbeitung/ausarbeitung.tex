@@ -55,8 +55,6 @@ Because traditional approaches to routing may not be feasible for this task, \em
 \section{Introduction}
 \label{sec:Intro}
 %==============================================================================
-%TODO
-
 
 \subsection{What is the Internet of Things?}
 \label{subsec:IoT}
@@ -91,7 +89,7 @@ But while this milestone has been reached, the amount of protocols of any kind s
 \item[\glspl{VANET}] have seen a lot of research concerning hybrid protocols. Unfortunately, their characteristics differ too drastically from the IoT: node mobility in VANETs is extremely high, with somewhat ordered movement patterns as cars usually only move on streets, which are known beforehand. %And because it has access to the energy system of a car, battery life is not as critical.
 \end{description}
 
-The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built. It aims to provide a critical overview over existing work and challenges which might arise in hybrid protocol design for the IoT.\\ %\todo{mehr herausarbeiten? Aber wohin damit? :(}
+The goal of this paper is thus to explore how hybrid routing can be advanced with the \gls{IoT} in mind, building on the foundation which research on \gls{MANET} routing of the past 15 years has built. It aims to provide a critical overview over existing work and highlight challenges which might arise in hybrid protocol design for the IoT.\\
 
 \section{Requirements for hybrid IoT routing protocols}
 \label{subsec:requirements}
@@ -142,7 +140,7 @@ The Zone Routing Protocol was originally developed for \glspl{MANET} and is one 
 It clusters nodes into so-called \emph{Routing Zones}, which adapt their diameter to the network's degree of mobility and traffic density. Routes inside these routing zones are discovered and maintained in a proactive fashion. In addition to the topology inside their zone, nodes are also aware of topology which all routing zones form.
 To find routes to nodes in foreign routing zones, the reactive protocol makes use of a technique similar so some multicast routing approaches. The so-called \gls{BRP}\cite{draft-ietf-manet-zone-brp} protocol constructs a \emph{bordercasting} tree between all routing zones, and forwards the packet along the tree to one \emph{bordercasting node} per routing zone. Each bordercasting node will know if the target of the route discovery is in their routing zone, since the zones are maintained with a proactive protocol. If this is the case, it reports this to the source node, and the data exchange begins. If it is not the case, it forwards the packet. This way, traffic overhead is avoided. An illustration of this clustering can be found in fig. \ref{fig:zrp_area_centered}\\
 The draft describes ZRP as a routing \emph{framework}. It introduces its own proactive and reactive protocol, namely the \gls{IARP}\cite{draft-ietf-manet-zone-iarp} for proactive routing inside routing zones, and the \gls{IERP}\cite{draft-ietf-manet-zone-ierp} to discover routes between zones reactively. Because of the modular nature of ZRP, alternate protocols such as OLSR for proactive or AODV for reactive may be used instead of the predefined options (i.e. IERP and IARP).\\
-There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{WARP} and the \gls{IZR}\cite{IZR}. %\todo{do I need to elaborate here?}
+There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{WARP} and the \gls{IZR}\cite{IZR}.
 
 \subsection{\gls{ZHLS}}
 \label{subsec:zhls}
@@ -245,8 +243,7 @@ Because the IoT is an umbrella term for many different use cases, none of these 
 \subsection{Architecture}
 \label{subsec:architecture}
 %==============================================================================
-Because hybrid protocols incorporate proactive and reactive protocols as building blocks, the relationship between its reactive and proactive components-- how it all goes together-- may be more than just a sequence of instructions.
-\todo{nette ueberleitung}
+Because hybrid protocols incorporate proactive and reactive protocols as building blocks, the relationship between its reactive and proactive components-- how it all goes together-- may be more than just a sequence of instructions. All hybrid protocols presented in section \ref{sec:existing_protocols} can be classified as one of the two following architectural types\footnote{Note that these names are not common in previous workf, but were created by the author due to a lack of naming in other literature.}. 
 \begin{description}
 \item[Monolithic] protocols have a reactive and a proactive component firmly in place. Oftentimes, these components are variations of well-known proactive and reactive protocols, customized to improve the hybrid protocol's overall performance or decrease traffic- or computational overhead. For example, \cite{baccelli_p2p_rpl} piggybacks reactive control traffic onto already existing, proactive RPL messages, thus avoiding unnecessary traffic and saving battery life. %\todo{mehr Beispielprotokolle auflistem}
 This bears great potential for optimization, but complicates code re-use and the deployment of updates.\\
@@ -265,17 +262,17 @@ Of course, this comes at the cost of lightweightedness: Approaches which are ver
 \section{Experimental work}
 \label{sec:experiments}
 %==============================================================================
-Most research concerning hybrid routing protocols stems from a time where large testbeds were not very feasible and simulations were conducted instead. %\todo{sources, examples}
+Most research concerning hybrid routing protocols stems from a time where large testbeds were technically not feasible and simulations were conducted instead. %\todo{sources, examples}
 Thus, publications documenting real-world experience with hybrid deployments are rare.\\
 
 \cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
 \cite{baccelli_p2p_rpl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
 In \cite{WARP}, WARP is compared to OLSR in experiments with a ``real'' network, which turns out to consist of 14 unidentified laptops connected to an unspecified number of stationary PCs over ethernet. This research is from 2002, a time when WiFi hardware wasn't necessarily standard in consumer-grade laptops.\\
 
-While simulations have proven to be useful for protocol design and evaluation, there are three main problems to a simulation-only approach: %\todo{find a source for this. STAT.}
+While simulations have proven to be useful for protocol design and evaluation, there are three main problems to a simulation-only approach: 
 \begin{enumerate}
 \item A simulation is only as good as its model. As shown by \cite{mistaken-axioms} and \cite{exp_eval_wsn_assumptions}, many simulations conducted in wireless network research are based on flawed assumptions about the environment they are trying to model, resulting in drastic deviations from reality. Additionally, as shown by \cite{sim_accuracy}, results of the same experiment may vary from simulator to simulator.
-\item Without data from ``real world'' experiments, the verification  a model represents real conditions satisfactorily is hard.\todo{impossible is too harsh, right?}
+\item Without data from ``real world'' experiments, the verification  a model represents real conditions satisfactorily is hard.
 \item Especially in wireless networking, a node's environment (i.e. flying bids, surfaces reflecting differently based on time or weather conditions, unforeseeable radio propagation...) is a big and unforeseeable influence. Even when the model is adequately accurate, it can never account for the unforeseen quirks which will be encountered in a real environment. This can be a great benefit when testing specific aspects of a protocol, because it is possible to observe just this aspect. But in order to test if a protocol can cope with the challenges the real world brings, it has to be tested in a lifelike environment.
 \end{enumerate}
 In conclusion, experiences from real-world experiments or deployments are vital to fully understand the challenges of hybrid IoT routing and assess the solutions at hand. Because the opportunity to deploy experimental software on productive systems is rarely given, more and more testbeds have been established in recent years. \cite{testbed-survey} provides a requirement analysis for IoT-ready testbeds. It concludes that in order to be suitable for meaningful research, testbeds need to offer the following features to their users:
@@ -302,11 +299,13 @@ The scope of a routing protocol heavily depends on the kind of network it serves
 Therefore, none of the discussed approaches is necessarily better than the other. Time may tell which kind of use case and thus which kind of scope is more common. Alternatively, it might be discovered that this clear distinguishment may not be found in the wild, and that a hybrid protocol has to serve both (or even more) kinds of networks. One way of implementing this may involve defining all \emph{n}-hop neighbors of a node in a path-centered protocol as sink nodes, thus artificially creating routing zones.\\
 Ideally, a hybrid protocol for the IoT would be able to identify the kind of environment it is operating in and adjust to its needs, but building such a protocol likely depends on the development of more use-case oriented protocols first.\\
 
-One of the main problems in protocol design is guaranteeing loop-freeness. A routing protocol has to ensure that no routes are created which form a circle rather than a path, so-called routing loops. Each protocol has its own protection mechanism against this. When two routing protocols serve the same network, the probability of routing loops increases. What protects one protocol from routing loops might not apply to the other protocol, or, in the worst case, might counter the other protocol's loop prevention mechanisms. This is even bigger a challenge if the hybrid protocol to be designed is not of the monolithic kind, but a composition of two interchangeable base protocols. In this case, the proactive and reactive protocols which are used cannot be modified statically. Instead, a flexible solution which applies to any and unknown protocol combinations has to be created.
+One of the main problems in protocol design is guaranteeing loop-freeness. A routing protocol has to ensure that no routes are created which form a circle rather than a path, so-called routing loops. Routing protocol have their own protection mechanism against this, which are often proven to be correct in complex theoretical procedures. When two routing protocols serve the same network, the probability of routing loops increases. What protects one protocol from routing loops might not apply to the other protocol, or, in the worst case, might counter the other protocol's loop prevention mechanisms. This is even bigger a challenge if the hybrid protocol to be designed is not of the monolithic kind, but a composition of two interchangeable base protocols. In this case, the proactive and reactive protocols which are used cannot be modified statically. Instead, a flexible solution which applies to any and unknown protocol combinations has to be created. Because the components are not known beforehand, this solution has to be sound even without the possibility to prove the correctness of collective loop-free prevention mathematically. Alternatively, a way to prove loop-freeness for a protocol combination whenever necessary has to be found.\\
 
 Provided there are ways to slim down the code to a manageable size and control overhead, frameworks for hybrid protocol composition appear to be the more appealing approach, as they are likely to be more future-proof and flexible. As mentioned in section \ref{sec:existing_protocols}, many of the protocols that were the basis for modifications are considered outdated now. While this took decades in this instance, the IoT may be considered to be just as established a field as MANETs were at the turn of the millennium. Thus, it is not unlikely it will be subject to changes and paradigm shifts, too, and a hybrid routing protocol for the IoT should be able to account for this to a certain extent. However, it might also take many more years and failed attempts at IoT hybrid routing until the subject is understood well enough to create such a framework. this includes, but is not limited to, handling the increased complexity of avoiding routing loops, as sketched above.
 
 Thus the, creation, evaluation and optimization of monolithic protocols with a clear use case and mission may help gaining the knowledge which is necessary to develop more flexible and capable hybrid routing frameworks.
+
+\todo{auf ungeeignete ideen aus prot. eingehen}
 
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
