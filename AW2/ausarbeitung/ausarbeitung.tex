@@ -112,11 +112,11 @@ The following section will provide a short introduction to all existing hybrid r
     \begin{tabular}{p{0.5\textwidth}|l|l|l}
         Name & Scope & Architecture & Published \\
         \hline
-        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Route & Framework & 2002 \\ % proactive fixed
-        SHARP\cite{SHARP} & Area and Route & Framework & 2003 \\ %TODO: only for reactive!
-        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Route & Protocol & 2013\\
+        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Path & Framework & 2002 \\ % proactive fixed
+        SHARP\cite{SHARP} & Area and path & Framework & 2003 \\ %TODO: only for reactive!
+        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Path & Protocol & 2013\\
         ZRP \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} \cite{WARP} & Area & Protocol & 2002/2004\\
-%        \gls{WARP}\cite{WARP} & Area and Route & Protocol & 2002\\ % TODO: evtl doch mit reinnehmen und auseinandernehmen?
+%        \gls{WARP}\cite{WARP} & Area and Path & Protocol & 2002\\ % TODO: evtl doch mit reinnehmen und auseinandernehmen?
         ZHLS\cite{ZHLS} & Area & Protocol & 1999\\
         HYMAD\cite{HYMAD} & Area & Framework & 2010\\ % Only DTN protocol is variable!
     \end{tabular}
@@ -181,7 +181,7 @@ While amongst the more recent research, there are no peer-reviewed publications 
 \end{wrapfigure}
 
 This protocol claims to offer each application the possibility to specify their needs in terms of latency and loss rate in the form of a metric, which is then used to guide the trade-off between proactive protocol overhead and reactive loss of reliability and latency.
-SHARP combines both area-centered and route-centered paradigms in what could be called a route-centered-in-area-centered approach. Routing zones are established around \emph{hot destinations}, i.e. nodes at which a majority of the traffic is directed. Gateways, nodes that offer a service, or sink nodes which collect sensor data in a Wireless Sensor Network may qualify as such a hot destination. Inside these routing zones, a \gls{DODAG} is formed with the hot destination as root, and proactive routes are kept \emph{only towards the hot destination node}. SHARP claims that this help meet the application requirements stated above, but it comes at the cost of enhanced traffic overhead and uneven battery draining, because nodes closer to the hot destination will forward more traffic than the ones on the outskirts.\\
+SHARP combines both area-centered and path-centered paradigms in what could be called a path-centered-in-area-centered approach. Routing zones are established around \emph{hot destinations}, i.e. nodes at which a majority of the traffic is directed. Gateways, nodes that offer a service, or sink nodes which collect sensor data in a Wireless Sensor Network may qualify as such a hot destination. Inside these routing zones, a \gls{DODAG} is formed with the hot destination as root, and proactive routes are kept \emph{only towards the hot destination node}. SHARP claims that this help meet the application requirements stated above, but it comes at the cost of enhanced traffic overhead and uneven battery draining, because nodes closer to the hot destination will forward more traffic than the ones on the outskirts.\\
 If the desired destination is outside of the routing zone, a reactive route discovery is initiated. This is similar to ZRP's approach.\\
 SHARP's routing strategy relies heavily on the assumption that only special nodes are the target of traffic, and is likely to fail in environments where all nodes are equal.\\
 SHARP defines its own proactive protocol, the SHARP Proactive Routing protocol (SPR), which is based on DSDV\cite{DSDV} and TORA\cite{TORA}. Neither of these protocols are relevant in MANET routing as of today.
@@ -215,7 +215,7 @@ All hybrid protocols discussed in section \ref{sec:existing_protocols} share com
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
                 \includegraphics[width=\textwidth]{../images/route_centered_example}
-                \caption{Example of a route-centered network: lights and control center in a smart home.}
+                \caption{Example of a path-centered network: lights and control center in a smart home.}
                 \label{fig:rc_img}
         \end{subfigure}%
         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
@@ -229,11 +229,11 @@ All hybrid protocols discussed in section \ref{sec:existing_protocols} share com
 \end{figure}
 \todo{add thenounproject credits}
 
-Hybrid protocols differ in the way they prioritize routes and decide which of them should be maintained proactively or set up reactively. There are two approaches to this, which this paper dubs the \emph{route-centered} and the \emph{area-centered} approach repectively.\\
+Hybrid protocols differ in the way they prioritize routes and decide which of them should be maintained proactively or set up reactively. There are two approaches to this, which this paper dubs the \emph{path-centered} and the \emph{area-centered} approach repectively.\\
 
 \begin{description}
-\item[route-centered] This approach serves networks in which some nodes, near or far, are more important than others. This is illustrated by fig. \ref{fig:rc_img}, which shows the different lamps of a house and the house's control center. Each lamp needs a stable connection to this control center, be it to switch on/off occasionally to confuse burglars, or exchange status info and configurations. Thus, this connection is maintained proactively, as indicated in the diagram by the thick straight line. Additionally, they may want to communicate with each other upon user interaction. Because this happens spontaneously and sparsely, the connections amongst all lamps are set up reactively, as indicated by the dotted lines.
-The most recent publication on hybrid routing, which is also the only publication with a focus on the IoT \cite{RFC-6997}, features a route-centered approach using \gls{RPL}\cite{RFC-6550} as a basis, extending it with its own reactive mechanism.
+\item[path-centered] This approach serves networks in which some nodes, near or far, are more important than others. This is illustrated by fig. \ref{fig:rc_img}, which shows the different lamps of a house and the house's control center. Each lamp needs a stable connection to this control center, be it to switch on/off occasionally to confuse burglars, or exchange status info and configurations. Thus, this connection is maintained proactively, as indicated in the diagram by the thick straight line. Additionally, they may want to communicate with each other upon user interaction. Because this happens spontaneously and sparsely, the connections amongst all lamps are set up reactively, as indicated by the dotted lines.
+The most recent publication on hybrid routing, which is also the only publication with a focus on the IoT \cite{RFC-6997}, features a path-centered approach using \gls{RPL}\cite{RFC-6550} as a basis, extending it with its own reactive mechanism.
 \\
 \item[area-centered] Protocols relying on this approach assume all nodes are equal in principle, but nearby nodes are more important than nodes which are farther away and know their neighborhood best. They cluster the network into so-called ``routing zones''. Nodes that are in the same zone maintain their connections among each other proactively, so routes towards other members of a routing zone are always known beforehand. Routes towards nodes from foreign zones are established reactively. \todo{write about intra-zone routing, border nodes etc}
 One example application for this may be a warehouse as illustrated in \ref{fig:ac_img} whose goods (or their packaging) are equipped with IoT hardware. Employees are thus able to tell details about the stock simply by asking their scanner, which communicated with the other IoT devices. In case a truck with new goods arrives, employees can use their scanner to ask for the nearest packaging for information about the entire truckload. Thus, knowledge about their immediate neighbors is vital to these nodes, while none of them has special features which may turn it into a ``more important node''. Many early attempts at Hybrid routing, most popularly \gls{ZRP}, but also more recent research such as HYMAD, feature this approach.
@@ -298,7 +298,7 @@ Some of these aspects may foster behavior which is more suitable for the IoT tha
 Experience with both hybrid protocols and IoT environments is rare, as detailed in \ref{sec:experiments}, so all statements about suitability have to be taken as educated guesses rather than hard truths.
 
 The scope of a routing protocol heavily depends on the kind of network it serves. Therefore, none of the discussed approaches is necessarily better than the other. Time may tell which kind of use case and thus which kind of scope is more common.
-\todo{what if I ``hack'' a route-centered one in such a way that I define all n-hop neighbors as sink nodes, too? I'd have a hybrid-hybrid :D}
+\todo{what if I ``hack'' a path-centered one in such a way that I define all n-hop neighbors as sink nodes, too? I'd have a hybrid-hybrid :D}
 
 Provided there are ways to slim down the code to a manageable size and control overhead, frameworks appear to be the more suitable approach, as they are future-proof and flexible. As mentioned in \ref{sec:existing_protocols}, many of the protocols that were the basis for modifications are considered outdated now. While this took decades in this instance, the IoT may be considered to be just as established a field as MANETs were at the turn of the millennium. Thus, it is not unlikely it will be subject to changes and paradigm shifts, too, and a hybrid routing protocol for the IoT should be able to account for this to a certain extent.
 
