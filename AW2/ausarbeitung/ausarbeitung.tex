@@ -112,13 +112,13 @@ The following section will provide a short introduction to all existing hybrid r
     \begin{tabular}{p{0.5\textwidth}|l|l|l}
         Name & Scope & Architecture & Published \\
         \hline
-        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Path & Framework & 2002 \\ % proactive fixed
-        SHARP\cite{SHARP} & Area and path & Framework & 2003 \\ %TODO: only for reactive!
-        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Path & Protocol & 2013\\
-        ZRP \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} \cite{WARP} & Area & Protocol & 2002/2004\\
+        Node-Centric Hybrid Routing \cite{Roy_nodecentric} & Path & Compositional & 2002 \\ % proactive fixed
+        SHARP\cite{SHARP} & Area and path & Compositional & 2003 \\ %TODO: only for reactive!
+        P2P extension\cite{RFC-6997} of RPL\cite{RFC-6550} & Path & Monolithic & 2013\\
+        ZRP \cite{ZRP-Draft} and extensions \cite{TZRP} \cite{IZR} \cite{WARP} & Area & Monolithic & 2002/2004\\
 %        \gls{WARP}\cite{WARP} & Area and Path & Protocol & 2002\\ % TODO: evtl doch mit reinnehmen und auseinandernehmen?
-        ZHLS\cite{ZHLS} & Area & Protocol & 1999\\
-        HYMAD\cite{HYMAD} & Area & Framework & 2010\\ % Only DTN protocol is variable!
+        ZHLS\cite{ZHLS} & Area & Monolithic & 1999\\
+        HYMAD\cite{HYMAD} & Area & Compositional & 2010\\ % Only DTN protocol is variable!
     \end{tabular}
     \caption{Overview over existing hybrid protocols. An explanation of the terminology used can be found in section \ref{sec:key_aspects}}
     \label{fig:overview}
@@ -246,13 +246,15 @@ Because the IoT is an umbrella term for many different use cases, none of these 
 \subsection{Architecture}
 \label{subsec:architecture}
 %==============================================================================
-Because hybrid protocols incorporate proactive and reactive protocols as building blocks, their design in terms of architecture-- how it all goes together-- may be more than just a sequence of instructions.
+Because hybrid protocols incorporate proactive and reactive protocols as building blocks, the relationship between its reactive and proactive components-- how it all goes together-- may be more than just a sequence of instructions.
 \todo{nette ueberleitung}
 \begin{description}
-\item[protocol] They may either be \emph{monolithic protocols} which have a reactive and a proactive component firmly in place. Oftentimes, these components are variations of well-known proactive and reactive protocols, customized to improve the hybrid protocol's overall performance or decrease traffic- or computational overhead. For example, \cite{baccelli_p2p_rpl} piggybacks reactive control traffic onto already existing, proactive RPL messages, thus avoiding unnecessary traffic and saving battery life. %\todo{mehr Beispielprotokolle auflistem}
+\item[Monolithic] protocols have a reactive and a proactive component firmly in place. Oftentimes, these components are variations of well-known proactive and reactive protocols, customized to improve the hybrid protocol's overall performance or decrease traffic- or computational overhead. For example, \cite{baccelli_p2p_rpl} piggybacks reactive control traffic onto already existing, proactive RPL messages, thus avoiding unnecessary traffic and saving battery life. %\todo{mehr Beispielprotokolle auflistem}
 This bears great potential for optimization, but complicates code re-use and the deployment of updates.\\
-\item[framework] Or, hybrid solutions may be organized as a mere \emph{framework} with which can be used to bring together different proactive or reactive protocols. Some existing hybrid solutions such as SHARP, Node-Centric Hybrid Routing and HYMAD chose this route, but with a twist: one component, for example the reactive protocol, is fixed, while the proactive protocol can be exchanged at will. This architecture allows for a great deal of flexibility: If a new version of a protocol that is in use surfaces, it can be adopted quickly. The same with alternative protocols which prove to serve some or all use-cases better. Existing implementations of well-known proactive or reactive protocols can be integrated and re-used.
-A hybrid framework bears the possibility to be customized for certain deployments, because the most suitable proactive and reactive protocols for the task may be picked and combined seamlessly.
+\item[Compositional] protocols are organized as a mere \emph{framework} which can be used to combine different proactive or reactive protocols. 
+The choice which proactive and reactive protocols are used is not made the protocol designer anymore, but by the person deploying the protocol for a specific environment.\\
+Some existing hybrid solutions such as SHARP, Node-Centric Hybrid Routing and HYMAD chose this route, but with a twist: one component, for example the reactive protocol, is fixed, while the proactive protocol can be exchanged at will. This architecture allows for a great deal of flexibility: If a new version of a protocol that is in use surfaces, it can be adopted quickly. The same with alternative protocols which prove to serve some or all use-cases better. Existing implementations of well-known proactive or reactive protocols can be integrated and re-used.
+A compositional protocol bears the possibility to be customized for certain deployments, because the most suitable proactive and reactive protocols for the task may be picked and combined seamlessly.
 Of course, this comes at the cost of lightweightedness: Approaches which are very flexible usually produce a higher amount of overhead. Additionally, if preexisting specifications and implementations are used, it may be hard to optimize them in terms of size and computational or traffic overhead.
 \end{description}
 
