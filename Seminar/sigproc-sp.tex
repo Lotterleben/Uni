@@ -1,5 +1,11 @@
 \documentclass{acm_proc_article-sp}
 
+% Glossary benutzen
+\usepackage{glossaries}
+\loadglsentries[main]{glossary}
+\makeglossaries
+%\printglossaries
+
 \begin{document}
 
 \title{Routing protocol evaluation for the IoT}
@@ -21,6 +27,8 @@ TODO
 \section{Introduction}
 \label{sec:Intro}
 %===============================================================================
+The \gls{IoT} is both a growing market and a budding research field. One central aspect of IoT communications is routing: finding the best paths between nodes and towards sink nodes and gateways is crucial to ensure energy-efficient and smooth network operations. However, practical experience with IoT routing is sparse, and scientific evaluation of such environments is rare. Most routing protocol evaluations are simulation-based, and even fewer of these evaluations have been designed with the IoT in mind.
+This paper presents a testbed-based evaluation approach tailored to the IoT. The goal is to enable the evaluation of routing protocols which have been created for \glspl{LLN} or \glspl{MANET} with regard to their suitability for the IoT.
 
 
 \subsection{Related work?}
@@ -32,9 +40,17 @@ Suchworte: Experiment Design
 \section{IoT Scenarios}
 \label{sec:Scenarios}
 %===============================================================================
-What do IoT-like topologies, environments, scenarios look like? Do they maybe need to be divided into different categories?
--> Short overview, then pick a strong one (use case exists in practice, is not niche etc) as a first step. Go on to model only that one.
+%What do IoT-like topologies, environments, scenarios look like? Do they maybe need to be divided into different categories?
+%-> Short overview, then pick a strong one (use case exists in practice, is not niche etc) as a first step. Go on to model only that one.
 
+In order to be able to create an accurate model, the core characteristics which make up the experiment scenario have to be determined. These characteristics are: Network topology, traffic patterns, mobility patterns (if any), energy efficiency requirements and radio propagation characteristics and the environmental factors which may influence them.
+%TODO: elaborate if I need more text
+Since the IoT is a paradigm which encompasses many different use cases and environments, there is no such thing as \emph{the} typical IoT scenario. A building automation installation in a factory might feature a star topology with TODO traffic, no mobility, low energy efficiency requirements and an open field, resulting in a wide radio range (TODO: Quelle), while a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents, resulting in low radio ranges, TODO traffic and bursty node mobility whenever the goods are unloaded or rearranged.
+
+TODO: list taxonomy of scenarios
+
+Therefor, providing a ``one scenario fits all'' solution is out of scope for this paper. Instead, a specific scenario will be studied and modeled in detail, with the hope that some of the building blocks may be reused as research expands.
+To achieve this, TODO has been chosen as the scenario to be modeled, as it can be found in a wide range of applications, and its characteristics are the most challenging for routing protocols.
 
 \section{Experiment goals}
 \label{sec:Goals}
