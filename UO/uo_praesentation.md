@@ -19,6 +19,19 @@ TODO: Diskussion einleiten nicht vergessen!
 **Quelle: [^3]**
 
 ---
+> “I don't want you to go to work unhappy, pissed off, upset, or mad about anything, because I don't think you can be totally focused on making money if you're worried about what's happening at home or at school with your kids.”
+
+^
+**Quelle: [^3]**
+
+---
+
+> “You've got to give them a piece of the action. That gives them their drive and their desire to hang in and do it well.”
+
+^
+His managers must purchase 25% equity stakes in the restaurants they run. In exchange, they receive 25% of the monthly net profits, a $1,200 monthly salary, and full health benefits for themselves and their dependents, a rarity in the burger world. That's just for starters. Managers who have been with D.L. Rogers for more than 18 months qualify for a bonus of up to 15% of net profits if they meet certain food, labor, and paper costs. And three-year veterans can buy a 1% stake in a new Sonic outlet for about $1,750, as long as they meet certain goals, such as posting an annual net profit of 20%. Supervisors can receive up to 13% of the net profits from the stores they oversee.
+
+---
 # Transaktional oder transformational?
 
 ---
@@ -48,18 +61,13 @@ TODO: Diskussion einleiten nicht vergessen!
 ^
 - Keine Beteiligung an Zielsetzung -> weniger einsatz fürs ziel
 - widerspruch bei blöden ideen v Hartnett durch das Klima quasi unmöglich
-
+- In 1996 a Texas manager who took it upon himself to computerize his store and take Saturday nights off was passed over for a promotion to supervisor, even though he ran the most profitable store in the chain. "Jack wants you to do things exactly the way he tells you," says the manager, who eventually quit in frustration [3]
 
 ---
 ## Machtmissbrauch
 
 ^
-TODO: auf mehrere Folien aufteilen?
 TODO: schmissigere überschrift
-- Extreme Normierung:
-    - nicht normkonformes verhalten bietet angriffsfläche f kollegen und chef (“kompromat”)
-    - besonderer Druck auf marginalisierte angestellte (Nicht Heterosexuell, nicht männlich, nicht able-bodied)
-    - Woher weiß ich wie offen/freundschaftlich mein Chef wirklich ist? => noch mehr Angst
 
 ---
 ### Falsche Freunde
@@ -79,7 +87,20 @@ TODO: schmissigere überschrift
 
 ---
 
+### Abhängigkeit
+
+^
+Kristin Anderson, a Minneapolis-based consultant who has studied similar businesses, fears that those who work for Hartnett may become too dependent on him for their own sense of self-worth, losing their individual identities. "He may be creating a cult of personality where he gains control through the guise of offering personal assistance," she says.
+
+---
+
 ### \#normcore
+
+^
+- Extreme Normierung:
+    - nicht normkonformes verhalten bietet angriffsfläche f kollegen und chef (“kompromat”)
+    - besonderer Druck auf marginalisierte angestellte (Nicht Heterosexuell, nicht männlich, nicht able-bodied)
+    - Woher weiß ich wie offen/freundschaftlich mein Chef wirklich ist? => noch mehr Angst
 
 ---
 # Discuss.
