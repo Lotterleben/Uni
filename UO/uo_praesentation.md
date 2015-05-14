@@ -50,18 +50,12 @@
 
 ---
 
-TODO: netter titel
+# Ein Freund, ein guter Freund...
 
 ^
 - aufbau starker persönlicher bindung
 - teambuilding 
 - aber: nicht wirklich interessiert an mitarbeitern? lacht darüber, dass er 1 fast getötet hätte ([^2])
-**Quelle: [^3]**
-
----
-# Ein Freund, ein guter Freund...
-
-^
 - teil der starken bindung: starke einbindung ins privatleben
 - idee: nur wenn zu hause alles im lot ist, können mitarbeiter sich auf d arbeit konzentrieren
 - Aufbaz v Vertrauensverhältnis als “freund d familie”
@@ -83,7 +77,7 @@ Nach dieser Einführung: transaktional oder transformational?
 ![fit](./images/trans*_folie.png)
 
 ^
-TODO: grafik aus der VL einführen zur Erinnerung; kleine wiederholung
+zur erinnerung: kam in der VL so dran
 
 ---
 # Situative Variablen des Erfolgs
@@ -111,19 +105,35 @@ positiv:
 ---
 ## Angst ist ein schlechter Motivator
 
+![](./images/angst.jpg)
+
 ^
 - two strikes-Regel
 - “Bedenkenlos benutzt er die in seiner Stellung liegende Anmerkungen Autorität, um Regeln aufzustellen und Strafen zu verhängen”
 - Er gibt zu, alle immer leicht zu verunsichern, "damit sie härter arbeiten".
 - So frightened are they of provoking him that they go out of their way to please him. "If you're really nice and you occasionally get upset, you'll get their attention," he says. [^2]
+(foto: the shining)
 
 ---
-## Not my Circus, not my Monkeys
+<!--## Not my Circus, not my Monkeys-->
+
+![original](./images/chaplin.jpg)
 
 ^
 - Keine Beteiligung an Zielsetzung -> weniger einsatz fürs ziel
 - widerspruch bei blöden ideen v Hartnett durch das Klima quasi unmöglich
 - eigeninitiative sehr eingeschränkt
+
+---
+
+<!--## Falsche Freunde-->
+
+![](./images/pate.jpg)
+
+^
+- zwingt “Freundschaft” auf, die effektiv nicht abgelehnt werden kann
+- massive grenzüberschritungen (unangekündigte Hausbesuche, Eingriffe ins Liebesleben)
+- würde ein echter freund sich so verhalten wäre die freundschaft beendet
 
 ---
 
@@ -133,15 +143,6 @@ positiv:
 -!!! Zitat foliensatz 5: Führung braucht kompatible Ziele, macht braucht nur Abhängigkeit!
 - Abhängigkeit nicht nur Lohn sondern auch privat
 - Kristin Anderson, a Minneapolis-based consultant who has studied similar businesses, fears that those who work for Hartnett may become too dependent on him for their own sense of self-worth, losing their individual identities. "He may be creating a cult of personality where he gains control through the guise of offering personal assistance," she says.
-
----
-
-## Falsche Freunde
-
-^
-- zwingt “Freundschaft” auf, die effektiv nicht abgelehnt werden kann
-- massive grenzüberschritungen (unangekündigte Hausbesuche, Eingriffe ins Liebesleben)
-- würde ein echter freund sich so verhalten wäre die freundschaft beendet
 
 ---
 # Feierabend?
@@ -164,15 +165,18 @@ positiv:
     - Woher weiß ich wie offen/freundschaftlich mein Chef wirklich ist? => noch mehr Angst
 
 ---
-# Discuss.
+![](./images/questions.gif)
 
 ^
-TODO: fragen vorbereiten.
+Fragen, Anregungen, mehr Diskussion?
 
 ---
 # Weitere Quellen
-[^1] Harvey A. Hornstein: The Haves and the Have Nots: The Abuse of Power and Privilege in the Workplace ... and How to Control It. hg. von Financial Times (Prentice Hall), September 2002.
-[Leseprobe](https://books.google.de/books?id=J_GlCvSOIOsC&pg=PA53&lpg=PA53&dq=jack+hartnett+rogers+corp&source=bl&ots=uEAvM2q2CP&sig=cPPaAVsxQXsNMV9k2LVpTkmZTbQ&hl=de&sa=X&ei=oXFLVYGPGIqOsAGvzIAI&ved=0CEMQ6AEwBA#v=onepage&q&f=false)
-[^2] http://www.inc.com/magazine/19980701/962.html
-[^3] http://www.antiessays.com/free-essays/Jack-Hartnett-Ceo-Of-Sonic-64907.html
+- Harvey A. Hornstein: The Haves and the Have Nots: The Abuse of Power and Privilege in the Workplace ... and How to Control It. hg. von Financial Times (Prentice Hall), September 2002. [Leseprobe](https://books.google.de/books?id=J_GlCvSOIOsC&pg=PA53&lpg=PA53&dq=jack+hartnett+rogers+corp&source=bl&ots=uEAvM2q2CP&sig=cPPaAVsxQXsNMV9k2LVpTkmZTbQ&hl=de&sa=X&ei=oXFLVYGPGIqOsAGvzIAI&ved=0CEMQ6AEwBA#v=onepage&q&f=false)
+- [http://www.inc.com/magazine/19980701/962.html](http://www.inc.com/magazine/19980701/962.html)
+- [http://www.antiessays.com/free-essays/Jack-Hartnett-Ceo-Of-Sonic-64907.html](http://www.antiessays.com/free-essays/Jack-Hartnett-Ceo-Of-Sonic-64907.html)
+
+---
+<!-- Jokerfolie! -->
+![](./images/bullshit.gif)
 
