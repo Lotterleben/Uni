@@ -3,17 +3,14 @@
 
 ![right](./images/hartnett.jpg)
 
-
-^
-TODO: zusammenfassung des papiers
-TODO: Diskussion einleiten nicht vergessen!
-
 ---
 
 ![](./images/sonic_burger.jpg)
 
 ^
-- präsident von rogers corp., verwaltet sonic burgerrestaurants
+- präsident D.L. Rogers Corp., Der Sonix Fastfoodkette gehört
+- erfolgreich: Einnahmen pro Restaurant 18% > Durchschnitt, gewinne 25% durschnitt
+- erreicht durch führungsstil wie folgt:
 
 ---
 1. I don’t steal from you
@@ -35,6 +32,9 @@ TODO: Diskussion einleiten nicht vergessen!
 ^
 - keine gemeinsame zielerarbeitung
 - eigeninitiative wird bestraft (->computerisierung effektiv; manager wurde bei beförderung übergangen)
+
+<!-- - In 1996 a Texas manager who took it upon himself to computerize his store and take Saturday nights off was passed over for a promotion to supervisor, even though he ran the most profitable store in the chain. "Jack wants you to do things exactly the way he tells you," says the manager, who eventually quit in frustration [3]
+ -->
 
 ---
 
@@ -64,6 +64,11 @@ TODO: netter titel
 ^
 - teil der starken bindung: starke einbindung ins privatleben
 - idee: nur wenn zu hause alles im lot ist, können mitarbeiter sich auf d arbeit konzentrieren
+- Aufbaz v Vertrauensverhältnis als “freund d familie”
+- Beispiele:
+    - Spontan zum Essen vorbeikommen
+    - Helfen bei Eheproblemen
+    - 
 
 <!--“I don't want you to go to work unhappy, pissed off, upset, or mad about anything, because I don't think you can be totally focused on making money if you're worried about what's happening at home or at school with your kids.” -->
 
@@ -102,6 +107,7 @@ TODO: grafik aus der VL einführen zur Erinnerung; kleine wiederholung
 ^
 positiv: 
 - interesse daran, dass mitarbeiter_innen ein (erfülltes) privatleben haben
+
 ---
 ## Angst ist ein schlechter Motivator
 
@@ -117,16 +123,19 @@ positiv:
 ^
 - Keine Beteiligung an Zielsetzung -> weniger einsatz fürs ziel
 - widerspruch bei blöden ideen v Hartnett durch das Klima quasi unmöglich
-- In 1996 a Texas manager who took it upon himself to computerize his store and take Saturday nights off was passed over for a promotion to supervisor, even though he ran the most profitable store in the chain. "Jack wants you to do things exactly the way he tells you," says the manager, who eventually quit in frustration [3]
+- eigeninitiative sehr eingeschränkt
 
 ---
-## Machtmissbrauch
+
+## Abhängigkeit
 
 ^
-TODO: schmissigere überschrift
-!!! Zitat foliensatz 5: Führung braucht kompatible Ziele, macht braucht nur Abhängigkeit!
+-!!! Zitat foliensatz 5: Führung braucht kompatible Ziele, macht braucht nur Abhängigkeit!
+- Abhängigkeit nicht nur Lohn sondern auch privat
+- Kristin Anderson, a Minneapolis-based consultant who has studied similar businesses, fears that those who work for Hartnett may become too dependent on him for their own sense of self-worth, losing their individual identities. "He may be creating a cult of personality where he gains control through the guise of offering personal assistance," she says.
 
 ---
+
 ## Falsche Freunde
 
 ^
@@ -142,13 +151,6 @@ TODO: schmissigere überschrift
 ^
 - auch wenn Hartnett wert auf gutes privatleben setzt:
 - keine klare Abgrenzung zw. Büro- & Privatleben möglich, da boss omnipräsent
-
----
-
-## Abhängigkeit
-
-^
-Kristin Anderson, a Minneapolis-based consultant who has studied similar businesses, fears that those who work for Hartnett may become too dependent on him for their own sense of self-worth, losing their individual identities. "He may be creating a cult of personality where he gains control through the guise of offering personal assistance," she says.
 
 ---
 
