@@ -1,9 +1,19 @@
 
 # Jack Hartnett
 
+![right](./images/hartnett.jpg)
+
+
 ^
 TODO: zusammenfassung des papiers
 TODO: Diskussion einleiten nicht vergessen!
+
+---
+
+![](./images/sonic_burger.jpg)
+
+^
+- präsident von rogers corp., verwaltet sonic burgerrestaurants
 
 ---
 1. I don’t steal from you
@@ -19,33 +29,79 @@ TODO: Diskussion einleiten nicht vergessen!
 **Quelle: [^3]**
 
 ---
-> “I don't want you to go to work unhappy, pissed off, upset, or mad about anything, because I don't think you can be totally focused on making money if you're worried about what's happening at home or at school with your kids.”
+
+# My way or the highway
 
 ^
-**Quelle: [^3]**
+- keine gemeinsame zielerarbeitung
+- eigeninitiative wird bestraft (->computerisierung effektiv; manager wurde bei beförderung übergangen)
 
 ---
 
 > “You've got to give them a piece of the action. That gives them their drive and their desire to hang in and do it well.”
 
 ^
-His managers must purchase 25% equity stakes in the restaurants they run. In exchange, they receive 25% of the monthly net profits, a $1,200 monthly salary, and full health benefits for themselves and their dependents, a rarity in the burger world. That's just for starters. Managers who have been with D.L. Rogers for more than 18 months qualify for a bonus of up to 15% of net profits if they meet certain food, labor, and paper costs. And three-year veterans can buy a 1% stake in a new Sonic outlet for about $1,750, as long as they meet certain goals, such as posting an annual net profit of 20%. Supervisors can receive up to 13% of the net profits from the stores they oversee.
+- anstatt einbeziehung: geld 1. motivationsfaktor
+- zahlt angestellten das 2-3 fache des Branchendurchschnitts
+- Restaurantmanager kaufen 25% Anteile ihres Restaurants, werden entsprechend am Profit beteiligt
+- krankenversicherung für Angestellte & familien (selten!!!)
+
+<!--His managers must purchase 25% equity stakes in the restaurants they run. In exchange, they receive 25% of the monthly net profits, a $1,200 monthly salary, and full health benefits for themselves and their dependents, a rarity in the burger world. That's just for starters. Managers who have been with D.L. Rogers for more than 18 months qualify for a bonus of up to 15% of net profits if they meet certain food, labor, and paper costs. And three-year veterans can buy a 1% stake in a new Sonic outlet for about $1,750, as long as they meet certain goals, such as posting an annual net profit of 20%. Supervisors can receive up to 13% of the net profits from the stores they oversee. -->
+
+---
+
+TODO: netter titel
+
+^
+- aufbau starker persönlicher bindung
+- teambuilding 
+- aber: nicht wirklich interessiert an mitarbeitern? lacht darüber, dass er 1 fast getötet hätte ([^2])
+**Quelle: [^3]**
+
+---
+# Ein Freund, ein guter Freund...
+
+^
+- teil der starken bindung: starke einbindung ins privatleben
+- idee: nur wenn zu hause alles im lot ist, können mitarbeiter sich auf d arbeit konzentrieren
+
+<!--“I don't want you to go to work unhappy, pissed off, upset, or mad about anything, because I don't think you can be totally focused on making money if you're worried about what's happening at home or at school with your kids.” -->
 
 ---
 # Transaktional oder transformational?
+
+^
+Nach dieser Einführung: transaktional oder transformational?
+
+---
+
+![fit](./images/trans*_folie.png)
+
+^
+TODO: grafik aus der VL einführen zur Erinnerung; kleine wiederholung
 
 ---
 # Situative Variablen des Erfolgs
 
 ^
+- TODO!!!!
 - publikum mit aufzählen lassen? Evtl einfach an die tafel schreiben?
 
 ---
 # Würde ich gern für Hartnett arbeiten?
 
+^
+- folgende punkte Diskussionsgrundlage:
+- -> das hier ist meine meinung, aber ich hab evtl nen anderen hintergrund & prios als ihr, was findet ihr? 
+- -> Einzelne Punkte durchgehen, zwischenrufe annehmen, am Ende offene diskussion 
+
+
 ---
 ![original](./images/nope.gif)
 
+^
+positiv: 
+- interesse daran, dass mitarbeiter_innen ein (erfülltes) privatleben haben
 ---
 ## Angst ist ein schlechter Motivator
 
@@ -68,9 +124,10 @@ His managers must purchase 25% equity stakes in the restaurants they run. In exc
 
 ^
 TODO: schmissigere überschrift
+!!! Zitat foliensatz 5: Führung braucht kompatible Ziele, macht braucht nur Abhängigkeit!
 
 ---
-### Falsche Freunde
+## Falsche Freunde
 
 ^
 - zwingt “Freundschaft” auf, die effektiv nicht abgelehnt werden kann
@@ -78,23 +135,25 @@ TODO: schmissigere überschrift
 - würde ein echter freund sich so verhalten wäre die freundschaft beendet
 
 ---
-### Feierabend?
+# Feierabend?
 
-![original](./images/peggy_home.gif)
+![fit](./images/peggy_home.gif)
 
 ^
-- keine klare Abgrenzung zw. Büro- & Privatleben möglich (-> work-life-balance)
+- auch wenn Hartnett wert auf gutes privatleben setzt:
+- keine klare Abgrenzung zw. Büro- & Privatleben möglich, da boss omnipräsent
 
 ---
 
-### Abhängigkeit
+## Abhängigkeit
 
 ^
 Kristin Anderson, a Minneapolis-based consultant who has studied similar businesses, fears that those who work for Hartnett may become too dependent on him for their own sense of self-worth, losing their individual identities. "He may be creating a cult of personality where he gains control through the guise of offering personal assistance," she says.
 
 ---
 
-### \#normcore
+## Normierung
+![](./images/judging.gif)
 
 ^
 - Extreme Normierung:
