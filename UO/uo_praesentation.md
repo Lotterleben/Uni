@@ -78,13 +78,24 @@ Nach dieser Einführung: transaktional oder transformational?
 
 ^
 zur erinnerung: kam in der VL so dran
+- JHs führung basiert auf Respekt, loyalität, Bewunderung, vertrauen
+- ABER:
+    - keine vermittlung von sinn
+    - keine gemiensamen ziele
+    - keine korrigierenden maßnahmen
+    - => Widerspruch zu Beidem
 
 ---
 # Situative Variablen des Erfolgs
 
 ^
-- TODO!!!!
-- publikum mit aufzählen lassen? Evtl einfach an die tafel schreiben?
+- publikum mit aufzählen lassen => TAFEL!!
+
+-  Situative Variablen beeinflussen die Wirksamkeit von Führungsverhalten. Beispiele in der Vorlesung dafür waren Strukturierheit der Arbeitsaufgaben oder Positionsmacht der Führungsperson.
+    - klare Aufgaben, klare Belohnungen
+    - JH extrem charismatisch
+    - “kümmererrolle” -> mitarbeiter_innen haben geklärtes Privatleben, ruhe im job
+    - Burgerbranche -> wenig ansprüche an eigeninitiative?
 
 ---
 # Würde ich gern für Hartnett arbeiten?
