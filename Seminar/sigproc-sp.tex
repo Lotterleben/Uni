@@ -32,9 +32,13 @@ This paper presents a testbed-based evaluation approach tailored to the IoT. The
 
 
 \subsection{Related work?}
-\label{subsec:realted_work}
+\label{subsec:related_work}
 %...............................................................................
-Suchworte: Experiment Design
+<TODO Einleitung>
+
+\cite{RFC-2501} provides a summary of issues which should be considered when evaluating a routing protocol.
+
+%Suchworte: Experiment Design
 
 
 \section{IoT Scenarios}
@@ -45,18 +49,18 @@ Suchworte: Experiment Design
 
 In order to be able to create an accurate model, the core characteristics which make up the experiment scenario have to be determined. These characteristics are: Network topology, traffic patterns, mobility patterns (if any), energy efficiency requirements and radio propagation characteristics and the environmental factors which may influence them.
 %TODO: elaborate if I need more text
-Since the IoT is a paradigm which encompasses many different use cases and environments, there is no such thing as \emph{the} typical IoT scenario. A building automation installation in a factory might feature a star topology with TODO traffic, no mobility, low energy efficiency requirements and an open field, resulting in a wide radio range (TODO: Quelle), while a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents, resulting in low radio ranges, TODO traffic and bursty node mobility whenever the goods are unloaded or rearranged.
+Since the IoT is a paradigm which encompasses many different use cases and environments, there is no such thing as \emph{the} typical IoT scenario. A building automation installation in a factory might feature a star topology with TODO traffic, no mobility, low energy efficiency requirements and an open field, resulting in a wide radio range (TODO: Quelle), while a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents which result in low radio ranges, and bursty traffic and node mobility whenever the goods are unloaded or rearranged \cite{food_monitoring}.
 
-TODO: list taxonomy of scenarios
+TODO: list taxonomy of scenarios (-> see BA notizen)
 
-Therefor, providing a ``one scenario fits all'' solution is out of scope for this paper. Instead, a specific scenario will be studied and modeled in detail, with the hope that some of the building blocks may be reused as research expands.
+Therefore, providing a ``one scenario fits all'' solution is out of scope for this paper. Instead, a specific scenario will be studied and modeled in detail, with the hope that some of the building blocks may be reused as research expands.
 To achieve this, TODO has been chosen as the scenario to be modeled, as it can be found in a wide range of applications, and its characteristics are the most challenging for routing protocols.
 
 \section{Experiment goals}
 \label{sec:Goals}
 %===============================================================================
 What do I actually want to investigate? Which routing protocol eigenschaften do I want to check, what do I expect from a routing protocol under IoT conditions in terms of performance, reliability etc?
-Use \cite{RFC2501} as a ref! And maybe my notes from back then?
+Use \cite{RFC-2501} as a ref! And maybe my notes from back then?
 
 \section{Experiment design}
 \label{sec:Design}
@@ -85,5 +89,8 @@ Which data do I want to collect and evaluate? What do I want to look for? Is the
 \label{sec:Conclusion}
 %===============================================================================
 
-% That's all folks!
+Outlook: Actually implement this. (Say with which RPs!)
+
+\bibliographystyle{ieeetr}
+\bibliography{sigproc}
 \end{document}
