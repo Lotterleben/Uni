@@ -5,6 +5,7 @@
 \newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
 \usepackage{booktabs}  % for \toprule, \midrule, and \bottomrule macros
 \usepackage{multirow}
+\usepackage{tablefootnote}
 
 % Glossary benutzen
 \usepackage{glossaries}
@@ -57,13 +58,13 @@ While testbed experiments are rare, research on the foundations needed to conduc
     \begin{tabularx}{\textwidth}{l | X | X | X }
         Environment & \textbf{Home automation} & \textbf{Urban \gls{LLN}} & \textbf{Building automation}\\
         \midrule
-        \multirow{5}{*}{Traffic Patterns} & few bytes   & very bursty &  m2p\\
+        Network Topology & star or mesh & fluctuating & star \\
+        \hline
+        \multirow{5}{*}{Traffic Patterns} & few bytes   & low data rates &  mp2p\\
                                           & spontaneous & spontaneous & p2p \\
                                           & scheduled   & scheduled & \\
-                                          &             & low data rates & \\
-                                          &             & p2m and m2p & \\
-        \hline
-        Network Topology & star or mesh & fluctuating & star \\
+                                          & mp2p and p2mp (star) & p2mp & \\
+                                          & mp2mp (mesh) & mp2p & \\
         \hline
         \multirow{2}{*}{Mobility} & some mobile (sending) nodes & low, but dynamicity through & low \\
                                   & mostly fixed (receiving) nodes & disassociation, defect etc &  \\
@@ -74,9 +75,12 @@ While testbed experiments are rare, research on the foundations needed to conduc
         \hline
         Other && Tight latency requirements &\\
     \end{tabularx}
-    \caption{Overview over requirements for different IoT scenarios, as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.}
-    \label{fig:overview}
+    %\caption{Overview over requirements for different IoT scenarios, as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.}
+    %\label{fig:overview}
+        \caption[Overview over requirements for different IoT scenarios, as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.]{%
+      Overview over requirements for different IoT scenarios, as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.\tablefootnote{}\label{fig:overview}}
 \end{table*}
+\footnotetext{\\\texttt{p2p:} Point-to-point\\\texttt{mp2p:} Multipoint-to-point\\\texttt{mp2mp:} Multipoint-to-multipoint}
 
 In order to be able to create an accurate model, the core characteristics which make up the experiment scenario have to be determined. These characteristics are: Network topology, traffic patterns, mobility patterns (if any), scale, energy efficiency requirements, and occasionally specific environmental factors which may influence the operation of the network.
 %TODO: elaborate if I need more text
