@@ -6,6 +6,7 @@
 \usepackage{booktabs}  % for \toprule, \midrule, and \bottomrule macros
 \usepackage{multirow}
 \usepackage{tablefootnote}
+\usepackage{hyperref}
 
 % Glossary benutzen
 \usepackage{glossaries}
@@ -89,24 +90,28 @@ Table \ref{fig:overview} provides an overview of different IoT-like environments
 
 Therefore, providing a ``one scenario fits all'' solution is out of scope for this paper. Instead, a specific scenario will be studied and modeled in detail, with the hope that some of the building blocks may be reused as research expands.
 To achieve this, TODO has been chosen as the scenario to be modeled, as it can be found in a wide range of applications, and its characteristics are the most challenging for routing protocols.
+TODO: Über das food truck ding gibt es recht genaue infos, das szenario ist spannend für uns (weil mesh), die anforderungen sind machbar... danach modeln und etwas abstrakter halten?
 
 \section{Experiment goals}
 \label{sec:Goals}
 %===============================================================================
-What do I actually want to investigate? Which routing protocol eigenschaften do I want to check, what do I expect from a routing protocol under IoT conditions in terms of performance, reliability etc?
+What do I actually want to investigate?
+- what are the metrics by which I determine failure/success?
+- Which routing protocol characteristics do I want to check
+    * how do they compare in terms of energy efficiency?
+    * how well (reaction time, quality of resolution) do they cope with mobility
+    * route reliability (i.e. how many discoveries/transmissions fail under these conditions?)
+
+- what do I expect from a routing protocol under my specific IoT conditions in terms of performance, reliability etc?
 Use \cite{RFC-2501} as a ref! And maybe my notes from back then?
 
 \section{Experiment design}
 \label{sec:Design}
 %===============================================================================
 Based on the goals: Which topology/topologies, which network size(s), which use cases, how do I want to model them, in how much detail.. etc -> Welche Aspekte der Realität sollen abgebildet werden?\\
-Was und wie wird ausgewertet?
+-> 1 very controlled, simple experiment, then ramp it up to a lange scale (and/ ore more, random durchläufe) and see if/how it changes?
 
-\subsection{Choosing the testbed}
-\label{subsec:testbed_choice}
-%...............................................................................
-Goooo IoT Lab! (see AW2 paper here)
-Hat das IoT-Lab irgendwelche fancy experimentierhilfen wie nepi sie zur verfügung stellt?
+Was und wie wird ausgewertet? Welche Implementierungen/ OSe benutz ich? (RIOT!!! ;) )
 
 \subsection{Experiment Setup}
 \label{subsec:setup}
@@ -118,6 +123,14 @@ How many nodes, which communication patterns, which mobility patterns (if any), 
 %...............................................................................
 Which data do I want to collect and evaluate? What do I want to look for? Is there anything I want to show?
 
+
+\subsection{Choosing the testbed}
+\label{subsec:testbed_choice}
+%...............................................................................
+%Hat das IoT-Lab irgendwelche fancy experimentierhilfen wie nepi sie zur verfügung stellt?
+
+In order to run the experiments in a lifelike, but still controlled environment, a testbed is needed. Ideally, a testbed suitable for the IoT should be able to provide their users with at least several hundreds, but ideally several thousands of nodes, a diverse range of hardware, and a number of mobile nodes. \cite{testbed-survey} compares several testbeds with regard to suitability for the IoT, and concludes that the FIT-IoTLab\footnote{\url{https://www.iot-lab.info}} is one of the most suitable facilities. Located all over France, the FIT-IoTLab offers 2,728 nodes in total, featuring three different hardware platforms of different capabilities (TODO:elaborate?) and controllable mobility through a fleet of toy trains. The two more constrained platforms of the IoT-Lab, the Wsn430 and M3 nodes, offer support for RIOT\footnote{\url{https://www.iot-lab.info/operating-systems/}, \\accessed 19.05.2015}.
+This combination is unique among all available testbeds, and provides every feature needed to conduct the described experiments. Therefore, it is advised to run the experiments described this paper on the FIT-IoTLab testbed.
 
 \section{Conclusion and outlook}
 \label{sec:Conclusion}
