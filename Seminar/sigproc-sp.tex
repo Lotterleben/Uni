@@ -77,15 +77,15 @@ While testbed experiments are rare, research on the foundations needed to conduc
     \end{tabularx}
     %\caption{Overview over requirements for different IoT scenarios, as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.}
     %\label{fig:overview}
-        \caption[Overview over requirements for different IoT scenarios, as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.]{%
-      Overview over requirements for different IoT scenarios, as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.\tablefootnote{}\label{fig:overview}}
+        \caption[Overview over requirements for different IoT scenarios]{%
+      Overview over requirements for different IoT scenarios\tablefootnote{}\label{fig:overview}}
 \end{table*}
 \footnotetext{\\\texttt{p2p:} Point-to-point\\\texttt{mp2p:} Multipoint-to-point\\\texttt{mp2mp:} Multipoint-to-multipoint}
 
 In order to be able to create an accurate model, the core characteristics which make up the experiment scenario have to be determined. These characteristics are: Network topology, traffic patterns, mobility patterns (if any), scale, energy efficiency requirements, and occasionally specific environmental factors which may influence the operation of the network.
-%TODO: elaborate if I need more text
-Since the IoT is a paradigm which encompasses many different use cases and environments, there is no such thing as \emph{the} typical IoT scenario. A building automation installation in a factory might feature a star topology with TODO traffic, no mobility, low energy efficiency requirements and an open field, resulting in a wide radio range (TODO: Quelle), while a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents which result in low radio ranges, and bursty traffic and node mobility whenever the goods are unloaded or rearranged \cite{food_monitoring}.
-Table \ref{fig:overview} provides a full overview of different environments.
+%TODO: elaborate in case I need more text
+Since the IoT is a paradigm which encompasses many different use cases and environments, there is no such thing as \emph{the} typical IoT scenario. For example, a building automation installation in a factory might feature a star topology with scheduled multipoint to point traffic, no mobility, low energy efficiency requirements and an open field, resulting in a wide radio range (TODO: Quelle), while a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents which result in low radio ranges, and bursty traffic and node mobility whenever the goods are unloaded or rearranged \cite{food_monitoring}.
+Table \ref{fig:overview} provides an overview of different IoT-like environments as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}. Since the aforementioned list of documents is and can not be exhaustive, neither can Table \ref{fig:overview}. It serves simply as a rough overview.
 
 Therefore, providing a ``one scenario fits all'' solution is out of scope for this paper. Instead, a specific scenario will be studied and modeled in detail, with the hope that some of the building blocks may be reused as research expands.
 To achieve this, TODO has been chosen as the scenario to be modeled, as it can be found in a wide range of applications, and its characteristics are the most challenging for routing protocols.
