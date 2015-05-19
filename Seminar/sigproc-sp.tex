@@ -1,5 +1,11 @@
 \documentclass{acm_proc_article-sp}
 
+\usepackage{tabularx}  % for 'tabularx' environment and 'X' column type
+\usepackage{ragged2e}  % for '\RaggedRight' macro (allows hyphenation)
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\usepackage{booktabs}  % for \toprule, \midrule, and \bottomrule macros
+\usepackage{multirow}
+
 % Glossary benutzen
 \usepackage{glossaries}
 \loadglsentries[main]{glossary}
@@ -34,7 +40,7 @@ This paper presents a testbed-based evaluation approach tailored to the IoT. The
 \label{subsec:related_work}
 %...............................................................................
 While testbed experiments are rare, research on the foundations needed to conduct life-like experiments has been done for about two decades, and is increasingly focused on the IoT.\\
-\cite{RFC-2501} provides a summary of issues which should be considered when evaluating a routing protocol. Routing requirements for the IoT-like scenarios of home and building automation, as well as urban \glspl{LLN} are described in \cite{RFC-5826},  \cite{RFC-5867} and \cite{RFC-5548}.
+\cite{RFC-2501} provides a summary of issues which should be considered when evaluating a routing protocol. Routing requirements for the IoT-like scenarios of home and building automation, as well as urban \glspl{LLN} are described in \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.
 \cite{food_monitoring} discusses influences on transmission range in food monitoring use cases, in particular monitoring bananas during transport. results were achieved both through mathematical analysis as well as well as a simple testbed consisting of four nodes.
 \cite{testbed-survey} presents the features and failings of different Wireless Sensor Network Testbeds, along with a requirement analysis for IoT-ready testbeds.
 
@@ -46,11 +52,36 @@ While testbed experiments are rare, research on the foundations needed to conduc
 %What do IoT-like topologies, environments, scenarios look like? Do they maybe need to be divided into different categories?
 %-> Short overview, then pick a strong one (use case exists in practice, is not niche etc) as a first step. Go on to model only that one.
 
-In order to be able to create an accurate model, the core characteristics which make up the experiment scenario have to be determined. These characteristics are: Network topology, traffic patterns, mobility patterns (if any), energy efficiency requirements and radio propagation characteristics and the environmental factors which may influence them.
+%TODO: explanation m2p etc? where do I put it?
+\begin{table*}[t]
+    \begin{tabularx}{\textwidth}{l | X | X | X }
+        Environment & \textbf{Home automation} & \textbf{Urban \gls{LLN}} & \textbf{Building automation}\\
+        \midrule
+        \multirow{5}{*}{Traffic Patterns} & few bytes   & very bursty &  m2p\\
+                                          & spontaneous & spontaneous & p2p \\
+                                          & scheduled   & scheduled & \\
+                                          &             & low data rates & \\
+                                          &             & p2m and m2p & \\
+        \hline
+        Network Topology & star or mesh & fluctuating & star \\
+        \hline
+        \multirow{2}{*}{Mobility} & some mobile (sending) nodes & low, but dynamicity through & low \\
+                                  & mostly fixed (receiving) nodes & disassociation, defect etc &  \\
+        \hline
+        Energy efficiency & high & high & medium \\
+        \hline
+        Scale & $\geq 250$ & $\geq 100 - 10000$ overall, $\geq 250$ per subnet & $\geq 2000$ \\
+        \hline
+        Other && Tight latency requirements &\\
+    \end{tabularx}
+    \caption{Overview over requirements for different IoT scenarios, as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.}
+    \label{fig:overview}
+\end{table*}
+
+In order to be able to create an accurate model, the core characteristics which make up the experiment scenario have to be determined. These characteristics are: Network topology, traffic patterns, mobility patterns (if any), scale, energy efficiency requirements, and occasionally specific environmental factors which may influence the operation of the network.
 %TODO: elaborate if I need more text
 Since the IoT is a paradigm which encompasses many different use cases and environments, there is no such thing as \emph{the} typical IoT scenario. A building automation installation in a factory might feature a star topology with TODO traffic, no mobility, low energy efficiency requirements and an open field, resulting in a wide radio range (TODO: Quelle), while a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents which result in low radio ranges, and bursty traffic and node mobility whenever the goods are unloaded or rearranged \cite{food_monitoring}.
-
-TODO: list taxonomy of scenarios (-> see BA notizen)
+Table \ref{fig:overview} provides a full overview of different environments.
 
 Therefore, providing a ``one scenario fits all'' solution is out of scope for this paper. Instead, a specific scenario will be studied and modeled in detail, with the hope that some of the building blocks may be reused as research expands.
 To achieve this, TODO has been chosen as the scenario to be modeled, as it can be found in a wide range of applications, and its characteristics are the most challenging for routing protocols.
