@@ -35,7 +35,7 @@ TODO
 \section{Introduction}
 \label{sec:Intro}
 %===============================================================================
-The \gls{IoT} is both a growing market and a budding research field. One central aspect of IoT communications is routing: finding the best paths between nodes and towards sink nodes and gateways is crucial to ensure energy-efficient and smooth network operations. However, practical experience with IoT routing is sparse, and scientific evaluation of such environments is rare. Most routing protocol evaluations are simulation-based, and even fewer of these evaluations have been designed with the IoT in mind.
+In 2014, the \gls{IoT} reached the peak of Gartner's hype cycle for emerging technologies\footnote{\url{https://www.gartner.com/doc/2809728}}. It is both a growing market and a thriving research field. One central aspect of IoT communications is routing: finding the best paths between nodes and towards sink nodes and gateways is crucial to ensure energy-efficient and smooth network operations. However, practical experience with IoT routing is sparse, and scientific evaluation of such environments is rare. Most routing protocol evaluations are simulation-based, and even fewer of these evaluations have been designed with the IoT in mind.
 This paper presents a testbed-based evaluation approach tailored to the IoT. The goal is to enable the evaluation of routing protocols which have been created for \glspl{LLN} or \glspl{MANET} with regard to their suitability for the IoT.
 
 \subsection{Related work}
@@ -45,7 +45,6 @@ While testbed experiments are rare, research on the foundations needed to conduc
 \cite{RFC-2501} provides a summary of issues which should be considered when evaluating a routing protocol. Routing requirements for the IoT-like scenarios of home and building automation, as well as urban \glspl{LLN} are described in \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}.
 \cite{food_monitoring} discusses influences on transmission range in food monitoring use cases, in particular monitoring bananas during transport. results were achieved both through mathematical analysis as well as well as a simple testbed consisting of four nodes.
 \cite{testbed-survey} presents the features and failings of different Wireless Sensor Network Testbeds, along with a requirement analysis for IoT-ready testbeds.
-
 %Suchworte: Experiment Design
 
 \section{IoT Scenarios}
@@ -83,14 +82,32 @@ While testbed experiments are rare, research on the foundations needed to conduc
 \end{table*}
 \footnotetext{\\\texttt{p2p:} Point-to-point\\\texttt{mp2p:} Multipoint-to-point\\\texttt{mp2mp:} Multipoint-to-multipoint}
 
+% Problem: der ansatz ist sehr network-zentriert, surveys sind aber eherfunktionszentriert. selber ableiten oder tabele einfach weglassen?
+% auf jeden Fall aber TODO: von schmidt eingebrachte metriken einbauen!
+
 In order to be able to create an accurate model, the core characteristics which make up the experiment scenario have to be determined. These characteristics are: Network topology, traffic patterns, mobility patterns (if any), scale, energy efficiency requirements, and occasionally specific environmental factors which may influence the operation of the network.
+% TODO: characteristics überarbeiten, fokus mehr auf chars die für routing/aus netzwerksicht wichtig sind
+% TODO: say that the IoT can be viewed from many angles (see atzori et al.), and that we're looking at it from the network angle?
+
 %TODO: elaborate in case I need more text
-Since the IoT is a paradigm which encompasses many different use cases and environments, there is no such thing as \emph{the} typical IoT scenario. For example, a building automation installation in a factory might feature a star topology with scheduled multipoint to point traffic, no mobility, low energy efficiency requirements and an open field, resulting in a wide radio range (TODO: Quelle), while a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents which result in low radio ranges, and bursty traffic and node mobility whenever the goods are unloaded or rearranged \cite{food_monitoring}.
-Table \ref{fig:overview} provides an overview of different IoT-like environments as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}. Since the aforementioned list of documents is and can not be exhaustive, neither can Table \ref{fig:overview}. It serves simply as a rough overview.
+Since the IoT is a paradigm which encompasses many different use cases and environments, there is no such thing as \emph{the} typical IoT scenario. \cite{IoT_survey} lists four main application areas for the IoT:
+\begin{itemize}
+\item Transportation and logistics
+\item Healthcare domain.
+\item Smart environment (home, office, agriculture)
+\item Personal and Social
+\end{itemize}
+%TODO: gubbi et al. do t differently, ausarbeiten
+
+Due to the diverse nature of application areas, the network characteristics vary significantly from domain to domain.
+For example, a building automation installation in a factory might feature a star topology with scheduled multipoint to point traffic, no mobility, low energy efficiency requirements and an open field, resulting in a wide radio range (TODO: Quelle), while a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents which result in low radio ranges, and bursty traffic and node mobility whenever the goods are unloaded or rearranged \cite{food_monitoring}.
+%Table \ref{fig:overview} provides an overview of different IoT-like environments as specified by \cite{RFC-5826}, \cite{RFC-5867} and \cite{RFC-5548}. Since the aforementioned list of documents is and can not be exhaustive, neither can Table \ref{fig:overview}. It serves simply as a rough overview.
 
 Therefore, providing a ``one scenario fits all'' solution is out of scope for this paper. Instead, a specific scenario will be studied and modeled in detail, with the hope that some of the building blocks may be reused as research expands.
-To achieve this, TODO has been chosen as the scenario to be modeled, as it can be found in a wide range of applications, and its characteristics are the most challenging for routing protocols.
-TODO: Über das food truck ding gibt es recht genaue infos, das szenario ist spannend für uns (weil mesh), die anforderungen sind machbar... danach modeln und etwas abstrakter halten?
+To achieve this, TODO has been chosen as the scenario to be modeled, as it can be found in a wide range of applications, and its characteristics are among the most challenging for routing protocols.
+
+%TODO: mesh with sink node.. what else do I want?
+%TODO: Über das food truck ding gibt es recht genaue infos, das szenario ist spannend für uns (weil mesh), die anforderungen sind machbar... danach modeln und etwas abstrakter halten?
 
 \section{Experiment goals}
 \label{sec:Goals}
@@ -129,7 +146,14 @@ Which data do I want to collect and evaluate? What do I want to look for? Is the
 %...............................................................................
 %Hat das IoT-Lab irgendwelche fancy experimentierhilfen wie nepi sie zur verfügung stellt?
 
-In order to run the experiments in a lifelike, but still controlled environment, a testbed is needed. Ideally, a testbed suitable for the IoT should be able to provide their users with at least several hundreds, but ideally several thousands of nodes, a diverse range of hardware, and a number of mobile nodes. \cite{testbed-survey} compares several testbeds with regard to suitability for the IoT, and concludes that the FIT-IoTLab\footnote{\url{https://www.iot-lab.info}} is one of the most suitable facilities. Located all over France, the FIT-IoTLab offers 2,728 nodes in total, featuring three different hardware platforms of different capabilities (TODO:elaborate?) and controllable mobility through a fleet of toy trains. The two more constrained platforms of the IoT-Lab, the Wsn430 and M3 nodes, offer support for RIOT\footnote{\url{https://www.iot-lab.info/operating-systems/}, \\accessed 19.05.2015}.
+In order to run the experiments in a lifelike, but still controlled environment, a testbed is needed. Ideally, a testbed suitable for the IoT should be able to provide their users with at least several hundreds, but ideally several thousands of nodes, a diverse range of hardware, and a number of mobile nodes. \cite{testbed-survey} compares several testbeds with regard to suitability for the IoT, and concludes that the FIT-IoTLab\footnote{\url{https://www.iot-lab.info}} is one of the most suitable facilities. Located all over France, the FIT-IoTLab offers 2,728 nodes in total, featuring three different hardware platforms of different capabilities:
+\begin{description}
+\item[The WSN430 Node] featuring a MSP430 MCU with 48kB Flash, 10kB RAM, an IEEE 802.15.4. radio interface, as well as sensors for ambient sensor light and temperature.
+\item[The M3 Node] featuring an ARM Cortex M3 MCU with 64kB RAM, an IEEE 802.15.4. radio interface, as well as sensors for ambient sensor light, atmospheric pressure and temperature, a gyrometer, and an accelerometer.
+\item[The A8 Node] featuring an ARM Cortex-A8 microprocessor with 256 MV RAM, an ethernet interface, a gyrometer, and an accelerometer.
+\end{description}
+Additionally, the IoT-Lab offers node mobility through a fleet of toy trains. This allows for the use of realistic, but controllable mobility patterns.
+The two more constrained platforms of the IoT-Lab, the Wsn430 and M3 nodes, offer support for RIOT\footnote{\url{https://www.iot-lab.info/operating-systems/}, \\accessed 19.05.2015}.
 This combination is unique among all available testbeds, and provides every feature needed to conduct the described experiments. Therefore, it is advised to run the experiments described this paper on the FIT-IoTLab testbed.
 
 \section{Conclusion and outlook}
