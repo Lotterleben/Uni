@@ -57,16 +57,22 @@ Among other things, this implies different network sizes and traffic patterns.\\
 Therefore, while grouping by application domain is useful to map the impact of the IoT and its possibilities for interoperation and interdisciplinary collaboration, this approach to categorizing the IoT is not feasible when it comes to network modeling. Instead, IoT networks can be categorized along a number of metrics on a relatively fine-grained scale. An IoT network can be characterized in terms of:\\
 \begin{description}
 \item[Network Topology:] The network may be organized in a star or mesh pattern.
-\item[Traffic Pattern:] Some networks experience bursty traffic based on outside events, for example a home automation system when the homeowners return. Others have a regular, scheduled stream of sensor data. Yet others employ a request/response-cycle based on outside events or internal calculations. Packets may travel towards a central \emph{sink node} in a \gls{mp2p} fashion, or flooding the network from a central node as \gls{p2mp} traffic, or \gls{p2p}. The data rate is typically small.
+\item[Traffic Patterns:] Some networks experience bursty traffic based on outside events, for example a home automation system when the homeowners return. Others have a regular, scheduled stream of sensor data. Yet others employ a request/response-cycle based on outside events or internal calculations. Packets may travel towards a central \emph{sink node} in a %\gls{mp2p} TODO: figure out why the eff "multi" in the gls causes an error
+ fashion, or flooding the network from a central node as % \gls{p2mp} traffic, or \gls{p2p}. The data rate is typically small. TODO: figure out why the eff "multi" in the gls causes an error
+\item[Mobility:] Some or all of the nodes of a network may move at different speeds. Movements can be shortlived and caused by displacement, such as the rearrangement of furniture, or constant, such as moving vehicles. Depending on a node's ``host'', different movement patterns may emerge: Cars drive on a fixed grid of streets at nonlinear speeds, while humans moving though an open field are less restricted in terms of directions, but also less prone to extreme acceleration.
+\item[Energy efficiency requirements:] Some IoT devices may be built-in to a host with a constant energy supply and therefore not constrained by battery. Other nodes can and will be charged regularly, while yet others must run without maintenance for years.
+\item[Scale:] Network sizes can range from 250 to more than 10.000 nodes.
 \end{description}
 
 Depending on these characteristics, networks differ in their requirements for a routing protocol. For example, a TODO
 
 Routing Protocol requirements for the IoT can be summarized as:
 \begin{description}
-\item[Latency:] TODO
-\item[Route convergence:] TODO
-\item[Code \& storage size:] TODO
+\item[Latency:] The latency with which routes are found or packets are sent is crucial to some applications. Networks with high mobility, for example in transport or emergency scenarios, may require quick route establishment and usage before the connection is disrupted, while static farming arrangements are not affected if sensor data arrives at the sink node with higher latency.
+%\item[Route convergence:] Convergence is the state of a set of routers that have the same topological information about the internetwork in which they operate. (wikiepdia) -> not sure how to put convergence into context here.
+\item[Route stability:] Networks with frequently changing routes can be expensive both in terms of latency as well as battery usage: unless a constant routing information is maintained\footnote{which is the case with most proactive protocols like OLSR\cite{RFC-3626}}, route rediscoveries require increased activity of the transceiver, which is the most battery-hungry component of IoT nodes.
+\item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even moreso than devices into household appliances etc. Thus, protocol complexity and thus code size can be a relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size.
+\item[Reliability] -> how many packets get lost?
 \end{description}
 
 
