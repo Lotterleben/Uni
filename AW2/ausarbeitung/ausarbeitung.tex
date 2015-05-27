@@ -165,16 +165,16 @@ There are two extensions of ZRP: the \gls{TZRP}\cite{TZRP}, the \gls{WARP}\cite{
 ZHLS is a hierarchical, GPS-based roting protocol. It clusters all nodes into non-overlapping routing zones based on their geographical location. This is done with the use of a zone map, ``which has to be worked out at the design stage''(\cite{ZHLS}, p. 1416). There is no information provided whether the zone map is determined at the protocol or the network design stage.\\
 Similar to routing mechanisms in peer-to-peer overlay networks, destinations are not just determined by their IP address, but by a (Zone ID, IP Address) tuple. On startup, Each node automatically knows on which zone ID it belongs to based on its GPS coordinates.
 % These clusters form a hierarchy, with the individual nodes at its very bottom.
-% each node determines their location and joins the routing zone which spans across the area they're in. 
+% each node determines their location and joins the routing zone which spans across the area they're in.
 As usual, route discovery within the zones is done in a proactive fashion, but nodes also maintain information about connections to neighboring zones. These neighboring nodes are called \emph{gateway nodes}. Additionally, an overlay network which connects the routing zones is created. Whenever a connection between two nodes from neighboring zones is known, a route between their zones exists, too. An illustration of the topology of both the routing zone overlay and the connections inside a zone can be found in fig. \ref{fig:zrp}.
 %Whenever a packet needs to travel outside the cluster, it is routed along the zone hierarchy. Because there are no cluster heads, a lot of flooding happens. \todo{disentangle the general WTFness of this protocols' operation}
-This protocol design bears the often erroneous assumption that physical proximity guarantees near-optimal, or even any kind of, connectivity, which has been debunked by \cite{mistaken-axioms} and \cite{lim_link_stability}. Additionally, GPS localization is known to be imprecise inside buildings or reflecting environments such as narrow streets, which could impact protocol performance even further. 
+This protocol design bears the often erroneous assumption that physical proximity guarantees near-optimal, or even any kind of, connectivity, which has been debunked by \cite{mistaken-axioms} and \cite{lim_link_stability}. Additionally, GPS localization is known to be imprecise inside buildings or reflecting environments such as narrow streets, which could impact protocol performance even further.
 Hamma et al.\cite{ZHLS-GF} propose to reintroduce gateway flooding to ZHLS.
 
 \subsection{Node-Centric Hybrid Routing}
 \label{subsec:nchr}
 %...............................................................................
-NCHR\cite{Roy_nodecentric} serves networks which contain some nodes, called \emph{netmarks}, that offer services to their peers, such as being a DNS server or an Internet Access Point. All nodes in the network maintain proactive routes towards the netmarks, while other connections are established reactively. This introduces an ability-based hierarchy into routing zones which strays from the common assumption that all nodes are equal and routing zones are created by proximity. 
+NCHR\cite{Roy_nodecentric} serves networks which contain some nodes, called \emph{netmarks}, that offer services to their peers, such as being a DNS server or an Internet Access Point. All nodes in the network maintain proactive routes towards the netmarks, while other connections are established reactively. This introduces an ability-based hierarchy into routing zones which strays from the common assumption that all nodes are equal and routing zones are created by proximity.
 The draft uses SOAR\cite{SOAR} for this, but maintains that AODV\cite{RFC-3561} or DSR\cite{DSR} may be used just as easily.
 
 \subsection{\gls{HYMAD}}
@@ -269,7 +269,7 @@ Because hybrid protocols incorporate proactive and reactive protocols as buildin
 \begin{description}
 \item[Monolithic] protocols have a reactive and a proactive component firmly in place. Oftentimes, these components are variations of well-known proactive and reactive protocols, customized to improve the hybrid protocol's overall performance or decrease traffic- or computational overhead. For example, \cite{baccelli_p2p_rpl} piggybacks reactive control traffic onto already existing, proactive RPL messages, thus avoiding unnecessary traffic and saving battery life. %\todo{mehr Beispielprotokolle auflistem}
 This bears great potential for optimization, but complicates code re-use and the deployment of updates.\\
-\item[Compositional] protocols are organized as a mere \emph{framework} which can be used to combine different proactive or reactive protocols. 
+\item[Compositional] protocols are organized as a mere \emph{framework} which can be used to combine different proactive or reactive protocols.
 The choice which proactive and reactive protocols are used is not made the protocol designer anymore, but by the person deploying the protocol for a specific environment.\\
 Some existing hybrid solutions such as SHARP, Node-Centric Hybrid Routing and HYMAD chose this route, but with a twist: one component, for example the reactive protocol, is fixed, while the proactive protocol can be exchanged at will. This architecture allows for a great deal of flexibility: If a new version of a protocol that is in use surfaces, it can be adopted quickly. The same with alternative protocols which prove to serve some or all use-cases better. Existing implementations of well-known proactive or reactive protocols can be integrated and re-used.
 A compositional protocol bears the possibility to be customized for certain deployments, because the most suitable proactive and reactive protocols for the task may be picked and combined seamlessly.
@@ -286,14 +286,14 @@ Of course, this comes at the cost of lightweightedness: Approaches which are ver
 \section{Experimental work}
 \label{sec:experiments}
 %==============================================================================
-Most research concerning hybrid routing protocols stems from a time where large testbeds were technically not feasible and simulations were conducted instead. 
+Most research concerning hybrid routing protocols stems from a time where large testbeds were technically not feasible and simulations were conducted instead.
 Thus, publications documenting real-world experience with hybrid deployments are rare.\\
 
 \cite{gomez_NSTAODV_eval} has evaluated the reactive AODVv2 protocol for IEEE 802.15.4. networks, a technology widely used in IoT deployments, as early as in 2006. However, the ``real environment'' used consists of 4-7 nodes, arranged in different topologies with a per-node distance of 12 cm. While a careful evaluation of simplified topologies is invaluable when examining new approaches, these findings can not provide us with information on the performance of (NST-)AODV in large scale, production IoT deployments.
 \cite{baccelli_p2p_rpl} reports about testbed experiences with P2P-RPL, comparing its performance in comparison to pure RPL in terms of route length and percentage of routes traversing the root node.
 In \cite{WARP}, WARP is compared to OLSR in experiments with a ``real'' network, which turns out to consist of 14 unidentified laptops connected to an unspecified number of stationary PCs over ethernet. This research is from 2002, a time when WiFi hardware wasn't necessarily standard in consumer-grade laptops.\\
 
-While simulations have proven to be useful for protocol design and evaluation, there are three main problems to a simulation-only approach: 
+While simulations have proven to be useful for protocol design and evaluation, there are three main problems to a simulation-only approach:
 \begin{enumerate}
 \item A simulation is only as good as its model. As shown by \cite{mistaken-axioms} and \cite{exp_eval_wsn_assumptions}, many simulations conducted in wireless network research are based on flawed assumptions about the environment they are trying to model, resulting in drastic deviations from reality. Additionally, as shown by \cite{sim_accuracy}, results of the same experiment may vary from simulator to simulator.
 \item Without data from ``real world'' experiments, the verification  a model represents real conditions satisfactorily is hard.
@@ -344,7 +344,7 @@ Thus the, creation, evaluation and optimization of monolithic protocols with a c
 %==============================================================================
 In conclusion, there is ground work in hybrid routing research to build on, but this body of work has been created  before the rise of the IoT. Most of it has to be updated to not only to suit the IoT, but also to respect the leaps MANET, DTN and LLN routing research has made. The fundamental building blocks of hybrid routing protocols, proactive and reactive routing protocols, have changed and evolved since the majority of hybrid protocols were conducted. Many proactive or reactive protocols which were used in said research are now irrelevant or have been replaced by more recent versions.\\
 
-It has been demonstrated that there are two categories for hybrid protocols in terms of architecture and scope. 
+It has been demonstrated that there are two categories for hybrid protocols in terms of architecture and scope.
 Architecturally, both monolithic and compositional protocols have their merits and downsides. Monolithic protocols have to find a way to incorporate future progress in the proactive and reactive routing protocols they are based on, while compositional protocols face the challenge of reducing overhead and prevent additional routing loops problems. Because of their increased complexity, compositional protocols may require a deeper understanding of hybrid routing before feasible solutions can be proposed. This understanding may, as has been mentioned, be gained through thorough and comparable testbed experiments, which could be conducted in the IoT-Lab. The IoT-Lab constitutes a testbed specifically constructed for IoT research. It features a number of nodes large enough to create significant results and gives researchers a high degree of control over their experiments.\\
 With regard to scope, both approaches-- area-centered and path-centered-- may work for distinct sets of use cases. As the IoT evolves, time will tell which of these use cases is more common, and whether the clear distinction made in section \ref{subsec:architecture} can be made at all.\\
 
