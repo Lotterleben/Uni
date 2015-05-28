@@ -57,41 +57,49 @@ Among other things, this implies different network sizes and traffic patterns.\\
 Therefore, while grouping by application domain is useful to map the impact of the IoT and its possibilities for interoperation and interdisciplinary collaboration, this approach to categorizing the IoT is not feasible when it comes to network modeling. Instead, IoT networks can be categorized along a number of metrics on a relatively fine-grained scale. An IoT network can be characterized in terms of:\\
 \begin{description}
 \item[Network Topology:] The network may be organized in a star or mesh pattern.
-\item[Traffic Patterns:] Some networks experience bursty traffic based on outside events, for example a home automation system when the homeowners return. Others have a regular, scheduled stream of sensor data. Yet others employ a request/response-cycle based on outside events or internal calculations. Packets may travel towards a central \emph{sink node} in a %\gls{mp2p} TODO: figure out why the eff "multi" in the gls causes an error
- fashion, or flooding the network from a central node as % \gls{p2mp} traffic, or \gls{p2p}. The data rate is typically small. TODO: figure out why the eff "multi" in the gls causes an error
+\item[Traffic Patterns:] Some networks experience bursty traffic based on outside events, for example a home automation system when the homeowners return. Others have a regular, scheduled stream of sensor data. Yet others employ a request/response-cycle based on outside events or internal calculations. Packets may travel towards a central \emph{sink node} in a multipoint-to-point fashion, or flooding the network from a central node as point-to-multipoint traffic, or simple point-to-point. The data rate is typically small.
 \item[Mobility:] Some or all of the nodes of a network may move at different speeds. Movements can be shortlived and caused by displacement, such as the rearrangement of furniture, or constant, such as moving vehicles. Depending on a node's ``host'', different movement patterns may emerge: Cars drive on a fixed grid of streets at nonlinear speeds, while humans moving though an open field are less restricted in terms of directions, but also less prone to extreme acceleration.
 \item[Energy efficiency requirements:] Some IoT devices may be built-in to a host with a constant energy supply and therefore not constrained by battery. Other nodes can and will be charged regularly, while yet others must run without maintenance for years.
 \item[Scale:] Network sizes can range from 250 to more than 10.000 nodes.
 \end{description}
 
-Depending on these characteristics, networks differ in their requirements for a routing protocol. For example, a building automation installation in a factory might feature 1000 nodes arranged in a star topology with scheduled multipoint to point traffic, no mobility, and low energy efficiency requirements, as most nodes are mostly idle and can be TODO. (regelmäßig geladen. das bedeutet dass das routingprotkoll x können musss. bananentransporte hingegen.. usw)
+Depending on these characteristics, networks differ in their requirements for a routing protocol. For example, a building automation installation in a factory might feature 1000 nodes arranged in a star topology with scheduled multipoint to point traffic, no mobility, and high energy efficiency requirements, as nodes are expected to operate on one battery for 5 years\cite{RFC-5867}. A routing protocol suitable for this environment thus has lower requirements for latency and code size, but its high energy-efficiency requirements call for a routing protocol with high route stability and reliability.
+On the other hand, a solution monitoring the insides of a food truck features a mesh topology made necessary by the high density of the truck's contents which result in low radio ranges, and bursty traffic and node mobility whenever the goods are unloaded or rearranged \cite{food_monitoring}. However, these goods are stored and monitored in boxes, which could be recharged upon arrival, lowering energy efficiency requirements. Thus, an optimal routing protocol for this environment differs vastly from the protocol suitable for the building automation installation described above: While energy-efficiency is less important here, code and storage size is a relevant factor, since the nodes installed should be as cheap and lightweight as possible. Since boxes can be rearranged during unloading/reloading, timely failure recovery is necessary.
 
-Routing Protocol requirements for the IoT can be summarized as:
+In general, Routing Protocol performance metrics for the IoT can be summarized as:
 \begin{description}
 \item[Latency:] The latency with which routes are found or packets are sent is crucial to some applications. Networks with high mobility, for example in transport or emergency scenarios, may require quick route establishment and usage before the connection is disrupted, while static farming arrangements are not affected if sensor data arrives at the sink node with higher latency.
 %\item[Route convergence:] Convergence is the state of a set of routers that have the same topological information about the internetwork in which they operate. (wikiepdia) -> not sure how to put convergence into context here.
+\item[Failure recovery:] Especially in highly mobile networks, route disruptions should be recognized and-- if possible-- fixed in a timely manner.
 \item[Route stability:] Networks with frequently changing routes can be expensive both in terms of latency as well as battery usage: unless a constant routing information is maintained\footnote{which is the case with most proactive protocols like OLSR\cite{RFC-3626}}, route rediscoveries require increased activity of the transceiver, which is the most battery-hungry component of IoT nodes.
 \item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even moreso than devices into household appliances etc. Thus, protocol complexity and thus code size can be a relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size.
-\item[Reliability] -> how many packets get lost?
+\item[Reliability] -> how many packets get lost? TODO
+\item[Energy-efficiency] Sending and receiving data is very battery-consuming, so it is advised to keep control traffic as low as possible. Additionally, low handling complexity will help keep retain a high energy efficiency.
 \end{description}
 
-
-%TODO: add mine \& schmidt's metrics and some examples from RFC5826, 5548 5867 as well as cite RFC 2501
+Based on these characteristics and metrics, an experiment design will be presented in the following.
 
 \section{Network model}
 \label{sec:Model}
 %===============================================================================
+\begin{table*}[t]
+    \begin{tabularx}{\textwidth}{l | X | X  }
+      Characteristic & Case 1 & Case 2 \\
+      \hline
+      Network Topology & Mesh & \\
+      Traffic Pattern & Multipoint-to-point, with most traffic traversing several hops & point-to-point across the network \\
+      Mobility & Sparse and bursty: Nodes move seldomly and not constantly & \\
+      Scale & 100 & 250\\
+    \end{tabularx}
+    \caption{Characteristics of the modeled network(s)}
+    \label{fig:characteristics}
+\end{table*}
 
-It can be seen in section \ref{sec:Scenarios} that the IoT is a very heterogeneous field in terms of network characteristics, and that a one-scenario-fits-all approach to studying IoT routing is unlikely to be feasible. Therefore, a specific scenario will be studied and modeled in detail over the course of this paper, with the hope that some of the building blocks may be reused as research expands. To achieve this, the following characteristics have been chosen as the scenario to be modeled, as they can be found in a wide range of applications, and are among the most challenging for routing protocols.
+It can be seen in section \ref{sec:Scenarios} that the IoT is a very heterogeneous field in terms of network characteristics, and that a one-scenario-fits-all approach to studying IoT routing is unlikely to be feasible. Therefore, a specific scenario will be studied, modeled and modified in detail over the course of this paper, with the hope that some of the building blocks may be reused as research expands. To achieve this, the characteristics listed in table \ref{fig:characteristics} have been chosen as the base scenario to be modeled, as they can be found in a wide range of applications, and are among the most challenging for routing protocols.
+In order to study which protocol excels in which scenario, variations have to be created. Therefor, \textbf{Case 1} and \textbf{Case 2} describe different characteristics which are switched up per experiment round.
 
-TODO: write down characteristics, supply with actual use case. maybe switch *some* of the vars up (like traffic pattern) to show advantages in different fields?
 
-\begin{description}
-\item[Traffic Pattern] mp2p
-\item[Mobility] Sparse and bursty: Nodes move seldomly and not constantly
-\item[Scale]
-\end{description}
-
+%TODO: daraus die zu checkenden performancemetriken ableiten
 
 \section{Experiment goals}
 \label{sec:Goals}
@@ -119,6 +127,12 @@ This combination is unique among all available testbeds, and provides every feat
 \label{subsec:setup}
 %...............................................................................
 
+\subsubsection{Experiment implementation}
+\label{subsec:implementation}
+%...............................................................................
+%TODO: reproduzierbar, parametrisierbar
+
+
 \subsection{Experiment evaluation}
 \label{subsec:evaluation}
 %...............................................................................
@@ -126,6 +140,8 @@ This combination is unique among all available testbeds, and provides every feat
 \section{Conclusion and outlook}
 \label{sec:Conclusion}
 %===============================================================================
+% more advanced traffic patterns: multiple sink nodes rport to ione central node etc
+
 
 \bibliographystyle{ieeetr}
 \bibliography{sigproc}
