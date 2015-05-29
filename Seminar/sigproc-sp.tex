@@ -27,7 +27,10 @@ Lotte Steenbrink
 
 \maketitle
 \begin{abstract}
-TODO TODO TODO TODO
+%TODO TODO TODO TODO
+In order to gather realistic experience with routing in the IoT, routing protocol evaluation research needs to shift from simulation towards the use of large-scale testbeds.
+In this paper, a testbed-based evaluation approach for routing protocols is presented, with a strong focus on IoT applications. The approach presented was designed with respect to modularity and extensibility, so as to allow adaption to the high variation in network characteristics in different IoT use cases. Using this approach as a base, routing protocols can be evaluated concerning their suitability for different IoT scenarios, and possibilities for improvements can be uncovered.
+%TODO [paragraph hinting at evaluation results]
 \end{abstract}
 
 \keywords{IoT, routing, MANET, test beds}
@@ -98,7 +101,7 @@ Based on these characteristics and metrics, an experiment design will be present
       Network Topology & Mesh & \\
       Traffic Pattern & Multipoint-to-point, with most traffic traversing several hops & point-to-point across the network \\
       Mobility & Sparse and bursty: Nodes move seldomly and not constantly & \\
-      Scale & 100 & 250\\
+      Scale & 100 & 500\\
     \end{tabularx}
     \caption{Characteristics of the modeled network(s)}
     \label{fig:characteristics}
@@ -117,8 +120,7 @@ It is assumed that all routing protocols involved are fully functional, but beha
 \section{Experiment design}
 \label{sec:Design}
 %===============================================================================
-% TODO: nette einleitung.
-
+After all prerequisites have been discussed, a specific experiment can be designed.
 
 \subsection{Choosing the testbed}
 \label{subsec:testbed_choice}
@@ -130,7 +132,7 @@ In order to run the experiments in a lifelike, but still controlled environment,
 \item[The A8 Node] featuring an ARM Cortex-A8 microprocessor with 256 MV RAM, an ethernet interface, a gyrometer, and an accelerometer.
 \end{description}
 Additionally, the IoT-Lab offers node mobility through a fleet of toy trains. This allows for the use of realistic, but controllable mobility patterns.
-The two more constrained platforms of the IoT-Lab, the Wsn430 and M3 nodes, offer support for RIOT\cite{riot_poster}\footnote{ \url{https://www.iot-lab.info/operating-systems/}, \\accessed 19.05.2015}.
+The two more constrained platforms of the IoT-Lab, the Wsn430 and M3 nodes, offer support for RIOT\cite{riot}\footnote{ \url{https://www.iot-lab.info/operating-systems/}, \\accessed 19.05.2015}.
 This combination is unique among all available testbeds, and provides every feature needed to conduct the described experiments. Therefore, it is advised to run the experiments described this paper on the FIT-IoTLab testbed.
 
 \subsubsection{Involved routing protocols}
@@ -145,7 +147,7 @@ All protocols vary vastly in their characteristics and application scenarios, so
 Each experiment will be run on four scenario combinations, as noted in table \ref{fig:characteristics}. The scenario combinations will be run through one by one, and each routing protocol is tested on the scenario before moving on to the next one. Still, the scenario is torn down and built from scratch for each new protocol, so as to prevent any unwanted side effects. The resulting running order is as follows:
 
 \begin{tabularx}{\linewidth}{l | X | l | X }
-  Scenarion \# & Traffic Pattern & Scale & Protocol \\
+  Scenario \# & Traffic Pattern & Scale & Protocol \\
   \hline
   1 & Case 1 & Case 1 & AODVv2\\
   1 & Case 1 & Case 1 & RPL\\
@@ -166,14 +168,13 @@ For each scenario combination, each experiment is run a fixed number of TODO ind
 \subsubsection{Experiment implementation}
 \label{subsec:implementation}
 %...............................................................................
-%TODO: reproduzierbar, parametrisierbar
 In order to provide a reusable and tweakable setup, modularity is to be kept in mind when implementing this experiment. Components should be parametrized wherever possible to allow further experiment variation. Additionally, the resulting experiment setup should be easy to use to enable the reproduction of experiments.
 
 \subsection{Experiment evaluation}
 \label{subsec:evaluation}
 %...............................................................................
 The success or failure of each routing protocol is determined with the metrics listed in section \ref{sec:Scenarios}.
-
+%TODO: which metrics do I evaluate how?
 
 \section{Conclusion and outlook}
 \label{sec:Conclusion}
