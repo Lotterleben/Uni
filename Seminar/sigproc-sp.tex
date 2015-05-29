@@ -34,7 +34,7 @@ In this paper, a testbed-based evaluation approach for routing protocols is pres
 %TODO [paragraph hinting at evaluation results]
 \end{abstract}
 
-\keywords{IoT, routing, MANET, test beds}
+\keywords{IoT, routing, MANET, LLN, RPL, AODV, RIOT, test beds}
 
 \section{Introduction}
 \label{sec:Intro}
@@ -43,7 +43,7 @@ The \gls{IoT} envisions autonomous communication between small computers install
 In 2014, the \gls{IoT} reached the peak of Gartner's hype cycle for emerging technologies\footnote{ \url{https://www.gartner.com/doc/2809728}}. It is both a growing market and a thriving research field. One central aspect of IoT communications is routing: finding the best paths between nodes and towards sink nodes and gateways is crucial to ensure energy-efficient and smooth network operations. However, practical experience with IoT routing is sparse, and scientific evaluation of such environments is rare. Most routing protocol evaluations are simulation-based, and even fewer of these evaluations have been designed with the IoT in mind.
 This paper presents a testbed-based evaluation approach tailored to the IoT. The goal is to enable the evaluation of routing protocols which have been created for \glspl{LLN} or \glspl{MANET} with regard to their suitability for the IoT.\\
 The remainder of this paper is organized as follows:
-First, the different domains and use cases that form the IoT are assessed. Based on these findings, a network configuration is presented on which all experiments shall be run. Following up, experiment goals, design and realization details are assessed. Finally, a conclusion of all findings as well as an outlook into future steps is provided.
+First, the need for experimental work is highlighted. Then, the different domains and use cases that form the IoT are assessed. Based on these findings, a network configuration is presented on which all experiments shall be run. Following up, experiment goals, design, realization and evaluation details are assessed. Finally, a conclusion of all findings as well as an outlook into future steps is provided.
 
 \subsection{Related work}
 \label{subsec:related_work}
@@ -56,9 +56,11 @@ To date, testbed experiments for the IoT featuring real hardware are rare. Howev
 \section{Experimentation vs. simulation}
 \label{sec:simulation_cons}
 %===============================================================================
-% If I need space: why simulation alone is not enough.
-
-% TODO TODO TODO (after beer)
+To date, most IoT, \gls{LLN}, and \gls{MANET} routing research has been conducted with the help of simulations. While this has the benefits of being cost-effective and widely available, simulations can only say so much about reality:
+Without ``real life'' data to check against, the accuracy of a simulation model cannot be determined. As \cite{mistaken-axioms} has shown, the assumptions made during network simulation often don't hold in the real world, eschewing simulation results.
+Matters are complicated further that especially in wireless networks, the quirks of an environment are many. Moving objects, reflection or outside noise can impact the performance of a network severely and are very hard to model in a simulation. The absence of these side effects can be of great benefit when studying specific traits of a protocol, but to determine a protocol's compatibility with the real world, its performance under such disturbances must be assessed, too.\\
+Consequently, it is necessary to obtain more realistic testing experience with the help of a growing fleet of test beds, made possible by technological progress and dedicated effort.
+\newpage
 
 \section{IoT domains and use cases}
 \label{sec:Scenarios}
@@ -85,7 +87,8 @@ In general, Routing Protocol performance metrics for the IoT can be summarized a
 %\item[Route convergence:] Convergence is the state of a set of routers that have the same topological information about the internetwork in which they operate. (wikiepdia) -> not sure how to put convergence into context here.
 \item[Failure recovery:] Especially in highly mobile networks, route disruptions should be recognized and-- if possible-- fixed in a timely manner.
 \item[Route stability:] Networks with frequently changing routes can be expensive both in terms of latency as well as battery usage: unless constant routing information is maintained\footnote{ which is the case with most proactive protocols like OLSR\cite{RFC-3626}}, route rediscoveries require increased activity of the transceiver, which is the most battery-hungry component of IoT nodes.
-\item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even more so than devices in household appliances etc. Therefor, protocol complexity and thus code size can be relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size.
+\item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even more so than devices in household appliances etc. Therefor, protocol complexity and thus code size can be relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size. Many embedded OSes use fixed buffer sizes which can be regulated accordingly if the memory usage of a protocol is well-known.
+\newpage
 \item[Energy-efficiency:] Sending and receiving data is very battery-consuming, so it is advised to keep control traffic as low as possible. Additionally, low handling complexity will help keep retain a high energy efficiency.
 \item[Reliability:] Routes which experience a high amount of packet loss are prone to triggering packet retransmissions (effectively draining batteries) or losing valuable data. Therefor,
  it should be ensured that the most reliable route is chosen. A significant part in this is played by \emph{route metrics}: these are the traits by which a protocol decides which link or route to use. Popular metrics include Hop Count (albeit considered suboptimal in many cases) and \gls{ETX}.\end{description}
@@ -145,11 +148,11 @@ All protocols vary vastly in their characteristics and application scenarios, so
 \subsection{Experiment setup and execution}
 \label{subsec:setup}
 %...............................................................................
-In preparation of the experiment,
+In preparation of the experiment, the following is created:
 \begin{enumerate}
-\item a randomized list containing the IDs of all participating nodes is created. It should contain some duplicates. This is needed to create point-to-point traffic.
-\item a randomized list containing tuples with randomized pairings of the IDs of all \emph{except for one} participating nodes is created. It should contain some duplicates. This is needed to create multipoint-to-point traffic.
-\item an sample packet with a payload of 20 bytes, resulting in a 61-byte packet including IEEE 802.15.4. and IPv6 headers with applied 6LoWPAN header compression.
+\item a randomized list containing the IDs of all participating nodes. It should contain some duplicates. This is needed to create point-to-point traffic.
+\item a randomized list containing tuples with randomized pairings of the IDs of all \emph{except for one} participating nodes. It should contain some duplicates. This is needed to create multipoint-to-point traffic.
+\item a sample packet with a payload of 20 bytes, resulting in a 61-byte packet including IEEE 802.15.4. and IPv6 headers with applied 6LoWPAN header compression.
 \end{enumerate}
 These lists must never be changed throughout the experiment, and should be stored along with the experiment data for future reference.\\
 
@@ -195,9 +198,9 @@ for (node_1, node_2) in node_ids:
 This ensures the exact same transmission sequence for each experiment run, eliminating possible side effects.
 
 For each scenario combination, each experiment is run a fixed number of multiple times, so as to not eschew data by isolated incidents.
-The numbers used should be tweaked in case they are found to be unrealistic.
+All numbers used should be tweaked in case they are found to be unrealistic.
 
-%TODO: mobility berücksichtigen! tatsächliche nummern benutzen.
+%TODO: mobility modellieren! tatsächliche nummern benutzen. (aus RFCs und food paper raussuchen)
 
 \subsubsection{Experiment implementation}
 \label{subsec:implementation}
@@ -207,8 +210,15 @@ In order to provide a reusable and tweakable setup, modularity is to be kept in 
 \subsection{Experiment evaluation}
 \label{subsec:evaluation}
 %...............................................................................
-The success or failure of each routing protocol is determined with the metrics listed in section \ref{sec:Scenarios}.
-%TODO: which metrics do I evaluate how?
+The success or failure of each routing protocol is determined with the metrics listed in section \ref{sec:Scenarios}. A protocol's performance regarding a certain metric is evaluated as follows:
+\begin{description}
+\item[Latency:] The median difference between packet dispatching and arrival time is used to calculate the latency with which packets are sent. For proactive protocols, the median time in which routes appear in the \gls{FIB} is taken for route finding latency. For reactive protocols, each yet unknown tuple is examined: the median time it takes between sending attempt and appearance of the route in the FIB determines route creation latency.
+\item[Failure recovery:] TODO
+\item[Route stability:] TODO
+\item[Code \& storage size:] Memory usage is monitored during the experiment. The median as well as the maximum memory usage are used to determine memory efficiency, as well as the code size at compile time. % TODO: haben wir nicht eh fixed buffers? dann gehts einfach nur um wie klein man die buffer minimal machen kann?
+\item[Energy-efficiency:] Energy usage is monitored during the experiment as well and can be compared between protocols per experiment batch.
+\item[Reliability:] Packets are recorded when they are sent at one end and received at the other. This way, the median number of lost packets can be determined.
+\end{description}
 
 \section{Conclusion and outlook}
 \label{sec:Conclusion}
