@@ -27,7 +27,7 @@ Lotte Steenbrink
 
 \maketitle
 \begin{abstract}
-TODO
+TODO TODO TODO TODO
 \end{abstract}
 
 \keywords{IoT, routing, MANET, test beds}
@@ -53,6 +53,8 @@ To date, testbed experiments for the IoT featuring real hardware are rare. Howev
 \label{sec:simulation_cons}
 %===============================================================================
 % If I need space: why simulation alone is not enough.
+
+
 
 \section{IoT domains and use cases}
 \label{sec:Scenarios}
@@ -110,7 +112,7 @@ In order to study which protocol excels in which scenario, variations have to be
 \section{Experiment goals}
 \label{sec:Goals}
 %===============================================================================
-It is assumed that all routing protocols involved are fully functional, but behave differently under different circumstances. The main goal is not to test them for functionality, but to examine which protocol performs best\footnote{ with regards to the metrics listed in section \ref{sec:Scenarios}} under which circumstance, and which factors impact routing protocol operations negatively. These factors may be unforeseen quirks which did not occur during previous simulations, or specific network configurations, or something completely different.
+It is assumed that all routing protocols involved are fully functional, but behave differently under different circumstances. The main goal is not to test them for functionality, but to examine which protocol performs best\footnote{ with regards to the metrics listed in section \ref{sec:Scenarios}} under which circumstance, and which factors impact routing protocol operations negatively. These factors may be unforeseen quirks which did not occur during previous simulations, or specific network configurations, or something completely different.\\
 
 \section{Experiment design}
 \label{sec:Design}
@@ -118,16 +120,9 @@ It is assumed that all routing protocols involved are fully functional, but beha
 % TODO: nette einleitung.
 
 
-\subsection{Experiment Setup}
-\label{subsec:setup}
-%...............................................................................
-Each experiment will be run on four scenario combinations, as noted in table \ref{fig:characteristics}.
-For each scenario combination, each experiment is run a fixed number of TODO individual times, so as to not eschew data by isolated incidents.
-
 \subsection{Choosing the testbed}
 \label{subsec:testbed_choice}
 %...............................................................................
-
 In order to run the experiments in a lifelike, but still controlled environment, a testbed is needed. Ideally, a testbed suitable for the IoT should be able to provide their users with at least several hundreds, but ideally several thousands of nodes, a diverse range of hardware, and a number of mobile nodes. \cite{testbed-survey} compares several testbeds with regard to suitability for the IoT, and concludes that the FIT-IoTLab\footnote{ \url{https://www.iot-lab.info}} is one of the most suitable facilities. Located all over France, the FIT-IoTLab offers 2,728 nodes in total, featuring three different hardware platforms of different capabilities:
 \begin{description}
 \item[The WSN430 Node] featuring a MSP430 MCU with 48kB Flash, 10kB RAM, an IEEE 802.15.4. radio interface, as well as sensors for ambient sensor light and temperature.
@@ -138,29 +133,54 @@ Additionally, the IoT-Lab offers node mobility through a fleet of toy trains. Th
 The two more constrained platforms of the IoT-Lab, the Wsn430 and M3 nodes, offer support for RIOT\cite{riot_poster}\footnote{ \url{https://www.iot-lab.info/operating-systems/}, \\accessed 19.05.2015}.
 This combination is unique among all available testbeds, and provides every feature needed to conduct the described experiments. Therefore, it is advised to run the experiments described this paper on the FIT-IoTLab testbed.
 
-\subsubsection{Experiment implementation}
-\label{subsec:implementation}
-%...............................................................................
-%TODO: reproduzierbar, parametrisierbar
-In order to provide a reusable and tweakable setup, modularity is to be kept in mind when implementing this experiment. Components should be parametrized wherever possible to allow further experiment variation. Additionally, the resulting experiment setup should be easy to use to enable the reproduction of experiments.
-
 \subsubsection{Involved routing protocols}
 \label{subsec:protocols}
 %...............................................................................
 RIOT currently features implementations of two routing protocols: RPL\cite{RFC-6550} and AODVv2\cite{draft-ietf-manet-aodvv2-09}. The former is a proactive, point-to-multipoint-protocol designed for \glspl{LLN}, while the latter is a reactive point-to-point protocol designed for \gls{MANET}. Additionally, implementations of the proactive \gls{MANET} protocol OLSR\cite{RFC-3626} and the \gls{ARA}\cite{ara} are in progress.\footnote{ \url{https://github.com/RIOT-OS/RIOT/pull/2294}\\  \url{https://github.com/mfrey/RIOT/tree/ara}}
 All protocols vary vastly in their characteristics and application scenarios, so it would be advisable to involve as many as possible in the experimentation. In addition to RPL and AODVv2, any of the other protocols which is available by the time of the experiment should be used.
 
+\subsection{Experiment Setup}
+\label{subsec:setup}
+%...............................................................................
+Each experiment will be run on four scenario combinations, as noted in table \ref{fig:characteristics}. The scenario combinations will be run through one by one, and each routing protocol is tested on the scenario before moving on to the next one. Still, the scenario is torn down and built from scratch for each new protocol, so as to prevent any unwanted side effects. The resulting running order is as follows:
+
+\begin{tabularx}{\linewidth}{l | X | l | X }
+  Scenarion \# & Traffic Pattern & Scale & Protocol \\
+  \hline
+  1 & Case 1 & Case 1 & AODVv2\\
+  1 & Case 1 & Case 1 & RPL\\
+  1 & Case 1 & Case 1 & (other)\\
+  2 & Case 1 & Case 2 & AODVv2\\
+  2 & Case 1 & Case 2 & RPL\\
+  2 & Case 1 & Case 2 & (other)\\
+  3 & Case 2 & Case 1 & AODVv2\\
+  3 & Case 2 & Case 1 & RPL\\
+  3 & Case 2 & Case 1 & (other)\\
+  4 & Case 2 & Case 2 & AODVv2\\
+  4 & Case 2 & Case 2 & RPL\\
+  4 & Case 2 & Case 2 & (other)\\
+\end{tabularx}
+
+For each scenario combination, each experiment is run a fixed number of TODO individual times, so as to not eschew data by isolated incidents.
+
+\subsubsection{Experiment implementation}
+\label{subsec:implementation}
+%...............................................................................
+%TODO: reproduzierbar, parametrisierbar
+In order to provide a reusable and tweakable setup, modularity is to be kept in mind when implementing this experiment. Components should be parametrized wherever possible to allow further experiment variation. Additionally, the resulting experiment setup should be easy to use to enable the reproduction of experiments.
+
 \subsection{Experiment evaluation}
 \label{subsec:evaluation}
 %...............................................................................
-The success or failure of each routing protocol is determined with the metrices listed in section \ref{sec:Scenarios}.
+The success or failure of each routing protocol is determined with the metrics listed in section \ref{sec:Scenarios}.
 
 
 \section{Conclusion and outlook}
 \label{sec:Conclusion}
 %===============================================================================
 % more advanced traffic patterns: multiple sink nodes rport to ione central node etc
-
+Over the course of this paper, the necessity of IoT routing protocol experimentation aided by testbeds has been discussed. Challenges in the creation of a setup have been discussed, along with possible solutions and a concrete experimentation setup. It has been stressed that this setup is to be extended to fully honor the diversity of IoT scenarios, and that it can be merely a starting point. These extensions may not only be limited to further switching of parameters and increasing the network size. Detailed mobility schemes could be developed, or more complex and/or hybrid traffic patterns. Based on the findings of all of these experiments, a map of protocol characteristics suitable for different IoT scenarios can be created. Future work could also include the development of optimization extensions for any of the routing protocols involved.\\
+Before all of this can be done, however, the provided experimentation scenarios will have to be implemented, put to the test, and tweaked.
 
 \bibliographystyle{ieeetr}
 \bibliography{sigproc}
