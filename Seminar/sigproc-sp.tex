@@ -7,6 +7,8 @@
 \usepackage{multirow}
 \usepackage{tablefootnote}
 \usepackage{hyperref}
+\usepackage{listings}
+
 
 % Glossary benutzen
 \usepackage{glossaries}
@@ -56,7 +58,7 @@ To date, testbed experiments for the IoT featuring real hardware are rare. Howev
 %===============================================================================
 % If I need space: why simulation alone is not enough.
 
-
+% TODO TODO TODO (after beer)
 
 \section{IoT domains and use cases}
 \label{sec:Scenarios}
@@ -84,8 +86,8 @@ In general, Routing Protocol performance metrics for the IoT can be summarized a
 \item[Failure recovery:] Especially in highly mobile networks, route disruptions should be recognized and-- if possible-- fixed in a timely manner.
 \item[Route stability:] Networks with frequently changing routes can be expensive both in terms of latency as well as battery usage: unless constant routing information is maintained\footnote{ which is the case with most proactive protocols like OLSR\cite{RFC-3626}}, route rediscoveries require increased activity of the transceiver, which is the most battery-hungry component of IoT nodes.
 \item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even more so than devices in household appliances etc. Therefor, protocol complexity and thus code size can be relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size.
-\item[Energy-efficiency] Sending and receiving data is very battery-consuming, so it is advised to keep control traffic as low as possible. Additionally, low handling complexity will help keep retain a high energy efficiency.
-\item[Reliability] Routes which experience a high amount of packet loss are prone to triggering packet retransmissions (effectively draining batteries) or losing valuable data. Therefor,
+\item[Energy-efficiency:] Sending and receiving data is very battery-consuming, so it is advised to keep control traffic as low as possible. Additionally, low handling complexity will help keep retain a high energy efficiency.
+\item[Reliability:] Routes which experience a high amount of packet loss are prone to triggering packet retransmissions (effectively draining batteries) or losing valuable data. Therefor,
  it should be ensured that the most reliable route is chosen. A significant part in this is played by \emph{route metrics}: these are the traits by which a protocol decides which link or route to use. Popular metrics include Hop Count (albeit considered suboptimal in many cases) and \gls{ETX}.\end{description}
 
 Based on these characteristics and metrics, an experiment design will be presented in the following.
@@ -98,7 +100,7 @@ Based on these characteristics and metrics, an experiment design will be present
       Characteristic & Case 1 & Case 2 \\
       \hline
       Network Topology & Mesh & \\
-      Traffic Pattern & Multipoint-to-point, with most traffic traversing several hops & point-to-point across the network \\
+      Traffic Pattern & Multipoint-to-point, with most traffic traversing several hops. Scheduled data transmissions. & point-to-point across the network. Scheduled data transmissions. \\
       Mobility & Sparse and bursty: Nodes move seldomly and not constantly & \\
       Scale & 100 & 500\\
     \end{tabularx}
@@ -140,9 +142,18 @@ This combination is unique among all available testbeds, and provides every feat
 RIOT currently features implementations of two routing protocols: RPL\cite{RFC-6550} and AODVv2\cite{draft-ietf-manet-aodvv2-09}. The former is a proactive, point-to-multipoint-protocol designed for \glspl{LLN}, while the latter is a reactive point-to-point protocol designed for \gls{MANET}. Additionally, implementations of the proactive \gls{MANET} protocol OLSR\cite{RFC-3626} and the \gls{ARA}\cite{ara} are in progress.\footnote{ \url{https://github.com/RIOT-OS/RIOT/pull/2294}\\  \url{https://github.com/mfrey/RIOT/tree/ara}}
 All protocols vary vastly in their characteristics and application scenarios, so it would be advisable to involve as many as possible in the experimentation. In addition to RPL and AODVv2, any of the other protocols which is available by the time of the experiment should be used.
 
-\subsection{Experiment Setup}
+\subsection{Experiment setup and execution}
 \label{subsec:setup}
 %...............................................................................
+In preparation of the experiment,
+\begin{enumerate}
+\item a randomized list containing the IDs of all participating nodes is created. It should contain some duplicates. This is needed to create point-to-point traffic.
+\item a randomized list containing tuples with randomized pairings of the IDs of all \emph{except for one} participating nodes is created. It should contain some duplicates. This is needed to create multipoint-to-point traffic.
+\item an sample packet with a payload of 20 bytes, resulting in a 61-byte packet including IEEE 802.15.4. and IPv6 headers with applied 6LoWPAN header compression.
+\end{enumerate}
+These lists must never be changed throughout the experiment, and should be stored along with the experiment data for future reference.\\
+
+The complete experiment consists of several runs, which are grouped per scenario.
 Each experiment will be run on four scenario combinations, as noted in table \ref{fig:characteristics}. The scenario combinations will be run through one by one, and each routing protocol is tested on the scenario before moving on to the next one. Still, the scenario is torn down and built from scratch for each new protocol, so as to prevent any unwanted side effects. The resulting running order is as follows:
 
 \begin{tabularx}{\linewidth}{l | X | l | X }
@@ -165,7 +176,28 @@ Each experiment will be run on four scenario combinations, as noted in table \re
   4 & Case 2 & Case 2 & (other)\\
 \end{tabularx}
 
-For each scenario combination, each experiment is run a fixed number of TODO individual times, so as to not eschew data by isolated incidents.
+Each experiment run is conducted as follows:
+
+\begin{description}
+\item[For scenarios 1 and 2,] List number 1 is used to model multipoint-to-point traffic. The node not contained in the list is appointed as the \emph{sink node} towards which all traffic is directed. Then, the list is traversed sequentially to initiate sending:
+\begin{lstlisting}[language=python]
+for node in node_ids:
+    node.send_packet(sink_node)
+    wait(fixed_time)
+\end{lstlisting}
+\item[For scenarios 3 and 4,] List number 2 is used to model point-to-point traffic. Each tuple \textbf{(node\_1, node\_2)} represents a transmission from \textbf{node\_1} to \textbf{node\_2}. This list too is traversed sequentially to initiate sending:
+\begin{lstlisting}[language=python]
+for (node_1, node_2) in node_ids:
+    node_1.send_packet(node_2)
+    wait(fixed_time)
+\end{lstlisting}
+\end{description}
+This ensures the exact same transmission sequence for each experiment run, eliminating possible side effects.
+
+For each scenario combination, each experiment is run a fixed number of multiple times, so as to not eschew data by isolated incidents.
+The numbers used should be tweaked in case they are found to be unrealistic.
+
+%TODO: mobility berücksichtigen! tatsächliche nummern benutzen.
 
 \subsubsection{Experiment implementation}
 \label{subsec:implementation}
@@ -182,7 +214,7 @@ The success or failure of each routing protocol is determined with the metrics l
 \label{sec:Conclusion}
 %===============================================================================
 % more advanced traffic patterns: multiple sink nodes rport to ione central node etc
-Over the course of this paper, the necessity of IoT routing protocol experimentation aided by testbeds has been discussed. Challenges in the creation of a setup have been discussed, along with possible solutions and a concrete experimentation setup. It has been stressed that this setup is to be extended to fully honor the diversity of IoT scenarios, and that it can be merely a starting point. These extensions may not only be limited to further switching of parameters and increasing the network size. Detailed mobility schemes could be developed, or more complex and/or hybrid traffic patterns. A wider range of protocols should be tested: protocols with similar characteristics could be compared against each other, or the same protocol could be tested with different route metrics.
+Over the course of this paper, the necessity of IoT routing protocol experimentation aided by testbeds has been discussed. Challenges in the creation of a setup have been discussed, along with possible solutions and a concrete experimentation setup. It has been stressed that this setup is to be extended to fully honor the diversity of IoT scenarios, and that it can be merely a starting point. These extensions may not only be limited to further switching of parameters and increasing the network size. Instead of waiting for a fixed time interval between transmissions, the waiting time could be randomized, or physically close nodes could send simultaneously, simulating a local triggering event. Detailed mobility schemes could be developed, or more complex and/or hybrid traffic patterns. A wider range of protocols should be tested: protocols with similar characteristics could be compared against each other, or the same protocol could be tested with different route metrics.
 
 Based on the findings of all of these experiments, a map of protocol characteristics suitable for different IoT scenarios can be created. Future work could also include the development of optimization extensions for any of the routing protocols involved.\\
 Before all of this can be done, however, the provided experimentation scenarios will have to be implemented, put to the test, and tweaked.
