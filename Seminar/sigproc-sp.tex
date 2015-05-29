@@ -27,7 +27,6 @@ Lotte Steenbrink
 
 \maketitle
 \begin{abstract}
-%TODO TODO TODO TODO
 In order to gather realistic experience with routing in the IoT, routing protocol evaluation research needs to shift from simulation towards the use of large-scale testbeds.
 In this paper, a testbed-based evaluation approach for routing protocols is presented, with a strong focus on IoT applications. The approach presented was designed with respect to modularity and extensibility, so as to allow adaption to the high variation in network characteristics in different IoT use cases. Using this approach as a base, routing protocols can be evaluated concerning their suitability for different IoT scenarios, and possibilities for improvements can be uncovered.
 %TODO [paragraph hinting at evaluation results]
@@ -84,10 +83,10 @@ In general, Routing Protocol performance metrics for the IoT can be summarized a
 %\item[Route convergence:] Convergence is the state of a set of routers that have the same topological information about the internetwork in which they operate. (wikiepdia) -> not sure how to put convergence into context here.
 \item[Failure recovery:] Especially in highly mobile networks, route disruptions should be recognized and-- if possible-- fixed in a timely manner.
 \item[Route stability:] Networks with frequently changing routes can be expensive both in terms of latency as well as battery usage: unless constant routing information is maintained\footnote{ which is the case with most proactive protocols like OLSR\cite{RFC-3626}}, route rediscoveries require increased activity of the transceiver, which is the most battery-hungry component of IoT nodes.
-\item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even moreso than devices in household appliances etc. Therefor, protocol complexity and thus code size can be relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size.
-\item[Reliability] -> how many packets get lost? TODO
+\item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even more so than devices in household appliances etc. Therefor, protocol complexity and thus code size can be relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size.
 \item[Energy-efficiency] Sending and receiving data is very battery-consuming, so it is advised to keep control traffic as low as possible. Additionally, low handling complexity will help keep retain a high energy efficiency.
-\end{description}
+\item[Reliability] Routes which experience a high amount of packet loss are prone to triggering packet retransmissions (effectively draining batteries) or losing valuable data. Therefor,
+ it should be ensured that the most reliable route is chosen. A significant part in this is played by \emph{route metrics}: these are the traits by which a protocol decides which link or route to use. Popular metrics include Hop Count (albeit considered suboptimal in many cases) and \gls{ETX}.\end{description}
 
 Based on these characteristics and metrics, an experiment design will be presented in the following.
 
@@ -152,12 +151,15 @@ Each experiment will be run on four scenario combinations, as noted in table \re
   1 & Case 1 & Case 1 & AODVv2\\
   1 & Case 1 & Case 1 & RPL\\
   1 & Case 1 & Case 1 & (other)\\
+  \hline
   2 & Case 1 & Case 2 & AODVv2\\
   2 & Case 1 & Case 2 & RPL\\
   2 & Case 1 & Case 2 & (other)\\
+  \hline
   3 & Case 2 & Case 1 & AODVv2\\
   3 & Case 2 & Case 1 & RPL\\
   3 & Case 2 & Case 1 & (other)\\
+  \hline
   4 & Case 2 & Case 2 & AODVv2\\
   4 & Case 2 & Case 2 & RPL\\
   4 & Case 2 & Case 2 & (other)\\
@@ -180,7 +182,9 @@ The success or failure of each routing protocol is determined with the metrics l
 \label{sec:Conclusion}
 %===============================================================================
 % more advanced traffic patterns: multiple sink nodes rport to ione central node etc
-Over the course of this paper, the necessity of IoT routing protocol experimentation aided by testbeds has been discussed. Challenges in the creation of a setup have been discussed, along with possible solutions and a concrete experimentation setup. It has been stressed that this setup is to be extended to fully honor the diversity of IoT scenarios, and that it can be merely a starting point. These extensions may not only be limited to further switching of parameters and increasing the network size. Detailed mobility schemes could be developed, or more complex and/or hybrid traffic patterns. Based on the findings of all of these experiments, a map of protocol characteristics suitable for different IoT scenarios can be created. Future work could also include the development of optimization extensions for any of the routing protocols involved.\\
+Over the course of this paper, the necessity of IoT routing protocol experimentation aided by testbeds has been discussed. Challenges in the creation of a setup have been discussed, along with possible solutions and a concrete experimentation setup. It has been stressed that this setup is to be extended to fully honor the diversity of IoT scenarios, and that it can be merely a starting point. These extensions may not only be limited to further switching of parameters and increasing the network size. Detailed mobility schemes could be developed, or more complex and/or hybrid traffic patterns. A wider range of protocols should be tested: protocols with similar characteristics could be compared against each other, or the same protocol could be tested with different route metrics.
+
+Based on the findings of all of these experiments, a map of protocol characteristics suitable for different IoT scenarios can be created. Future work could also include the development of optimization extensions for any of the routing protocols involved.\\
 Before all of this can be done, however, the provided experimentation scenarios will have to be implemented, put to the test, and tweaked.
 
 \bibliographystyle{ieeetr}
