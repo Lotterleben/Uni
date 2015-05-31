@@ -103,7 +103,7 @@ Based on these characteristics and metrics, an experiment design will be present
       \hline
       Network Topology & Mesh & \\
       Traffic Pattern & Multipoint-to-point, with most traffic traversing several hops. Scheduled data transmissions. & point-to-point across the network. Scheduled data transmissions. \\
-      Mobility & Sparse and bursty: Nodes move seldomly and not constantly & \\
+      Mobility & None, but occasionally failing nodes. & \\
       Scale & 100 & 500\\
     \end{tabularx}
     \caption{Characteristics of the modeled network(s)}
@@ -147,11 +147,14 @@ All protocols vary vastly in their characteristics and application scenarios, so
 \subsection{Experiment setup and execution}
 \label{subsec:setup}
 %...............................................................................
+%TODO: Anordnung der Knoten
+
 In preparation of the experiment, the following is created:
 \begin{enumerate}
 \item a list containing the IDs of all \emph{except for one} participating nodes. This is needed to create multipoint-to-point traffic.
-\item a randomized list containing tuples with randomized pairings of the IDs of all participating nodes. It should contain some duplicates and be of length \textbf{max\_transmissions}. This is needed to create point-to-point traffic.
+\item a randomized list containing tuples with randomized pairings of the IDs of all participating nodes. It should contain some duplicates and be of length \texttt{max\_transmissions}. This is needed to create point-to-point traffic.
 \item a sample packet with a payload of 20 bytes, resulting in a 61-byte packet including IEEE 802.15.4. and IPv6 headers with applied 6LoWPAN header compression.
+\item a randomized list of length \texttt{num\_failing\_nodes}, containing IDs of participating nodes, containing no duplicates.
 \end{enumerate}
 These lists must never be changed throughout the experiment, and should be stored along with the experiment data for future reference.\\
 
@@ -179,44 +182,58 @@ Each experiment will be run on four scenario combinations, as noted in table \re
 \end{tabularx}
 
 Each experiment run is conducted as follows:
-
+To emulate failing batteries, nodes are shut down every\\
+\texttt{max\_transmissions/num\_failing\_nodes}'th iteration.
 \begin{description}
-\item[For scenarios 1 and 2,] List number 1 is used to model multipoint-to-point traffic. The node not contained in the list is appointed as the \emph{sink node} towards which all traffic is directed. Then, the list is traversed sequentially to initiate sending:
-\footnote{All pseudocode is based on python.}
+\item[For scenarios 1 and 2,] List number 1 is used to model multipoint-to-point traffic. The node not contained in the list is appointed as the \emph{sink node} towards which all traffic is directed. Then, the list is traversed sequentially to initiate sending.\footnote{All pseudocode is based on python syntax.} %TODO: fail more nodes towards the end?
 \begin{lstlisting}[language=python]
-for run in range (0, max_transmissions):
-    for node in node_ids:
-        node.send_packet(sink_node)
+for t in range (0, max_transmissions):
+  s = max_transmission/num_failing_nodes
+  if (t % s == 0 ):
+    failing_nodes.pop().shutdown()
+  for node in node_ids:
+    node.send_packet(sink_node)
 sleep(fixed_time)
 \end{lstlisting}
 Note that all nodes send at roughly the same scheduled time and then sleep collectively.
-
-\item[For scenarios 3 and 4,] List number 2 is used to model point-to-point traffic. Each tuple \textbf{(node\_1, node\_2)} represents a transmission from \textbf{node\_1} to \textbf{node\_2}. This list too is traversed sequentially to initiate sending:
+\item[For scenarios 3 and 4,] List number 2 is used to model point-to-point traffic. Each tuple \texttt{(node\_1, node\_2)} represents a transmission from \texttt{node\_1} to \texttt{node\_2}. This list too is traversed sequentially to initiate sending:
 \begin{lstlisting}[language=python]
-for (node_1, node_2) in node_ids:
-    node_1.send_packet(node_2)
-    sleep(fixed_time)
+for t in range (0, max_transmissions):
+  s = max_transmission/num_failing_nodes
+  if (t % s == 0 ):
+    failing_nodes.pop().shutdown()
+  for (node_1, node_2) in node_ids:
+      node_1.send_packet(node_2)
+      sleep(fixed_time)
 \end{lstlisting}
 \end{description}
 This ensures the exact same transmission sequence for each experiment run, eliminating possible side effects.
-For each scenario combination, each experiment is run a fixed number of \textbf{max\_experiment\_runs} times, so as to not eschew data by isolated incidents.
+For each scenario combination, each experiment is run a fixed number of \texttt{max\_experiment\_runs} times, so as to not eschew data by isolated incidents.
 
 The variables used above should be substituted for actual values as follows:
 
-\begin{tabularx}{\linewidth}{l | l}
-  variable & value \\
+% TODO: hauen die werte so hin, experiment- und realitätsnähetechnisch?
+\begin{tabularx}{\linewidth}{l | l | l}
+  variable & scenarios 1 \& 2 & scenarios 3 \& 4  \\
   \hline
-  fixed\_time & TODO \\
-  max\_transmissions & TODO \\
-  max\_experiment\_runs & TODO \\
-  packet size & 61
+  fixed\_time & 5 seconds & 1 second \\ % TODO: first value close to reality
+  max\_transmissions & $scale \cdot 2$ & $scale \cdot 2$ \\
+  max\_experiment\_runs & 30 & 30 \\
+  num\_failing\_nodes & 10\% of all nodes & 10\% of all nodes \\
+  packet size & 61 bytes & 61 bytes
 \end{tabularx}
 
 All numbers used should be tweaked in case they are found to be unrealistic or statistically problematic.
 
-%TODO: mobility modellieren!
-%TODO: tatsächliche nummern benutzen. (aus RFCs und food paper raussuchen)
-% TODO: ergibt es bei scheduled nicht mehr sinn, dass alle gleichzeitig senden?
+During each experiment run, the following data is collected per node in a machine-readable format, along with a timestamp:
+\begin{itemize}
+\item Each update to the node's routing table and \gls{FIB}
+\item Each sent data packet.
+\item Each received data packet.
+\item Each sent control packet.
+\item Each received control packet.
+\item Overall energy consumption.
+\end{itemize}
 
 \subsubsection{Experiment implementation}
 \label{subsec:implementation}
@@ -226,21 +243,23 @@ In order to provide a reusable and tweakable setup, modularity is to be kept in 
 \subsection{Experiment evaluation}
 \label{subsec:evaluation}
 %...............................................................................
-The success or failure of each routing protocol is determined with the metrics listed in section \ref{sec:Scenarios}. A protocol's performance regarding a certain metric is evaluated as follows:
+The success or failure of each routing protocol is determined by the metrics listed in section \ref{sec:Scenarios}. A protocol's performance regarding a certain metric is evaluated as follows:
 \begin{description}
 \item[Latency:] The median difference between packet dispatching and arrival time is used to calculate the latency with which packets are sent. For proactive protocols, the median time in which routes appear in the \gls{FIB} is taken for route finding latency. For reactive protocols, each yet unknown tuple is examined: the median time it takes between sending attempt and appearance of the route in the FIB determines route creation latency.
-\item[Failure recovery:] TODO: hängt von mobility umsetzung ab
-\item[Route stability:] TODO: wie messe ich das überhaupt? also wie erkenne ich “unnötige” wechsel?
+\item[Failure recovery:] The median time from node shutdown to changes in routing table and \gls{FIB} is calculated.
+%\item[Route stability:] TODO: wie messe ich das überhaupt? also wie erkenne ich “unnötige” wechsel?
 \item[Code \& storage size:] Memory usage is monitored during the experiment. The median as well as the maximum memory usage are used to determine memory efficiency, as well as the code size at compile time. % TODO: haben wir nicht eh fixed buffers? dann gehts einfach nur um wie klein man die buffer minimal machen kann?
 \item[Energy-efficiency:] Energy usage is monitored during the experiment as well and can be compared between protocols per experiment batch.
 \item[Reliability:] Packets are recorded when they are sent at one end and received at the other. This way, the median number of lost packets can be determined.
 \end{description}
 
+Apart from the overall median, the median value of the above should also be calculated over all experiment runs at each point in time and be plotted into graphs to detect any difference in development. For example two protocols with about the same overall median latency might show punctual differences in latency after a disruption of the network.
+
 \section{Conclusion and outlook}
 \label{sec:Conclusion}
 %===============================================================================
 % more advanced traffic patterns: multiple sink nodes rport to ione central node etc
-Over the course of this paper, the necessity of IoT routing protocol experimentation aided by testbeds has been discussed. Challenges in the creation of a setup have been discussed, along with possible solutions and a concrete experimentation setup. It has been stressed that this setup is to be extended to fully honor the diversity of IoT scenarios, and that it can be merely a starting point. These extensions may not only be limited to further switching of parameters and increasing the network size. Instead of waiting for a fixed time interval between transmissions, the waiting time could be randomized, or physically close nodes could send simultaneously, simulating a local triggering event. Detailed mobility schemes could be developed, or more complex and/or hybrid traffic patterns. A wider range of protocols should be tested: protocols with similar characteristics could be compared against each other, or the same protocol could be tested with different route metrics.
+Over the course of this paper, the necessity of IoT routing protocol experimentation aided by testbeds has been discussed. Challenges in the creation of a setup have been discussed, along with possible solutions and a concrete experimentation setup. It has been stressed that this setup is to be extended to fully honor the diversity of IoT scenarios, and that it can be merely a starting point. These extensions may not only be limited to further switching of parameters and increasing the network size. Once initial experience is gathered, sparse mobility should be added to the experiments. Instead of waiting for a fixed time interval between transmissions, the waiting time could be randomized, or physically close nodes could send simultaneously, simulating a local triggering event. Detailed mobility schemes could be developed, or more complex and/or hybrid traffic patterns. A wider range of protocols should be tested: protocols with similar characteristics could be compared against each other, or the same protocol could be tested with different route metrics.
 
 Based on the findings of all of these experiments, a map of protocol characteristics suitable for different IoT scenarios can be created. Future work could also include the development of optimization extensions for any of the routing protocols involved.\\
 Before all of this can be done, however, the provided experimentation scenarios will have to be implemented, put to the test, and tweaked.
