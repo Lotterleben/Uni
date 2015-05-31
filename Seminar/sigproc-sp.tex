@@ -90,8 +90,7 @@ In general, Routing Protocol performance metrics for the IoT can be summarized a
 \item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even more so than devices in household appliances etc. Therefor, protocol complexity and thus code size can be relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size. Many embedded OSes use fixed buffer sizes which can be regulated accordingly if the memory usage of a protocol is well-known.
 \newpage
 \item[Energy-efficiency:] Sending and receiving data is very battery-consuming, so it is advised to keep control traffic as low as possible. Additionally, low handling complexity will help keep retain a high energy efficiency.
-\item[Reliability:] Routes which experience a high amount of packet loss are prone to triggering packet retransmissions (effectively draining batteries) or losing valuable data. Therefor,
- it should be ensured that the most reliable route is chosen. A significant part in this is played by \emph{route metrics}: these are the traits by which a protocol decides which link or route to use. Popular metrics include Hop Count (albeit considered suboptimal in many cases) and \gls{ETX}.\end{description}
+\item[Reliability:] Routes which experience a high amount of packet loss are prone to triggering packet retransmissions (effectively draining batteries) or losing valuable data. Therefore, it should be ensured that the most reliable route is chosen. A significant part in this is played by \emph{route metrics}: these are the traits by which a protocol decides which link or route to use. Popular metrics include Hop Count (albeit considered suboptimal in many cases) and \gls{ETX}.\end{description}
 
 Based on these characteristics and metrics, an experiment design will be presented in the following.
 
@@ -150,8 +149,8 @@ All protocols vary vastly in their characteristics and application scenarios, so
 %...............................................................................
 In preparation of the experiment, the following is created:
 \begin{enumerate}
-\item a randomized list containing the IDs of all participating nodes. It should contain some duplicates. This is needed to create point-to-point traffic.
-\item a randomized list containing tuples with randomized pairings of the IDs of all \emph{except for one} participating nodes. It should contain some duplicates. This is needed to create multipoint-to-point traffic.
+\item a list containing the IDs of all \emph{except for one} participating nodes. This is needed to create multipoint-to-point traffic.
+\item a randomized list containing tuples with randomized pairings of the IDs of all participating nodes. It should contain some duplicates and be of length \textbf{max\_transmissions}. This is needed to create point-to-point traffic.
 \item a sample packet with a payload of 20 bytes, resulting in a 61-byte packet including IEEE 802.15.4. and IPv6 headers with applied 6LoWPAN header compression.
 \end{enumerate}
 These lists must never be changed throughout the experiment, and should be stored along with the experiment data for future reference.\\
@@ -183,24 +182,41 @@ Each experiment run is conducted as follows:
 
 \begin{description}
 \item[For scenarios 1 and 2,] List number 1 is used to model multipoint-to-point traffic. The node not contained in the list is appointed as the \emph{sink node} towards which all traffic is directed. Then, the list is traversed sequentially to initiate sending:
+\footnote{All pseudocode is based on python.}
 \begin{lstlisting}[language=python]
-for node in node_ids:
-    node.send_packet(sink_node)
-    wait(fixed_time)
+for run in range (0, max_transmissions):
+    for node in node_ids:
+        node.send_packet(sink_node)
+sleep(fixed_time)
 \end{lstlisting}
+Note that all nodes send at roughly the same scheduled time and then sleep collectively.
+
 \item[For scenarios 3 and 4,] List number 2 is used to model point-to-point traffic. Each tuple \textbf{(node\_1, node\_2)} represents a transmission from \textbf{node\_1} to \textbf{node\_2}. This list too is traversed sequentially to initiate sending:
 \begin{lstlisting}[language=python]
 for (node_1, node_2) in node_ids:
     node_1.send_packet(node_2)
-    wait(fixed_time)
+    sleep(fixed_time)
 \end{lstlisting}
 \end{description}
 This ensures the exact same transmission sequence for each experiment run, eliminating possible side effects.
+For each scenario combination, each experiment is run a fixed number of \textbf{max\_experiment\_runs} times, so as to not eschew data by isolated incidents.
 
-For each scenario combination, each experiment is run a fixed number of multiple times, so as to not eschew data by isolated incidents.
-All numbers used should be tweaked in case they are found to be unrealistic.
+The variables used above should be substituted for actual values as follows:
 
-%TODO: mobility modellieren! tatsächliche nummern benutzen. (aus RFCs und food paper raussuchen)
+\begin{tabularx}{\linewidth}{l | l}
+  variable & value \\
+  \hline
+  fixed\_time & TODO \\
+  max\_transmissions & TODO \\
+  max\_experiment\_runs & TODO \\
+  packet size & 61
+\end{tabularx}
+
+All numbers used should be tweaked in case they are found to be unrealistic or statistically problematic.
+
+%TODO: mobility modellieren!
+%TODO: tatsächliche nummern benutzen. (aus RFCs und food paper raussuchen)
+% TODO: ergibt es bei scheduled nicht mehr sinn, dass alle gleichzeitig senden?
 
 \subsubsection{Experiment implementation}
 \label{subsec:implementation}
@@ -213,8 +229,8 @@ In order to provide a reusable and tweakable setup, modularity is to be kept in 
 The success or failure of each routing protocol is determined with the metrics listed in section \ref{sec:Scenarios}. A protocol's performance regarding a certain metric is evaluated as follows:
 \begin{description}
 \item[Latency:] The median difference between packet dispatching and arrival time is used to calculate the latency with which packets are sent. For proactive protocols, the median time in which routes appear in the \gls{FIB} is taken for route finding latency. For reactive protocols, each yet unknown tuple is examined: the median time it takes between sending attempt and appearance of the route in the FIB determines route creation latency.
-\item[Failure recovery:] TODO
-\item[Route stability:] TODO
+\item[Failure recovery:] TODO: hängt von mobility umsetzung ab
+\item[Route stability:] TODO: wie messe ich das überhaupt? also wie erkenne ich “unnötige” wechsel?
 \item[Code \& storage size:] Memory usage is monitored during the experiment. The median as well as the maximum memory usage are used to determine memory efficiency, as well as the code size at compile time. % TODO: haben wir nicht eh fixed buffers? dann gehts einfach nur um wie klein man die buffer minimal machen kann?
 \item[Energy-efficiency:] Energy usage is monitored during the experiment as well and can be compared between protocols per experiment batch.
 \item[Reliability:] Packets are recorded when they are sent at one end and received at the other. This way, the median number of lost packets can be determined.
