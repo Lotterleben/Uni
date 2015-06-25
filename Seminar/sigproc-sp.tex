@@ -102,7 +102,7 @@ Based on these characteristics and metrics, an experiment design will be present
 \section{Experiment goals}
 \label{sec:Goals}
 %===============================================================================
-It is assumed that all routing protocols involved are fully functional, but behave differently under different circumstances. The main goal is not to test them for functionality, but to examine which protocol performs best\footnote{ with regards to the metrics listed in section \ref{sec:Scenarios}} under which circumstance, and which factors impact routing protocol operations negatively. These factors may be unforeseen quirks which did not occur during previous simulations, or specific network configurations, or something completely different.s
+It is assumed that all involved routing protocols are fully functional, but excel in different environments. The main goal is not to test them for functionality, but to examine which protocol performs best under which circumstance, and which factors impact routing protocol operations negatively. These factors may be unforeseen quirks which did not occur during previous simulations, or specific network configurations, or something completely different. Protocol performance is assessed using the metrics listed in section \ref{sec:Scenarios}.
 
 \section{Experiment design}
 \label{sec:Design}
@@ -138,15 +138,15 @@ In order to run the experiments in a realistic, but still controlled environment
 \item[The M3 Node] featuring an ARM Cortex M3 MCU with 64kB RAM, an IEEE 802.15.4. radio interface, as well as sensors for ambient sensor light, atmospheric pressure and temperature, a gyrometer, and an accelerometer.
 \item[The A8 Node] featuring an ARM Cortex-A8 microprocessor with 256 MV RAM, an ethernet interface, a gyrometer, and an accelerometer.
 \end{description}
-Additionally, the IoT-Lab offers node mobility through a fleet of toy trains. This allows for the use of realistic, but controllable mobility patterns.
+Additionally, the IoT-Lab offers node mobility through a fleet of toy trains. This allows for the use of controllable mobility patterns.
 The two more constrained platforms of the IoT-Lab, the Wsn430 and M3 nodes, offer support for RIOT\cite{riot}\footnote{ \url{https://www.iot-lab.info/operating-systems/}, \\accessed 19.05.2015}.
-This combination is unique among all available testbeds, and provides every feature needed to conduct the described experiments. Therefore, it is advised to run the experiments described this paper on the FIT-IoTLab testbed.
+This combination is unique among all available testbeds, and provides every feature needed to conduct the described experiments. Therefore, it is advised to run the experiments described in this paper on the FIT-IoTLab testbed.
 
 \subsubsection{Involved routing protocols}
 \label{subsec:protocols}
 %...............................................................................
 RIOT currently features implementations of two routing protocols: RPL \cite{RFC-6550} and AODVv2 \cite{draft-ietf-manet-aodvv2-09}. The former is a proactive, point-to-multipoint-protocol designed for \glspl{LLN}, while the latter is a reactive point-to-point protocol designed for \glspl{MANET}. Additionally, implementations of the proactive \gls{MANET} protocol OLSR\cite{RFC-3626} and the \gls{ARA}\cite{ara} are in progress.\footnote{ \url{https://github.com/RIOT-OS/RIOT/pull/2294}\\  \url{https://github.com/mfrey/RIOT/tree/ara}}
-All protocols vary vastly in their characteristics and application scenarios, so it would be advisable to involve as many as possible in the experimentation. In addition to RPL and AODVv2, any of the other protocols which is available by the time of the experiment should be used.
+All protocols vary vastly in their characteristics and application scenarios, so it would be advisable to involve as many as possible in the experimentation. In addition to RPL and AODVv2, any other protocols available by the time of the experiment should be used.
 
 \section{Setup and execution of the experiment}
 \label{sec:setup}
