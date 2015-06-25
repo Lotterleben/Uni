@@ -44,7 +44,7 @@ In 2014, the \gls{IoT} reached the peak of Gartner's hype cycle for emerging tec
 One central aspect of IoT communication is routing: finding the best paths between nodes and towards sink nodes and gateways is crucial to ensure energy-efficient and smooth network operations. However, practical experience with IoT routing is sparse, and scientific evaluation of such environments is rare. Most routing protocol evaluations are simulation-based, and even fewer of these evaluations have been designed with the IoT in mind.
 This paper presents a testbed-based evaluation approach tailored to the IoT. The goal is to enable the evaluation of routing protocols which have been created for \glspl{LLN} or \glspl{MANET} with regard to their suitability for the IoT.\\
 The remainder of this paper is organized as follows:
-First, the need for experimental work is highlighted. Then, the different domains and use cases that form the IoT are assessed. Based on these findings, a network configuration is presented on which all experiments shall be run. Following up, experiment goals, design, realization and evaluation details are assessed. Finally, a conclusion of all findings as well as an outlook into future steps is provided.
+First, the need for experimental work is highlighted in section \ref{sec:simulation_cons}. Then, the different domains and use cases that form the IoT are assessed in section \ref{sec:Scenarios}. Based on these findings, experiment goals, design, realization and evaluation details are assessed in sections \ref{sec:Goals}, \ref{sec:Design} and \ref{sec:setup}. Finally, a conclusion of all findings as well as an outlook into future steps is provided by section \ref{sec:Conclusion}.
 
 \subsection{Related work}
 \label{subsec:related_work}
@@ -97,9 +97,22 @@ In general, Routing Protocol performance metrics for the IoT can be summarized a
 
 Based on these characteristics and metrics, an experiment design will be presented in the following.
 
-\section{Network model}
-\label{sec:Model}
+%TODO: daraus die zu checkenden performancemetriken ableiten
+
+\section{Experiment goals}
+\label{sec:Goals}
 %===============================================================================
+It is assumed that all routing protocols involved are fully functional, but behave differently under different circumstances. The main goal is not to test them for functionality, but to examine which protocol performs best\footnote{ with regards to the metrics listed in section \ref{sec:Scenarios}} under which circumstance, and which factors impact routing protocol operations negatively. These factors may be unforeseen quirks which did not occur during previous simulations, or specific network configurations, or something completely different.s
+
+\section{Experiment design}
+\label{sec:Design}
+%===============================================================================
+After all prerequisites have been discussed, a specific experiment can be designed.
+
+\subsection{Network model}
+\label{subsec:Model}
+%===============================================================================
+
 \begin{table*}[t]
     \begin{tabularx}{\textwidth}{l | X | X  }
       Characteristic & Case 1 & Case 2 \\
@@ -115,18 +128,6 @@ Based on these characteristics and metrics, an experiment design will be present
 
 It can be seen in section \ref{sec:Scenarios} that the IoT is a very heterogeneous field in terms of network characteristics, and that a one-scenario-fits-all approach to studying IoT routing is unlikely to be feasible. Therefore, a specific scenario will be studied, modeled and modified in detail over the course of this paper, with the hope that some of the building blocks may be reused as research expands. To achieve this, the characteristics listed in table \ref{fig:characteristics} have been chosen as the base scenario to be modeled, as they can be found in a wide range of applications, and are among the most challenging for routing protocols.
 In order to study which protocol excels in which scenario, variations have to be created. Therefor, \textbf{Case 1} and \textbf{Case 2} describe different characteristics which are switched up per experiment round.
-
-%TODO: daraus die zu checkenden performancemetriken ableiten
-
-\section{Experiment goals}
-\label{sec:Goals}
-%===============================================================================
-It is assumed that all routing protocols involved are fully functional, but behave differently under different circumstances. The main goal is not to test them for functionality, but to examine which protocol performs best\footnote{ with regards to the metrics listed in section \ref{sec:Scenarios}} under which circumstance, and which factors impact routing protocol operations negatively. These factors may be unforeseen quirks which did not occur during previous simulations, or specific network configurations, or something completely different.s
-
-\section{Experiment design}
-\label{sec:Design}
-%===============================================================================
-After all prerequisites have been discussed, a specific experiment can be designed.
 
 \subsection{Choosing the testbed}
 \label{subsec:testbed_choice}
@@ -147,8 +148,8 @@ This combination is unique among all available testbeds, and provides every feat
 RIOT currently features implementations of two routing protocols: RPL \cite{RFC-6550} and AODVv2 \cite{draft-ietf-manet-aodvv2-09}. The former is a proactive, point-to-multipoint-protocol designed for \glspl{LLN}, while the latter is a reactive point-to-point protocol designed for \glspl{MANET}. Additionally, implementations of the proactive \gls{MANET} protocol OLSR\cite{RFC-3626} and the \gls{ARA}\cite{ara} are in progress.\footnote{ \url{https://github.com/RIOT-OS/RIOT/pull/2294}\\  \url{https://github.com/mfrey/RIOT/tree/ara}}
 All protocols vary vastly in their characteristics and application scenarios, so it would be advisable to involve as many as possible in the experimentation. In addition to RPL and AODVv2, any of the other protocols which is available by the time of the experiment should be used.
 
-\subsection{Setup and execution of the experiment}
-\label{subsec:setup}
+\section{Setup and execution of the experiment}
+\label{sec:setup}
 %...............................................................................
 %TODO: Anordnung der Knoten
 In preparation of the experiment, the following is created:
