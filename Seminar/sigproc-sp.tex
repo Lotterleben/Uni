@@ -232,13 +232,16 @@ All numbers used should be tweaked in case they are found to be unrealistic or s
 
 During each experiment run, the following data is collected per node in a machine-readable format, along with a timestamp:
 \begin{itemize}
-\item Each update to the node's routing table and \gls{FIB}
+\item Each routing table update. %to the node's routing table and \gls{FIB}
 \item Each sent data packet.
 \item Each received data packet.
 \item Each sent control packet.
 \item Each received control packet.
 \item Overall energy consumption.
 \end{itemize}
+% TODO: what about memory usage during the operation? RT space exceeded/not used fully?
+
+Additionally, the overall size of the RIOT image is recorded for code and storage size.
 
 \subsubsection{Experiment implementation}
 \label{subsec:implementation}
