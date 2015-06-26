@@ -72,11 +72,11 @@ Surveys divide the IoT into domains such as Transportation, Healthcare, Smart En
 The network characteristics vary widely between the different domains, and even within each domain, the variety of characteristics is high. For example, both smart homes and industrial plants can be considered to be a part of the Smart Environment domain\cite{IoT_survey_Atzori}. Still, the network established in a smart home may differ vastly from the network of an industrial farming facility. The floor space of a single-family house is much smaller than that of an industrial plant, and IoT home applications may be focused on human interaction, while industrial IoT is focused on sensing reporting, and adjusting autonomously\cite{RFC-5867}. Among other things, this implies different network sizes and traffic patterns.\\
 Therefore, while grouping by application domain is useful to map the impact of the IoT and its possibilities for interoperation and interdisciplinary collaboration, this approach to categorizing the IoT is not feasible when it comes to network modeling. Instead, IoT networks can be categorized along a number of characteristics, such as the following:
 \begin{description}
-\item[Network Topology:] Networks are characteristically organized in a star or mesh pattern.
+%\item[Network Topology:] Networks are characteristically organized in a star or mesh pattern. % topology is created by routing protocol & traffic patterns!!? not inherent to the NW
 \item[Traffic Patterns:] Some networks experience bursty traffic caused by outside events. Others have a regular, scheduled stream of sensor data. Yet others employ a request/response-cycle based on outside events or internal calculations. Packets may travel towards a central \emph{sink node} in a multipoint-to-point fashion, or flooding the network from a central node as point-to-multipoint traffic, or simple point-to-point. The data rate is typically small.
 \item[Mobility:] Some or all nodes of a network may experience movement. This can be either constant or shortlived and caused by displacement. Depending on a node's ``host'', different movement patterns may emerge, such as high speed movement along a fixed grid of streets or slower movements, on less fixed paths, through a more dense space.
-\item[Energy efficiency requirements:] Some IoT devices may be built-in to a host with a constant energy supply and therefore not constrained by battery. Other nodes can and will be charged regularly, while yet others must run without maintenance for years.
-\item[Scale:] Maximum Network sizes can range from up to 250 to more than 10.000 nodes, depending on the use case \cite{RFC-5826} \cite{RFC-5867} \cite{RFC-5548}. Some networks, like building automation deployments, are broken down into several subnets containing up to 250 nodes each.
+\item[Energy-efficiency requirements:] Some IoT devices may be built-in to a host with a constant energy supply and therefore not constrained by battery. Other nodes can and will be charged regularly, while yet others must run without maintenance for years.
+\item[Size:] Maximum Network sizes can range from up to 250 to more than 10.000 nodes, depending on the use case \cite{RFC-5826} \cite{RFC-5867} \cite{RFC-5548}. Some networks, like building automation deployments, are broken down into several subnets containing up to 250 nodes each.
 \item[Physical environment:] Environmental factors such as walls, nearby objects or weather conditions may impact the node's transmission range \cite{food_monitoring} and communication behavior.
 \end{description}
 
@@ -91,7 +91,7 @@ In general, Routing Protocol performance metrics for the IoT can be summarized a
 \item[Route stability:] Networks with frequently changing routes can be expensive both in terms of latency as well as battery usage: unless constant routing information is maintained\footnote{ which is the case with most proactive protocols like OLSR\cite{RFC-3626}}, route rediscoveries require increased activity of the transceiver, which is the most battery-hungry component of IoT nodes.
 \item[Route Convergence:] The longer it takes for a route from one node to the other to be stable, the more bandwidth and energy goes to waste. Additionally, the ability to adapt to mobility is limited. % TODO: unusable for reactive? Mention!
 \item[Code \& storage size:] With the exception of border routers and sink nodes, IoT devices typically have constrained memory storage resources. Devices which are used in bulk as ``throwaway hardware'' for monitoring even more so than devices embedded into objects. Protocol complexity and thus code size can be relevant criteria. Another factor is memory usage on operation: extensive routing tables, such as those maintained by proactive protocols, can become a problem especially in large-scale networks, since they increase linearly with the network size. %Many embedded OSes use fixed buffer sizes which can be regulated accordingly if the memory usage of a protocol is well-known.
-\item[Energy-efficiency:] Sending and receiving data is very battery-consuming, so it is advised to keep control traffic as low as possible. Additionally, low handling complexity will help keep retain a high energy efficiency.
+\item[Energy consumption:] Sending and receiving data is very battery-consuming, so it is advised to keep control traffic as low as possible. Additionally, low handling complexity will help keep retain a high energy efficiency.
 \item[Reliability:] Routes which experience a high amount of packet loss are prone to triggering packet retransmissions (effectively draining batteries) or losing valuable data. Therefore, it should be ensured that the most reliable route is chosen. A significant part in this is played by \emph{route metrics}, the traits by which a protocol decides which link or route to use. Popular metrics include Hop Count and \gls{ETX}.
 \end{description}
 
@@ -115,19 +115,21 @@ After all prerequisites have been discussed, a specific experiment can be design
 
 \begin{table*}[t]
     \begin{tabularx}{\textwidth}{l | X | X  }
-      Characteristic & Case 1 & Case 2 \\
+      Characteristic & Default & Alternative \\
       \hline
-      Network Topology & Mesh & \\
+      %Network Topology & Mesh & \\
       Traffic Pattern & Multipoint-to-point, with most traffic traversing several hops. Scheduled data transmissions. & point-to-point across the network. Scheduled data transmissions. \\
-      Mobility & None, but occasionally failing nodes. & \\
-      Scale & 100 & 500\\
+      Mobility & None, but occasionally failing nodes. & -- \\
+      Energy efficiency reqs. & None & --\\
+      Network size & 100 & 500\\
+      Physical environment & IoT-Lab testbed & -- \\
     \end{tabularx}
     \caption{Characteristics of the modeled network(s)}
     \label{fig:characteristics}
 \end{table*}
 
 It can be seen in section \ref{sec:Scenarios} that the IoT is a very heterogeneous field in terms of network characteristics, and that a one-scenario-fits-all approach to studying IoT routing is unlikely to be feasible. Therefore, a specific scenario will be studied, modeled and modified in detail over the course of this paper, with the hope that some of the building blocks may be reused as research expands. To achieve this, the characteristics listed in table \ref{fig:characteristics} have been chosen as the base scenario to be modeled, as they can be found in a wide range of applications, and are among the most challenging for routing protocols.
-In order to study which protocol excels in which scenario, variations have to be created. Therefor, \textbf{Case 1} and \textbf{Case 2} describe different characteristics which are switched up per experiment round.
+In order to study which protocol excels in which scenario, variations have to be created. Therefore, some variables of the \textbf{Default} scenario are exchanged with an \textbf{Alternative} configuration per experiment round.
 
 \subsection{Choosing the testbed}
 \label{subsec:testbed_choice}
@@ -148,7 +150,7 @@ This combination is unique among all available testbeds, and provides every feat
 RIOT currently features implementations of two routing protocols: RPL \cite{RFC-6550} and AODVv2 \cite{draft-ietf-manet-aodvv2-09}. The former is a proactive, point-to-multipoint-protocol designed for \glspl{LLN}, while the latter is a reactive point-to-point protocol designed for \glspl{MANET}. Additionally, implementations of the proactive \gls{MANET} protocol OLSR\cite{RFC-3626} and the \gls{ARA}\cite{ara} are in progress.\footnote{ \url{https://github.com/RIOT-OS/RIOT/pull/2294}\\  \url{https://github.com/mfrey/RIOT/tree/ara}}
 All protocols vary vastly in their characteristics and application scenarios, so it would be advisable to involve as many as possible in the experimentation. In addition to RPL and AODVv2, any other protocols available by the time of the experiment should be used.
 
-\section{Setup and execution of the experiment}
+\section{Setup and execution}
 \label{sec:setup}
 %...............................................................................
 %TODO: Anordnung der Knoten
@@ -165,23 +167,23 @@ The complete experiment consists of several runs, which are grouped per scenario
 Each experiment will be run on four scenario combinations, as noted in table \ref{fig:characteristics}. The scenario combinations will be run through one by one, and each routing protocol is tested on the scenario before moving on to the next one. Still, the scenario is torn down and built from scratch for each new protocol, so as to prevent any unwanted side effects. The resulting running order is as follows:
 
 \begin{tabularx}{\linewidth}{l | X | l | X }
-  Scenario \# & Traffic Pattern & Scale & Protocol \\
+  Scenario \# & Traffic Pattern & Size & Protocol \\
   \hline
-  1 & Case 1 & Case 1 & AODVv2\\
-  1 & Case 1 & Case 1 & RPL\\
-  1 & Case 1 & Case 1 & (other)\\
+  1 & Default & Default & AODVv2\\
+  1 & Default & Default & RPL\\
+  1 & Default & Default & (other)\\
   \hline
-  2 & Case 1 & Case 2 & AODVv2\\
-  2 & Case 1 & Case 2 & RPL\\
-  2 & Case 1 & Case 2 & (other)\\
+  2 & Default & Alternative & AODVv2\\
+  2 & Default & Alternative & RPL\\
+  2 & Default & Alternative & (other)\\
   \hline
-  3 & Case 2 & Case 1 & AODVv2\\
-  3 & Case 2 & Case 1 & RPL\\
-  3 & Case 2 & Case 1 & (other)\\
+  3 & Alternative & Default & AODVv2\\
+  3 & Alternative & Default & RPL\\
+  3 & Alternative & Default & (other)\\
   \hline
-  4 & Case 2 & Case 2 & AODVv2\\
-  4 & Case 2 & Case 2 & RPL\\
-  4 & Case 2 & Case 2 & (other)\\
+  4 & Alternative & Alternative & AODVv2\\
+  4 & Alternative & Alternative & RPL\\
+  4 & Alternative & Alternative & (other)\\
 \end{tabularx}
 
 Each experiment run is conducted as follows:
@@ -220,7 +222,7 @@ The variables used above should be substituted for actual values as follows:
   variable & scenarios 1 \& 2 & scenarios 3 \& 4  \\
   \hline
   fixed\_time & 5 seconds & 1 second \\ % TODO: first value close to reality
-  max\_transmissions & $scale \cdot 2$ & $scale \cdot 2$ \\
+  max\_transmissions & $size \cdot 2$ & $size \cdot 2$ \\
   max\_experiment\_runs & 30 & 30 \\
   num\_failing\_nodes & 10\% of all nodes & 10\% of all nodes \\
   packet size & 61 bytes & 61 bytes
