@@ -9,7 +9,7 @@
 \usepackage{tablefootnote}
 \usepackage{hyperref}
 \usepackage{listings}
-
+\usepackage{enumitem}
 
 % Glossary benutzen
 \usepackage{glossaries}
@@ -128,7 +128,7 @@ After all prerequisites have been discussed, a specific experiment can be design
     \label{fig:characteristics}
 \end{table*}
 
-It can be seen in section \ref{sec:Scenarios} that the IoT is a very heterogeneous field in terms of network characteristics, and that a one-scenario-fits-all approach to studying IoT routing is unlikely to be feasible. Therefore, a specific scenario will be studied, modeled and modified in detail over the course of this paper, with the hope that some of the building blocks may be reused as research expands. To achieve this, the characteristics listed in table \ref{fig:characteristics} have been chosen as the base scenario to be modeled, as they can be found in a wide range of applications, and are among the most challenging for routing protocols.
+It can be seen in section \ref{sec:Scenarios} that the IoT is a very heterogeneous field in terms of network characteristics, and that a one-scenario-fits-all approach to studying IoT routing is unlikely to be feasible. Therefore, a specific scenario will be studied, modeled and modified in detail over the course of this paper, with the hope that some of the building blocks may be reused as research expands. To achieve this, the characteristics listed as \emph{Default} in table \ref{fig:characteristics} have been chosen as the base scenario to be modeled, as they can be found in a wide range of applications, and are among the most challenging for routing protocols.
 In order to study which protocol excels in which scenario, variations have to be created. Therefore, some variables of the \textbf{Default} scenario are exchanged with an \textbf{Alternative} configuration per experiment round.
 
 \subsection{Choosing the testbed}
@@ -144,7 +144,7 @@ Additionally, the IoT-Lab offers node mobility through a fleet of toy trains. Th
 The two more constrained platforms of the IoT-Lab, the Wsn430 and M3 nodes, offer support for RIOT\cite{riot}\footnote{ \url{https://www.iot-lab.info/operating-systems/}, \\accessed 19.05.2015}.
 This combination is unique among all available testbeds, and provides every feature needed to conduct the described experiments. Therefore, it is advised to run the experiments described in this paper on the FIT-IoTLab testbed.
 
-\subsubsection{Involved routing protocols}
+\subsection{Routing protocols to test}
 \label{subsec:protocols}
 %...............................................................................
 RIOT currently features implementations of two routing protocols: RPL \cite{RFC-6550} and AODVv2 \cite{draft-ietf-manet-aodvv2-09}. The former is a proactive, point-to-multipoint-protocol designed for \glspl{LLN}, while the latter is a reactive point-to-point protocol designed for \glspl{MANET}. Additionally, implementations of the proactive \gls{MANET} protocol OLSR\cite{RFC-3626} and the \gls{ARA}\cite{ara} are in progress.\footnote{ \url{https://github.com/RIOT-OS/RIOT/pull/2294}\\  \url{https://github.com/mfrey/RIOT/tree/ara}}
@@ -154,41 +154,26 @@ All protocols vary vastly in their characteristics and application scenarios, so
 \label{sec:setup}
 %...............................................................................
 %TODO: Anordnung der Knoten
+Now that all metrics and environmental variables have been determined, the appropriate experiment setup and execution can be discussed.
 In preparation of the experiment, the following is created:
 \begin{enumerate}
-\item a list containing the IDs of all \emph{except for one} participating nodes. This is needed to create multipoint-to-point traffic.
-\item a randomized list containing tuples with randomized pairings of the IDs of all participating nodes. It should contain some duplicates and be of length \texttt{max\_transmissions}. This is needed to create point-to-point traffic.
-\item a sample packet with a payload of 20 bytes, resulting in a 61-byte packet including IEEE 802.15.4. and IPv6 headers with applied 6LoWPAN header compression.
-\item a randomized list of length \texttt{num\_failing\_nodes}, containing IDs of participating nodes, containing no duplicates.
+\item For multipoint-to-point traffic: a list containing the IDs of all \emph{except for one} participating nodes.
+\item for point-to-point traffic: a randomized list containing tuples with randomized pairings of the IDs of all participating nodes. It should contain some duplicates and be of length \texttt{max\_transmissions}.
+\item A sample packet with a payload of 20 bytes, resulting in a 61-byte packet including IEEE 802.15.4. and IPv6 headers with applied 6LoWPAN header compression.
+\item A randomized, duplicate-free list of length \texttt{num\_failing\_nodes}, containing IDs of participating nodes.
 \end{enumerate}
-These lists must never be changed throughout the experiment, and should be stored along with the experiment data for future reference.\\
+These lists must never be changed throughout the whole experiment, and should be stored along with the experiment data for future reference.
 
-The complete experiment consists of several runs, which are grouped per scenario.
-Each experiment will be run on four scenario combinations, as noted in table \ref{fig:characteristics}. The scenario combinations will be run through one by one, and each routing protocol is tested on the scenario before moving on to the next one. Still, the scenario is torn down and built from scratch for each new protocol, so as to prevent any unwanted side effects. The resulting running order is as follows:
-
-\begin{tabularx}{\linewidth}{l | X | l | X }
-  Scenario \# & Traffic Pattern & Size & Protocol \\
-  \hline
-  1 & Default & Default & AODVv2\\
-  1 & Default & Default & RPL\\
-  1 & Default & Default & (other)\\
-  \hline
-  2 & Default & Alternative & AODVv2\\
-  2 & Default & Alternative & RPL\\
-  2 & Default & Alternative & (other)\\
-  \hline
-  3 & Alternative & Default & AODVv2\\
-  3 & Alternative & Default & RPL\\
-  3 & Alternative & Default & (other)\\
-  \hline
-  4 & Alternative & Alternative & AODVv2\\
-  4 & Alternative & Alternative & RPL\\
-  4 & Alternative & Alternative & (other)\\
-\end{tabularx}
-
+One experiment run consists of multiple sub-experiments called \emph{scenarios}, all of which are repeated for every routing protocol involved. As discussed in section \ref{subsec:Model}, routing protocols should be tested in different environments to explore under which conditions they excel. Thus, the default network model presented in fig. \ref{fig:characteristics} and its variations each are the base for one scenario. This creates a total of four scenarios which make up one experiment:
+\begin{description}
+\item[Scenario 1:] default characteristics only
+\item[Scenario 2:] alternative size
+\item[Scenario 3:] alternative traffic pattern
+\item[Scenario 4:] alternative size and traffic pattern
+\end{description}
 Each experiment run is conducted as follows:
 To emulate failing batteries, nodes are shut down every\\
-\texttt{max\_transmissions/num\_failing\_nodes}'th iteration.
+\texttt{max\_transmissions/num\_failing\_nodes}'th iteration in each scenario.
 \begin{description}
 \item[For scenarios 1 and 2,] List number 1 is used to model multipoint-to-point traffic. The node not contained in the list is appointed as the \emph{sink node} towards which all traffic is directed. Then, the list is traversed sequentially to initiate sending.\footnote{All pseudocode is based on python syntax.} %TODO: fail more nodes towards the end?
 \begin{lstlisting}[language=python]
@@ -231,7 +216,7 @@ The variables used above should be substituted for actual values as follows:
 All numbers used should be tweaked in case they are found to be unrealistic or statistically problematic.
 
 During each experiment run, the following data is collected per node in a machine-readable format, along with a timestamp:
-\begin{itemize}
+\begin{itemize}[noitemsep]
 \item Each routing table update. %to the node's routing table and \gls{FIB}
 \item Each sent data packet.
 \item Each received data packet.
@@ -240,8 +225,8 @@ During each experiment run, the following data is collected per node in a machin
 \item Overall energy consumption.
 \end{itemize}
 % TODO: what about memory usage during the operation? RT space exceeded/not used fully?
-
 Additionally, the overall size of the RIOT image is recorded for code and storage size.
+Since time synchronization in a network is a complicated problem, close attention should be paid to the accuracy of the collected timestamps. If the margin of error between the nodes of the network is not negligible, an alternate solution should be investigated.
 
 \subsubsection{Experiment implementation}
 \label{subsec:implementation}
